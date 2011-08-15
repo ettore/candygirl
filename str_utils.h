@@ -26,19 +26,21 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+  extern NSString *clcg_str_trim(NSString *s);
   
-// returns a substring no longer than max_len; if max_len > [s length], returns
-// the whole string.
-extern NSString *clcg_str_sub(NSString *s, int max_len);
+  // returns a substring no longer than max_len; if max_len > [s length], 
+  // returns the whole string.
+  extern NSString *clcg_str_sub(NSString *s, unsigned max_len);
 
-// is the string nil, empty string, or whitespace chars only.
-extern BOOL clcg_str_isblank(NSString *s);
+  // is the string nil, empty string, or whitespace chars only.
+  extern BOOL clcg_str_isblank(NSString *s);
 
-// adds possessive suffix ('s or ')
-extern NSString* clcg_str_addpossessive(NSString *s);
+  // adds possessive suffix ('s or ')
+  extern NSString* clcg_str_addpossessive(NSString *s);
 
-// extracts first word in a string
-extern NSString *clcg_str_firstword(NSString *s);
+  // extracts first word in a string
+  extern NSString *clcg_str_firstword(NSString *s);
 
 #ifdef __cplusplus
 }

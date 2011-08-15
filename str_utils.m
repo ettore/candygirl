@@ -23,10 +23,17 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import <Foundation/Foundation.h>
-#import "StringUtils.h"
+#import "str_utils.h"
 
 
-NSString *clcg_str_sub(NSString *s, int max_len)
+NSString *clcg_str_trim(NSString *s)
+{
+	return [s stringByTrimmingCharactersInSet:
+          [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+
+NSString *clcg_str_sub(NSString *s, unsigned max_len)
 {
   if (s == nil)
     return @"";
