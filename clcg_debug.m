@@ -1,4 +1,3 @@
-// Copyright (c) 2011, Ettore Pasquini
 // Copyright (c) 2011, Cubelogic
 // All rights reserved.
 //
@@ -25,19 +24,20 @@
 
 #import "clcg_debug.h"
 
+#ifdef DEBUG
+
+#if TARGET_IPHONE_SIMULATOR
+
 #include <assert.h>
 #include <stdbool.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/sysctl.h>
 
-#ifdef DEBUG
-
-#if TARGET_IPHONE_SIMULATOR
-
-int am_i_being_debugged(void)
 // Returns true if the current process is being debugged (either 
 // running under the debugger or has a debugger attached post facto).
+// taken from: http://developer.apple.com/library/mac/#qa/qa1361/_index.html
+int am_i_being_debugged(void)
 {
   int                 junk;
   int                 mib[4];
@@ -68,6 +68,6 @@ int am_i_being_debugged(void)
   return ( (info.kp_proc.p_flag & P_TRACED) != 0 );
 }
 
-#endif
+#endif // TARGET_IPHONE_SIMULATOR
 
-#endif
+#endif // DEBUG
