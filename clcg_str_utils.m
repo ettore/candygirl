@@ -23,7 +23,7 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 #import <Foundation/Foundation.h>
-#import "str_utils.h"
+#import "clcg_str_utils.h"
 
 
 NSString *clcg_str_trim(NSString *s)

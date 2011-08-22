@@ -24,7 +24,7 @@
 
 
 #import <UIKit/UIKit.h>
-#import "device_utils.h"
+#import "clcg_device_utils.h"
 
 void clcg_savepref(NSString *key, NSString *value)
 {
