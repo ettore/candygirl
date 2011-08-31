@@ -26,6 +26,16 @@
 #import <UIKit/UIKit.h>
 #import "clcg_device_utils.h"
 
+BOOL clcg_is_ipad()
+{
+#if __IPHONE_3_2 && __IPHONE_3_2 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+#else
+    return NO;
+#endif
+}
+
+
 void clcg_savepref(NSString *key, NSString *value)
 {
   NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];

@@ -40,6 +40,9 @@ extern "C" {
   /** Returns YES if the device has a Retina display. */
   BOOL clcg_has_retina();
   
+  
+  BOOL clcg_is_ipad();
+  
 #ifdef __cplusplus
 }
 #endif
