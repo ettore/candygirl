@@ -26,6 +26,15 @@
 #import <UIKit/UIKit.h>
 #import "clcg_device_utils.h"
 
+
+BOOL clcg_os_geq(NSString* version)
+{
+  NSString *sys = [[UIDevice currentDevice] systemVersion];
+  NSComparisonResult r = [sys compare:version options:NSNumericSearch];
+  return (r != NSOrderedAscending);
+}
+
+
 BOOL clcg_is_ipad()
 {
 #if __IPHONE_3_2 && __IPHONE_3_2 <= __IPHONE_OS_VERSION_MAX_ALLOWED

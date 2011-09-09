@@ -40,8 +40,14 @@ extern "C" {
   /** Returns YES if the device has a Retina display. */
   BOOL clcg_has_retina();
   
-  
+  /** Returns YES if the device is an iPad. */
   BOOL clcg_is_ipad();
+ 
+  /** 
+   * Returns YES if the OS version is >= than given version. The version string
+   * can be something like "3.1".
+   */
+  BOOL clcg_os_geq(NSString* version);
   
 #ifdef __cplusplus
 }
