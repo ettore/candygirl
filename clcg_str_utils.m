@@ -58,11 +58,15 @@ BOOL clcg_str_isblank(NSString *s)
 
 NSString *clcg_str_addpossessive(NSString *s)
 {
-  unichar c = [s characterAtIndex:([s length] - 1)];
-  if (c == 's' || c == 'z') 
-    return [s stringByAppendingString:@"'"];
-  else
-    return [s stringByAppendingString:@"'s"];
+  NSArray *locs = [[NSBundle mainBundle] preferredLocalizations];
+  if ([locs count] > 0 && [@"en" isEqualToString:[locs objectAtIndex:0]]) {
+    unichar c = [s characterAtIndex:([s length] - 1)];
+    if (c == 's' || c == 'z') 
+      return [s stringByAppendingString:@"'"];
+    else
+      return [s stringByAppendingString:@"'s"];
+  }
+  return s;
 }
 
 
