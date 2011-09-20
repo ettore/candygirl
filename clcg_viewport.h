@@ -23,7 +23,20 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#ifndef CLCG_VIEWPORT_H_
+#define CLCG_VIEWPORT_H_
+
 #import <Foundation/Foundation.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 CGSize clcg_screensize();
 UIInterfaceOrientation clcg_orientation();
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
