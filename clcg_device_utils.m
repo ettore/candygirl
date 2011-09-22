@@ -45,6 +45,33 @@ BOOL clcg_is_ipad()
 }
 
 
+void clcg_removepref(NSString *key)
+{
+  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+  [defs removeObjectForKey:key];
+  [defs synchronize];
+}
+
+
+/** 
+ * The value will be added to the array pref identified by `key'
+ */
+void clcg_savepref_in_array(NSString *key, NSString *value)
+{
+  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+  NSArray *current = [defs arrayForKey:key];
+  NSMutableArray *newarr;
+  if (current == nil)
+    newarr = [NSMutableArray arrayWithCapacity:1];
+  else 
+    newarr = [NSMutableArray arrayWithArray:current];
+  
+  [newarr addObject:value];
+  [defs setValue:newarr forKey:key];
+  [defs synchronize];
+}
+
+
 void clcg_savepref(NSString *key, NSString *value)
 {
   NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];

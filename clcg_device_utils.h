@@ -27,8 +27,16 @@
 extern "C" {
 #endif
 
-  /** This group of functions save a pref value to defaults. */
+  /** Removes a key from the prefs and synchronizes them. */
+  void clcg_removepref(NSString *key);
+  
+  /** Adds `value' to the array pref identified by `key'. */
+  void clcg_savepref_in_array(NSString *key, NSString *value);
+
+  /** Saves a string pref value to user defaults. */
   void clcg_savepref(NSString *key, NSString *value);
+  
+  /** Saves a boolean pref value to user defaults. */
   void clcg_savepref_bool(NSString *key, BOOL value);
 
   /** Returns a string with the resolution (in pixel) and the scale value. */
