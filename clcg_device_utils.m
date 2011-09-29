@@ -30,6 +30,9 @@
 BOOL clcg_os_geq(NSString* version)
 {
   NSString *sys = [[UIDevice currentDevice] systemVersion];
+  if (sys == nil)
+    return NO;
+  
   NSComparisonResult r = [sys compare:version options:NSNumericSearch];
   return (r != NSOrderedAscending);
 }
