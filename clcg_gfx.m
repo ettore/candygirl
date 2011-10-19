@@ -32,18 +32,23 @@
 #import <QuartzCore/QuartzCore.h>
 #import "clcg_gfx.h"
 
-
+//TODO-XX make font name and height parameters
 UIImage *clcg_do_snapshot(UIView *v, NSString *title)
 {
   // make space for the title below the view
-  const CGFloat TITLE_H = 50.0;
+  const CGFloat TITLEH = 80.0;
   CGSize sz = v.frame.size;
-  sz.height += TITLE_H;
+  sz.height += TITLEH;
   
   // add a label with the title to the view (below it)
-  CGRect titlerect = CGRectMake(0, v.frame.size.height + 1, sz.width, TITLE_H - 1);
+  CGRect titlerect = CGRectMake(4, v.frame.size.height+1, sz.width-4, TITLEH-1);
   UILabel *l = [[UILabel alloc] initWithFrame:titlerect];
+  [l setFont:[UIFont fontWithName:@"TrebuchetMS" size:14]];
+  [l setNumberOfLines:0];
+  [l setTextAlignment:UITextAlignmentCenter];
+  [l setLineBreakMode:UILineBreakModeWordWrap];
   [l setText:title];
+  [l setBackgroundColor:[UIColor clearColor]];
   [v addSubview:l];
   [l setNeedsLayout];
   [l setNeedsDisplay];
