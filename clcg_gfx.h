@@ -35,3 +35,53 @@
  * Does a snapshot of a view appending a title below it.
  */
 UIImage *clcg_do_snapshot(UIView *v, NSString *title);
+
+
+/**
+ * Scenario: you want to hide the bottom bar when a VC of class 'hiding_vc_class'
+ * is pushed on the stack.
+ *
+ * Usage: from your UINavigationController subclass, override 
+ * pushViewController:animated: and call this function before calling super.
+ * Use this function in conjunction with poppingVCFromHiding().
+ *
+ * @param nc The Navigation Controller who's pushing the view controllers on
+ *           the navigation stack.
+ * @param vc The view conroller about to be pushed.
+ * @param hiding_vc_class The specific class for which we want to hide the 
+ *        bottom bar.
+ */
+void pushingVCForHiding(UINavigationController *nc, 
+                        UIViewController *vc, 
+                        Class hiding_vc_class);
+
+
+/**
+ * Scenario: you want to show back the bottom bar when a VC of class 
+ * 'hiding_vc_class' is popped from the stack.
+ * 
+ * Usage: from your UINavigationController subclass, override 
+ * popViewControllerAnimated: and call this function before calling super.
+ *
+ * @param nc The Navigation Controller who's popping the view controllers on
+ *           the navigation stack.
+ * @param hiding_vc_class The specific class for which we want to hide the 
+ *        bottom bar.
+ */
+void poppingVCFromHiding(UINavigationController *nc, Class hiding_vc_class);
+
+
+/**
+ * Creates an UIActivityIndicatorView of given size in pixels and returns it. 
+ * The returned instance is not autoreleased: the celler will have to
+ * take care of releasing it when needed.
+ */
+UIActivityIndicatorView *newSpinny(CGFloat size);
+
+
+/**
+ * Creates an UIActivityIndicatorView of given size in pixels, attaches it to 
+ * the accessory view of the table-view cell, and autoreleases it.
+ */
+void attachSpinnyToCell(CGFloat size, UITableViewCell *cell);
+

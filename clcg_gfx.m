@@ -32,6 +32,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "clcg_gfx.h"
 
+
 //TODO-XX make font name and height parameters
 UIImage *clcg_do_snapshot(UIView *v, NSString *title)
 {
@@ -66,3 +67,69 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title)
   
   return snapshot;
 }
+
+
+void pushingVCForHiding(UINavigationController *nc, 
+                        UIViewController *vc, 
+                        Class hiding_vc_class)
+{
+  BOOL is_board_ctrl = [vc isKindOfClass:hiding_vc_class];
+  
+  vc.hidesBottomBarWhenPushed = is_board_ctrl;
+  
+  // controller currently displayed, about to be be superseded
+  UIViewController *curr = [nc topViewController];
+  if (!is_board_ctrl)
+    curr.hidesBottomBarWhenPushed = NO;
+}
+
+
+void poppingVCFromHiding(UINavigationController *nc, Class hiding_vc_class)
+{
+  // this is the controller about to be removed
+  //UIViewController *curr = [nc topViewController];
+  
+  NSArray *vcs = [nc viewControllers];
+  int cnt = [vcs count];
+  if (cnt >= 2) {
+    UIViewController *prev = [vcs objectAtIndex:cnt-2];
+    if ([prev isKindOfClass:hiding_vc_class]) {
+      prev.hidesBottomBarWhenPushed = YES;
+    }
+  }
+  
+  // now this would be the controller about to be displayed
+  //  curr = [nc topViewController];
+}
+
+
+// =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+#pragma mark - Spinny
+
+UIActivityIndicatorView *newSpinny(CGFloat size)
+{
+  CGRect f;
+  UIActivityIndicatorView *spinny;
+  
+  f = CGRectMake(0.0, 0.0, size, size);
+  spinny = [[UIActivityIndicatorView alloc] initWithFrame:f];
+  [spinny startAnimating];
+  [spinny setActivityIndicatorViewStyle:UIActivityIndicatorViewStyleGray];
+  [spinny sizeToFit];
+  [spinny setAutoresizingMask:(UIViewAutoresizingFlexibleLeftMargin |
+                               UIViewAutoresizingFlexibleRightMargin |
+                               UIViewAutoresizingFlexibleTopMargin |
+                               UIViewAutoresizingFlexibleBottomMargin)];
+  return spinny;
+}
+
+
+void attachSpinnyToCell(CGFloat size, UITableViewCell *cell)
+{
+  UIActivityIndicatorView *spinny;
+  
+  spinny = newSpinny(size);
+  [cell setAccessoryView:spinny];
+  [spinny release];
+}
+
