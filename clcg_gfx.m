@@ -69,22 +69,22 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title)
 }
 
 
-void pushingVCForHiding(UINavigationController *nc, 
-                        UIViewController *vc, 
-                        Class hiding_vc_class)
+void clcg_pushing_vc_for_hiding(UINavigationController *nc, 
+                                UIViewController *vc, 
+                                Class hiding_vc_class)
 {
-  BOOL is_board_ctrl = [vc isKindOfClass:hiding_vc_class];
+  BOOL is_vc_for_hiding = [vc isKindOfClass:hiding_vc_class];
   
-  vc.hidesBottomBarWhenPushed = is_board_ctrl;
+  vc.hidesBottomBarWhenPushed = is_vc_for_hiding;
   
   // controller currently displayed, about to be be superseded
   UIViewController *curr = [nc topViewController];
-  if (!is_board_ctrl)
+  if (!is_vc_for_hiding)
     curr.hidesBottomBarWhenPushed = NO;
 }
 
 
-void poppingVCFromHiding(UINavigationController *nc, Class hiding_vc_class)
+void clcg_popping_vc_from_hiding(UINavigationController *nc, Class hiding_vc_class)
 {
   // this is the controller about to be removed
   //UIViewController *curr = [nc topViewController];
@@ -106,7 +106,7 @@ void poppingVCFromHiding(UINavigationController *nc, Class hiding_vc_class)
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 #pragma mark - Spinny
 
-UIActivityIndicatorView *newSpinny(CGFloat size)
+UIActivityIndicatorView *clcg_new_spinny(CGFloat size)
 {
   CGRect f;
   UIActivityIndicatorView *spinny;
@@ -124,11 +124,11 @@ UIActivityIndicatorView *newSpinny(CGFloat size)
 }
 
 
-void attachSpinnyToCell(CGFloat size, UITableViewCell *cell)
+void clcg_attach_spinny2cell(CGFloat size, UITableViewCell *cell)
 {
   UIActivityIndicatorView *spinny;
   
-  spinny = newSpinny(size);
+  spinny = clcg_new_spinny(size);
   [cell setAccessoryView:spinny];
   [spinny release];
 }
