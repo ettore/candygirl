@@ -13,6 +13,11 @@
 //@interface UIViewController(CLCGVC)
 @interface CLCGVC : UIViewController
 {
+  // Tells if this view controller is currently displayed on the screen.
+  // Apparently this may be superfluous, as it seems that evaluating
+  // self.view.window could be enough to determine if the view is currently 
+  // visible; our strategy seems more robust though.
+  // http://stackoverflow.com/questions/3678180/how-to-check-if-a-specific-uiviewcontrollers-view-is-currently-visible/3681076#3681076
   BOOL mVisible;
 }
 
