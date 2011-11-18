@@ -26,6 +26,23 @@
 #import "clcg_str_utils.h"
 
 
+NSString *clcg_str_from(id data)
+{
+  NSString *s = nil;
+  
+  // we could use this helper function to return the contents of container 
+  // classes (like NSData). The advantage of using this instead of a similar
+  // method in a category is that we don't need to worry about types from the 
+  // caller side.
+  if ([data isKindOfClass:[NSData class]]) {
+    s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    [s autorelease];
+  }
+  
+  return s;
+}
+
+
 NSString *clcg_str_trim(NSString *s)
 {
 	return [s stringByTrimmingCharactersInSet:
