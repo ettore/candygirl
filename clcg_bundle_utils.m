@@ -23,3 +23,28 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#import "clcg_bundle_utils.h"
+
+SystemSoundID clcg_create_short_snd(NSString *fname, NSString *ext)
+{
+  OSStatus err;
+  SystemSoundID snd_id;
+  UInt32 flag = 0;
+  const float len = 0.8; // In seconds
+  NSBundle *bndl = [NSBundle mainBundle];
+  NSString *path = [bndl pathForResource:fname ofType:ext];
+  NSURL *url = [NSURL fileURLWithPath:path isDirectory:NO]; 
+  
+  err = AudioServicesCreateSystemSoundID((CFURLRef)url, &snd_id);
+
+  err = AudioServicesSetProperty(kAudioServicesPropertyIsUISound,
+                                 sizeof(UInt32),
+                                 &snd_id,
+                                 sizeof(UInt32),
+                                 &flag);
+
+  err = AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, 
+                                sizeof(len), &len);
+  
+  return snd_id;
+}
