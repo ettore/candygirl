@@ -27,6 +27,10 @@
 extern "C" {
 #endif
 
+  // Converts the contents of the object (e.g. NSData) into a string.
+  extern NSString *clcg_str_from(id data);
+  
+  // trims string left and right.
   extern NSString *clcg_str_trim(NSString *s);
   
   // returns a substring no longer than max_len; if max_len > [s length], 
