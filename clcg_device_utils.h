@@ -39,6 +39,9 @@ extern "C" {
   /** Saves a boolean pref value to user defaults. */
   void clcg_savepref_bool(NSString *key, BOOL value);
 
+  /** Gets a boolean pref value from the user defaults. */
+  BOOL clcg_getpref_bool(NSString *key);
+  
   /** Returns a string with the resolution (in pixel) and the scale value. */
   NSString *clcg_device_resolution();
   
