@@ -29,7 +29,21 @@
  
  */
 
+#ifndef CLCG_GFX_H_
+#define CLCG_GFX_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #import <Foundation/Foundation.h>
+
+
+/**
+ * Before calling removeFromSuperview, ensures that the object is an actual
+ * UIView, otherwise it does nothing.
+ */
+void clcg_safe_remove_from_superview(id view);
 
 /**
  * Does a snapshot of a view appending a title below it.
@@ -85,3 +99,8 @@ UIActivityIndicatorView *clcg_new_spinny(CGFloat size);
  */
 void clcg_attach_spinny2cell(CGFloat size, UITableViewCell *cell);
 
+#ifdef __cplusplus
+}
+#endif
+
+#endif

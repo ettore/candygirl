@@ -33,6 +33,14 @@
 #import "clcg_gfx.h"
 
 
+void clcg_safe_remove_from_superview(id view)
+{
+  if (view && [view isKindOfClass:[UIView class]] && [view superview]) {
+    [view removeFromSuperview];
+  }
+}
+
+
 //TODO-XX make font name and height parameters
 UIImage *clcg_do_snapshot(UIView *v, NSString *title)
 {

@@ -24,5 +24,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 
+#import <AudioToolbox/AudioToolbox.h>
+
 #define CLCG_LOC(key) \
 [[NSBundle mainBundle] localizedStringForKey:(key) value:(key) table:nil]
+
+SystemSoundID clcg_create_short_snd(NSString *fname, NSString *ext);
