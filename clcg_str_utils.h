@@ -45,6 +45,9 @@ extern "C" {
 
   // extracts first word in a string
   extern NSString *clcg_str_firstword(NSString *s);
+  
+  // returns the same string with the first character capitalized.
+  extern NSString *clcg_str_capitalize_firstword(NSString *s);
 
 #ifdef __cplusplus
 }
