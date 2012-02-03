@@ -53,7 +53,7 @@ extern "C" {
  
   /** 
    * Returns YES if the OS version is >= than given version. The version string
-   * can be something like "3.1".
+   * can be something like "4.3.2".
    */
   BOOL clcg_os_geq(NSString* version);
   
