@@ -26,6 +26,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+  
+  // returns YES if string are equal (or both nil), NO otherwise
+  extern BOOL clcg_str_eq(NSString *s, NSString *t);
 
   // Converts the contents of the object (e.g. NSData) into a string.
   extern NSString *clcg_str_from(id data);

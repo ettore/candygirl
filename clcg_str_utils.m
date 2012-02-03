@@ -26,6 +26,18 @@
 #import "clcg_str_utils.h"
 
 
+BOOL clcg_str_eq(NSString *s, NSString *t)
+{
+  if (s == nil && t == nil)
+    return YES;
+  
+  if (s)
+    return [t isEqualToString:s];
+  else
+    return [s isEqualToString:t];
+}
+
+
 NSString *clcg_str_from(id data)
 {
   NSString *s = nil;
