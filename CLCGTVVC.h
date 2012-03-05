@@ -21,9 +21,10 @@
 
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
 
+// if not created via nib file
+- (id)initWithStyle:(UITableViewStyle)style;
+
 // deselects all currently selected rows.
 -(void)deselectAll:(BOOL)animated;
 
 @end
-
-

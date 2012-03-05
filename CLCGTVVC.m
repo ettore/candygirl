@@ -55,6 +55,14 @@
   
   UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
   UITableView *tv = [[UITableView alloc] initWithFrame:CGRectZero style:mStyle];
+  
+  // set views to expand to all available area
+  UIViewAutoresizing expandmask;
+  expandmask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+  [v setAutoresizingMask:expandmask];
+  [tv setAutoresizingMask:expandmask];
+  
+  // build view hierarchy
   [self setView:v];
   [self setTableView:tv];
   [v addSubview:tv];
