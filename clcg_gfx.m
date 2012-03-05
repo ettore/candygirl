@@ -79,9 +79,9 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title)
 
 void clcg_pushing_vc_for_hiding(UINavigationController *nc, 
                                 UIViewController *vc, 
-                                Class hiding_vc_class)
+                                clcg_should_hide_vc_f shouldhide_callback)
 {
-  BOOL is_vc_for_hiding = [vc isKindOfClass:hiding_vc_class];
+  BOOL is_vc_for_hiding = shouldhide_callback(vc);
   
   vc.hidesBottomBarWhenPushed = is_vc_for_hiding;
   
@@ -92,7 +92,8 @@ void clcg_pushing_vc_for_hiding(UINavigationController *nc,
 }
 
 
-void clcg_popping_vc_from_hiding(UINavigationController *nc, Class hiding_vc_class)
+void clcg_popping_vc_from_hiding(UINavigationController *nc,
+                                 clcg_should_hide_vc_f shouldhide_callback)
 {
   // this is the controller about to be removed
   //UIViewController *curr = [nc topViewController];
@@ -101,7 +102,7 @@ void clcg_popping_vc_from_hiding(UINavigationController *nc, Class hiding_vc_cla
   int cnt = [vcs count];
   if (cnt >= 2) {
     UIViewController *prev = [vcs objectAtIndex:cnt-2];
-    if ([prev isKindOfClass:hiding_vc_class]) {
+    if (shouldhide_callback(prev)) {
       prev.hidesBottomBarWhenPushed = YES;
     }
   }
