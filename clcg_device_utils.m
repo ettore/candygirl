@@ -94,6 +94,13 @@ void clcg_savepref_bool(NSString *key, BOOL value)
 }
 
 
+BOOL clcg_getpref_bool(NSString *key)
+{
+  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+  return [defs boolForKey:key];
+}
+
+
 NSString *clcg_device_resolution()
 {
   CGFloat scale;

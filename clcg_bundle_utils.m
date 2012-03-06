@@ -25,14 +25,13 @@
 
 #import "clcg_bundle_utils.h"
 
-SystemSoundID clcg_create_short_snd(NSString *fname, NSString *ext)
+SystemSoundID clcg_create_short_snd(NSString *filename, NSString *ext)
 {
   OSStatus err;
   SystemSoundID snd_id;
   UInt32 flag = 0;
-  const float len = 0.8; // In seconds
   NSBundle *bndl = [NSBundle mainBundle];
-  NSString *path = [bndl pathForResource:fname ofType:ext];
+  NSString *path = [bndl pathForResource:filename ofType:ext];
   NSURL *url = [NSURL fileURLWithPath:path isDirectory:NO]; 
   
   err = AudioServicesCreateSystemSoundID((CFURLRef)url, &snd_id);
@@ -43,8 +42,10 @@ SystemSoundID clcg_create_short_snd(NSString *fname, NSString *ext)
                                  sizeof(UInt32),
                                  &flag);
 
-  err = AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, 
-                                sizeof(len), &len);
+//  // do not set this unless you require lower i/o latency
+//  float len = 0.8; // In seconds
+//  err = AudioSessionSetProperty(kAudioSessionProperty_PreferredHardwareIOBufferDuration, 
+//                                sizeof(len), &len);
   
   return snd_id;
 }

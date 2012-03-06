@@ -1,4 +1,4 @@
-// Copyright (c) 2011, Goodreads
+// Copyright (c) 2012, Cubelogic
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without 
@@ -21,45 +21,73 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
+//
+//  Created by ep on 1/8/12.
+//
 
+#import <UIKit/UIKit.h>
+#import "UIViewCategory.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+@implementation UIView (Candygirl)
 
-  /** Removes a key from the prefs and synchronizes them. */
-  void clcg_removepref(NSString *key);
-  
-  /** Adds `value' to the array pref identified by `key'. */
-  void clcg_savepref_in_array(NSString *key, NSString *value);
-
-  /** Saves a string pref value to user defaults. */
-  void clcg_savepref(NSString *key, NSString *value);
-  
-  /** Saves a boolean pref value to user defaults. */
-  void clcg_savepref_bool(NSString *key, BOOL value);
-
-  /** Gets a boolean pref value from the user defaults. */
-  BOOL clcg_getpref_bool(NSString *key);
-  
-  /** Returns a string with the resolution (in pixel) and the scale value. */
-  NSString *clcg_device_resolution();
-  
-  /** Returns YES if the device has camera capability. */
-  BOOL clcg_has_camera();
-
-  /** Returns YES if the device has a Retina display. */
-  BOOL clcg_has_retina();
-  
-  /** Returns YES if the device is an iPad. */
-  BOOL clcg_is_ipad();
- 
-  /** 
-   * Returns YES if the OS version is >= than given version. The version string
-   * can be something like "4.3.2".
-   */
-  BOOL clcg_os_geq(NSString* version);
-  
-#ifdef __cplusplus
+-(CGFloat)x
+{
+  return [self frame].origin.x;
 }
-#endif
+
+-(void)setX:(CGFloat)x
+{
+  CGRect r = [self frame];
+  r.origin.x = x;
+  [self setFrame:r];
+}
+
+-(CGFloat)y
+{
+  return [self frame].origin.y;
+}
+
+-(void)setY:(CGFloat)y
+{
+  CGRect r = [self frame];
+  r.origin.y = y;
+  [self setFrame:r];
+}
+
+-(CGFloat)w
+{
+  return [self frame].size.width;
+}
+
+-(void)setW:(CGFloat)w
+{
+  CGRect r = [self frame];
+  r.size.width = w;
+  [self setFrame:r];
+}
+
+-(CGFloat)h
+{
+  return [self frame].size.height;
+}
+
+-(void)setH:(CGFloat)h
+{
+  CGRect r = [self frame];
+  r.size.height = h;
+  [self setFrame:r];
+}
+
+-(CGFloat)right
+{
+  CGRect r = [self frame];
+  return r.origin.x + r.size.width;
+}
+
+-(CGFloat)bottom
+{
+  CGRect r = [self frame];
+  return r.origin.y + r.size.height;
+}
+
+@end

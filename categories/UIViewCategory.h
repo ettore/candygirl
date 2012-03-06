@@ -1,4 +1,4 @@
-// Copyright (c) 2011, Goodreads
+// Copyright (c) 2012, Cubelogic
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without 
@@ -21,45 +21,22 @@
 // CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
+//
+//  Created by ep on 1/8/12.
+//
 
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+@interface UIView (Candygirl)
 
-  /** Removes a key from the prefs and synchronizes them. */
-  void clcg_removepref(NSString *key);
-  
-  /** Adds `value' to the array pref identified by `key'. */
-  void clcg_savepref_in_array(NSString *key, NSString *value);
+-(CGFloat)x;
+-(void)setX:(CGFloat)x;
+-(CGFloat)y;
+-(void)setY:(CGFloat)y;
+-(CGFloat)w;
+-(void)setW:(CGFloat)w;
+-(CGFloat)h;
+-(void)setH:(CGFloat)h;
+-(CGFloat)right;
+-(CGFloat)bottom;
 
-  /** Saves a string pref value to user defaults. */
-  void clcg_savepref(NSString *key, NSString *value);
-  
-  /** Saves a boolean pref value to user defaults. */
-  void clcg_savepref_bool(NSString *key, BOOL value);
-
-  /** Gets a boolean pref value from the user defaults. */
-  BOOL clcg_getpref_bool(NSString *key);
-  
-  /** Returns a string with the resolution (in pixel) and the scale value. */
-  NSString *clcg_device_resolution();
-  
-  /** Returns YES if the device has camera capability. */
-  BOOL clcg_has_camera();
-
-  /** Returns YES if the device has a Retina display. */
-  BOOL clcg_has_retina();
-  
-  /** Returns YES if the device is an iPad. */
-  BOOL clcg_is_ipad();
- 
-  /** 
-   * Returns YES if the OS version is >= than given version. The version string
-   * can be something like "4.3.2".
-   */
-  BOOL clcg_os_geq(NSString* version);
-  
-#ifdef __cplusplus
-}
-#endif
+@end

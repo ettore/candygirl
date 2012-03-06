@@ -52,8 +52,16 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title);
 
 
 /**
- * Scenario: you want to hide the bottom bar when a VC of class 'hiding_vc_class'
- * is pushed on the stack.
+ * Clients should define a function with this signature to determine if 
+ * the bottom bar should be hidden when the given vc is pushed on the stack,
+ * or if should be show it back when the vc is popped from the stack.
+ */
+typedef BOOL (*clcg_should_hide_vc_f)(UIViewController *vc);
+  
+
+/**
+ * Scenario: you want to hide the bottom bar when a given VC is pushed on the 
+ * stack and certain conditions are met.
  *
  * Usage: from your UINavigationController subclass, override 
  * pushViewController:animated: and call this function before calling super.
@@ -62,27 +70,28 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title);
  * @param nc The Navigation Controller who's pushing the view controllers on
  *           the navigation stack.
  * @param vc The view conroller about to be pushed.
- * @param hiding_vc_class The specific class for which we want to hide the 
- *        bottom bar.
+ * @param clcg_should_hide_vc_f  Function determining if we should hide the
+ *                               bottom bar when pushing `vc' on the stack.
  */
 void clcg_pushing_vc_for_hiding(UINavigationController *nc, 
                                 UIViewController *vc, 
-                                Class hiding_vc_class);
+                                clcg_should_hide_vc_f fun);
 
 
 /**
- * Scenario: you want to show back the bottom bar when a VC of class 
- * 'hiding_vc_class' is popped from the stack.
+ * Scenario: you want to show back the bottom bar when a given VC is popped 
+ * from the stack and certain conditions are met.
  * 
  * Usage: from your UINavigationController subclass, override 
  * popViewControllerAnimated: and call this function before calling super.
  *
  * @param nc The Navigation Controller who's popping the view controllers on
  *           the navigation stack.
- * @param hiding_vc_class The specific class for which we want to hide the 
- *        bottom bar.
+ * @param clcg_should_hide_vc_f  Function determining if we should hide the
+ *                               bottom bar when pushing `vc' on the stack.
  */
-void clcg_popping_vc_from_hiding(UINavigationController *nc, Class hiding_vc_class);
+void clcg_popping_vc_from_hiding(UINavigationController *nc,
+                                 clcg_should_hide_vc_f fun);
 
 
 /**

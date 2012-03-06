@@ -29,4 +29,12 @@
 #define CLCG_LOC(key) \
 [[NSBundle mainBundle] localizedStringForKey:(key) value:(key) table:nil]
 
-SystemSoundID clcg_create_short_snd(NSString *fname, NSString *ext);
+/**
+ * Create a short sound, such as a tick, from a sampled sound on disk.
+ * The actual sample should reside inside the app bundle.
+ * This function does not play the actual sound: to play it, use the 
+ * AudioServicesPlaySystemSound with the returned SystemSoundID.
+ * Once you're done using the created sound, dispose it with 
+ * AudioServicesDisposeSystemSoundID().
+ */
+SystemSoundID clcg_create_short_snd(NSString *filename, NSString *ext);
