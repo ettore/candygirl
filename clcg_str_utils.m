@@ -26,6 +26,18 @@
 #import "clcg_str_utils.h"
 
 
+BOOL clcg_str_eq(NSString *s, NSString *t)
+{
+  if (s == nil && t == nil)
+    return YES;
+  
+  if (s)
+    return [t isEqualToString:s];
+  else
+    return [s isEqualToString:t];
+}
+
+
 NSString *clcg_str_from(id data)
 {
   NSString *s = nil;
@@ -93,3 +105,11 @@ NSString *clcg_str_firstword(NSString *s)
   NSArray *a = [s componentsSeparatedByCharactersInSet:cs];
   return [a objectAtIndex:0];
 }
+
+
+NSString *clcg_str_capitalize_firstword(NSString *s)
+{
+  return [s stringByReplacingCharactersInRange:NSMakeRange(0,1) 
+                                    withString:[[s substringToIndex:1] uppercaseString]];
+}
+

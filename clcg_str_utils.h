@@ -26,6 +26,9 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+  
+  // returns YES if string are equal (or both nil), NO otherwise
+  extern BOOL clcg_str_eq(NSString *s, NSString *t);
 
   // Converts the contents of the object (e.g. NSData) into a string.
   extern NSString *clcg_str_from(id data);
@@ -45,6 +48,9 @@ extern "C" {
 
   // extracts first word in a string
   extern NSString *clcg_str_firstword(NSString *s);
+  
+  // returns the same string with the first character capitalized.
+  extern NSString *clcg_str_capitalize_firstword(NSString *s);
 
 #ifdef __cplusplus
 }

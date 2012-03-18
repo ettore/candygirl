@@ -33,6 +33,9 @@ BOOL clcg_os_geq(NSString* version)
   if (sys == nil)
     return NO;
   
+  // another way to do it: e.g., 4.3.2 becomes something like 4.3000099
+  //return [sys floatValue] >= [version floatValue];
+  
   NSComparisonResult r = [sys compare:version options:NSNumericSearch];
   return (r != NSOrderedAscending);
 }
