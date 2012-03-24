@@ -3,6 +3,7 @@
 //  Copyright 2011 Cubelogic. All rights reserved.
 
 #import "clcg_debug.h"
+#import "clcg_macros.h"
 
 #import "DSActivityView.h"
 
@@ -26,7 +27,9 @@ static NSString *loadingMessage()
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 
+
 @implementation CLCGVC
+
 
 -(UIView*)viewForActivityView
 {
@@ -73,6 +76,31 @@ static NSString *loadingMessage()
   [super viewWillDisappear:animated];
   mVisible = NO;
 }
+
+
+#pragma mark - Memory Mgmt
+
+
+-(void)dealloc
+{
+  CLCG_P(@"");
+  [super dealloc];
+}
+
+
+-(void)viewDidUnload
+{
+  CLCG_P(@"");
+  [super viewDidUnload];
+}
+
+
+-(void)didReceiveMemoryWarning
+{
+  CLCG_P(@"");
+  [super didReceiveMemoryWarning];
+}
+
 
 @end
 
@@ -126,6 +154,30 @@ static NSString *loadingMessage()
 {
   [super viewWillDisappear:animated];
   mVisible = NO;
+}
+
+
+#pragma mark - Memory Mgmt
+
+
+-(void)dealloc
+{
+  CLCG_P(@"");
+  [super dealloc];
+}
+
+
+-(void)viewDidUnload
+{
+  CLCG_P(@"");
+  [super viewDidUnload];
+}
+
+
+-(void)didReceiveMemoryWarning
+{
+  CLCG_P(@"");
+  [super didReceiveMemoryWarning];
 }
 
 
