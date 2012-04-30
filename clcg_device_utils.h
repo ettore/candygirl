@@ -43,16 +43,16 @@ extern "C" {
   BOOL clcg_getpref_bool(NSString *key);
   
   /** Returns a string with the resolution (in pixel) and the scale value. */
-  NSString *clcg_device_resolution();
+  NSString *clcg_device_resolution(void);
   
   /** Returns YES if the device has camera capability. */
-  BOOL clcg_has_camera();
+  BOOL clcg_has_camera(void);
 
   /** Returns YES if the device has a Retina display. */
-  BOOL clcg_has_retina();
+  BOOL clcg_has_retina(void);
   
   /** Returns YES if the device is an iPad. */
-  BOOL clcg_is_ipad();
+  BOOL clcg_is_ipad(void);
  
   /** 
    * Returns YES if the OS version is >= than given version. The version string
