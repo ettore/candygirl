@@ -32,9 +32,38 @@
 extern "C" {
 #endif
 
-CGSize clcg_screensize();
-UIInterfaceOrientation clcg_orientation();
+  /** 
+   * Returns the current device orientation. 
+   */
+  UIInterfaceOrientation clcg_orientation();
+  
+  /** 
+   * Returns the screen size in the current device orientation. 
+   */
+  CGSize clcg_screensize();
 
+  /** 
+   * Returns the height of the statusbar considering the current device 
+   * orientation. 
+   */
+  CGFloat clcg_statusbar_h();
+
+  /**
+   * Returns the height of the standard UINavigationBar considering the 
+   * current device orientation. 
+   */
+  CGFloat clcg_navbar_h();
+
+  /**
+   * Returns the height of a standard UIToolbar.
+   */
+  CGFloat clcg_toolbar_h();
+  
+  /**
+   * Returns the height of a standard UITabbar.
+   */
+  CGFloat clcg_tabbar_h();
+  
 #ifdef __cplusplus
 }
 #endif

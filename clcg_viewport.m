@@ -23,7 +23,44 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#import "clcg_debug.h"
 #import "clcg_viewport.h"
+#import "clcg_device_utils.h"
+
+
+CGFloat clcg_statusbar_h()
+{
+  UIInterfaceOrientation orient = clcg_orientation();
+  const CGSize sz = [[UIApplication sharedApplication] statusBarFrame].size;
+  if (UIInterfaceOrientationIsPortrait(orient)) {
+    return sz.height;
+  } else {
+    return sz.width;
+  }
+}
+
+
+CGFloat clcg_navbar_h()
+{
+  UIInterfaceOrientation orient = clcg_orientation();
+  if (UIInterfaceOrientationIsPortrait(orient) || clcg_is_ipad()) {
+    return 44.0f;
+  } else {
+    return 33.0f;
+  }
+}
+
+
+CGFloat clcg_toolbar_h()
+{
+  return 44.0;
+}
+
+
+CGFloat clcg_tabbar_h()
+{
+  return 49.0f;
+}
 
 
 UIInterfaceOrientation clcg_orientation()
