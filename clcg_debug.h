@@ -23,6 +23,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#ifndef CLCG_DEBUG_H_
+#define CLCG_DEBUG_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 // generic helpers
@@ -65,20 +71,25 @@
 
 #import <TargetConditionals.h>
 
+
 #if TARGET_IPHONE_SIMULATOR
-int am_i_being_debugged();
+
+int am_i_being_debugged(void);
 // We leave the __asm__ in this macro so that when a break occurs, we don't 
 // have to step out of a "breakInDebugger" function.
-#define CLCG_ASSERT(xx) { if(!(xx)) { CLCG_P(@"CLCG_ASSERT failed: %s", #xx); \
-if(am_i_being_debugged()) { __asm__("int $3\n" : : ); }; } \
+#define CLCG_ASSERT(xx) { if (!(xx)) { CLCG_P(@"CLCG_ASSERT failed: %s", #xx); \
+if (am_i_being_debugged()) { __asm__("int $3\n" : : ); }; } \
 } ((void)0)
 #else
-#define CLCG_ASSERT(xx) { if(!(xx)) { CLCG_P(@"CLCG_ASSERT failed: %s", #xx); } } ((void)0)
+#define CLCG_ASSERT(xx) { if (!(xx)) { CLCG_P(@"CLCG_ASSERT failed: %s", #xx); } } ((void)0)
 #endif // #if TARGET_IPHONE_SIMULATOR
 
 #else
-
 #define CLCG_ASSERT(xx) ((void)0)
-
 #endif // #ifdef DEBUG
 
+#ifdef __cplusplus
+}
+#endif
+    
+#endif // #ifndef CLCG_DEBUG_H_
