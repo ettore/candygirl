@@ -48,7 +48,9 @@ NSString *clcg_str_from(id data)
   // caller side.
   if ([data isKindOfClass:[NSData class]]) {
     s = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+#if !__has_feature(objc_arc)
     [s autorelease];
+#endif
   }
   
   return s;

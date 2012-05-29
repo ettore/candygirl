@@ -41,7 +41,7 @@ BOOL clcg_os_geq(NSString* version)
 }
 
 
-BOOL clcg_is_ipad()
+BOOL clcg_is_ipad(void)
 {
 #if __IPHONE_3_2 && __IPHONE_3_2 <= __IPHONE_OS_VERSION_MAX_ALLOWED
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
@@ -101,7 +101,7 @@ BOOL clcg_getpref_bool(NSString *key)
 }
 
 
-NSString *clcg_device_resolution()
+NSString *clcg_device_resolution(void)
 {
   CGFloat scale;
   NSString *res;
@@ -116,14 +116,14 @@ NSString *clcg_device_resolution()
 }
 
 
-BOOL clcg_has_camera()
+BOOL clcg_has_camera(void)
 {
   return [UIImagePickerController isSourceTypeAvailable:
           UIImagePickerControllerSourceTypeCamera];
 }
 
 
-BOOL clcg_has_retina()
+BOOL clcg_has_retina(void)
 {
   UIScreen *screen = [UIScreen mainScreen];
   

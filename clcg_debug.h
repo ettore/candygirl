@@ -71,7 +71,6 @@ extern "C" {
 
 #import <TargetConditionals.h>
 
-
 #if TARGET_IPHONE_SIMULATOR
 
 int am_i_being_debugged(void);
