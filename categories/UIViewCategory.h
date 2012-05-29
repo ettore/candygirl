@@ -38,5 +38,6 @@
 -(void)setH:(CGFloat)h;
 -(CGFloat)right;
 -(CGFloat)bottom;
+-(UIView*)findFirstResponder;
 
 @end

@@ -28,12 +28,15 @@
 #import <UIKit/UIKit.h>
 #import "UIViewCategory.h"
 
+
 @implementation UIView (Candygirl)
+
 
 -(CGFloat)x
 {
   return [self frame].origin.x;
 }
+
 
 -(void)setX:(CGFloat)x
 {
@@ -42,10 +45,12 @@
   [self setFrame:r];
 }
 
+
 -(CGFloat)y
 {
   return [self frame].origin.y;
 }
+
 
 -(void)setY:(CGFloat)y
 {
@@ -54,10 +59,12 @@
   [self setFrame:r];
 }
 
+
 -(CGFloat)w
 {
   return [self frame].size.width;
 }
+
 
 -(void)setW:(CGFloat)w
 {
@@ -66,10 +73,12 @@
   [self setFrame:r];
 }
 
+
 -(CGFloat)h
 {
   return [self frame].size.height;
 }
+
 
 -(void)setH:(CGFloat)h
 {
@@ -78,11 +87,13 @@
   [self setFrame:r];
 }
 
+
 -(CGFloat)right
 {
   CGRect r = [self frame];
   return r.origin.x + r.size.width;
 }
+
 
 -(CGFloat)bottom
 {
@@ -90,4 +101,24 @@
   return r.origin.y + r.size.height;
 }
 
+
+- (UIView *)findFirstResponder
+{
+  if (self.isFirstResponder) {        
+    return self;     
+  }
+  
+  for (UIView *subView in self.subviews) {
+    UIView *firstResponder = [subView findFirstResponder];
+    
+    if (firstResponder != nil) {
+      return firstResponder;
+    }
+  }
+  
+  return nil;
+}
+
+
 @end
+
