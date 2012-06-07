@@ -5,7 +5,7 @@
 #import "clcg_debug.h"
 #import "clcg_macros.h"
 
-#import "DSActivityView.h"
+//#import "DSActivityView.h"
 
 #import "CLCGVC.h"
 
@@ -14,13 +14,13 @@
 static void removeSpinny()
 {
   //TODO also look at DSActivityView::removeViewAnimated:YES
-  [DSActivityView removeView];
+//  [DSActivityView removeView];
 }
 
 
 static NSString *loadingMessage()
 {
-  return CLLocalized(@"Loading...");
+  return CLCG_LOC(@"Loading...");
 }
 
 
@@ -42,13 +42,13 @@ static NSString *loadingMessage()
 // removeSpinny
 -(void)showSpinny 
 { 
-  UIView *v = [self viewForActivityView];
-  
-  // if clients changed the view-for-act-view (v!=self.view) we're going to 
-  // trust them and always display the activity view
-  if (mVisible || v != [self view])
-    [DSBezelActivityView newActivityViewForView:v
-                                      withLabel:[self loadingMessage]];
+//  UIView *v = [self viewForActivityView];
+//  
+//  // if clients changed the view-for-act-view (v!=self.view) we're going to 
+//  // trust them and always display the activity view
+//  if (mVisible || v != [self view])
+//    [DSBezelActivityView newActivityViewForView:v
+//                                      withLabel:[self loadingMessage]];
 }
 
 
@@ -83,21 +83,21 @@ static NSString *loadingMessage()
 
 -(void)dealloc
 {
-  CLCG_P(@"");
+  CLCG_P(@"%@", self);
   [super dealloc];
 }
 
 
 -(void)viewDidUnload
 {
-  CLCG_P(@"");
+  CLCG_P(@"%@", self);
   [super viewDidUnload];
 }
 
 
 -(void)didReceiveMemoryWarning
 {
-  CLCG_P(@"");
+  CLCG_P(@"%@", self);
   [super didReceiveMemoryWarning];
 }
 
@@ -121,13 +121,13 @@ static NSString *loadingMessage()
 // removeSpinny
 -(void)showSpinny 
 { 
-  UIView *v = [self viewForActivityView];
-  
-  // if clients changed the view-for-act-view (v!=self.view) we're going to 
-  // trust them and always display the activity view
-  if (mVisible || v != [self view])
-    [DSBezelActivityView newActivityViewForView:v
-                                      withLabel:[self loadingMessage]];
+//  UIView *v = [self viewForActivityView];
+//  
+//  // if clients changed the view-for-act-view (v!=self.view) we're going to 
+//  // trust them and always display the activity view
+//  if (mVisible || v != [self view])
+//    [DSBezelActivityView newActivityViewForView:v
+//                                      withLabel:[self loadingMessage]];
 }
 
 
@@ -162,21 +162,21 @@ static NSString *loadingMessage()
 
 -(void)dealloc
 {
-  CLCG_P(@"");
+  CLCG_P(@"%@", self);
   [super dealloc];
 }
 
 
 -(void)viewDidUnload
 {
-  CLCG_P(@"");
+  CLCG_P(@"%@", self);
   [super viewDidUnload];
 }
 
 
 -(void)didReceiveMemoryWarning
 {
-  CLCG_P(@"");
+  CLCG_P(@"%@", self);
   [super didReceiveMemoryWarning];
 }
 
