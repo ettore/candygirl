@@ -28,6 +28,9 @@
 
 @interface UIView (Candygirl)
 
+-(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font;
+-(UIView*)findFirstResponder;
+
 -(CGFloat)x;
 -(void)setX:(CGFloat)x;
 -(CGFloat)y;
@@ -36,8 +39,6 @@
 -(void)setW:(CGFloat)w;
 -(CGFloat)h;
 -(void)setH:(CGFloat)h;
--(CGFloat)right;
--(CGFloat)bottom;
--(UIView*)findFirstResponder;
+-(CGFloat)low;
 
 @end

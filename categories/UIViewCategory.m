@@ -25,11 +25,23 @@
 //  Created by ep on 1/8/12.
 //
 
+
 #import <UIKit/UIKit.h>
 #import "UIViewCategory.h"
 
 
 @implementation UIView (Candygirl)
+
+
+-(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font
+{
+  CGSize sz;
+
+  sz = CGSizeMake([self w], INT_MAX);
+  sz = [txt sizeWithFont:font constrainedToSize:sz];
+
+  [self setH:sz.height];
+}
 
 
 -(CGFloat)x
@@ -88,14 +100,7 @@
 }
 
 
--(CGFloat)right
-{
-  CGRect r = [self frame];
-  return r.origin.x + r.size.width;
-}
-
-
--(CGFloat)bottom
+-(CGFloat)low
 {
   CGRect r = [self frame];
   return r.origin.y + r.size.height;
