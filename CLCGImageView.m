@@ -82,8 +82,7 @@
 
 - (void)requestFail:(ASIHTTPRequest *)req
 {
-  NSError *err = [req error];
-  CLCG_P(@"%@", err);
+  CLCG_P(@"%@", [req error]);
   CLCG_REL(mReq);
 }
 
