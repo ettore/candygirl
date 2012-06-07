@@ -11,6 +11,7 @@
 
 @implementation CLCGTVVC
 
+@synthesize loadState = mLoadState;
 
 //-----------------------------------------------------------------------------
 #pragma mark - Init, dealloc, memory mgmt
@@ -29,6 +30,7 @@
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
     mStyle = style;
+    mLoadState = CLCG_NOT_LOADED;
   }
   return self;
 }
