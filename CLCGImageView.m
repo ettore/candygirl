@@ -18,6 +18,8 @@
 
 -(void)dealloc
 {
+  mTapTarget = nil;
+  mTapAction = nil;
   CLCG_REL(mUrl);
   CLCG_REL(mRetinaUrl);
   CLCG_REL(mReq);
@@ -25,12 +27,23 @@
 }
 
 
-- (id)initWithFrame:(CGRect)frame
+-(void)addTarget:(id)target onTapAction:(SEL)action
 {
-  self = [super initWithFrame:frame];
-  if (self) {
-  }
-  return self;
+  mTapAction = action;
+
+  // we want to keep an "assign" memory policy here to avoid circular references
+  // with container classes, who are likely to retain us. For instance, on a 
+  // memory warning situation the container or vc will release us, and once 
+  // viewDidLoad is re-hit, the client code will reassign the target in there.
+  mTapTarget = target;
+}
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  [super touchesEnded:touches withEvent:event];
+  if ([touches count] == 1)
+    [mTapTarget performSelector:mTapAction withObject:self];
 }
 
 
