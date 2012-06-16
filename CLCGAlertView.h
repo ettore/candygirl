@@ -26,13 +26,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CLCGAlertView : UIAlertView
+@interface CLCGAlertView : UIAlertView <UIAlertViewDelegate>
 {
-  // this allows to use the same delegate callback for multiple alerts and 
-  // easily discern which alert the invocation belongs to.
-  NSUInteger identifier;
+  void (^mBlock)(NSInteger btn);
 }
 
-@property(nonatomic) NSUInteger identifier;
+- (id)initWithTitle:(NSString *)t
+            message:(NSString *)message
+              block:(void (^)(NSInteger btn))clicked_btn_block
+  cancelButtonTitle:(NSString *)cancelButtonTitle 
+  submitButtonTitle:(NSString *)submitButtonTitle;
+//  otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
+
 
 @end

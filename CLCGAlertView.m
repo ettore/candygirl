@@ -25,8 +25,47 @@
 
 #import "CLCGAlertView.h"
 
+
 @implementation CLCGAlertView 
 
-@synthesize identifier;
+
+-(void)dealloc
+{
+  [mBlock release];
+  mBlock = nil;
+  [super dealloc];
+}
+
+
+//
+// TODO: implement variadic arguments handling
+//       http://stackoverflow.com/questions/205529
+//
+-(id)initWithTitle:(NSString *)t
+            message:(NSString *)m
+              block:(void (^)(NSInteger btn))block
+  cancelButtonTitle:(NSString *)cancel_btn_title
+  submitButtonTitle:(NSString *)submit_btn_title
+{
+  self = [super initWithTitle:t 
+                      message:m 
+                     delegate:self
+            cancelButtonTitle:cancel_btn_title 
+            otherButtonTitles:submit_btn_title, nil];
+
+  if (self) {
+    mBlock = [block copy];
+  }
+          
+  return self;
+}
+
+
+-(void)alertView:(UIAlertView*)av clickedButtonAtIndex:(NSInteger)btn
+{
+  mBlock(btn);
+}
+
 
 @end
+
