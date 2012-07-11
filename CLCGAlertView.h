@@ -28,8 +28,15 @@
 
 @interface CLCGAlertView : UIAlertView <UIAlertViewDelegate>
 {
+#if NS_BLOCKS_AVAILABLE
   void (^mBlock)(NSInteger btn);
+#endif
 }
+
+#if NS_BLOCKS_AVAILABLE
+-(id)initWithTitle:(NSString *)t
+           message:(NSString *)m
+             block:(void (^)(NSInteger btn))block;
 
 - (id)initWithTitle:(NSString *)t
             message:(NSString *)message
@@ -38,5 +45,12 @@
   submitButtonTitle:(NSString *)submitButtonTitle;
 //  otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
+-(id)initWithTitle:(NSString *)t
+           message:(NSString *)m
+             block:(void (^)(NSInteger btn))block
+ cancelButtonTitle:(NSString *)cancel_btn_title
+ submitButtonTitle:(NSString *)submit_btn_title
+  otherButtonTitle:(NSString *)other_btn_title;
+#endif
 
 @end

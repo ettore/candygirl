@@ -29,11 +29,31 @@
 @implementation CLCGAlertView 
 
 
+#if NS_BLOCKS_AVAILABLE
+
 -(void)dealloc
 {
   [mBlock release];
   mBlock = nil;
   [super dealloc];
+}
+
+
+-(id)initWithTitle:(NSString *)t
+           message:(NSString *)m
+             block:(void (^)(NSInteger btn))block
+{
+  self = [super initWithTitle:t 
+                      message:m 
+                     delegate:self
+            cancelButtonTitle:CLCG_LOC(@"OK")
+            otherButtonTitles:nil];
+  
+  if (self) {
+    mBlock = [block copy];
+  }
+  
+  return self;
 }
 
 
@@ -47,6 +67,16 @@
   cancelButtonTitle:(NSString *)cancel_btn_title
   submitButtonTitle:(NSString *)submit_btn_title
 {
+//  va_list ap;
+//  int i, sum;
+//  
+//  va_start (ap, count);         /* Initialize the argument list. */
+//  sum = 0;
+//  for (i = 0; i < count; i++)
+//    sum += va_arg (ap, int);    /* Get the next argument value. */
+//  
+//  va_end (ap);                  /* Clean up. */
+  
   self = [super initWithTitle:t 
                       message:m 
                      delegate:self
@@ -61,11 +91,33 @@
 }
 
 
+-(id)initWithTitle:(NSString *)t
+           message:(NSString *)m
+             block:(void (^)(NSInteger btn))block
+ cancelButtonTitle:(NSString *)cancel_btn_title
+ submitButtonTitle:(NSString *)submit_btn_title
+  otherButtonTitle:(NSString *)other_btn_title
+{
+  self = [super initWithTitle:t 
+                      message:m 
+                     delegate:self
+            cancelButtonTitle:cancel_btn_title 
+            otherButtonTitles:submit_btn_title,other_btn_title,nil];
+  
+  if (self) {
+    mBlock = [block copy];
+  }
+  
+  return self;
+}
+
+
 -(void)alertView:(UIAlertView*)av clickedButtonAtIndex:(NSInteger)btn
 {
   mBlock(btn);
 }
 
+#endif
 
 @end
 
