@@ -28,6 +28,14 @@
 
 @interface UIView (Candygirl)
 
+/** Moves the X position of the view to the center of its superview. */
+-(void)centerHorizontally;
+
+/** 
+ * Moves the Y position of the view to the center of its superview, plus an
+ * additional offset. */
+-(void)centerVerticallyWithOffset:(CGFloat)offset;
+
 -(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font;
 -(UIView*)findFirstResponder;
 

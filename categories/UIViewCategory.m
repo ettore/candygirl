@@ -33,6 +33,28 @@
 @implementation UIView (Candygirl)
 
 
+-(void)centerVerticallyWithOffset:(CGFloat)offset
+{
+  CGSize sz;
+  CGFloat y;
+  
+  sz = [[self superview] frame].size;
+  y = (sz.height - [self h])/2 + offset;
+  [self setY:y];
+}
+
+
+-(void)centerHorizontally
+{
+  CGSize sz;
+  CGFloat x;
+
+  sz = [[self superview] frame].size;
+  x = (sz.width - [self w])/2;
+  [self setX:x];
+}
+
+
 -(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font
 {
   CGSize sz;
