@@ -5,12 +5,13 @@
 //  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
+#import "CLCGLayer.h"
+
 @class ASIHTTPRequest;
 
-@interface CLCGImageView : UIImageView
+
+@interface CLCGImageView : UIImageView <CLCGImageLoaderDelegate>
 {
-  NSString        *mUrl;
-  NSString        *mRetinaUrl;
   ASIHTTPRequest  *mReq;
   
   // target and action for "on tap" event

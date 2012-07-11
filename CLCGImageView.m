@@ -18,10 +18,10 @@
 
 -(void)dealloc
 {
+  [mReq cancel];
+  [mReq setDelegate:nil];
   mTapTarget = nil;
   mTapAction = nil;
-  CLCG_REL(mUrl);
-  CLCG_REL(mRetinaUrl);
   CLCG_REL(mReq);
   [super dealloc];
 }
@@ -49,40 +49,17 @@
 
 -(void)loadImageForURL:(NSString*)normalurl retinaURL:(NSString*)retinaurl
 {
-  NSURL *url = nil;
-  
   if (mReq) {
     [mReq cancel];
     CLCG_REL(mReq);
   }
   
-  if (clcg_has_retina()) {
-    if (!clcg_str_isblank(retinaurl))
-      url = [[NSURL alloc] initWithString:retinaurl];
-    else if (!clcg_str_isblank(normalurl))
-      url = [[NSURL alloc] initWithString:normalurl];
-  } else if (!clcg_str_isblank(normalurl)) {
-    url = [[NSURL alloc] initWithString:normalurl];
-  }
-
-  if (url) {
-    // configure the request
-    mReq = [[ASIHTTPRequest alloc] initWithURL:url];
-    [mReq addRequestHeader:@"Accept-Encoding" value:@"gzip"];
-    [mReq setDidFinishSelector:@selector(requestSuccess:)];
-    [mReq setDidFailSelector:@selector(requestFail:)];
-    [mReq setDelegate:self];
-    
-    // execute the request
-    [mReq startAsynchronous];
-    
-    // cleanup
-    [url release];
-  }
+  mReq = [CLCGLayer loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
+  [mReq retain];
 }
 
 
-- (void)requestSuccess:(ASIHTTPRequest *)req
+- (void)requestFinished:(ASIHTTPRequest *)req
 {
   NSData *data = [req responseData];
   UIImage *img = [UIImage imageWithData:data];
