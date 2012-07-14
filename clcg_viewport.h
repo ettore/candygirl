@@ -47,22 +47,6 @@ extern "C" {
    * orientation. 
    */
   CGFloat clcg_statusbar_h();
-
-  /**
-   * Returns the height of the standard UINavigationBar considering the 
-   * current device orientation. 
-   */
-  CGFloat clcg_navbar_h();
-
-  /**
-   * Returns the height of a standard UIToolbar.
-   */
-  CGFloat clcg_toolbar_h();
-  
-  /**
-   * Returns the height of a standard UITabbar.
-   */
-  CGFloat clcg_tabbar_h();
   
 #ifdef __cplusplus
 }
