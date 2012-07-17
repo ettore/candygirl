@@ -114,7 +114,8 @@
 
 -(void)alertView:(UIAlertView*)av clickedButtonAtIndex:(NSInteger)btn
 {
-  mBlock(btn);
+  if (mBlock)
+    mBlock(btn);
 }
 
 #endif
