@@ -8,50 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-@class DSActivityView;
 
-//@interface UIViewController(CLCGVC)
 @interface CLCGVC : UIViewController
 {
-  // Tells if this view controller is currently displayed on the screen.
-  // Apparently this may be superfluous, as it seems that evaluating
-  // self.view.window could be enough to determine if the view is currently 
-  // visible; our strategy seems more robust though.
-  // http://stackoverflow.com/questions/3678180/how-to-check-if-a-specific-uiviewcontrollers-view-is-currently-visible/3681076#3681076
-  BOOL mVisible;
+  UIView                        *mSpinnerContainer;
+  UIActivityIndicatorView       *mSpinner;
+  UIActivityIndicatorViewStyle  mSpinnerStyle;
+  UIColor                       *mSpinnerBackgroundColor;
 }
 
-/** Show spinny indicator with the message obtained from loadingMessage:. */
--(void)showSpinny;
+@property(nonatomic,retain) IBOutlet UIView *spinnerContainer;
+@property(nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
+@property(nonatomic) UIActivityIndicatorViewStyle  spinnerStyle;
+@property(nonatomic,retain) UIColor *spinnerBackgroundColor;
 
-/** Remove the spinny indicator if one was out, or do nothing otherwise. */
--(void)removeSpinny;
-
-/** Subclasses should override this and return the appropriate loading message */
--(NSString*)loadingMessage;
-
--(UIView*)viewForActivityView;
-
-@end
-
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-@interface CLCGTableVC : UITableViewController
-{
-  BOOL mVisible;
-}
-
-/** Show spinny indicator with the message obtained from loadingMessage:. */
--(void)showSpinny;
-
-/** Remove the spinny indicator if one was out, or do nothing otherwise. */
--(void)removeSpinny;
-
-/** Subclasses should override this and return the appropriate loading message */
--(NSString*)loadingMessage;
-
--(UIView*)viewForActivityView;
+/** 
+ * If show == YES, shows and aligns the spinny indicator to the center 
+ * of the screen. 
+ * If show == NO, removes the spinny indicator if it was displayed, or do 
+ * nothing otherwise.
+ */
+-(void)showLoadingView:(BOOL)show;
 
 @end
