@@ -15,24 +15,37 @@
 
 #import "CLCGLayer.h"
 
+
 @implementation CLCGLayer
+
 
 -(void)dealloc
 {
-  [mReq cancel];
-  [mReq setDelegate:nil];
-  CLCG_REL(mReq);
+  [self cleanupLayer];
   [super dealloc];
 }
 
 
--(void)loadImageForURL:(NSString*)normalurl retinaURL:(NSString*)retinaurl
+-(void)cleanupLayer
+{
+  [self setContents:nil];
+  mCache = nil;
+  [mReq cancel];
+  [mReq setDelegate:nil];
+  CLCG_REL(mReq);
+}
+
+
+-(void)loadImageForURL:(NSString*)normalurl 
+             retinaURL:(NSString*)retinaurl
+                 cache:(NSCache*)cache
 {
   if (mReq) {
     [mReq cancel];
     CLCG_REL(mReq);
   }
   
+  mCache = cache;
   mReq = [CLCGLayer loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
   [mReq retain];
 }
@@ -79,7 +92,10 @@
   NSData *data = [req responseData];
   UIImage *img = [UIImage imageWithData:data];
   
-  [self setContents:(id)[img CGImage]];
+  if (img) {
+    [mCache setObject:img forKey:[[req originalURL] absoluteString]];
+    [self setContents:(id)[img CGImage]];
+  }
   
   CLCG_REL(mReq);
 }

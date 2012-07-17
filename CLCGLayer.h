@@ -18,13 +18,36 @@
 
 @interface CLCGLayer : CALayer <CLCGImageLoaderDelegate>
 {
-  ASIHTTPRequest *mReq;
+  ASIHTTPRequest  *mReq;
+  
+  // non-retained pointer to an external cache where to store the UIImage 
+  // object we fetched.
+  NSCache         *mCache;
 }
 
--(void)loadImageForURL:(NSString*)url retinaURL:(NSString*)retinaurl;
 +(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
                         retinaURL:(NSString*)retinaurl
                          delegate:(id<CLCGImageLoaderDelegate>)delegate;
 
+/**
+ * Loads image from a URL and sets it as this layer's contents.
+ * Will load the retina or non-retina image according to device capabilities.
+ *
+ * If a cache is provided, the downloaded UIImage object will be stored there 
+ * with the used URL as key. The caller will need to call cleanupLayer if it
+ * is about to release the cache object from memory in order to avoid a 
+ * dangling pointer error.
+ *
+ * TODO: the caller doesn't know which URL was actually used.
+ */
+-(void)loadImageForURL:(NSString*)url
+             retinaURL:(NSString*)retinaurl
+                 cache:(NSCache*)cache;
+
+/**
+ * Removes content, cancels pending request, and zeros out delegate and cache
+ * pointers.
+ */
+-(void)cleanupLayer;
 
 @end
