@@ -27,20 +27,16 @@
 
 SystemSoundID clcg_create_short_snd(NSString *filename, NSString *ext)
 {
-  OSStatus err;
   SystemSoundID snd_id;
   UInt32 flag = 0;
   NSBundle *bndl = [NSBundle mainBundle];
   NSString *path = [bndl pathForResource:filename ofType:ext];
   NSURL *url = [NSURL fileURLWithPath:path isDirectory:NO]; 
   
-  err = AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &snd_id);
+  AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &snd_id);
 
-  err = AudioServicesSetProperty(kAudioServicesPropertyIsUISound,
-                                 sizeof(UInt32),
-                                 &snd_id,
-                                 sizeof(UInt32),
-                                 &flag);
+  AudioServicesSetProperty(kAudioServicesPropertyIsUISound, 
+                           sizeof(UInt32), &snd_id, sizeof(UInt32), &flag);
 
 //  // do not set this unless you require lower i/o latency
 //  float len = 0.8; // In seconds

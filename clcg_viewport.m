@@ -26,40 +26,17 @@
 #import "clcg_debug.h"
 #import "clcg_viewport.h"
 #import "clcg_device_utils.h"
-
+#import "UIApplicationCategory.h"
 
 CGFloat clcg_statusbar_h()
 {
-  UIInterfaceOrientation orient = clcg_orientation();
+  const UIInterfaceOrientation orient = clcg_orientation();
   const CGSize sz = [[UIApplication sharedApplication] statusBarFrame].size;
   if (UIInterfaceOrientationIsPortrait(orient)) {
     return sz.height;
   } else {
     return sz.width;
   }
-}
-
-
-CGFloat clcg_navbar_h()
-{
-  UIInterfaceOrientation orient = clcg_orientation();
-  if (UIInterfaceOrientationIsPortrait(orient) || clcg_is_ipad()) {
-    return 44.0f;
-  } else {
-    return 33.0f;
-  }
-}
-
-
-CGFloat clcg_toolbar_h()
-{
-  return 44.0;
-}
-
-
-CGFloat clcg_tabbar_h()
-{
-  return 49.0f;
 }
 
 
@@ -72,7 +49,7 @@ UIInterfaceOrientation clcg_orientation()
 CGSize clcg_screensize()
 {
   CGRect bounds = [[UIScreen mainScreen] bounds];
-  UIInterfaceOrientation orientation = clcg_orientation();
+  const UIInterfaceOrientation orientation = clcg_orientation();
   
   if (UIInterfaceOrientationIsLandscape(orientation)) {
     CGFloat w = bounds.size.width;

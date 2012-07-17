@@ -23,6 +23,12 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#ifndef CLCG_TIME_UTILS_H_
+#define CLCG_TIME_UTILS_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define CLCG_MINUTE 60
 #define CLCG_HOUR   (60 * CLCG_MINUTE)
@@ -30,3 +36,9 @@
 #define CLCG_WEEK   (7 * CLCG_DAY)
 #define CLCG_MONTH  (30.5 * CLCG_DAY)
 #define CLCG_YEAR   (365 * CLCG_DAY)
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

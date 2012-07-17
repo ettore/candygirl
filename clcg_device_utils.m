@@ -43,11 +43,10 @@ BOOL clcg_os_geq(NSString* version)
 
 BOOL clcg_is_ipad(void)
 {
-#if __IPHONE_3_2 && __IPHONE_3_2 <= __IPHONE_OS_VERSION_MAX_ALLOWED
+  if (clcg_os_geq(@"3.2"))
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-#else
+  else
     return NO;
-#endif
 }
 
 
