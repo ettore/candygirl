@@ -24,6 +24,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 
+#ifndef CLCG_BUNDLE_UTILS_H_
+#define CLCG_BUNDLE_UTILS_H_
+
 #import <AudioToolbox/AudioToolbox.h>
 
 #define CLCG_LOC(key) \
@@ -38,3 +41,5 @@
  * AudioServicesDisposeSystemSoundID().
  */
 SystemSoundID clcg_create_short_snd(NSString *filename, NSString *ext);
+
+#endif //ifndef CLCG_BUNDLE_UTILS_H_

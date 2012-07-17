@@ -23,6 +23,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 
+#ifndef CLCG_DEVICE_UTILS_H_
+#define CLCG_DEVICE_UTILS_H_
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -62,4 +65,6 @@ extern "C" {
   
 #ifdef __cplusplus
 }
+#endif
+
 #endif

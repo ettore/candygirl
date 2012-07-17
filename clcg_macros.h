@@ -24,6 +24,9 @@
 // POSSIBILITY OF SUCH DAMAGE.
 
 
+#ifndef CLCG_MACROS_H_
+#define CLCG_MACROS_H_
+
 /**
  * Borrowed from Apple's AvailabiltyInternal.h header. There's no reason why we 
  * shouldn't be able to use this macro, as it's a gcc-supported flag.
@@ -50,5 +53,5 @@
  */
 #define IS_MASK_SET(value, flag)  (((value) & (flag)) == (flag))
 
-
+#endif //ifdef CLCG_LMACROS_H
 
