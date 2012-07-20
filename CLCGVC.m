@@ -39,39 +39,24 @@
 // just creates the spinner view and subviews, without adding to view stack
 -(void)createSpinnerView
 {
-  UIView *container;
+  UIView *cont;
   UIActivityIndicatorView *ai;
 
   ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:mSpinnerStyle];
   [self setSpinner:ai];
   [ai release];
   
-  container = [[UIView alloc] initWithFrame:[[self view] frame]];
-  [container setBackgroundColor:mSpinnerBackgroundColor];
-  [container addSubview:mSpinner];
-  [self setSpinnerContainer:container];
-  [container release];
-  
-//  CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"alpha"];
-//  anim.duration = 2.0;
-//  anim.fromValue = [NSNumber numberWithFloat:0];
-//  anim.toValue = [NSNumber numberWithFloat:0.7];
-//  anim.repeatCount = 1;
-//  anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
-//  [[v layer] addAnimation:anim forKey:@"spinnyIn"];
-  //  [UIView animateWithDuration:1 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve 
-  //                   animations:^{
-  //                     [v setAlpha:0.7];
-  //                   } 
-  //                   completion:nil];
+  cont = [[UIView alloc] initWithFrame:[[self view] frame]];
+  [cont setBackgroundColor:mSpinnerBackgroundColor];
+  [cont setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+  [cont addSubview:mSpinner];
+  [self setSpinnerContainer:cont];
+  [cont release];
 }
 
 
 -(void)centerSpinner
 {
-  const CGSize SZ = [[self view] frame].size;
-  [mSpinnerContainer setW:SZ.width];
-  [mSpinnerContainer setH:SZ.height];
   [mSpinner centerVerticallyWithOffset:0];
   [mSpinner centerHorizontally];
 }
