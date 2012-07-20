@@ -24,13 +24,23 @@
 }
 
 
-// if not created via nib file
+// designated initializer
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    mStyle = UITableViewStylePlain;
+    mLoadState = CLCG_NOT_LOADED;
+  }
+  return self;
+}
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
-  self = [super initWithNibName:nil bundle:nil];
+  self = [self initWithNibName:nil bundle:nil];
   if (self) {
     mStyle = style;
-    mLoadState = CLCG_NOT_LOADED;
   }
   return self;
 }

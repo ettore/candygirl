@@ -31,8 +31,11 @@ enum CLCGLoadingState {
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
 @property(nonatomic,assign) enum CLCGLoadingState loadState;
 
-// if not created via nib file
-- (id)initWithStyle:(UITableViewStyle)style;
+// still the designated initializer. Defaults style to UITableViewStylePlain.
+-(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+
+// use this if you don't use a nib
+-(id)initWithStyle:(UITableViewStyle)style;
 
 // deselects all currently selected rows.
 -(void)deselectAll:(BOOL)animated;
