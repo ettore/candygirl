@@ -22,6 +22,7 @@
 @synthesize spinner = mSpinner;
 @synthesize spinnerStyle = mSpinnerStyle;
 @synthesize spinnerBackgroundColor = mSpinnerBackgroundColor;
+@synthesize popoverContentDelegate = mPopoverContentDelegate;
 
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -66,12 +67,14 @@
 }
 
 
-// From the docs: subclasses should not call [super loadView]
-//-(void)loadView
-//{
-//  if (mSpinnerContainer == nil)
-//    [self createSpinnerView];
-//}
+-(void)centerSpinner
+{
+  const CGSize SZ = [[self view] frame].size;
+  [mSpinnerContainer setW:SZ.width];
+  [mSpinnerContainer setH:SZ.height];
+  [mSpinner centerVerticallyWithOffset:0];
+  [mSpinner centerHorizontally];
+}
 
 
 -(void)showLoadingView:(BOOL)show
@@ -85,17 +88,21 @@
       [mSpinnerContainer setNeedsLayout];
     }
     
-    const CGSize SZ = [[self view] frame].size;
-    [mSpinnerContainer setW:SZ.width];
-    [mSpinnerContainer setH:SZ.height];
-    [mSpinner centerVerticallyWithOffset:0];
-    [mSpinner centerHorizontally];
+    [self centerSpinner];
     [mSpinner startAnimating];
     [[self view] bringSubviewToFront:mSpinnerContainer];
   } else {
     [mSpinner stopAnimating];
     clcg_safe_remove_from_superview(mSpinnerContainer);
   }
+}
+
+
+-(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)to_orient
+                                        duration:(NSTimeInterval)duration
+{
+  [super willAnimateRotationToInterfaceOrientation:to_orient duration:duration];
+  [self centerSpinner];
 }
 
 
@@ -106,6 +113,7 @@
 -(void)dealloc
 {
   CLCG_P(@"%@", self);
+  mPopoverContentDelegate = nil;
   CLCG_REL(mSpinnerBackgroundColor);
   CLCG_REL(mSpinner);
   CLCG_REL(mSpinnerContainer);
@@ -116,6 +124,8 @@
 -(void)viewDidUnload
 {
   CLCG_P(@"%@", self);
+  CLCG_REL(mSpinner);
+  CLCG_REL(mSpinnerContainer);
   [super viewDidUnload];
 }
 
