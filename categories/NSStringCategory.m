@@ -14,8 +14,12 @@
 {
   NSString *s;
   
-  s = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, 
-                                                                (__bridge CFStringRef)self, 
+  s = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                                                (
+#if __has_feature(objc_arc)
+                                                                 __bridge
+#endif
+                                                                 CFStringRef)self,
                                                                 NULL, 
                                                                 CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"),
                                                                 kCFStringEncodingUTF8));

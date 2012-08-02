@@ -33,7 +33,11 @@ SystemSoundID clcg_create_short_snd(NSString *filename, NSString *ext)
   NSString *path = [bndl pathForResource:filename ofType:ext];
   NSURL *url = [NSURL fileURLWithPath:path isDirectory:NO]; 
   
-  AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &snd_id);
+  AudioServicesCreateSystemSoundID((
+#if __has_feature(objc_arc)
+                                    __bridge
+#endif
+                                    CFURLRef)url, &snd_id);
 
   AudioServicesSetProperty(kAudioServicesPropertyIsUISound, 
                            sizeof(UInt32), &snd_id, sizeof(UInt32), &flag);
