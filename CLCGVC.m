@@ -36,6 +36,10 @@
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark - Spinner
+
+
 // just creates the spinner view and subviews, without adding to view stack
 -(void)createSpinnerView
 {
@@ -88,6 +92,17 @@
 {
   [super willAnimateRotationToInterfaceOrientation:to_orient duration:duration];
   [self centerSpinner];
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Utils
+
+
+-(CGFloat)navBarH
+{
+  UINavigationBar *nb = [[self navigationController] navigationBar];
+  return (nb ? [nb h] : 0.0f);
 }
 
 
