@@ -5,7 +5,7 @@
 //  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
-#import "CLCGLayer.h"
+#import "CLCGImageLoader.h"
 
 @class ASIHTTPRequest;
 

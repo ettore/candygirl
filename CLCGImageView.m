@@ -54,26 +54,21 @@
     CLCG_REL(mReq);
   }
   
-  mReq = [CLCGLayer loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
+  mReq = [CLCGImageLoader loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
   [mReq retain];
 }
 
 
-- (void)requestFinished:(ASIHTTPRequest *)req
+-(void)didDownloadImage:(UIImage*)img
 {
-  NSData *data = [req responseData];
-  UIImage *img = [UIImage imageWithData:data];
-  
   [self setImage:img];
-  
-  CLCG_REL(mReq);
+  CLCG_REL(mReq);//we retained in loadImageForURL:retinaURL:, so release here
 }
 
 
-- (void)requestFail:(ASIHTTPRequest *)req
+-(void)downloadFailedWithHTTPStatus:(int)status
 {
-  CLCG_P(@"%@", [req error]);
-  CLCG_REL(mReq);
+  CLCG_REL(mReq);//we retained in loadImageForURL:retinaURL:, so release here
 }
 
 @end

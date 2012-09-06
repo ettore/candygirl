@@ -8,13 +8,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@class ASIHTTPRequest;
-
-@protocol CLCGImageLoaderDelegate
--(void)requestFinished:(ASIHTTPRequest *)req;
--(void)requestFail:(ASIHTTPRequest *)req;
-@end
-
+#import "CLCGImageLoader.h"
 
 @interface CLCGLayer : CALayer <CLCGImageLoaderDelegate>
 {
@@ -24,10 +18,6 @@
   // object we fetched.
   NSCache         *mCache;
 }
-
-+(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
-                        retinaURL:(NSString*)retinaurl
-                         delegate:(id<CLCGImageLoaderDelegate>)delegate;
 
 /**
  * Loads image from a URL and sets it as this layer's contents.

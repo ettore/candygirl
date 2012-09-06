@@ -46,64 +46,26 @@
   }
   
   mCache = cache;
-  mReq = [CLCGLayer loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
+  mReq = [CLCGImageLoader loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
+  
+  // will release on callbacks
   [mReq retain];
 }
 
 
-+(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
-                        retinaURL:(NSString*)retinaurl
-                         delegate:(id<CLCGImageLoaderDelegate>)delegate
+-(void)didDownloadImage:(UIImage*)img
 {
-  NSURL *url = nil;
-  ASIHTTPRequest *req = nil;
+  [mCache setObject:img forKey:[[mReq originalURL] absoluteString]];
+  [self setContents:(id)[img CGImage]];
   
-  if (clcg_has_retina()) {
-    if (!clcg_str_isblank(retinaurl))
-      url = [[NSURL alloc] initWithString:retinaurl];
-    else if (!clcg_str_isblank(normalurl))
-      url = [[NSURL alloc] initWithString:normalurl];
-  } else if (!clcg_str_isblank(normalurl)) {
-    url = [[NSURL alloc] initWithString:normalurl];
-  }
-  
-  if (url) {
-    // configure the request
-    req = [[ASIHTTPRequest alloc] initWithURL:url];
-    [req addRequestHeader:@"Accept-Encoding" value:@"gzip"];
-    [req setDidFinishSelector:@selector(requestFinished:)];
-    [req setDidFailSelector:@selector(requestFail:)];
-    [req setDelegate:delegate];
-    
-    // execute the request
-    [req startAsynchronous];
-    
-    // cleanup
-    [url release];
-    [req autorelease];
-  }
-  
-  return req;
-}
-
-
--(void)requestFinished:(ASIHTTPRequest*)req
-{
-  NSData *data = [req responseData];
-  UIImage *img = [UIImage imageWithData:data];
-  
-  if (img) {
-    [mCache setObject:img forKey:[[req originalURL] absoluteString]];
-    [self setContents:(id)[img CGImage]];
-  }
-  
+  // we retained in loadImageForURL:retinaURL:cache:, so release here.
   CLCG_REL(mReq);
 }
 
 
--(void)requestFail:(ASIHTTPRequest*)req
+-(void)downloadFailedWithHTTPStatus:(int)status
 {
-  CLCG_P(@"%@", [req error]);
+  // we retained in loadImageForURL:retinaURL:cache:, so release here.
   CLCG_REL(mReq);
 }
 
