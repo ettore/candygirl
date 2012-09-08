@@ -53,4 +53,11 @@
  */
 -(void)showLoadingView:(BOOL)show;
 
+/** 
+ * Helper method that returns the height of the nav bar of the navigation
+ * controller hosting this view controller. If no navigation controller is
+ * present, it will return 0.
+ */
+-(CGFloat)navBarH;
+
 @end
