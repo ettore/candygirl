@@ -95,7 +95,7 @@
     [url autorelease];
     
     if (use_cache) {
-      UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:url];
+      UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:[url absoluteString]];
       if (img) {
         [self returnImage:img status:200 toDelegate:delegate orBlock:block];
         return nil;
