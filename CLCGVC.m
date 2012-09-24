@@ -106,6 +106,13 @@
 }
 
 
+-(CGFloat)tabBarH
+{
+  UITabBar *tb = [[self tabBarController] tabBar];
+  return (tb ? [tb h] : 0.0f);
+}
+
+
 //------------------------------------------------------------------------------
 #pragma mark - Memory Mgmt
 
