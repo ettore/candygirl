@@ -117,13 +117,19 @@
 #pragma mark - Memory Mgmt
 
 
+-(void)releaseRetainedSubviews
+{
+  CLCG_REL(mSpinner);
+  CLCG_REL(mSpinnerContainer);
+}
+
+
 -(void)dealloc
 {
   CLCG_P(@"%@", self);
   mPopoverContentDelegate = nil;
   CLCG_REL(mSpinnerBackgroundColor);
-  CLCG_REL(mSpinner);
-  CLCG_REL(mSpinnerContainer);
+  [self releaseRetainedSubviews];
   [super dealloc];
 }
 
@@ -131,8 +137,7 @@
 -(void)viewDidUnload
 {
   CLCG_P(@"%@", self);
-  CLCG_REL(mSpinner);
-  CLCG_REL(mSpinnerContainer);
+  [self releaseRetainedSubviews];
   [super viewDidUnload];
 }
 

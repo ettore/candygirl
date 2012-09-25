@@ -54,6 +54,13 @@
 -(void)showLoadingView:(BOOL)show;
 
 /** 
+ * Releases all the retained subviews of this view controller. This is called
+ * by dealloc and viewDidUnload.
+ * Subclasses should override this method and release their subviews here.
+ */
+-(void)releaseRetainedSubviews;
+
+/** 
  * Helper method that returns the height of the nav bar of the navigation
  * controller hosting this view controller. If no navigation controller is
  * present, it will return 0.

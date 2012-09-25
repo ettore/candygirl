@@ -17,13 +17,6 @@
 #pragma mark - Init, dealloc, memory mgmt
 
 
--(void)dealloc
-{
-  CLCG_REL(mTableView);
-  [super dealloc];
-}
-
-
 // designated initializer
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,7 +29,7 @@
 }
 
 
-- (id)initWithStyle:(UITableViewStyle)style
+-(id)initWithStyle:(UITableViewStyle)style
 {
   self = [self initWithNibName:nil bundle:nil];
   if (self) {
@@ -46,10 +39,11 @@
 }
 
 
-- (void)viewDidUnload
+// this is called by the super class dealloc and viewDidUnload
+-(void)releaseRetainedSubviews
 {
   CLCG_REL(mTableView);
-  [super viewDidUnload];
+  [super releaseRetainedSubviews];
 }
 
 
