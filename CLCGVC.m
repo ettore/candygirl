@@ -149,5 +149,31 @@
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark - Rotation
+
+
+// iOS 6
+-(BOOL)shouldAutorotate
+{
+  return YES;
+}
+
+
+// iOS 6
+- (NSUInteger)supportedInterfaceOrientations {
+  // by default, UIInterfaceOrientationMaskAllButUpsideDown is returned on
+  // iPhone. Override that and let the default be the project level setting.
+  return UIInterfaceOrientationMaskAll;
+}
+
+
+// iOS < 6
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orient
+{
+  return YES;
+}
+
+
 @end
 
