@@ -84,6 +84,7 @@
   same_sz_mask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
   [current setAutoresizingMask:same_sz_mask];
   [current setBackgroundColor:[UIColor clearColor]];
+  [current setOpaque:YES];
 
   // set frame of subview to match self
   CGRect r = [self frame];
@@ -120,6 +121,8 @@
   } else if (CLCGTogglerSecondView == state) {
     [mFirstView setHidden:YES];
     [mSecondView setHidden:NO];
+  } else {
+    CLCG_ASSERT(NO);
   }
   
   mState = state;
