@@ -102,14 +102,6 @@
 {
   [super layoutSubviews];
   [self setState:mState];
-//  CGRect r = [self frame];
-//  CGRect r1 = [mFirstView frame];
-//  CGRect r2 = [mSecondView frame];
-//  CGFloat w = MAX(r1.size.width, r2.size.width);
-//  if (w == 0)
-//    w = r.size.width;
-//  [mFirstView setFrame:CGRectMake(0,0,w,r.size.height)];
-//  [mSecondView setFrame:CGRectMake(0,0,w,r.size.height)];
 }
 
 
@@ -118,9 +110,13 @@
   if (CLCGTogglerFirstView == state) {
     [mFirstView setHidden:NO];
     [mSecondView setHidden:YES];
+    [mFirstView setAlpha:1.0];
+    [mSecondView setAlpha:0.0];
   } else if (CLCGTogglerSecondView == state) {
     [mFirstView setHidden:YES];
     [mSecondView setHidden:NO];
+    [mFirstView setAlpha:0.0];
+    [mSecondView setAlpha:1.0];
   } else {
     CLCG_ASSERT(NO);
   }
