@@ -35,4 +35,10 @@ enum CLCGBarButtonItemState {
              action:(SEL)action
              height:(CGFloat)height;
 
+-(id)initWithImage:(UIImage *)img
+             style:(UIBarButtonItemStyle)style
+            target:(id)target
+            action:(SEL)action
+            height:(CGFloat)height;
+
 @end

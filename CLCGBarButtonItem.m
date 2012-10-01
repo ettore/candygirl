@@ -62,43 +62,60 @@
 }
 
 
-- (id)initWithImage:(UIImage*)image
+- (id)initWithImage:(UIImage*)img
             orTitle:(NSString*)title
               style:(UIBarButtonItemStyle)style
              target:(id)target
              action:(SEL)action
              height:(CGFloat)h
 {
-  if (image)
-    self = [super initWithImage:image style:style target:target action:action];
+  if (img)
+    self = [super initWithImage:img style:style target:target action:action];
   else
     self = [super initWithTitle:title style:style target:target action:action];
   
   if (self) {
-    UIButton *first;
+    UIView *first;
+    UIButton *b;
     UIActivityIndicatorView *second;
     CGFloat w;
-    
-    // set up first view
-    first = [UIButton buttonWithType:UIButtonTypeCustom];
-    if (image) {
-      [first setTitle:@"" forState:UIControlStateNormal];
-      [first setBackgroundImage:image forState:UIControlStateNormal];
-      w = [image size].width;
-    } else {
-      UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
-      [first setTitle:title forState:UIControlStateNormal];
-      [first setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-      [[first titleLabel] setFont:font];
-      w = [title sizeWithFont:font].width;
-    }
-    [first addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 
     // set up second view
     second = [[UIActivityIndicatorView alloc]
               initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [second startAnimating];
     [second autorelease];
+    
+    // set up first view
+    b = [UIButton buttonWithType:UIButtonTypeCustom];
+    [b addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    if (img) {
+      CGFloat x, y;
+      CGSize imgsz = [img size];
+
+      [b setTitle:@"" forState:UIControlStateNormal];
+      [b setBackgroundImage:img forState:UIControlStateNormal];
+      [b setAutoresizingMask:
+       UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin
+       |UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
+      [b setContentMode:UIViewContentModeCenter];
+      [b setOpaque:YES];
+      [b setBackgroundColor:[UIColor clearColor]];
+
+      w = MAX(imgsz.width, [second w]);
+      first = [[[UIView alloc] initWithFrame:CGRectMake(0,0,w,h)] autorelease];
+      x = (w - imgsz.width)/2;
+      y = (h - imgsz.height)/2;
+      [b setFrame:CGRectMake(x, y, imgsz.width, imgsz.height)];
+      [first addSubview:b];
+    } else {
+      UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
+      [b setTitle:title forState:UIControlStateNormal];
+      [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+      [[b titleLabel] setFont:font];
+      w = MAX([title sizeWithFont:font].width, [second w]);
+      first = b;
+    }
 
     // set up self
     mToggler = [[CLCGTogglerView alloc] initWithFrame:CGRectMake(0,0,w,h)];
