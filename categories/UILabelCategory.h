@@ -9,4 +9,6 @@
 
 -(void)resizeHeightForText;
 
+-(void)sizeToFitWidth:(CGFloat)w;
+
 @end

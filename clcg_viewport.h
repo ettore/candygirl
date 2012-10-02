@@ -28,6 +28,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define DEFAULT_PADDING           9.0f
+#define DEFAULT_PADDING_COMFORT   8.0f
+
 #ifdef __cplusplus
 extern "C" {
 #endif

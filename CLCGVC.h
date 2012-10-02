@@ -36,6 +36,10 @@
   UIActivityIndicatorView       *mSpinner;
   UIActivityIndicatorViewStyle  mSpinnerStyle;
   UIColor                       *mSpinnerBackgroundColor;
+
+  UIView                        *mEmptyContainer;
+  UILabel                       *mEmptyLabel;
+
   id<CLCGPopoverContentDelegate> mPopoverContentDelegate;
 }
 
@@ -43,9 +47,19 @@
 @property(nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
 @property(nonatomic) UIActivityIndicatorViewStyle  spinnerStyle;
 @property(nonatomic,retain) UIColor *spinnerBackgroundColor;
+@property(nonatomic,retain) IBOutlet UIView *emptyContainer;
+@property(nonatomic,retain) IBOutlet UILabel *emptyLabel;
 @property(nonatomic,assign) id<CLCGPopoverContentDelegate> popoverContentDelegate;
 
-/** 
+
+/**
+ * If msg is non-nil, this method shows and aligns the given message to the
+ * center of the screen. Otherwise, it removes the message if it was displayed.
+ */
+-(void)showEmptyMessage:(NSString*)msg;
+
+
+/**
  * If show == YES, shows and aligns the spinny indicator to the center 
  * of the screen. 
  * If show == NO, removes the spinny indicator if it was displayed, or do 

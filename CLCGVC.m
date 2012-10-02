@@ -10,6 +10,7 @@
 #import "clcg_gfx.h"
 #import "clcg_viewport.h"
 #import "UIViewCategory.h"
+#import "UILabelCategory.h"
 #import "CLCGVC.h"
 
 
@@ -23,6 +24,8 @@
 @synthesize spinnerStyle = mSpinnerStyle;
 @synthesize spinnerBackgroundColor = mSpinnerBackgroundColor;
 @synthesize popoverContentDelegate = mPopoverContentDelegate;
+@synthesize emptyLabel = mEmptyLabel;
+@synthesize emptyContainer = mEmptyContainer;
 
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -59,10 +62,12 @@
 }
 
 
--(void)centerSpinner
+-(void)centerSpinnerAndEmptyPlaceholder
 {
   [mSpinner centerVerticallyWithOffset:0];
   [mSpinner centerHorizontally];
+  [mEmptyLabel centerVerticallyWithOffset:0];
+  [mEmptyLabel centerHorizontally];
 }
 
 
@@ -77,7 +82,7 @@
       [mSpinnerContainer setNeedsLayout];
     }
     
-    [self centerSpinner];
+    [self centerSpinnerAndEmptyPlaceholder];
     [mSpinner startAnimating];
     [[self view] bringSubviewToFront:mSpinnerContainer];
   } else {
@@ -91,7 +96,57 @@
                                         duration:(NSTimeInterval)duration
 {
   [super willAnimateRotationToInterfaceOrientation:to_orient duration:duration];
-  [self centerSpinner];
+  [self centerSpinnerAndEmptyPlaceholder];
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Empty Placeholder View
+
+
+-(void)createEmptyView
+{
+  UIView *cont;
+  UILabel *label;
+
+  label = [[UILabel alloc] initWithFrame:CGRectZero];
+  [self setEmptyLabel:label];
+  [label release];
+  [mEmptyLabel setTextColor:[UIColor darkGrayColor]];
+  [mEmptyLabel setFont:[UIFont systemFontOfSize:14]];
+  [mEmptyLabel setTextAlignment:NSTextAlignmentCenter];
+  [mEmptyLabel setLineBreakMode:NSLineBreakByWordWrapping];
+  [mEmptyLabel setNumberOfLines:0];//use as many lines as needed
+
+  cont = [[UIView alloc] initWithFrame:[[self view] frame]];
+  [cont setBackgroundColor:[UIColor whiteColor]];
+  [cont setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+  [cont addSubview:mEmptyLabel];
+  [self setEmptyContainer:cont];
+  [cont release];
+}
+
+
+-(void)showEmptyMessage:(NSString*)msg
+{
+  if (msg) {
+    UIView *mainview = [self view];
+
+    if (![[mainview subviews] containsObject:mEmptyContainer]) {
+      if (mEmptyContainer == nil)
+        [self createEmptyView];
+
+      [mEmptyLabel setText:msg];
+      [mEmptyLabel sizeToFitWidth:([mainview w] - DEFAULT_PADDING*2)];
+      [mainview addSubview:mEmptyContainer];
+      [mEmptyContainer setNeedsLayout];
+    }
+
+    [self centerSpinnerAndEmptyPlaceholder];
+    [mainview bringSubviewToFront:mEmptyContainer];
+  } else {
+    clcg_safe_remove_from_superview(mEmptyContainer);
+  }
 }
 
 
@@ -121,6 +176,8 @@
 {
   CLCG_REL(mSpinner);
   CLCG_REL(mSpinnerContainer);
+  CLCG_REL(mEmptyLabel);
+  CLCG_REL(mEmptyContainer);
 }
 
 

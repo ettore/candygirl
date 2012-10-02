@@ -9,11 +9,27 @@
 #import "UILabelCategory.h"
 #import "UIViewCategory.h"
 
+
 @implementation UILabel (Candygirl)
+
+
+-(void)sizeToFitWidth:(CGFloat)w
+{
+  CGSize sz;
+
+  sz = CGSizeMake(w, INT_MAX);
+  sz = [[self text] sizeWithFont:[self font] constrainedToSize:sz];
+
+  [self setW:sz.width];
+  [self setH:sz.height];
+}
+
 
 -(void)resizeHeightForText
 {
   return [self resizeHeightForText:[self text] font:[self font]];
 }
 
+
 @end
+
