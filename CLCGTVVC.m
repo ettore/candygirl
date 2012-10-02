@@ -110,14 +110,6 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  [mTableView reloadData];
-  [self deselectAll:NO];
-}
-
-
 -(void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
   [super setEditing:editing animated:animated];
