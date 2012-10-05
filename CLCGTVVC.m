@@ -31,9 +31,10 @@
 
 -(id)initWithStyle:(UITableViewStyle)style
 {
-  self = [self initWithNibName:nil bundle:nil];
+  self = [super initWithNibName:nil bundle:nil];
   if (self) {
     mStyle = style;
+    mLoadState = CLCG_NOT_LOADED;
   }
   return self;
 }
@@ -67,7 +68,10 @@
   expandmask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
   [v setAutoresizingMask:expandmask];
   [tv setAutoresizingMask:expandmask];
-  
+
+  // necessary to avoid default striped background for grouped tableviews
+  [tv setBackgroundView:nil];
+
   // build view hierarchy
   [self setView:v];
   [self setTableView:tv];
