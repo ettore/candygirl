@@ -28,7 +28,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  
+
+  // given a url string, append the given parameter to it.
+  extern NSString *clcg_str_append2url(NSString *url,
+                                       NSString *param_name,
+                                       NSString *param_val);
+
   // returns YES if string are equal (or both nil), NO otherwise
   extern BOOL clcg_str_eq(NSString *s, NSString *t);
 

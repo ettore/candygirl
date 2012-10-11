@@ -26,6 +26,20 @@
 #import "clcg_str_utils.h"
 
 
+NSString *clcg_str_append2url(NSString *url,
+                              NSString *param_name,
+                              NSString *param_val)
+{
+  if (url == nil)
+    return nil;
+
+  NSRange r = [url rangeOfString:@"?"];
+  char c = ((r.location == NSNotFound) ? '?' : '&');
+
+  return [NSString stringWithFormat:@"%@%c%@=%@",url,c,param_name,param_val];
+}
+
+
 BOOL clcg_str_eq(NSString *s, NSString *t)
 {
   if (s == nil && t == nil)
