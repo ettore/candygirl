@@ -114,8 +114,8 @@
   [label release];
   [mEmptyLabel setTextColor:[UIColor darkGrayColor]];
   [mEmptyLabel setFont:[UIFont systemFontOfSize:14]];
-  [mEmptyLabel setTextAlignment:NSTextAlignmentCenter];
-  [mEmptyLabel setLineBreakMode:NSLineBreakByWordWrapping];
+  [mEmptyLabel setTextAlignment:UITextAlignmentCenter];
+  [mEmptyLabel setLineBreakMode:UILineBreakModeWordWrap];
   [mEmptyLabel setNumberOfLines:0];//use as many lines as needed
 
   cont = [[UIView alloc] initWithFrame:[[self view] frame]];
