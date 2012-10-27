@@ -30,6 +30,7 @@
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+  CLCG_P(@"INIT...");
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     mSpinnerStyle = UIActivityIndicatorViewStyleGray;
