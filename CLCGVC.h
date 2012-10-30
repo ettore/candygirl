@@ -37,9 +37,11 @@
   UIActivityIndicatorViewStyle  mSpinnerStyle;
   UIColor                       *mSpinnerBackgroundColor;
 
+  // support for empty content case
   UIView                        *mEmptyContainer;
   UILabel                       *mEmptyLabel;
 
+  // support for showing this vc in a iPad popover
   id<CLCGPopoverContentDelegate> mPopoverContentDelegate;
 }
 
@@ -67,12 +69,14 @@
  */
 -(void)showLoadingView:(BOOL)show;
 
+
 /** 
  * Releases all the retained subviews of this view controller. This is called
  * by dealloc and viewDidUnload.
  * Subclasses should override this method and release their subviews here.
  */
 -(void)releaseRetainedSubviews;
+
 
 /** 
  * Helper method that returns the height of the nav bar of the navigation
@@ -89,4 +93,6 @@
  */
 -(CGFloat)tabBarH;
 
+
 @end
+
