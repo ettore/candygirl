@@ -6,15 +6,40 @@
 //  Copyright (c) 2012 Cubelogic. All rights reserved.
 //
 
+
 #import "CLCGTVVC.h"
-#import "clcg_macros.h"
+#import "CLCGMoreCell.h"
+
 
 @implementation CLCGTVVC
 
+
 @synthesize loadState = mLoadState;
+@synthesize page = mPage;
+@synthesize perPage = mPerPage;
+@synthesize itemsTotal = mItemsTotal;
+@synthesize itemsEnd = mItemsEnd;
+@synthesize moreButtonText = mMoreButtonText;
+
 
 //-----------------------------------------------------------------------------
 #pragma mark - Init, dealloc, memory mgmt
+
+
+-(void)dealloc
+{
+  CLCG_REL(mItems);
+  CLCG_REL(mMoreButtonText);
+  [super dealloc];
+}
+
+
+// this is called by the super class dealloc and viewDidUnload
+-(void)releaseRetainedSubviews
+{
+  CLCG_REL(mTableView);
+  [super releaseRetainedSubviews];
+}
 
 
 // designated initializer
@@ -23,7 +48,7 @@
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     mStyle = UITableViewStylePlain;
-    mLoadState = CLCG_NOT_LOADED;
+    [self doInitCore];
   }
   return self;
 }
@@ -34,17 +59,17 @@
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
     mStyle = style;
-    mLoadState = CLCG_NOT_LOADED;
+    [self doInitCore];
   }
   return self;
 }
 
 
-// this is called by the super class dealloc and viewDidUnload
--(void)releaseRetainedSubviews
+-(void)doInitCore
 {
-  CLCG_REL(mTableView);
-  [super releaseRetainedSubviews];
+  mLoadState = CLCG_NOT_LOADED;
+  mPage = 1;
+  mPerPage = -1; // pagination is disabled by default
 }
 
 
@@ -121,22 +146,70 @@
 }
 
 
+-(BOOL)isMoreRow:(NSIndexPath*)ip
+{
+  return (mItemsEnd < mItemsTotal && [ip row] == [mItems count]);
+}
+
+
+-(UITableViewCell*)tableView:(UITableView*)tv moreButtonCellForRow:(NSIndexPath*)ip
+{
+  CLCGMoreCell *cell;
+
+  cell = (CLCGMoreCell*)[tv dequeueReusableCellWithIdentifier:CLCGTVVC_MORE_CID];
+
+  if (cell == nil) {
+    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID withText:mMoreButtonText];
+    [cell autorelease];
+  }
+
+  if (mLoadState != CLCG_LOADING)
+    [cell didStopRequestingMore];
+
+  return cell;
+}
+
 
 //-----------------------------------------------------------------------------
 #pragma mark - UITableViewDataSource protocol
 
 
--(NSInteger)tableView:(UITableView*)tv numberOfRowsInSection:(NSInteger)section
+-(NSInteger)numberOfSectionsInTableView:(UITableView*)tv
 {
-  return 0;
+  return 1;
 }
 
 
--(UITableViewCell*)tableView:(UITableView*)tv 
-       cellForRowAtIndexPath:(NSIndexPath*)indexPath
+-(NSInteger)tableView:(UITableView*)tv numberOfRowsInSection:(NSInteger)sect
+{
+  if (mItemsEnd < mItemsTotal && [self supportsPagination])
+    return [mItems count] + 1; //for the "More..." button
+  else
+    return [mItems count];
+}
+
+
+-(UITableViewCell*)tableView:(UITableView*)tv cellForRowAtIndexPath:(NSIndexPath*)ip
 {
   return nil;
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark - Pagination Support
+
+
+-(BOOL)supportsPagination
+{
+  return mPerPage > 0;
+}
+
+
+-(void)setSupportsPagination:(BOOL)flag
+{
+  mPerPage = (flag ? PER_PAGE_DEFAULT : -1);
+}
+
+
 @end
+
