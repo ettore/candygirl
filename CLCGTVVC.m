@@ -80,7 +80,6 @@
 -(void)loadView
 {
   if ([self nibName]) {
-    [super loadView];
     NSAssert(mTableView != nil, @"NIB file didn't set tableView.");
     return;
   }
