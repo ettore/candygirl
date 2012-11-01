@@ -61,6 +61,16 @@ enum CLCGLoadingState {
 // use this if you don't use a nib
 -(id)initWithStyle:(UITableViewStyle)style;
 
+// if a subclass does not use a nib file, you should call this method in your
+// loadView implementation to create the base view structure (this includes
+// a background view and a TableView on top of that. The reason why this is
+// NOT done inside a local loadView implementation is because UIKit prohibits
+// to override loadView if the actual class uses a nib file: since this is a
+// base class and subclasses MIGHT use a nib file, we leave the task of actually
+// building the views hierarchy up to the user (either as a nib or by calling
+// loadBaseView inside the actual loadView implementation).
+-(void)loadBaseView;
+
 // deselects all currently selected rows.
 -(void)deselectAll:(BOOL)animated;
 

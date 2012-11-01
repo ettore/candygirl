@@ -77,13 +77,8 @@
 #pragma mark - View creation
 
 
--(void)loadView
+-(void)loadBaseView
 {
-  if ([self nibName]) {
-    NSAssert(mTableView != nil, @"NIB file didn't set tableView.");
-    return;
-  }
-  
   UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
   UITableView *tv = [[UITableView alloc] initWithFrame:CGRectZero style:mStyle];
   
@@ -92,9 +87,6 @@
   expandmask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
   [v setAutoresizingMask:expandmask];
   [tv setAutoresizingMask:expandmask];
-
-  // necessary to avoid default striped background for grouped tableviews
-  [tv setBackgroundView:nil];
 
   // build view hierarchy
   [self setView:v];
@@ -106,6 +98,14 @@
   [tv release];
 }
 
+
+-(void)viewDidLoad
+{
+  [super viewDidLoad];
+
+  // necessary to avoid default striped background for grouped tableviews
+  [mTableView setBackgroundView:nil];
+}
 
 
 //-----------------------------------------------------------------------------
