@@ -30,8 +30,8 @@
 {
   [self setContents:nil];
   mCache = nil;
-  [mReq cancel];
-  [mReq setDelegate:nil];
+
+  [mReq clearDelegatesAndCancel];
   CLCG_REL(mReq);
 }
 

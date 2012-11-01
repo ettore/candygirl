@@ -18,11 +18,11 @@
 
 -(void)dealloc
 {
-  [mReq cancel];
-  [mReq setDelegate:nil];
+  [mReq clearDelegatesAndCancel];
+  CLCG_REL(mReq);
+
   mTapTarget = nil;
   mTapAction = nil;
-  CLCG_REL(mReq);
   [super dealloc];
 }
 
