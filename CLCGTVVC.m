@@ -14,7 +14,6 @@
 @implementation CLCGTVVC
 
 
-@synthesize loadState = mLoadState;
 @synthesize page = mPage;
 @synthesize perPage = mPerPage;
 @synthesize itemsTotal = mItemsTotal;
@@ -67,7 +66,6 @@
 
 -(void)doInitCore
 {
-  mLoadState = CLCG_NOT_LOADED;
   mPage = 1;
   mPerPage = -1; // pagination is disabled by default
 }
@@ -105,6 +103,13 @@
 
   // necessary to avoid default striped background for grouped tableviews
   [mTableView setBackgroundView:nil];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [mTableView flashScrollIndicators];
 }
 
 

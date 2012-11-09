@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 
 
+enum CLCGLoadingState {
+  CLCG_NOT_LOADED,
+  CLCG_LOADING,
+  CLCG_LOADED,
+  CLCG_OUTDATED,
+  CLCG_LOAD_ERROR,
+};
+
+
 /**
  * If your CLCGVC view controller is presented as content inside of a 
  * UIPopoverController, and you want to be notified when the user 
@@ -37,6 +46,8 @@
   UIActivityIndicatorViewStyle  mSpinnerStyle;
   UIColor                       *mSpinnerBackgroundColor;
 
+  enum CLCGLoadingState   mLoadState;
+
   // support for empty content case
   UIView                        *mEmptyContainer;
   UILabel                       *mEmptyLabel;
@@ -45,6 +56,7 @@
   id<CLCGPopoverContentDelegate> mPopoverContentDelegate;
 }
 
+@property(nonatomic,assign) enum CLCGLoadingState loadState;
 @property(nonatomic,retain) IBOutlet UIView *spinnerContainer;
 @property(nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
 @property(nonatomic) UIActivityIndicatorViewStyle  spinnerStyle;

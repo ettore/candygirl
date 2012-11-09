@@ -17,14 +17,6 @@
 #define PER_PAGE_DEFAULT  20
 
 
-enum CLCGLoadingState {
-  CLCG_NOT_LOADED,
-  CLCG_LOADING,
-  CLCG_LOADED,
-  CLCG_OUTDATED,
-  CLCG_LOAD_ERROR,
-};
-
 /**
  * Recreates the functionality of a UITableViewController, putting the 
  * tableView as a subview of [self view].
@@ -33,7 +25,6 @@ enum CLCGLoadingState {
 {
   UITableViewStyle        mStyle;
   UITableView             *mTableView;
-  enum CLCGLoadingState   mLoadState;
 
   // array containing the models of the table-view items.
   NSMutableArray          *mItems;
@@ -47,7 +38,6 @@ enum CLCGLoadingState {
 }
 
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
-@property(nonatomic,assign) enum CLCGLoadingState loadState;
 @property(nonatomic,assign) int page;
 @property(nonatomic,assign) int perPage;
 @property(nonatomic,assign) BOOL supportsPagination;

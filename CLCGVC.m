@@ -26,6 +26,7 @@
 @synthesize popoverContentDelegate = mPopoverContentDelegate;
 @synthesize emptyLabel = mEmptyLabel;
 @synthesize emptyContainer = mEmptyContainer;
+@synthesize loadState = mLoadState;
 
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,6 +36,7 @@
   if (self) {
     mSpinnerStyle = UIActivityIndicatorViewStyleGray;
     [self setSpinnerBackgroundColor:[UIColor whiteColor]];
+    mLoadState = CLCG_NOT_LOADED;
   }
   return self;
 }
