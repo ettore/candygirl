@@ -21,7 +21,7 @@
 @synthesize detailFont = mDetailFont;
 @synthesize imgUrl = mImgUrl;
 @synthesize context = mContext;
-@synthesize isNew = mIsRecent;
+@synthesize isHighlighted = mIsHighlighted;
 
 
 -(void)dealloc
@@ -30,7 +30,7 @@
   CLCG_REL(mDetailFont);
   CLCG_REL(mImgUrl);
   CLCG_REL(mContext);
-  CLCG_REL(mRecentColor);
+  CLCG_REL(mHighlightColor);
   [super dealloc];
 }
 
@@ -68,8 +68,8 @@
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
-    mRecentColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
-    [mRecentColor retain];
+    mHighlightColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
+    [mHighlightColor retain];
 
     // since we don't control the disclosure indicator size (and we need to 
     // know the width when we calc the cell height in the TV controller) let's 
@@ -102,7 +102,7 @@
 
 -(void)updateBackgroundColor
 {
-  [self setBackgroundColor:(mIsRecent ? mRecentColor : [UIColor whiteColor])];
+  [self setBackgroundColor:(mIsHighlighted ? mHighlightColor : [UIColor whiteColor])];
 }
 
 

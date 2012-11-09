@@ -12,7 +12,7 @@
  * This cell loads an image on the left side, renders multiline text in its
  * textLabel, adds a 1-line gray detailTextLabel and a standard disclosure
  * indicator on the right side. It also renders itself with a different
- * background color if it's set as a logically "new" cell. The layout of 
+ * background color if it's set as a highlighted cell. The layout of
  * all components is performed accordingly, adding padding between elements.
  */
 @interface CLCGCell : UITableViewCell
@@ -23,15 +23,15 @@
   CGFloat   mImgW;
   CGFloat   mImgH;
   CGFloat   mPadding;
-  UIColor   *mRecentColor;
-  BOOL      mIsRecent;
+  UIColor   *mHighlightColor;
+  BOOL      mIsHighlighted;
   id        mContext;
 }
 
 @property(nonatomic,retain) UIFont    *textFont;
 @property(nonatomic,retain) UIFont    *detailFont;
 @property(nonatomic,retain) NSString  *imgUrl;
-@property(nonatomic,assign) BOOL      isNew;
+@property(nonatomic,assign) BOOL      isHighlighted;
 @property(nonatomic,retain) id        context;//should this be assign?
 
 /** Designated initializer. */
