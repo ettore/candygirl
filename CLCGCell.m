@@ -21,7 +21,7 @@
 @synthesize detailFont = mDetailFont;
 @synthesize imgUrl = mImgUrl;
 @synthesize context = mContext;
-@synthesize isHighlighted = mIsHighlighted;
+@synthesize emphasized = mEmphasized;
 
 
 -(void)dealloc
@@ -30,7 +30,7 @@
   CLCG_REL(mDetailFont);
   CLCG_REL(mImgUrl);
   CLCG_REL(mContext);
-  CLCG_REL(mHighlightColor);
+  CLCG_REL(mEmphasizedColor);
   [super dealloc];
 }
 
@@ -68,8 +68,8 @@
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
-    mHighlightColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
-    [mHighlightColor retain];
+    mEmphasizedColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
+    [mEmphasizedColor retain];
 
     // since we don't control the disclosure indicator size (and we need to 
     // know the width when we calc the cell height in the TV controller) let's 
@@ -102,7 +102,14 @@
 
 -(void)updateBackgroundColor
 {
-  [self setBackgroundColor:(mIsHighlighted ? mHighlightColor : [UIColor whiteColor])];
+  [self setBackgroundColor:(mEmphasized ? mEmphasizedColor : [UIColor whiteColor])];
+}
+
+
+-(void)setEmphasized:(BOOL)emphasized
+{
+  mEmphasized = emphasized;
+  [self updateBackgroundColor];
 }
 
 
