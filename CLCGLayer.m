@@ -46,27 +46,25 @@
   }
   
   mCache = cache;
-  mReq = [CLCGImageLoader loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
+
+  // don't use the built-in CLCGImageLoader cache if we're using an external cache
+  mReq = [CLCGImageLoader loadImageForURL:normalurl
+                                retinaURL:retinaurl
+                                 useCache:(mCache == nil)
+                                    block:^(UIImage *img, int http_status) {
+                                      if (img) {
+                                        [mCache setObject:img
+                                                   forKey:[[mReq originalURL] absoluteString]];
+                                        [self setContents:(id)[img CGImage]];
+                                      } else {
+                                        CLCG_P(@"Error loading image. HTTP status=%d",
+                                               http_status);
+                                      }
+                                      CLCG_REL(mReq);
+                                    }];
   
-  // will release on callbacks
+  // will release in the block callback
   [mReq retain];
-}
-
-
--(void)didDownloadImage:(UIImage*)img
-{
-  [mCache setObject:img forKey:[[mReq originalURL] absoluteString]];
-  [self setContents:(id)[img CGImage]];
-  
-  // we retained in loadImageForURL:retinaURL:cache:, so release here.
-  CLCG_REL(mReq);
-}
-
-
--(void)downloadFailedWithHTTPStatus:(int)status
-{
-  // we retained in loadImageForURL:retinaURL:cache:, so release here.
-  CLCG_REL(mReq);
 }
 
 

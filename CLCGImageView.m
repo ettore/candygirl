@@ -54,21 +54,20 @@
     CLCG_REL(mReq);
   }
   
-  mReq = [CLCGImageLoader loadImageForURL:normalurl retinaURL:retinaurl delegate:self];
+  mReq = [CLCGImageLoader loadImageForURL:normalurl
+                                retinaURL:retinaurl
+                                 useCache:NO
+                                    block:^(UIImage *img, int http_status) {
+                                      if (img) {
+                                        [self setImage:img];
+                                      } else {
+                                        CLCG_P(@"Error loading image. HTTP status=%d",
+                                               http_status);
+                                      }
+                                      CLCG_REL(mReq);
+                                    }];
   [mReq retain];
 }
 
-
--(void)didDownloadImage:(UIImage*)img
-{
-  [self setImage:img];
-  CLCG_REL(mReq);//we retained in loadImageForURL:retinaURL:, so release here
-}
-
-
--(void)downloadFailedWithHTTPStatus:(int)status
-{
-  CLCG_REL(mReq);//we retained in loadImageForURL:retinaURL:, so release here
-}
 
 @end

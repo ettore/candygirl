@@ -31,10 +31,6 @@ typedef void (^CLCGImageLoaderCallback)(UIImage *img, int http_status);
 
 +(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
                         retinaURL:(NSString*)retinaurl
-                         delegate:(id<CLCGImageLoaderDelegate>)delegate;
-
-+(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
-                        retinaURL:(NSString*)retinaurl
                          useCache:(BOOL)use_cache
                             block:(CLCGImageLoaderCallback)block;
 

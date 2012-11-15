@@ -10,7 +10,7 @@
 
 #import "CLCGImageLoader.h"
 
-@interface CLCGLayer : CALayer <CLCGImageLoaderDelegate>
+@interface CLCGLayer : CALayer
 {
   ASIHTTPRequest  *mReq;
   

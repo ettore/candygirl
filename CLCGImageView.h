@@ -10,7 +10,7 @@
 @class ASIHTTPRequest;
 
 
-@interface CLCGImageView : UIImageView <CLCGImageLoaderDelegate>
+@interface CLCGImageView : UIImageView
 {
   ASIHTTPRequest  *mReq;
   

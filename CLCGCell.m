@@ -11,9 +11,9 @@
 
 #import "CLCGCell.h"
 
-#define GRCELL_IMG_DEFAULT_W      60.0f
-#define GRCELL_IMG_DEFAULT_H      60.0f
-#define MAX_CELL_H                20000.0f
+#define CLCGCELL_IMG_DEFAULT_W      60.0f
+#define CLCGCELL_IMG_DEFAULT_H      60.0f
+#define MAX_CELL_H                  20000.0f
 
 @implementation CLCGCell
 
@@ -38,8 +38,8 @@
 // overriding super-class designated initializer
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)cid
 {
-  return [self initWithImageWidth:GRCELL_IMG_DEFAULT_W 
-                           height:GRCELL_IMG_DEFAULT_H 
+  return [self initWithImageWidth:CLCGCELL_IMG_DEFAULT_W 
+                           height:CLCGCELL_IMG_DEFAULT_H 
                           padding:0
                           reuseId:cid];
 }
@@ -75,7 +75,7 @@
     // know the width when we calc the cell height in the TV controller) let's 
     // provide a default size here, slightly bigger than actual to avoid 
     // calculating a cell height that's too small.
-#define GRCELL_ACCESSORY_DISCL_W  22.0
+#define CLCGCELL_ACCESSORY_DISCL_W  22.0
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   }
   return self;
@@ -177,7 +177,7 @@
                          imageW:(CGFloat)imgw
                         padding:(CGFloat)pad
 {
-  return maxw - imgw - ((imgw > 0) ? pad:0) - pad*3 - GRCELL_ACCESSORY_DISCL_W;
+  return maxw - imgw - ((imgw > 0) ? pad:0) - pad*3 - CLCGCELL_ACCESSORY_DISCL_W;
 }
 
 
