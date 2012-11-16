@@ -57,57 +57,42 @@
 }
 
 
-//
-// TODO: implement variadic arguments handling
-//       http://stackoverflow.com/questions/205529
-//
--(id)initWithTitle:(NSString *)t
-            message:(NSString *)m
-              block:(void (^)(NSInteger btn))block
-  cancelButtonTitle:(NSString *)cancel_btn_title
-  submitButtonTitle:(NSString *)submit_btn_title
-{
-//  va_list ap;
-//  int i, sum;
-//  
-//  va_start (ap, count);         /* Initialize the argument list. */
-//  sum = 0;
-//  for (i = 0; i < count; i++)
-//    sum += va_arg (ap, int);    /* Get the next argument value. */
-//  
-//  va_end (ap);                  /* Clean up. */
-  
-  self = [super initWithTitle:t 
-                      message:m 
-                     delegate:self
-            cancelButtonTitle:cancel_btn_title 
-            otherButtonTitles:submit_btn_title, nil];
-
-  if (self) {
-    mBlock = [block copy];
-  }
-          
-  return self;
-}
-
-
 -(id)initWithTitle:(NSString *)t
            message:(NSString *)m
              block:(void (^)(NSInteger btn))block
  cancelButtonTitle:(NSString *)cancel_btn_title
- submitButtonTitle:(NSString *)submit_btn_title
-  otherButtonTitle:(NSString *)other_btn_title
+ otherButtonTitles:(NSString *)other_btn_title, ... NS_REQUIRES_NIL_TERMINATION
 {
-  self = [super initWithTitle:t 
-                      message:m 
+  va_list args;
+  va_start(args, other_btn_title);
+  NSMutableArray *buttons = [[NSMutableArray alloc] init];
+  id arg = nil;
+
+  while ((arg = va_arg(args,id))) {
+    [buttons addObject:arg];
+  }
+
+  va_end(args);
+
+  self = [super initWithTitle:t
+                      message:m
                      delegate:self
-            cancelButtonTitle:cancel_btn_title 
-            otherButtonTitles:submit_btn_title,other_btn_title,nil];
-  
+            cancelButtonTitle:cancel_btn_title
+            otherButtonTitles:nil];
+
   if (self) {
+    if (other_btn_title) {
+      [self addButtonWithTitle:other_btn_title];
+    }
+    for (NSString *title in buttons) {
+      [self addButtonWithTitle:title];
+    }
     mBlock = [block copy];
   }
-  
+
+  // cleanup
+  [buttons release];
+
   return self;
 }
 

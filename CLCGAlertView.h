@@ -38,19 +38,12 @@
            message:(NSString *)m
              block:(void (^)(NSInteger btn))block;
 
-- (id)initWithTitle:(NSString *)t
-            message:(NSString *)message
-              block:(void (^)(NSInteger btn))clicked_btn_block
-  cancelButtonTitle:(NSString *)cancelButtonTitle 
-  submitButtonTitle:(NSString *)submitButtonTitle;
-//  otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
-
 -(id)initWithTitle:(NSString *)t
            message:(NSString *)m
              block:(void (^)(NSInteger btn))block
  cancelButtonTitle:(NSString *)cancel_btn_title
- submitButtonTitle:(NSString *)submit_btn_title
-  otherButtonTitle:(NSString *)other_btn_title;
+ otherButtonTitles:(NSString *)other_btn_titles, ... NS_REQUIRES_NIL_TERMINATION;
+
 #endif
 
 @end
