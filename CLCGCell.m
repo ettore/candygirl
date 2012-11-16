@@ -71,7 +71,13 @@
     mEmphasizedColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
     [mEmphasizedColor retain];
 
-    // since we don't control the disclosure indicator size (and we need to 
+    // needed for changing the background color
+    UIView *bgview = [[UIView alloc] initWithFrame:CGRectZero];
+    [bgview setOpaque:YES];
+    [self setBackgroundView:bgview];
+    [bgview release];
+
+    // since we don't control the disclosure indicator size (and we need to
     // know the width when we calc the cell height in the TV controller) let's 
     // provide a default size here, slightly bigger than actual to avoid 
     // calculating a cell height that's too small.
@@ -102,7 +108,11 @@
 
 -(void)updateBackgroundColor
 {
-  [self setBackgroundColor:(mEmphasized ? mEmphasizedColor : [UIColor whiteColor])];
+  // Note: setting the background color on the contentView or even all the
+  // subviews doesn't take care of changing the background of the accessoryView.
+  // Setting the background of the accessoryView doesn't seem to work either.
+  UIColor *color = (mEmphasized ? mEmphasizedColor : [UIColor whiteColor]);
+  [[self backgroundView] setBackgroundColor:color];
 }
 
 
