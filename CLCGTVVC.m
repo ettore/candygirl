@@ -152,7 +152,7 @@
 
 -(BOOL)isMoreRow:(NSIndexPath*)ip
 {
-  return (mItemsEnd < mItemsTotal && [ip row] == [mItems count]);
+  return (mItemsEnd < mItemsTotal && [ip row] == (NSInteger)[mItems count]);
 }
 
 

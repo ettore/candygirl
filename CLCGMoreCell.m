@@ -6,6 +6,7 @@
 //
 //
 
+#import "clcg_bundle_utils.h"
 #import "clcg_macros.h"
 #import "UIViewCategory.h"
 #import "CLCGMoreCell.h"
@@ -72,7 +73,7 @@
 -(void)layoutSubviews
 {
   [super layoutSubviews];
-  [[self textLabel] setW:[self width]];
+  [[self textLabel] setW:[self w]];
 }
 
 
