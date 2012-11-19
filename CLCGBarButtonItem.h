@@ -12,14 +12,20 @@
 
 
 enum CLCGBarButtonItemState {
-  CLCGBarButtonItemStateReady,
+  CLCGBarButtonItemStateReady = 1,
   CLCGBarButtonItemStateBusy,
+  CLCGBarButtonItemStateHidden,
 };
 
 
 /**
- * A button item that can switch to a spinner if some activity (such as a 
- * network request) is being performed.
+ * A button item that can switch to 3 possible states:
+ *  - Ready: The normal behavior. If an image was used to create the button,
+ *           the image will be used and the title and style are ignored. If
+ *           the image is nil, the receiver will be displayed as a normal
+ *           UIBarButtonItem, using its style and title.
+ *  - Busy: An activity indicator (spinner) will be displayed.
+ *  - Hidden: The button is hidden and nothing is visible/tappable.
  */
 @interface CLCGBarButtonItem : UIBarButtonItem
 {

@@ -28,4 +28,7 @@ enum CLCGTogglerState {
 @property(nonatomic,retain) UIView *secondView;
 @property(nonatomic,assign) enum CLCGTogglerState state;
 
+/** By default, the receiver is condfigured to show the first view. */
+- (id)initWithFrame:(CGRect)frame;
+
 @end

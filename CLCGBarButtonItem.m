@@ -14,9 +14,6 @@
 @implementation CLCGBarButtonItem
 
 
-@synthesize state = mState;
-
-
 -(void)dealloc
 {
   CLCG_REL(mToggler);
@@ -69,10 +66,10 @@
              action:(SEL)action
              height:(CGFloat)h
 {
-  if (img)
-    self = [super initWithImage:img style:style target:target action:action];
-  else
-    self = [super initWithTitle:title style:style target:target action:action];
+  if (title == nil)
+    title = @"";
+
+  self = [super initWithTitle:title style:style target:target action:action];
   
   if (self) {
     UIView *first;
@@ -88,7 +85,6 @@
     
     // set up first view
     b = [UIButton buttonWithType:UIButtonTypeCustom];
-    [b addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     if (img) {
       CGFloat x, y;
       CGSize imgsz = [img size];
@@ -109,19 +105,23 @@
       [b setFrame:CGRectMake(x, y, imgsz.width, imgsz.height)];
       [first addSubview:b];
     } else {
+      // if we've a textual button, we're going to render ourselves as a
+      // normal UIBarButton. This is just to display the hidden state.
       UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
-      [b setTitle:title forState:UIControlStateNormal];
-      [b setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-      [[b titleLabel] setFont:font];
       w = MAX([title sizeWithFont:font].width, [second w]);
       first = b;
     }
+    [b addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 
-    // set up self
+    // set up the toggler view
     mToggler = [[CLCGTogglerView alloc] initWithFrame:CGRectMake(0,0,w,h)];
     [mToggler setFirstView:first];
     [mToggler setSecondView:second];
-    [self setCustomView:mToggler];
+
+    // by default, the toggler will show the first view. Since the first view
+    // can be nil in our case, only add the toggler if we have one.
+    if (img)
+      [self setCustomView:mToggler];
   }
   return self;
 }
@@ -129,15 +129,41 @@
 
 -(void)setState:(enum CLCGBarButtonItemState)state
 {
-  if (CLCGBarButtonItemStateBusy == state) {
-    // show the spinner
-    [mToggler setState:CLCGTogglerSecondView];
-  } else {
-    // show back the button
-    [mToggler setState:CLCGTogglerFirstView];
+  switch (state) {
+    case CLCGBarButtonItemStateReady:
+      [mToggler setState:CLCGTogglerFirstView];
+      if ([[self title] length] <= 0) {
+        [self setCustomView:mToggler];
+      } else {
+        // remove the custom view, so that the normal UIBarButtonItem style
+        // is displayed
+        [self setCustomView:nil];
+      }
+      break;
+    case CLCGBarButtonItemStateBusy:
+      // show the spinner
+      [mToggler setState:CLCGTogglerSecondView];
+      [self setCustomView:mToggler];
+      break;
+    case CLCGBarButtonItemStateHidden:
+      [mToggler setState:CLCGTogglerFirstView];
+      [[mToggler firstView] setHidden:YES];
+      if ([[self title] length] > 0) {
+        // for a textual button, this will "show" the empty button we created.
+        [self setCustomView:mToggler];
+      }
+      break;
+    default:
+      break;
   }
   
   mState = state;
+}
+
+
+-(enum CLCGBarButtonItemState)state
+{
+  return mState;
 }
 
 
