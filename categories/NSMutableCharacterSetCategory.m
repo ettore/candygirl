@@ -26,11 +26,21 @@
  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  POSSIBILITY OF SUCH DAMAGE.
-*/
+ */
 
-@interface NSArray (Candygirl)
 
--(NSArray*)map:(SEL)item_method;
+#import "NSMutableCharacterSetCategory.h"
+
+@implementation NSMutableCharacterSet (Candygirl)
+
++ (NSMutableCharacterSet *)punctSpaces
+{
+    NSMutableCharacterSet *set;
+    
+    set = [NSMutableCharacterSet characterSetWithCharactersInString:@""];
+    [set formUnionWithCharacterSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [set formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
+    return set;
+}
 
 @end
-
