@@ -21,12 +21,25 @@
 }
 
 
+// Overriding super class initializer. You should avoid calling these directly.
 - (id)initWithTitle:(NSString *)t
               style:(UIBarButtonItemStyle)st
              target:(id)target
              action:(SEL)a
 {
+  // just called with an arbitrary (yet reasonable) default
   return [self initWithImage:nil orTitle:t style:st target:target action:a height:44];
+}
+
+
+// Overriding super class initializer. You should avoid calling this directly.
+-(id)initWithImage:(UIImage *)img
+             style:(UIBarButtonItemStyle)st
+            target:(id)target
+            action:(SEL)a
+{
+  // just called with an arbitrary (yet reasonable) default
+  return [self initWithImage:img orTitle:nil style:st target:target action:a height:44];
 }
 
 
@@ -44,21 +57,19 @@
              style:(UIBarButtonItemStyle)st
             target:(id)target
             action:(SEL)a
-{
-  return [self initWithImage:img orTitle:nil style:st target:target action:a height:44];
-}
-
-
--(id)initWithImage:(UIImage *)img
-             style:(UIBarButtonItemStyle)st
-            target:(id)target
-            action:(SEL)a
             height:(CGFloat)h
 {
   return [self initWithImage:img orTitle:nil style:st target:target action:a height:h];
 }
 
 
+/*
+ Private method.
+ 
+ Note that this is (and must be) invoked only in this condition:
+    img == nil XOR title == nil
+ 
+ */
 - (id)initWithImage:(UIImage*)img
             orTitle:(NSString*)title
               style:(UIBarButtonItemStyle)style
@@ -118,10 +129,7 @@
     [mToggler setFirstView:first];
     [mToggler setSecondView:second];
 
-    // by default, the toggler will show the first view. Since the first view
-    // can be nil in our case, only add the toggler if we have one.
-    if (img)
-      [self setCustomView:mToggler];
+    [self setState:CLCGBarButtonItemStateReady];
   }
   return self;
 }
@@ -132,11 +140,11 @@
   switch (state) {
     case CLCGBarButtonItemStateReady:
       [mToggler setState:CLCGTogglerFirstView];
-      if ([[self title] length] <= 0) {
+      if ([[self title] length] == 0) {
         [self setCustomView:mToggler];
       } else {
         // remove the custom view, so that the normal UIBarButtonItem style
-        // is displayed
+        // is rendered
         [self setCustomView:nil];
       }
       break;
