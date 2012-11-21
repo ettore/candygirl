@@ -35,6 +35,19 @@
 @implementation NSArray (Candygirl)
 
 
+-(NSArray*)mapBlock:(id(^)(id item))block
+{
+  NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
+
+  for (id item in self) {
+    [a addObject:block(item)];
+  }
+
+  return a;
+
+}
+
+
 -(NSArray*)map:(SEL)item_method
 {
   NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
