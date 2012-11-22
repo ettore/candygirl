@@ -30,7 +30,23 @@
 
 @interface NSArray (Candygirl)
 
+
+/**
+ * @return A new array where each element is the result of calling `block`
+ *         on every item of the original array.
+ */
+-(NSArray*)mapBlock:(id(^)(id item))block;
+
+
+/**
+ * Executes `item_method` on every item of the array.
+ * Note: `item_method` must return an object, not a scalar value.
+ *
+ * @return A new array where each element is the result of calling `item_method`
+ *         on every item of the original array.
+ */
 -(NSArray*)map:(SEL)item_method;
+
 
 @end
 
