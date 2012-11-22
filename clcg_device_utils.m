@@ -41,6 +41,13 @@ BOOL clcg_os_geq(NSString* version)
 }
 
 
+BOOL clcg_is_iphone5(void)
+{
+  CGSize sz = [[UIScreen mainScreen] bounds].size;
+  return (!clcg_is_ipad() && sz.height > 480.0f);
+}
+
+
 BOOL clcg_is_ipad(void)
 {
   if (clcg_os_geq(@"3.2"))
