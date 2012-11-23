@@ -26,7 +26,7 @@
 //  Created by Ettore Pasquini on 9/20/11.
 //
 
-#import "clcg_date_utils.h"
+#import "clcg_datetime_utils.h"
 
 /** Get the year out of a date object. */
 NSInteger clcg_date_year(NSDate *d)
@@ -37,4 +37,40 @@ NSInteger clcg_date_year(NSDate *d)
   greg = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   comps = [greg components:NSYearCalendarUnit fromDate:d];
   return [comps year];
+}
+
+NSString *clcg_ago_format(NSDate *d)
+{
+  NSCalendar *greg;
+  unsigned int flags;
+  NSDateComponents *dc;
+  NSDate *now = [NSDate date];
+  NSInteger t;
+  NSString *res, *interval;
+
+  greg = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |
+  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+  dc = [greg components:flags fromDate:d toDate:now options:0];
+  [greg release];
+
+  if ((t = [dc year])) {
+    interval = ((t == 1) ? CLCG_LOC(@"year") : CLCG_LOC(@"years"));
+  } else if ((t = [dc month])) {
+    interval = ((t == 1) ? CLCG_LOC(@"month") : CLCG_LOC(@"months"));
+  } else if ((t = [dc day])) {
+    interval = ((t == 1) ? CLCG_LOC(@"day") : CLCG_LOC(@"days"));
+  } else if ((t = [dc hour])) {
+    interval = ((t == 1) ? CLCG_LOC(@"hour") : CLCG_LOC(@"hours"));
+  } else if ((t = [dc minute])) {
+    interval = ((t == 1) ? CLCG_LOC(@"minute") : CLCG_LOC(@"minutes"));
+  } else if ((t = [dc second])) {
+   interval = ((t == 1) ? CLCG_LOC(@"second") : CLCG_LOC(@"seconds"));
+  } else {
+    return CLCG_LOC(@"just about now");
+  }
+
+  res = [NSString stringWithFormat:@"%d %@ %@",t,interval,CLCG_LOC(@"ago")];
+  
+  return res;
 }

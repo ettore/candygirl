@@ -26,8 +26,8 @@
 //  Created by Ettore Pasquini on 9/20/11.
 //
 
-#ifndef CLCG_DATE_UTILS_H_
-#define CLCG_DATE_UTILS_H_
+#ifndef CLCG_DATETIME_UTILS_H_
+#define CLCG_DATETIME_UTILS_H_
 
 #import <Foundation/Foundation.h>
 
@@ -37,7 +37,10 @@ extern "C" {
 
 /** Get the year out of a date object. */
 NSInteger clcg_date_year(NSDate *d);
-  
+
+/** Formats `d` as `X days Y hour Z seconds agp` from todays date/time. */
+NSString *clcg_ago_format(NSDate *d);
+
 #ifdef __cplusplus
 }
 #endif
