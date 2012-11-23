@@ -39,29 +39,42 @@ extern "C" {
 
 
 ///////////////////////////////////////////////////////////////////////////////
+// logging macro
+
+#define CLCG_LOG(xx, ...)  NSLog(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#define CLCGLOG CLCG_LOG
+
+
+///////////////////////////////////////////////////////////////////////////////
 // debugging macros
+
 
 #ifdef DEBUG
 #define CLCG_P(xx, ...)  NSLog(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define CLCG_P(xx, ...)  ((void)0)
 #endif
+#define CLCGP CLCG_P
 
 
+/* e.g. CLCG_PSIZE(@"screen bounds", [[UIScreen mainScreen] bounds]); */
 #ifdef DEBUG
 #define CLCG_PRECT(s,r) NSLog(@"%s(%d): %@ (%.0f,%.0f) (%.0f,%.0f)", __PRETTY_FUNCTION__, \
         __LINE__, s, r.origin.x, r.origin.y, r.size.width, r.size.height)
 #else
 #define CLCG_PRECT(s,r)  ((void)0)
 #endif
+#define CLCGPR CLCG_PRECT
 
 
+/* e.g. CLCG_PSIZE(@"screen size", [[UIScreen mainScreen] bounds].size); */
 #ifdef DEBUG
 #define CLCG_PSIZE(s,r) NSLog(@"%s(%d): %@ (%.0f,%.0f)", __PRETTY_FUNCTION__, \
         __LINE__, s, r.width, r.height);
 #else
 #define CLCG_PSIZE(s,r)  ((void)0)
 #endif
+#define CLCGPSZ CLCG_PSIZE
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -86,6 +99,7 @@ if (am_i_being_debugged()) { __asm__("int $3\n" : : ); }; } \
 #else
 #define CLCG_ASSERT(xx) ((void)0)
 #endif // #ifdef DEBUG
+#define CLCGASSERT CLCG_ASSERT
 
 #ifdef __cplusplus
 }
