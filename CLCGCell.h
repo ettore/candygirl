@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+// since we don't control the disclosure indicator size (and we need to
+// know the width when we calc the cell height in the TV controller) let's
+// provide a default size here, slightly bigger than actual to avoid
+// calculating a cell height that's too small.
+#define CLCGCELL_ACCESSORY_DISCL_W  22.0
+
 /**
  * This cell loads an image on the left side, renders multiline text in its
  * textLabel, adds a 1-line gray detailTextLabel and a standard disclosure

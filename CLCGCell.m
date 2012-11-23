@@ -5,6 +5,8 @@
 //  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "clcg_macros.h"
 #import "clcg_viewport.h"
 #import "UIViewCategory.h"
@@ -68,6 +70,8 @@
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    [self setTextFont:[UIFont boldSystemFontOfSize:15.0f]]; //reasonable default
+    [self setDetailFont:[UIFont systemFontOfSize:12.0f]];   //reasonable default
     mEmphasizedColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
     [mEmphasizedColor retain];
 
@@ -77,11 +81,6 @@
     [self setBackgroundView:bgview];
     [bgview release];
 
-    // since we don't control the disclosure indicator size (and we need to
-    // know the width when we calc the cell height in the TV controller) let's 
-    // provide a default size here, slightly bigger than actual to avoid 
-    // calculating a cell height that's too small.
-#define CLCGCELL_ACCESSORY_DISCL_W  22.0
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   }
   return self;
@@ -160,11 +159,10 @@
   [[self imageView] setFrame:CGRectMake(mPadding, mPadding, mImgW, mImgH)];
   
   // layout text label
-  x = [[self imageView] right] + mPadding;
-  w = [CLCGCell textLabelWidthWithMax:[self width] 
-                             imageW:[[self imageView] width] 
-                            padding:mPadding];
-  sz = CGSizeMake(w, [self height]);
+  w = [[self imageView] w];
+  x = [[self imageView] x] + w + mPadding;
+  w = [CLCGCell textLabelWidthWithMax:[self w] imageW:w padding:mPadding];
+  sz = CGSizeMake(w, [self h]);
   sz = [[[self textLabel] text] sizeWithFont:mTextFont 
                            constrainedToSize:sz
                                lineBreakMode:UILineBreakModeWordWrap];
@@ -173,7 +171,7 @@
   [[self textLabel] setFrame:r];
   
   // layout detail label
-  sz = CGSizeMake(w, [self height]);
+  sz = CGSizeMake(w, [self h]);
   sz = [[[self detailTextLabel] text] sizeWithFont:mDetailFont
                                  constrainedToSize:sz
                                      lineBreakMode:UILineBreakModeWordWrap];
