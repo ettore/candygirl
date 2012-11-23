@@ -27,6 +27,7 @@
 //
 
 #import "clcg_datetime_utils.h"
+#import "clcg_bundle_utils.h"
 
 /** Get the year out of a date object. */
 NSInteger clcg_date_year(NSDate *d)

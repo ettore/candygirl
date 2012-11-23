@@ -29,7 +29,12 @@
 #ifndef CLCG_DATETIME_UTILS_H_
 #define CLCG_DATETIME_UTILS_H_
 
-#import <Foundation/Foundation.h>
+#define CLCG_MINUTE   60
+#define CLCG_HOUR     (60 * CLCG_MINUTE)
+#define CLCG_DAY      (24 * CLCG_HOUR)
+#define CLCG_WEEK     (7 * CLCG_DAY)
+#define CLCG_MONTH    (30.5 * CLCG_DAY)
+#define CLCG_YEAR     (365 * CLCG_DAY)
 
 #ifdef __cplusplus
 extern "C" {
