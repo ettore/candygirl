@@ -77,7 +77,7 @@
   
   result = [self trimwsnl];
   
-  if (result == nil || [result isEqual:@""]) {
+  if (result == nil || [result isEqualToString:@""]) {
     result = @"";
   } else {
     // Note: if we try to open a URL w/ an unsupported scheme
