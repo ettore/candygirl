@@ -1,15 +1,38 @@
-//
-//  CLCGTVVC.m
-//  PostalChess
-//
-//  Created by e p on 3/5/12.
-//  Copyright (c) 2012 Cubelogic. All rights reserved.
-//
+/*
+ Copyright (c) 2012, Ettore Pasquini
+ Copyright (c) 2012, Cubelogic
+ All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice,
+   this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+ * Neither the name of Cubelogic nor the names of its contributors may be
+   used to endorse or promote products derived from this software without
+   specific prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ */
 
 
 #import "CLCGTVVC.h"
 #import "CLCGMoreCell.h"
 
+#define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
 
 @implementation CLCGTVVC
 
@@ -106,10 +129,33 @@
 }
 
 
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  switch ([self loadState]) {
+    case CLCG_LOADING:
+      [self showLoadingView:YES];
+      break;
+    default: {
+      UITableView *tv = [self tableView];
+      [self showLoadingView:NO];
+      if ([tv indexPathForSelectedRow])
+        [tv deselectRowAtIndexPath:[tv indexPathForSelectedRow] animated:YES];
+      break;
+    }
+  }
+}
+
+
 -(void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
   [mTableView flashScrollIndicators];
+}
+
+
+-(void)loadFromServerIfNeeded
+{
 }
 
 
@@ -156,26 +202,33 @@
 }
 
 
--(UITableViewCell*)tableView:(UITableView*)tv moreButtonCellForRow:(NSIndexPath*)ip
+//-----------------------------------------------------------------------------
+#pragma mark - UITableViewDelegate
+
+
+-(void)tableView:(UITableView*)tv didSelectRowAtIndexPath:(NSIndexPath*)ip
 {
-  CLCGMoreCell *cell;
+  if ([self isMoreRow:ip] && [self supportsPagination]) {
+    CLCGMoreCell *more;
 
-  cell = (CLCGMoreCell*)[tv dequeueReusableCellWithIdentifier:CLCGTVVC_MORE_CID];
-
-  if (cell == nil) {
-    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID withText:mMoreButtonText];
-    [cell autorelease];
+    mPage++;
+    [self setLoadState:CLCG_OUTDATED];
+    [self loadFromServerIfNeeded];
+    more = (CLCGMoreCell *)[self tableView:tv moreButtonCellForRow:ip];
+    [more didStartRequestingMore];
+  } else {
+    [self tableView:tv didSelectNormalRow:ip];
   }
+}
 
-  if (mLoadState != CLCG_LOADING)
-    [cell didStopRequestingMore];
 
-  return cell;
+-(void)tableView:(UITableView*)tv didSelectNormalRow:(NSIndexPath*)ip
+{
 }
 
 
 //-----------------------------------------------------------------------------
-#pragma mark - UITableViewDataSource protocol
+#pragma mark - UITableViewDataSource
 
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView*)tv
@@ -196,6 +249,24 @@
 -(UITableViewCell*)tableView:(UITableView*)tv cellForRowAtIndexPath:(NSIndexPath*)ip
 {
   return nil;
+}
+
+
+-(UITableViewCell*)tableView:(UITableView*)tv moreButtonCellForRow:(NSIndexPath*)ip
+{
+  CLCGMoreCell *cell;
+
+  cell = (CLCGMoreCell*)[tv dequeueReusableCellWithIdentifier:CLCGTVVC_MORE_CID];
+
+  if (cell == nil) {
+    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID withText:mMoreButtonText];
+    [cell autorelease];
+  }
+
+  if (mLoadState != CLCG_LOADING)
+    [cell didStopRequestingMore];
+
+  return cell;
 }
 
 

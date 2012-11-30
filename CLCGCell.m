@@ -36,9 +36,33 @@
 
 #import "CLCGCell.h"
 
+/*!
+ @discussion Since we don't control the disclosure indicator size (and we need
+    to know the width when we calc the cell height in the TV controller) let's
+    provide a default size here, slightly bigger than actual to avoid
+    calculating a cell height that's too small.
+ HACK: this is fragile against future iterations of iOS.
+ TODO: find a way to derive the accessory width when we're not using a
+       custom accessory view.
+*/
+#define CLCG_DEFAULT_ACCESSORY_TYPE_W   22.0f
+
+
+/*!
+ @discussion This accounts for left and right viewport padding added by iOS,
+    since we are still using UITableViewCell for the layout of the image.
+ @note This is fragile in the sense that it could change in future releases
+    of iOS, but likely is not going to change by much more. 
+ @todo Nevertheless, we should remove this dependency and just derive this
+    dynamically, although that can probably be done only at layout time
+    (typically we want to use this before layout, to calculate the height of
+    the cell.
+ */
+#define CLCG_DEFAULT_VIEWPORT_PADDING   11.0f
+
+/*! Construction time defaults. */
 #define CLCGCELL_IMG_DEFAULT_W      60.0f
 #define CLCGCELL_IMG_DEFAULT_H      60.0f
-#define MAX_CELL_H                  20000.0f
 
 @implementation CLCGCell
 
@@ -47,6 +71,7 @@
 @synthesize imgUrl = mImgUrl;
 @synthesize context = mContext;
 @synthesize emphasized = mEmphasized;
+@synthesize padding = mPadding;
 
 
 -(void)dealloc
@@ -104,14 +129,6 @@
     [self setBackgroundView:bgview];
     [bgview release];
 
-    // HACK: this is pretty fragile against future iterations of iOS.
-    // TODO: find a way to derive the accessory width without using a
-    //       custom accessory view.
-    // since we don't control the disclosure indicator size (and we need to
-    // know the width when we calc the cell height in the TV controller) let's
-    // provide a default size here, slightly bigger than actual to avoid
-    // calculating a cell height that's too small.
-#define CLCGCELL_ACCESSORY_DISCL_W  22.0
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   }
   return self;
@@ -178,6 +195,10 @@
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark - Layout
+
+
 -(void)layoutSubviews
 {
   CGRect r;
@@ -191,8 +212,8 @@
   
   // layout text label
   w = [[self imageView] w];
-  x = [[self imageView] x] + w + mPadding;
-  w = [CLCGCell textLabelWidthWithMax:[self w] imageW:w padding:mPadding];
+  x = [self xRightOfImage];
+  w = [CLCGCell textLabelWidthWithCellW:[self w] imageW:w padding:mPadding];
   sz = CGSizeMake(w, [self h]);
   sz = [[[self textLabel] text] sizeWithFont:mTextFont 
                            constrainedToSize:sz
@@ -212,11 +233,25 @@
 }
 
 
-+(CGFloat)textLabelWidthWithMax:(CGFloat)maxw
-                         imageW:(CGFloat)imgw
-                        padding:(CGFloat)pad
+-(CGFloat)xRightOfImage
 {
-  return maxw - imgw - ((imgw > 0) ? pad:0) - pad*3 - CLCGCELL_ACCESSORY_DISCL_W;
+  CGRect r = [[self imageView] frame];
+  return r.origin.x + r.size.width + mPadding;
+}
+
+
++(CGFloat)maxAccessoryWidth
+{
+  return CLCG_DEFAULT_ACCESSORY_TYPE_W;
+}
+
+
++(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
+                           imageW:(CGFloat)imgw
+                          padding:(CGFloat)pad
+{
+  return maxw - imgw - ((imgw>0) ? pad:0) - pad
+         - CLCG_DEFAULT_VIEWPORT_PADDING*2 - [self maxAccessoryWidth];
 }
 
 
@@ -225,7 +260,7 @@
                  detailText:(NSString*)detailtext
                        font:(UIFont*)text_font 
                  detailFont:(UIFont*)detail_font 
-               cellMaxWidth:(CGFloat)cell_maxw
+                   maxWidth:(CGFloat)cell_maxw
                      imageW:(CGFloat)imgw
                      imageH:(CGFloat)imgh
                     padding:(CGFloat)padding
@@ -234,10 +269,12 @@
   CGFloat label_w, h;
   
   // adding mPadding for cell margins (L & R) and right margin of img
-  label_w = [CLCGCell textLabelWidthWithMax:cell_maxw imageW:imgw padding:padding];
+  // Note: using `self` here seems necessary to properly invoke polymorphism on
+  // maxAccessoryWidth, called by textLabelWidthWithCellW:imageW:padding:.
+  label_w = [self textLabelWidthWithCellW:cell_maxw imageW:imgw padding:padding];
 
   // measure main text size
-  sz = CGSizeMake(label_w, MAX_CELL_H);
+  sz = CGSizeMake(label_w, CLCG_MAX_CELL_H);
   sz = [text sizeWithFont:text_font
               constrainedToSize:sz
                   lineBreakMode:UILineBreakModeWordWrap];
@@ -245,7 +282,7 @@
   
   // add detail text size.
   h += padding + [detailtext sizeWithFont:detail_font
-                        constrainedToSize:CGSizeMake(label_w, MAX_CELL_H)
+                        constrainedToSize:CGSizeMake(label_w, CLCG_MAX_CELL_H)
                             lineBreakMode:UILineBreakModeWordWrap].height;
   
   // add padding above and below cell content
