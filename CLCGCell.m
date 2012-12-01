@@ -47,19 +47,6 @@
 */
 #define CLCG_DEFAULT_ACCESSORY_TYPE_W   22.0f
 
-
-/*!
- @discussion This accounts for left and right viewport padding added by iOS,
-    since we are still using UITableViewCell for the layout of the image.
- @note This is fragile in the sense that it could change in future releases
-    of iOS, but likely is not going to change by much more. 
- @todo Nevertheless, we should remove this dependency and just derive this
-    dynamically, although that can probably be done only at layout time
-    (typically we want to use this before layout, to calculate the height of
-    the cell.
- */
-#define CLCG_DEFAULT_VIEWPORT_PADDING   11.0f
-
 /*! Construction time defaults. */
 #define CLCGCELL_IMG_DEFAULT_W      60.0f
 #define CLCGCELL_IMG_DEFAULT_H      60.0f
@@ -206,7 +193,7 @@
   CGSize sz;
   
   [super layoutSubviews];
-  
+
   // layout image view
   [[self imageView] setFrame:CGRectMake(mPadding, mPadding, mImgW, mImgH)];
   
@@ -246,12 +233,21 @@
 }
 
 
+/*!
+ This method calculates the available width for the text content.
+ It accounts for:
+ - image width
+ - accessory item (we assume it's either present/absent on all views)
+ - padding left and right of the cell's borders,
+ - padding on the right side of the image, if we have it,
+ - padding on the left side of the accessory view, if we have it.
+ */
 +(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
                            imageW:(CGFloat)imgw
                           padding:(CGFloat)pad
 {
-  return maxw - imgw - ((imgw>0) ? pad:0) - pad
-         - CLCG_DEFAULT_VIEWPORT_PADDING*2 - [self maxAccessoryWidth];
+  CGFloat accw = [self maxAccessoryWidth];
+  return maxw - imgw - pad*2 - (imgw>0 ? pad:0) - accw - (accw>0 ? pad:0);
 }
 
 

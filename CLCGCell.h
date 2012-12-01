@@ -65,7 +65,15 @@
 @property(nonatomic,retain) id        context;//should this be assign?
 @property(nonatomic,readonly) CGFloat padding;
 
-/*! Designated initializer. */
+/*! 
+ The designated initializer.
+ Sets up the styling of the cell, according to the given width and height of
+ the image and padding. 
+ The padding value adds whitespace to all sides of the cell (i.e. left, right, 
+ up, down), on the right side of the image and the left side of the accessory 
+ view (if you use it) and between the textLabel and detailTextLabel.
+ To use no image, simply construct a cell with image width and height set to 0.
+ */
 -(id)initWithImageWidth:(CGFloat)w 
                  height:(CGFloat)h
                 padding:(CGFloat)padding
@@ -107,11 +115,12 @@
 /*! 
  @abstract The max width accounted during layout calculations for the
     accessory view or discolosure arrow.
- @discussion By default, CLCGCell does not use a true accessory view. Rather,
+ @discussion By default, CLCGCell does not use a true accessory view; rather,
     it employs the default UITableViewCellAccessoryDisclosureIndicator type.
     If you use actual custom views for your accessory element, you should 
     probably create a subclass and override this method with actual 
     measurements.
+    If you don't use any accessory item, override this method and return 0.
  @return A constant value that should account for the size of a default 
     accessory type.
  */
