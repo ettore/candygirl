@@ -53,7 +53,7 @@
   CGFloat   mImgW;
   CGFloat   mImgH;
   CGFloat   mPadding;
-  UIColor   *mEmphasizedColor;
+  UIColor   *mEmphasisColor;
   BOOL      mEmphasized;
   id        mContext;
 }

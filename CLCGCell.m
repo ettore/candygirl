@@ -67,7 +67,7 @@
   CLCG_REL(mDetailFont);
   CLCG_REL(mImgUrl);
   CLCG_REL(mContext);
-  CLCG_REL(mEmphasizedColor);
+  CLCG_REL(mEmphasisColor);
   [super dealloc];
 }
 
@@ -94,22 +94,27 @@
     mImgH = h;
     mPadding = padding;
     [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
-    [[self textLabel] setNumberOfLines:0];//set to 0 and calc height dynamically
     [[self textLabel] setTextColor:[UIColor blackColor]];
-    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self textLabel] setLineBreakMode:UILineBreakModeWordWrap];
+    [[self textLabel] setNumberOfLines:0];//set to 0 and calc height dynamically
     [[self detailTextLabel] setTextColor:[UIColor grayColor]];
+    [[self detailTextLabel] setLineBreakMode:UILineBreakModeWordWrap];
     [[self detailTextLabel] setNumberOfLines:0];
-    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setMinimumFontSize:9];
-    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
     [self setTextFont:[UIFont boldSystemFontOfSize:15.0f]]; //reasonable default
     [self setDetailFont:[UIFont systemFontOfSize:12.0f]];   //reasonable default
-    mEmphasizedColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
-    [mEmphasizedColor retain];
+    mEmphasisColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
+    [mEmphasisColor retain];
 
+    // NOTE: despite what the docs say, it seems necessary to set the background
+    // color here to have the emphasis color render correctly behind the labels.
+    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    
     // needed for changing the background color
     UIView *bgview = [[UIView alloc] initWithFrame:CGRectZero];
     [bgview setOpaque:YES];
@@ -145,7 +150,7 @@
   // Note: setting the background color on the contentView or even all the
   // subviews doesn't take care of changing the background of the accessoryView.
   // Setting the background of the accessoryView doesn't seem to work either.
-  UIColor *color = (mEmphasized ? mEmphasizedColor : [UIColor whiteColor]);
+  UIColor *color = (mEmphasized ? mEmphasisColor : [UIColor whiteColor]);
   [[self backgroundView] setBackgroundColor:color];
 }
 
