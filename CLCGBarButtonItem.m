@@ -11,6 +11,10 @@
 #import "UIViewCategory.h"
 
 
+@interface CLCGBarButtonItem ()
+-(UIActivityIndicatorView*)spinner;
+@end
+
 @implementation CLCGBarButtonItem
 
 
@@ -132,6 +136,21 @@
     [self setState:CLCGBarButtonItemStateReady];
   }
   return self;
+}
+
+
+-(UIActivityIndicatorView*)spinner
+{
+  return (UIActivityIndicatorView*)[mToggler secondView];
+}
+
+
+-(void)setTintColor:(UIColor*)col
+{
+  if (clcg_os_geq(@"5.0")) {
+    [super setTintColor:col];
+    [[self spinner] setColor:col];
+  }
 }
 
 
