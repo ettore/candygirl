@@ -47,6 +47,8 @@
 */
 #define CLCG_DEFAULT_ACCESSORY_TYPE_W   22.0f
 
+static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
+
 
 /*!
  @discussion This accounts for left and right viewport padding added by iOS,
@@ -64,22 +66,24 @@
 #define CLCGCELL_IMG_DEFAULT_W      60.0f
 #define CLCGCELL_IMG_DEFAULT_H      60.0f
 
+@interface CLCGCell ()
+@end
+
 @implementation CLCGCell
 
-@synthesize textFont = mTextFont;
-@synthesize detailFont = mDetailFont;
 @synthesize imgUrl = mImgUrl;
 @synthesize context = mContext;
 @synthesize emphasized = mEmphasized;
 @synthesize padding = mPadding;
-
+@synthesize infoTextLabel = mInfoTextLabel;
+@synthesize normalColor = mNormalColor;
 
 -(void)dealloc
 {
-  CLCG_REL(mTextFont);
-  CLCG_REL(mDetailFont);
+  CLCG_REL(mInfoTextLabel);
   CLCG_REL(mImgUrl);
   CLCG_REL(mContext);
+  CLCG_REL(mNormalColor);
   CLCG_REL(mEmphasizedColor);
   [super dealloc];
 }
@@ -118,10 +122,19 @@
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
-    [self setTextFont:[UIFont boldSystemFontOfSize:15.0f]]; //reasonable default
-    [self setDetailFont:[UIFont systemFontOfSize:12.0f]];   //reasonable default
+    [[self textLabel] setFont:[UIFont boldSystemFontOfSize:15.0f]];  //reasonable default
+    [[self detailTextLabel] setFont:[UIFont systemFontOfSize:12.0f]];//reasonable default
+    [mInfoTextLabel setFont:[UIFont systemFontOfSize:12.0f]];        //reasonable default
     mEmphasizedColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
     [mEmphasizedColor retain];
+    [self setNormalColor:[UIColor whiteColor]];
+
+    // info label, this goes below the detail label
+    mInfoTextLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    [mInfoTextLabel setTextColor:[UIColor blackColor]];
+    [mInfoTextLabel setNumberOfLines:0];
+    [mInfoTextLabel setBackgroundColor:[UIColor clearColor]];
+    [self addSubview:mInfoTextLabel];
 
     // needed for changing the background color
     UIView *bgview = [[UIView alloc] initWithFrame:CGRectZero];
@@ -135,30 +148,12 @@
 }
 
 
--(void)setTextFont:(UIFont*)f
-{
-  [f retain];
-  [mTextFont release];
-  mTextFont = f;
-  [[self textLabel] setFont:f];
-}
-
-
--(void)setDetailFont:(UIFont*)f
-{
-  [f retain];
-  [mDetailFont release];
-  mDetailFont = f;
-  [[self detailTextLabel] setFont:f];
-}
-
-
 -(void)updateBackgroundColor
 {
   // Note: setting the background color on the contentView or even all the
   // subviews doesn't take care of changing the background of the accessoryView.
   // Setting the background of the accessoryView doesn't seem to work either.
-  UIColor *color = (mEmphasized ? mEmphasizedColor : [UIColor whiteColor]);
+  UIColor *color = (mEmphasized ? mEmphasizedColor : mNormalColor);
   [[self backgroundView] setBackgroundColor:color];
 }
 
@@ -202,34 +197,44 @@
 -(void)layoutSubviews
 {
   CGRect r;
-  CGFloat x, w;
   CGSize sz;
   
   [super layoutSubviews];
-  
+
   // layout image view
   [[self imageView] setFrame:CGRectMake(mPadding, mPadding, mImgW, mImgH)];
-  
+
+  // these should not change
+  const CGFloat cellh = [self h];
+  const CGFloat imgw = [[self imageView] w];
+  const CGFloat x = [self xRightOfImage];
+  const CGFloat w = [CLCGCell textLabelWidthWithCellW:[self w]
+                                               imageW:imgw
+                                              padding:mPadding];
+
   // layout text label
-  w = [[self imageView] w];
-  x = [self xRightOfImage];
-  w = [CLCGCell textLabelWidthWithCellW:[self w] imageW:w padding:mPadding];
-  sz = CGSizeMake(w, [self h]);
-  sz = [[[self textLabel] text] sizeWithFont:mTextFont 
+  sz = CGSizeMake(w, cellh);
+  sz = [[[self textLabel] text] sizeWithFont:[[self textLabel] font]
                            constrainedToSize:sz
                                lineBreakMode:UILineBreakModeWordWrap];
-  
   r = CGRectMake(x, mPadding, w, sz.height);
   [[self textLabel] setFrame:r];
   
   // layout detail label
-  sz = CGSizeMake(w, [self h]);
-  sz = [[[self detailTextLabel] text] sizeWithFont:mDetailFont
+  sz = CGSizeMake(w, cellh);
+  sz = [[[self detailTextLabel] text] sizeWithFont:[[self detailTextLabel] font]
                                  constrainedToSize:sz
                                      lineBreakMode:UILineBreakModeWordWrap];
-  w = sz.width;
-  r = CGRectMake(x, [[self textLabel] low] + (int)(mPadding/2), w, sz.height);
+  r = CGRectMake(x, [[self textLabel] low] + (int)(mPadding/2), sz.width, sz.height);
   [[self detailTextLabel] setFrame:r];
+
+  // info text label
+  sz = CGSizeMake(w, cellh);
+  sz = [[mInfoTextLabel text] sizeWithFont:[mInfoTextLabel font]
+                         constrainedToSize:sz
+                             lineBreakMode:UILineBreakModeWordWrap];
+  r = CGRectMake(x, [[self detailTextLabel] low] + (int)(mPadding/2), w, sz.height);
+  [[self infoTextLabel] setFrame:r];
 }
 
 
@@ -242,7 +247,13 @@
 
 +(CGFloat)maxAccessoryWidth
 {
-  return CLCG_DEFAULT_ACCESSORY_TYPE_W;
+  return sMaxAccessoryWidth;
+}
+
+
++(void)setMaxAccessoryWidth:(CGFloat)w
+{
+  sMaxAccessoryWidth = w;
 }
 
 
@@ -255,11 +266,12 @@
 }
 
 
-
 +(CGFloat)cellHeightForText:(NSString*)text
                  detailText:(NSString*)detailtext
-                       font:(UIFont*)text_font 
-                 detailFont:(UIFont*)detail_font 
+                   infoText:(NSString*)infotext
+                       font:(UIFont*)text_font
+                 detailFont:(UIFont*)detail_font
+                   infoFont:(UIFont*)info_font
                    maxWidth:(CGFloat)cell_maxw
                      imageW:(CGFloat)imgw
                      imageH:(CGFloat)imgh
@@ -267,6 +279,7 @@
 {
   CGSize sz;
   CGFloat label_w, h;
+  const CGFloat cell_maxh = CLCG_MAX_CELL_H;
   
   // adding mPadding for cell margins (L & R) and right margin of img
   // Note: using `self` here seems necessary to properly invoke polymorphism on
@@ -274,17 +287,26 @@
   label_w = [self textLabelWidthWithCellW:cell_maxw imageW:imgw padding:padding];
 
   // measure main text size
-  sz = CGSizeMake(label_w, CLCG_MAX_CELL_H);
+  sz = CGSizeMake(label_w, cell_maxh);
   sz = [text sizeWithFont:text_font
               constrainedToSize:sz
                   lineBreakMode:UILineBreakModeWordWrap];
   h = sz.height;
   
   // add detail text size.
-  h += padding + [detailtext sizeWithFont:detail_font
-                        constrainedToSize:CGSizeMake(label_w, CLCG_MAX_CELL_H)
+  if ([detailtext length] > 0) {
+    h += padding + [detailtext sizeWithFont:detail_font
+                          constrainedToSize:CGSizeMake(label_w, cell_maxh)
+                              lineBreakMode:UILineBreakModeWordWrap].height;
+  }
+
+  // now we have to add space for info text + 1 padding unit
+  if ([infotext length] > 0) {
+    h += padding + [infotext sizeWithFont:info_font
+                        constrainedToSize:CGSizeMake(label_w, cell_maxh)
                             lineBreakMode:UILineBreakModeWordWrap].height;
-  
+  }
+
   // add padding above and below cell content
   h = MAX(h, imgh) + padding*2;
   

@@ -39,31 +39,36 @@
 
 /*!
  @class CLCGCell
- @discussion This cell loads an image on the left side, renders multiline text
-  in its textLabel, adds a 1-line gray detailTextLabel and a standard disclosure
-  indicator on the right side. It also renders itself with a different
-  background color if it's set as a emphasized cell. The layout of
-  all components is performed accordingly, adding padding between elements.
+ @abstract A reusable cell capable of rendering 3 blocks of text and an image.
+ @discussion This cell loads an image on the left side and renders multiline
+  text in the standard UITableViewCell's textLabel and detailTextLabel. 
+  It also adds an additional `infoTextLabel` positioned below detailTextLabel, 
+  also with multiline text. The detailTextLabel is rendered in gray. 
+  A standard disclosure indicator is added by default on the right side. 
+  This cell is also able to render itself with a different background color 
+  if it's set as an "emphasized" cell. 
+  The layout of all components is performed accordingly, adding padding 
+  between elements.
  */
 @interface CLCGCell : UITableViewCell
 {
-  UIFont    *mTextFont;
-  UIFont    *mDetailFont;
+  UILabel   *mInfoTextLabel;
   NSString  *mImgUrl;
   CGFloat   mImgW;
   CGFloat   mImgH;
   CGFloat   mPadding;
+  UIColor   *mNormalColor;
   UIColor   *mEmphasizedColor;
   BOOL      mEmphasized;
   id        mContext;
 }
 
-@property(nonatomic,retain) UIFont    *textFont;
-@property(nonatomic,retain) UIFont    *detailFont;
 @property(nonatomic,retain) NSString  *imgUrl;
 @property(nonatomic,assign) BOOL      emphasized;
 @property(nonatomic,retain) id        context;//should this be assign?
 @property(nonatomic,readonly) CGFloat padding;
+@property(nonatomic,retain) UILabel   *infoTextLabel;
+@property(nonatomic,retain) UIColor   *normalColor;
 
 /*! Designated initializer. */
 -(id)initWithImageWidth:(CGFloat)w 
@@ -82,8 +87,10 @@
  */
 +(CGFloat)cellHeightForText:(NSString*)text
                  detailText:(NSString*)detailtext
+                   infoText:(NSString*)infotext
                        font:(UIFont*)text_font
                  detailFont:(UIFont*)detail_font
+                   infoFont:(UIFont*)info_font
                    maxWidth:(CGFloat)cell_maxw
                      imageW:(CGFloat)imgw
                      imageH:(CGFloat)imgh
@@ -116,7 +123,7 @@
     accessory type.
  */
 +(CGFloat)maxAccessoryWidth;
-
++(void)setMaxAccessoryWidth:(CGFloat)w;
 
 @end
 
