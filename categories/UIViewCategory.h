@@ -47,6 +47,17 @@
 -(void)setW:(CGFloat)w;
 -(CGFloat)h;
 -(void)setH:(CGFloat)h;
+
+/*! The ordinate position below this view, i.e. Y + Height. */
 -(CGFloat)low;
+
+/*! The abscissa position at the right of this view, i.e. X + Width. */
+-(CGFloat)r;
+
+/*! @return The view size. */
+-(CGSize)sz;
+
+/*! Set view size leaving origin unchanged. */
+-(void)setSz:(CGSize)size;
 
 @end

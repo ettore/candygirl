@@ -122,10 +122,31 @@
 }
 
 
+-(CGFloat)r
+{
+  CGRect r = [self frame];
+  return r.origin.x + r.size.width;
+}
+
+
 -(CGFloat)low
 {
   CGRect r = [self frame];
   return r.origin.y + r.size.height;
+}
+
+
+- (CGSize)sz
+{
+  return [self frame].size;
+}
+
+
+- (void)setSz:(CGSize)size
+{
+  CGRect frame = [self frame];
+  frame.size = size;
+  [self setFrame:frame];
 }
 
 
