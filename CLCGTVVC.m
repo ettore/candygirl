@@ -42,6 +42,7 @@
 @synthesize itemsTotal = mItemsTotal;
 @synthesize itemsEnd = mItemsEnd;
 @synthesize moreButtonText = mMoreButtonText;
+@synthesize items = mItems;
 
 
 //-----------------------------------------------------------------------------

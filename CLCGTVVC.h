@@ -68,6 +68,7 @@
 @property(nonatomic,assign) int itemsTotal;
 @property(nonatomic,assign) int itemsEnd;
 @property(nonatomic,retain) NSString *moreButtonText;
+@property(nonatomic,retain,readonly) NSMutableArray *items;
 
 /*! Still the designated initializer. Defaults style to UITableViewStylePlain. */
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
