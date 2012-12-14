@@ -36,6 +36,78 @@
 @implementation NSString (Candygirl)
 
 
+-(NSString*)ellipsisized
+{
+  return [self ellipsisized:150];
+}
+
+
+-(NSString*)ellipsisized:(NSUInteger)maxlen
+{
+  NSString *s;
+
+  s = [self HTMLStripped];
+  if ([s length] > maxlen)
+    s = [[s substringToIndex:maxlen] stringByAppendingString:@"..."];
+
+  return s;
+}
+
+
+//
+// TODO
+// we should have a more systematic approach to this, perhaps using
+// a dictionary with all entities, something like:
+// https://code.google.com/p/google-toolbox-for-mac/source/browse/trunk/Foundation/GTMNSString%2BHTML.m
+//
+-(NSString*)HTMLDecoded
+{
+	return [[[[[[self
+               stringByReplacingOccurrencesOfString: @"&amp;" withString: @"&"]
+              stringByReplacingOccurrencesOfString: @"&quot;" withString: @"\""]
+             stringByReplacingOccurrencesOfString: @"&#39;" withString: @"'"]
+            stringByReplacingOccurrencesOfString: @"&gt;" withString: @">"]
+           stringByReplacingOccurrencesOfString: @"&lt;" withString: @"<"]
+          stringByReplacingOccurrencesOfString: @"&nbsp;" withString: @" "];
+}
+
+
+-(NSString*)HTMLEncoded
+{
+	return [[[[[self
+              stringByReplacingOccurrencesOfString: @"&" withString: @"&amp;"]
+             stringByReplacingOccurrencesOfString: @"\"" withString: @"&quot;"]
+            stringByReplacingOccurrencesOfString: @"'" withString: @"&#39;"]
+           stringByReplacingOccurrencesOfString: @">" withString: @"&gt;"]
+          stringByReplacingOccurrencesOfString: @"<" withString: @"&lt;"];
+}
+
+
+-(NSString*)HTMLStripped
+{
+  NSScanner *scanner;
+  NSString *text = nil, *s = self;
+
+  scanner = [NSScanner scannerWithString:self];
+
+  while ([scanner isAtEnd] == NO) {
+
+    // find start of tag
+    [scanner scanUpToString:@"<" intoString:NULL];
+
+    // find end of tag
+    [scanner scanUpToString:@">" intoString:&text] ;
+
+    // replace the found tag with a space
+    //(you can filter multi-spaces out later if you wish)
+    text = [NSString stringWithFormat:@"%@>", text];
+    s = [s stringByReplacingOccurrencesOfString:text withString:@" "];
+  }
+
+  return [s HTMLDecoded];
+}
+
+
 -(NSString*)URLEncode
 {
   NSString *s;

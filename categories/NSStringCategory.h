@@ -31,27 +31,58 @@
 
 @interface NSString (Candygirl)
 
-/** URL-encodes (i.e. %-escapes) the receiver. */
+
+/*! 
+ Truncates the string (after stripping HTML) if it's longer than 150
+ characters, and adds ellipsis if needed.
+ */
+-(NSString*)ellipsisized;
+
+/*!
+ Truncates the string (after stripping HTML) if it's longer than a given number
+ of characters, and adds ellipsis if needed.
+ */
+-(NSString*)ellipsisized:(NSUInteger)maxlen;
+
+/*!
+ Decodes characters from their respective HTML entities.
+ E.g.:    &amp  --->  &;
+ */
+-(NSString*)HTMLDecoded;
+
+/*! 
+ Encodes characters into their respective HTML entities.
+ Currently this supports only the predefined XML entities " ' < > &.
+ E.g.:    &     --->  &amp;
+ */
+-(NSString *)HTMLEncoded;
+
+/*! 
+ Strips all HTML tags from the receiver. 
+ */
+-(NSString *)HTMLStripped;
+
+/*! URL-encodes (i.e. %-escapes) the receiver. */
 -(NSString*)URLEncode;
 
-/** Trims whitespaces only. */
+/*! Trims whitespaces only. */
 -(NSString *)trimws;
 
-/** Trims whitespaces and new lines too. */
+/*! Trims whitespaces and new lines too. */
 -(NSString *)trimwsnl;
 
-/**
+/*!
  * Trims and attempts to fix the receiver by adding the "http://" scheme
  * specification if no other scheme is present.
  */
 -(NSString *)fixURLString;
 
-/**
- * Returns a shortened version of a given name, taking the first words that
+/*!
+ * @return A shortened version of a given name, taking the first words that
  * match the given length. E.g.
  *      shortenedName(@"Ettore Pasquini", 10) --> "Ettore"
  * If the first word is still too long, it will be returned truncated with a
- * tolerance of + 2 additional chars.
+ * tolerance of + 2 additional chars. No ellipses are added.
  */
 -(NSString *)shortenedName:(int)max_len;
 
