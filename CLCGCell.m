@@ -84,7 +84,7 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
   CLCG_REL(mImgUrl);
   CLCG_REL(mContext);
   CLCG_REL(mNormalColor);
-  CLCG_REL(mEmphasizedColor);
+  CLCG_REL(mEmphasisColor);
   [super dealloc];
 }
 
@@ -111,22 +111,22 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
     mImgH = h;
     mPadding = padding;
     [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
-    [[self textLabel] setNumberOfLines:0];//set to 0 and calc height dynamically
     [[self textLabel] setTextColor:[UIColor blackColor]];
-    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self textLabel] setLineBreakMode:UILineBreakModeWordWrap];
+    [[self textLabel] setNumberOfLines:0];//set to 0 and calc height dynamically
     [[self detailTextLabel] setTextColor:[UIColor grayColor]];
+    [[self detailTextLabel] setLineBreakMode:UILineBreakModeWordWrap];
     [[self detailTextLabel] setNumberOfLines:0];
-    [[self detailTextLabel] setAdjustsFontSizeToFitWidth:YES];
     [[self detailTextLabel] setMinimumFontSize:9];
-    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
     [[self textLabel] setFont:[UIFont boldSystemFontOfSize:15.0f]];  //reasonable default
     [[self detailTextLabel] setFont:[UIFont systemFontOfSize:12.0f]];//reasonable default
     [mInfoTextLabel setFont:[UIFont systemFontOfSize:12.0f]];        //reasonable default
-    mEmphasizedColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
-    [mEmphasizedColor retain];
+    mEmphasisColor = [UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0];
+    [mEmphasisColor retain];
     [self setNormalColor:[UIColor whiteColor]];
 
     // info label, this goes below the detail label
@@ -136,6 +136,11 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
     [mInfoTextLabel setBackgroundColor:[UIColor clearColor]];
     [self addSubview:mInfoTextLabel];
 
+    // NOTE: despite what the docs say, it seems necessary to set the background
+    // color here to have the emphasis color render correctly behind the labels.
+    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
+    [[self detailTextLabel] setBackgroundColor:[UIColor clearColor]];
+    
     // needed for changing the background color
     UIView *bgview = [[UIView alloc] initWithFrame:CGRectZero];
     [bgview setOpaque:YES];
@@ -153,7 +158,7 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
   // Note: setting the background color on the contentView or even all the
   // subviews doesn't take care of changing the background of the accessoryView.
   // Setting the background of the accessoryView doesn't seem to work either.
-  UIColor *color = (mEmphasized ? mEmphasizedColor : mNormalColor);
+  UIColor *color = (mEmphasized ? mEmphasisColor : mNormalColor);
   [[self backgroundView] setBackgroundColor:color];
 }
 
@@ -257,12 +262,21 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
 }
 
 
+/*!
+ This method calculates the available width for the text content.
+ It accounts for:
+ - image width
+ - accessory item (we assume it's either present/absent on all views)
+ - padding left and right of the cell's borders,
+ - padding on the right side of the image, if we have it,
+ - padding on the left side of the accessory view, if we have it.
+ */
 +(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
                            imageW:(CGFloat)imgw
                           padding:(CGFloat)pad
 {
-  return maxw - imgw - ((imgw>0) ? pad:0) - pad
-         - CLCG_DEFAULT_VIEWPORT_PADDING*2 - [self maxAccessoryWidth];
+  CGFloat accw = [self maxAccessoryWidth];
+  return maxw - imgw - pad*2 - (imgw>0 ? pad:0) - accw - (accw>0 ? pad:0);
 }
 
 
