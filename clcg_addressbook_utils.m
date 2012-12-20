@@ -49,6 +49,9 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
 {
   ABAddressBookRef ab;
 
+  // make sure to keep a valid object on the heap
+  callback = [[callback copy] autorelease];
+
   // check existence of function, only defined in iOS 6
   if (&ABAddressBookCreateWithOptions != NULL) {
     // iOS 6+
@@ -57,10 +60,10 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
     if (error) {
       callback(nil, NO, (NSError*)error);
     } else {
-      ABAddressBookRequestAccessWithCompletion(ab, ^(bool granted, CFErrorRef err) {
+      ABAddressBookRequestAccessWithCompletion(ab, [[^(bool granted, CFErrorRef err) {
         // the callback can occur in the background, but the address book must
         // be accessed on the thread it was created on
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), [[^{
           if (err || !granted) {
             callback(nil, granted, (NSError*)err);
           } else {
@@ -68,8 +71,8 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
             callback(people, YES, nil);
             CFRelease(ab);
           }
-        });
-      });
+        } copy] autorelease]);
+      } copy] autorelease]);
     }
   } else {
     // iOS 4/5
