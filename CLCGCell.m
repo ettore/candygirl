@@ -120,6 +120,7 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
     [[self detailTextLabel] setMinimumFontSize:9];
     [[self detailTextLabel] setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
     [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
+    [[self imageView] setAutoresizesSubviews:YES];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
     [[self textLabel] setFont:[UIFont boldSystemFontOfSize:15.0f]];  //reasonable default
