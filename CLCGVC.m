@@ -95,6 +95,25 @@
 }
 
 
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+
+  switch ([self loadState]) {
+    case CLCG_LOADING:
+      // the reason why we're showing the loading view here and not earlier
+      // is because earlier, eg at viewDidLoad time, the view is not really
+      // laid out (e.g. frame is Zero)
+      [self showLoadingView:YES];
+      break;
+    default: {
+      [self showLoadingView:NO];
+      break;
+    }
+  }
+}
+
+
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)to_orient
                                         duration:(NSTimeInterval)duration
 {

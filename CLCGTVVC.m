@@ -125,25 +125,21 @@
 {
   [super viewDidLoad];
 
-  // necessary to avoid default striped background for grouped tableviews
-  [mTableView setBackgroundView:nil];
+  if ([mTableView style] == UITableViewStyleGrouped) {
+    // necessary to avoid default striped background for grouped tableviews
+    [mTableView setBackgroundView:nil];
+  }
 }
 
 
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  switch ([self loadState]) {
-    case CLCG_LOADING:
-      [self showLoadingView:YES];
-      break;
-    default: {
-      UITableView *tv = [self tableView];
-      [self showLoadingView:NO];
-      if ([tv indexPathForSelectedRow])
-        [tv deselectRowAtIndexPath:[tv indexPathForSelectedRow] animated:YES];
-      break;
-    }
+
+  if ([self loadState] != CLCG_LOADING) {
+    UITableView *tv = [self tableView];
+    if ([tv indexPathForSelectedRow])
+      [tv deselectRowAtIndexPath:[tv indexPathForSelectedRow] animated:YES];
   }
 }
 
