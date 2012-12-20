@@ -1,7 +1,5 @@
 //
 //  CLCGBarButtonItem.m
-//  PostalChess
-//
 //  Created by Ettore Pasquini on 9/29/12.
 //  Copyright (c) 2012 Cubelogic. All rights reserved.
 //
@@ -9,6 +7,7 @@
 #import "clcg_device_utils.h"
 #import "CLCGBarButtonItem.h"
 #import "UIViewCategory.h"
+#import "CLCGTogglerView.h"
 
 
 @interface CLCGBarButtonItem ()
@@ -16,6 +15,11 @@
 @end
 
 @implementation CLCGBarButtonItem
+{
+  CLCGTogglerView             *mToggler;
+  enum CLCGBarButtonItemState mState;
+  BOOL                        mIsSystemItem;
+}
 
 
 -(void)dealloc
@@ -25,25 +29,69 @@
 }
 
 
-// Overriding super class initializer. You should avoid calling these directly.
+//------------------------------------------------------------------------------
+#pragma mark - Overrides
+
+
+-(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)item
+                          target:(id)target
+                          action:(SEL)action
+{
+  return [self initWithImage:nil
+                     orTitle:nil
+                orSystemItem:item
+                       style:UIBarButtonItemStylePlain
+                      target:target
+                      action:action
+                      height:44]; //arbitrary yet reasonable default height
+}
+
+
 - (id)initWithTitle:(NSString *)t
               style:(UIBarButtonItemStyle)st
              target:(id)target
              action:(SEL)a
 {
-  // just called with an arbitrary (yet reasonable) default
+  // just called with an arbitrary (yet reasonable) default height
   return [self initWithImage:nil orTitle:t style:st target:target action:a height:44];
 }
 
 
-// Overriding super class initializer. You should avoid calling this directly.
 -(id)initWithImage:(UIImage *)img
              style:(UIBarButtonItemStyle)st
             target:(id)target
             action:(SEL)a
 {
-  // just called with an arbitrary (yet reasonable) default
+  // just called with an arbitrary (yet reasonable) default height
   return [self initWithImage:img orTitle:nil style:st target:target action:a height:44];
+}
+
+
+-(void)setTintColor:(UIColor*)col
+{
+  if (clcg_os_geq(@"5.0")) {
+    [super setTintColor:col];
+    [[self spinner] setColor:col];
+  }
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Public API
+
+
+-(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)item
+                          target:(id)target
+                          action:(SEL)action
+                          height:(CGFloat)h
+{
+  return [self initWithImage:nil
+                     orTitle:nil
+                orSystemItem:item
+                       style:UIBarButtonItemStylePlain
+                      target:target
+                      action:action
+                      height:h];
 }
 
 
@@ -67,12 +115,58 @@
 }
 
 
+-(void)setState:(enum CLCGBarButtonItemState)state
+{
+  switch (state) {
+    case CLCGBarButtonItemStateReady:
+      if (mIsSystemItem) {
+        // remove customView so that UIBarButtonItem system graphics are rendered
+        [self setCustomView:nil];
+      } else {
+        [mToggler setState:CLCGTogglerFirstView];
+        if ([[self title] length] == 0) {
+          [self setCustomView:mToggler];
+        } else {
+          [self setCustomView:nil];
+        }
+      }
+      break;
+    case CLCGBarButtonItemStateBusy:
+      // show the spinner
+      [mToggler setState:CLCGTogglerSecondView];
+      [self setCustomView:mToggler];
+      break;
+    case CLCGBarButtonItemStateHidden:
+      [mToggler setState:CLCGTogglerFirstView];
+      [[mToggler firstView] setHidden:YES];
+      if ([[self title] length] > 0) {
+        // for a textual button, this will "show" the empty button we created.
+        [self setCustomView:mToggler];
+      }
+      break;
+    default:
+      break;
+  }
+
+  mState = state;
+}
+
+
+-(enum CLCGBarButtonItemState)state
+{
+  return mState;
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Private
+
+
 /*
- Private method.
- 
- Note that this is (and must be) invoked only in this condition:
-    img == nil XOR title == nil
- 
+ This method MUST NOT be invoked with `img` and `title` both non-nil.
+ The non-nil value will be used. 
+ If `img` and `title` are both nil, the systemItem will be considered,
+ otherwise it will be ignored.
  */
 - (id)initWithImage:(UIImage*)img
             orTitle:(NSString*)title
@@ -81,11 +175,35 @@
              action:(SEL)action
              height:(CGFloat)h
 {
+  return [self initWithImage:img
+                     orTitle:title
+                orSystemItem:UIBarButtonSystemItemDone
+                       style:style
+                      target:target
+                      action:action
+                      height:h];
+}
+
+
+- (id)initWithImage:(UIImage*)img
+            orTitle:(NSString*)title
+       orSystemItem:(UIBarButtonSystemItem)item
+              style:(UIBarButtonItemStyle)style
+             target:(id)target
+             action:(SEL)action
+             height:(CGFloat)h
+{
   if (title == nil)
     title = @"";
 
-  self = [super initWithTitle:title style:style target:target action:action];
-  
+  if (img == nil && [title length] == 0) {
+    self = [super initWithBarButtonSystemItem:item target:target action:action];
+    mIsSystemItem = YES;
+  } else {
+    self = [super initWithTitle:title style:style target:target action:action];
+    mIsSystemItem = NO;
+  }
+
   if (self) {
     UIView *first;
     UIButton *b;
@@ -142,55 +260,6 @@
 -(UIActivityIndicatorView*)spinner
 {
   return (UIActivityIndicatorView*)[mToggler secondView];
-}
-
-
--(void)setTintColor:(UIColor*)col
-{
-  if (clcg_os_geq(@"5.0")) {
-    [super setTintColor:col];
-    [[self spinner] setColor:col];
-  }
-}
-
-
--(void)setState:(enum CLCGBarButtonItemState)state
-{
-  switch (state) {
-    case CLCGBarButtonItemStateReady:
-      [mToggler setState:CLCGTogglerFirstView];
-      if ([[self title] length] == 0) {
-        [self setCustomView:mToggler];
-      } else {
-        // remove the custom view, so that the normal UIBarButtonItem style
-        // is rendered
-        [self setCustomView:nil];
-      }
-      break;
-    case CLCGBarButtonItemStateBusy:
-      // show the spinner
-      [mToggler setState:CLCGTogglerSecondView];
-      [self setCustomView:mToggler];
-      break;
-    case CLCGBarButtonItemStateHidden:
-      [mToggler setState:CLCGTogglerFirstView];
-      [[mToggler firstView] setHidden:YES];
-      if ([[self title] length] > 0) {
-        // for a textual button, this will "show" the empty button we created.
-        [self setCustomView:mToggler];
-      }
-      break;
-    default:
-      break;
-  }
-  
-  mState = state;
-}
-
-
--(enum CLCGBarButtonItemState)state
-{
-  return mState;
 }
 
 
