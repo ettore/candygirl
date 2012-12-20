@@ -13,6 +13,7 @@
 #import "clcg_device_utils.h"
 #import "CLCGImageView.h"
 
+
 @implementation CLCGImageView
 
 
@@ -24,6 +25,18 @@
   mTapTarget = nil;
   mTapAction = nil;
   [super dealloc];
+}
+
+
+-(id)initWithFrame:(CGRect)frame
+{
+  self = [super initWithFrame:frame];
+  if (self) {
+    [self setAutoresizesSubviews:YES];
+    [self setAutoresizingMask:UIViewAutoresizingNone];
+    [self setContentMode:UIViewContentModeScaleAspectFit];
+  }
+  return self;
 }
 
 
@@ -60,6 +73,13 @@
                                     block:^(UIImage *img, int http_status) {
                                       if (img) {
                                         [self setImage:img];
+
+                                        //TODO we should resize the image view
+                                        //accordingly to `img` size. But if we're
+                                        //not sure to always get retina images
+                                        //this could lead to displaying an
+                                        //image that's too big or too small.
+
                                       } else {
                                         CLCG_P(@"Error loading image. HTTP status=%d",
                                                http_status);
