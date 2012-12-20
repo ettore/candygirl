@@ -151,11 +151,6 @@
 }
 
 
--(void)loadFromServerIfNeeded
-{
-}
-
-
 //-----------------------------------------------------------------------------
 #pragma mark - UITableView behavior
 

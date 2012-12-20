@@ -81,8 +81,13 @@ enum CLCGLoadingState {
  */
 -(void)showLoadingView:(BOOL)show;
 
+/*!
+ @discussion Subclasses should override this method and initiate here any
+ asynchronous server side call. The default implementation does nothing.
+ */
+-(void)loadFromServerIfNeeded;
 
-/** 
+/**
  * Releases all the retained subviews of this view controller. This is called
  * by dealloc and viewDidUnload.
  * Subclasses should override this method and release their subviews here.

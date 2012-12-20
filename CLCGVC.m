@@ -114,6 +114,11 @@
 }
 
 
+-(void)loadFromServerIfNeeded
+{
+}
+
+
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)to_orient
                                         duration:(NSTimeInterval)duration
 {

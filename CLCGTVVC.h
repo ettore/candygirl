@@ -88,12 +88,6 @@
  */
 -(void)loadBaseView;
 
-/*! 
- @discussion Subclasses should override this method and initiate here any
-    asynchronous server side call. The default implementation does nothing.
- */
--(void)loadFromServerIfNeeded;
-
 /*! Deselects all currently selected rows. */
 -(void)deselectAll:(BOOL)animated;
 
