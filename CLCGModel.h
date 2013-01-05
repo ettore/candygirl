@@ -1,12 +1,10 @@
 //
 //  CLCGModel.h
-//  Goodreads
-//
+//  Cubelogic
 //  Created by Ettore Pasquini on 10/31/12.
 //
-//
 
-@interface CLCGModel : NSObject
+@interface CLCGModel : NSObject <NSCopying>
 {
   // for search purposes: concatenation of searchable data
   NSString    *mSearchable;

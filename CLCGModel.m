@@ -1,9 +1,7 @@
 //
 //  CLCGModel.m
-//  Goodreads
-//
+//  Cubelogic
 //  Created by Ettore Pasquini on 10/31/12.
-//
 //
 
 #import "CLCGModel.h"
@@ -18,6 +16,14 @@
 {
   CLCG_REL(mSearchable);
   [super dealloc];
+}
+
+
+-(id)copyWithZone:(NSZone*)zone
+{
+  CLCGModel *copy = [[[self class] allocWithZone:zone] init];
+  [copy setSearchable:[self searchable]];
+  return copy;
 }
 
 
