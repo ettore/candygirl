@@ -59,6 +59,7 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
     ab = ABAddressBookCreateWithOptions(NULL,&error);
     if (error) {
       callback(nil, NO, (NSError*)error);
+      CFRelease(ab);
     } else {
       ABAddressBookRequestAccessWithCompletion(ab, [[^(bool granted, CFErrorRef err) {
         // the callback can occur in the background, but the address book must
