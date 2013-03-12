@@ -49,6 +49,10 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
 {
   ABAddressBookRef ab;
 
+  // get the current queue 'cause we can only access a ABAddressBookRef object
+  // from the one queue (therefore ensuring thread-safety)
+  dispatch_queue_t currq = dispatch_get_current_queue();
+
   // make sure to keep a valid object on the heap
   callback = [[callback copy] autorelease];
 
@@ -57,14 +61,15 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
     // iOS 6+
     CFErrorRef error = nil;
     ab = ABAddressBookCreateWithOptions(NULL,&error);
-    if (error) {
+    if (error || ab == nil) {
       callback(nil, NO, (NSError*)error);
-      CFRelease(ab);
+      if (ab)
+        CFRelease(ab);
     } else {
       ABAddressBookRequestAccessWithCompletion(ab, [[^(bool granted, CFErrorRef err) {
-        // the callback can occur in the background, but the address book must
-        // be accessed on the thread it was created on
-        dispatch_async(dispatch_get_main_queue(), [[^{
+        // the callback could occur in the background, but the address book
+        // must be accessed on the thread it was created on
+        dispatch_async(currq, [[^{
           if (err || !granted) {
             callback(nil, granted, (NSError*)err);
           } else {
