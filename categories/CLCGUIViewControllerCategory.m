@@ -21,4 +21,14 @@
 }
 
 
+-(BOOL)isVisible
+{
+  // The view's window property is non-nil if a view is currently visible
+  // and nil if it has not been added to a window (and therefore can't be
+  // visible).
+  // To avoid loading the view inadvertently ([self view] does that if view's
+  // not loaded) we also check for isViewLoaded.
+  return [self isViewLoaded] && [[self view] window];
+}
+
 @end

@@ -11,4 +11,9 @@
  */
 -(void)presentVC:(UIViewController*)vc;
 
+/*!
+ @return true if the view controller view is visible.
+ */
+-(BOOL)isVisible;
+
 @end
