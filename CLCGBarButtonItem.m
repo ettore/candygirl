@@ -117,38 +117,40 @@
 
 -(void)setState:(enum CLCGBarButtonItemState)state
 {
-  switch (state) {
-    case CLCGBarButtonItemStateReady:
-      if (mIsSystemItem) {
-        // remove customView so that UIBarButtonItem system graphics are rendered
-        [self setCustomView:nil];
-      } else {
-        [mToggler setState:CLCGTogglerFirstView];
-        if ([[self title] length] == 0) {
-          [self setCustomView:mToggler];
-        } else {
+  if (state != mState) {
+    switch (state) {
+      case CLCGBarButtonItemStateReady:
+        if (mIsSystemItem) {
+          // remove customView so that UIBarButtonItem system graphics are rendered
           [self setCustomView:nil];
+        } else {
+          [mToggler setState:CLCGTogglerFirstView];
+          if ([[self title] length] == 0) {
+            [self setCustomView:mToggler];
+          } else {
+            [self setCustomView:nil];
+          }
         }
-      }
-      break;
-    case CLCGBarButtonItemStateBusy:
-      // show the spinner
-      [mToggler setState:CLCGTogglerSecondView];
-      [self setCustomView:mToggler];
-      break;
-    case CLCGBarButtonItemStateHidden:
-      [mToggler setState:CLCGTogglerFirstView];
-      [[mToggler firstView] setHidden:YES];
-      if ([[self title] length] > 0) {
-        // for a textual button, this will "show" the empty button we created.
+        break;
+      case CLCGBarButtonItemStateBusy:
+        // show the spinner
+        [mToggler setState:CLCGTogglerSecondView];
         [self setCustomView:mToggler];
-      }
-      break;
-    default:
-      break;
-  }
+        break;
+      case CLCGBarButtonItemStateHidden:
+        [mToggler setState:CLCGTogglerFirstView];
+        [[mToggler firstView] setHidden:YES];
+        if ([[self title] length] > 0) {
+          // for a textual button, this will "show" the empty button we created.
+          [self setCustomView:mToggler];
+        }
+        break;
+      default:
+        break;
+    }
 
-  mState = state;
+    mState = state;
+  }
 }
 
 

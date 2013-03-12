@@ -107,23 +107,25 @@
 
 -(void)setState:(enum CLCGTogglerState)state
 {
-  if (CLCGTogglerFirstView == state) {
-    [mFirstView setHidden:NO];
-    [mSecondView setHidden:YES];
-    [mFirstView setAlpha:1.0];
-    [mSecondView setAlpha:0.0];
-  } else if (CLCGTogglerSecondView == state) {
-    [mFirstView setHidden:YES];
-    [mSecondView setHidden:NO];
-    [mFirstView setAlpha:0.0];
-    [mSecondView setAlpha:1.0];
-  } else {
-    CLCG_ASSERT(NO);
+  if (state != mState) {
+    if (CLCGTogglerFirstView == state) {
+      [mFirstView setHidden:NO];
+      [mSecondView setHidden:YES];
+      [mFirstView setAlpha:1.0];
+      [mSecondView setAlpha:0.0];
+    } else if (CLCGTogglerSecondView == state) {
+      [mFirstView setHidden:YES];
+      [mSecondView setHidden:NO];
+      [mFirstView setAlpha:0.0];
+      [mSecondView setAlpha:1.0];
+    } else {
+      CLCG_ASSERT(NO);
+    }
+    
+    mState = state;
+    
+    [self setNeedsDisplay];
   }
-  
-  mState = state;
-  
-  [self setNeedsDisplay];
 }
 
 
