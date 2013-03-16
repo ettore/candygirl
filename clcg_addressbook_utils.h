@@ -38,7 +38,12 @@ extern "C" {
 
 typedef void (^CLCGABCallback)(NSMutableArray *people, BOOL granted, NSError *err);
 
-void clcg_addressbook_load_contacts(CLCGABCallback callback);
+  /*!
+   Load contacts from the device's address book and returns them via a callback.
+   The callback itself is called on the same thread this function is being
+   called on. (To ensure ABAddressBook thread-safety.)
+   */
+  void clcg_addressbook_load_contacts(CLCGABCallback callback);
 
 #ifdef __cplusplus
 }
