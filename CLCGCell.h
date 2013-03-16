@@ -63,12 +63,12 @@
   id        mContext;
 }
 
-@property(nonatomic,retain) NSString  *imgUrl;
-@property(nonatomic,assign) BOOL      emphasized;
-@property(nonatomic,retain) id        context;//should this be assign?
+@property(nonatomic,copy)     NSString  *imgUrl;
+@property(nonatomic,assign)   BOOL      emphasized;
+@property(nonatomic,retain)   id        context;//should this be assign?
 @property(nonatomic,readonly) CGFloat padding;
-@property(nonatomic,retain) UILabel   *infoTextLabel;
-@property(nonatomic,retain) UIColor   *normalColor;
+@property(nonatomic,retain)   UILabel   *infoTextLabel;
+@property(nonatomic,retain)   UIColor   *normalColor;
 
 /*! 
  The designated initializer.
