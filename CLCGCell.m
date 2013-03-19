@@ -179,24 +179,19 @@ static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
 
 -(void)showImage:(UIImage*)img
 {
-  // once the img view has been layed out once, no need to re-lay it out again
-  if ([[self imageView] image] == nil)
-    [self setNeedsLayout]; //layout will happen in next update cycle
-
-  [[self imageView] setImage:img];
-
   CALayer *layer = [[self imageView] layer];
 
-  // smooth out the appearance of the image a bit but only if we are changing
-  // the image content. No need to animate if the image is the same.
-  if ([[self imageView] image] != img) {
+  if ([[self imageView] image] == nil) {
+    // once the img view has been layed out once, no need to re-lay it out again
+    [self setNeedsLayout]; //layout will happen in next update cycle
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    [anim setDuration:0.2]; //0.2 sec
+    [anim setDuration:0.3]; // seconds
     [anim setFromValue:[NSNumber numberWithFloat:0.0]];
     [anim setToValue:[NSNumber numberWithFloat:1.0]];
     [layer addAnimation:anim forKey:@"animateOpacity"];
   }
 
+  [[self imageView] setImage:img];
   [layer setOpacity:1.0]; //makes the animation ending value stick
 }
 
