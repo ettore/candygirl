@@ -79,15 +79,15 @@ void clcg_savepref_in_array(NSString *key, NSString *value)
     newarr = [NSMutableArray arrayWithArray:current];
   
   [newarr addObject:value];
-  [defs setValue:newarr forKey:key];
+  [defs setObject:newarr forKey:key];
   [defs synchronize];
 }
 
 
-void clcg_savepref(NSString *key, NSString *value)
+void clcg_savepref(NSString *key, id<NSCoding> value)
 {
   NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
-  [defs setValue:value forKey:key];
+  [defs setObject:value forKey:key];
   [defs synchronize];
 }
 

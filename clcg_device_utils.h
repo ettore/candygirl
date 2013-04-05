@@ -36,8 +36,15 @@ extern "C" {
   /** Adds `value' to the array pref identified by `key'. */
   void clcg_savepref_in_array(NSString *key, NSString *value);
 
-  /** Saves a string pref value to user defaults. */
-  void clcg_savepref(NSString *key, NSString *value);
+  /** 
+   Saves a pref value to user defaults.
+   @param key   The user defaults key.
+   @param value Value to save. The value parameter can be only property list
+                objects: NSData, NSString, NSNumber, NSDate, NSArray, or
+                NSDictionary. For NSArray and NSDictionary objects, their
+                contents must be property list objects.
+   */
+  void clcg_savepref(NSString *key, id<NSCoding> value);
   
   /** Saves a boolean pref value to user defaults. */
   void clcg_savepref_bool(NSString *key, BOOL value);
