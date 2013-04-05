@@ -21,6 +21,16 @@
 }
 
 
+-(void)dismissVC
+{
+  if (clcg_os_geq(@"5.0")) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } else {
+    [self dismissModalViewControllerAnimated:YES];
+  }
+}
+
+
 -(BOOL)isVisible
 {
   // The view's window property is non-nil if a view is currently visible
