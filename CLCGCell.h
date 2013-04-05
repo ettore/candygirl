@@ -116,6 +116,12 @@
 /*! Sets the image in the cell and shows it. */
 -(void)showImage:(UIImage*)img;
 
+/*! 
+ Sets the image in the cell and shows it with or without a short fade-in
+ animation. 
+ */
+-(void)showImage:(UIImage*)img animated:(BOOL)animated;
+
 /*! The X position on the right of the image, considering padding. */
 -(CGFloat)xRightOfImage;
 

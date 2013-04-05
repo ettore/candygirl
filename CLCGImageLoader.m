@@ -71,7 +71,7 @@
     if (use_cache) {
       UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:[url absoluteString]];
       if (img) {
-        [self returnImage:img status:200 block:block];
+        [self returnImage:img status:CLCGImageStatusCached block:block];
         return nil;
       }
     }
@@ -118,7 +118,7 @@
              block:(CLCGImageLoaderCallback)block
 {
 #if DEBUG
-  if (status != 200)
+  if (status != 200 && status >= 100)
     CLCG_P(@"Status code: %d", status);
 #endif
 

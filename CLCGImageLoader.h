@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+/*! 
+ @discussion These are additional codes used when HTTP status codes are not
+        suitable, for instance if the network request is skipped becaue the 
+        image is cached. Therefore, they should never be greater than 100.
+ */
+enum CLCGImageStatus {
+  CLCGImageStatusCached = 10,
+};
 
 typedef void (^CLCGImageLoaderCallback)(UIImage *img, int http_status);
 
