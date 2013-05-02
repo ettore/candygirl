@@ -37,6 +37,8 @@
 #define CLCG_MAX_CELL_H             2009.0f
 
 
+#import "CLCGCellCommonLayouter.h"
+
 /*!
  @class CLCGCell
  @abstract A reusable cell capable of rendering 3 blocks of text and an image.
@@ -50,25 +52,17 @@
   The layout of all components is performed accordingly, adding padding 
   between elements.
  */
-@interface CLCGCell : UITableViewCell
-{
-  UILabel   *mInfoTextLabel;
-  NSString  *mImgUrl;
-  CGFloat   mImgW;
-  CGFloat   mImgH;
-  CGFloat   mPadding;
-  UIColor   *mNormalColor;
-  UIColor   *mEmphasisColor;
-  BOOL      mEmphasized;
-  id        mContext;
-}
+@interface CLCGCell : UITableViewCell <CLCGCell, CLCGCellCommonLayouter>
 
 @property(nonatomic,copy)     NSString  *imgUrl;
-@property(nonatomic,assign)   BOOL      emphasized;
 @property(nonatomic,retain)   id        context;//should this be assign?
-@property(nonatomic,readonly) CGFloat padding;
 @property(nonatomic,retain)   UILabel   *infoTextLabel;
+
+// properties declared in CLCGCell protocol
+@property(nonatomic,assign)   BOOL      emphasized;
+@property(nonatomic,readonly) CGFloat   padding;
 @property(nonatomic,retain)   UIColor   *normalColor;
+@property(nonatomic,retain)   UIColor   *emphasisColor;
 
 /*! 
  The designated initializer.
@@ -85,12 +79,6 @@
                 reuseId:(NSString*)cid;
 
 /*! 
- @discussion Calculates the possible width available to the text label in any
-    CLCGCell, accounting for image width, accessory view, and padding.
- */
-+(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw imageW:(CGFloat)w padding:(CGFloat)p;
-
-/*! 
  Calculates the height of the cell in accordance with all given parameters. 
  */
 +(CGFloat)cellHeightForText:(NSString*)text
@@ -103,27 +91,6 @@
                      imageW:(CGFloat)imgw
                      imageH:(CGFloat)imgh
                     padding:(CGFloat)padding;
-
-/*! Changes the background color according to the current `emphasized' state. */
--(void)updateBackgroundColor;
-
-/*! 
- @abstract Hides the image. 
- @discussion You might want to use this to prevent flicker when scrolling fast.
-*/
--(void)hideImage;
-
-/*! Sets the image in the cell and shows it. */
--(void)showImage:(UIImage*)img;
-
-/*! 
- Sets the image in the cell and shows it with or without a short fade-in
- animation. 
- */
--(void)showImage:(UIImage*)img animated:(BOOL)animated;
-
-/*! The X position on the right of the image, considering padding. */
--(CGFloat)xRightOfImage;
 
 /*! 
  @abstract The max width accounted during layout calculations for the
