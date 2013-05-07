@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
-#import "UILabelCategory.h"
-#import "UIViewCategory.h"
+#import "CLCGUILabelCategory.h"
+#import "CLCGUIViewCategory.h"
 
 
 @implementation UILabel (Candygirl)

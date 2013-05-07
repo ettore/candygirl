@@ -31,7 +31,7 @@
 #import "clcg_macros.h"
 #import "clcg_debug.h"
 
-#import "UIImageViewCategory.h"
+#import "CLCGUIImageViewCategory.h"
 
 
 @implementation UIImageView (UIImageViewCategory)

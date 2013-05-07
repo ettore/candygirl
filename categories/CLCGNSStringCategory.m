@@ -29,7 +29,7 @@
  */
 
 
-#import "NSStringCategory.h"
+#import "CLCGNSStringCategory.h"
 #import "NSMutableCharacterSetCategory.h"
 
 

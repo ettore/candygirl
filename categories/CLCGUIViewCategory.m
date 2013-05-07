@@ -26,8 +26,7 @@
 //
 
 
-#import <UIKit/UIKit.h>
-#import "UIViewCategory.h"
+#import "CLCGUIViewCategory.h"
 
 
 @implementation UIView (Candygirl)

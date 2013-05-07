@@ -9,8 +9,8 @@
 #import "clcg_bundle_utils.h"
 #import "clcg_gfx.h"
 #import "clcg_viewport.h"
-#import "UIViewCategory.h"
-#import "UILabelCategory.h"
+#import "CLCGUIViewCategory.h"
+#import "CLCGUILabelCategory.h"
 #import "CLCGVC.h"
 
 

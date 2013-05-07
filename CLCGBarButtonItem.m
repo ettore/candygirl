@@ -6,7 +6,7 @@
 
 #import "clcg_device_utils.h"
 #import "CLCGBarButtonItem.h"
-#import "UIViewCategory.h"
+#import "CLCGUIViewCategory.h"
 #import "CLCGTogglerView.h"
 
 

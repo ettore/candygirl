@@ -8,7 +8,7 @@
 
 #import "clcg_bundle_utils.h"
 #import "clcg_macros.h"
-#import "UIViewCategory.h"
+#import "CLCGUIViewCategory.h"
 #import "CLCGMoreCell.h"
 
 @implementation CLCGMoreCell
