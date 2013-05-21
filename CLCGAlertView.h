@@ -27,13 +27,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CLCGAlertView : UIAlertView <UIAlertViewDelegate>
-{
-#if NS_BLOCKS_AVAILABLE
-  void (^mBlock)(NSInteger btn);
-#endif
-}
 
 #if NS_BLOCKS_AVAILABLE
+
+@property(nonatomic,copy) void (^block)(NSInteger btn);
+
 -(id)initWithTitle:(NSString *)t
            message:(NSString *)m
              block:(void (^)(NSInteger btn))block;

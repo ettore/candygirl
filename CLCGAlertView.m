@@ -33,8 +33,7 @@
 
 -(void)dealloc
 {
-  [mBlock release];
-  mBlock = nil;
+  [self setBlock:nil];
   [super dealloc];
 }
 
@@ -50,7 +49,7 @@
             otherButtonTitles:nil];
   
   if (self) {
-    mBlock = [block copy];
+    [self setBlock:block];
   }
   
   return self;
@@ -63,16 +62,19 @@
  cancelButtonTitle:(NSString *)cancel_btn_title
  otherButtonTitles:(NSString *)other_btn_title, ... NS_REQUIRES_NIL_TERMINATION
 {
-  va_list args;
-  va_start(args, other_btn_title);
   NSMutableArray *buttons = [[NSMutableArray alloc] init];
-  id arg = nil;
 
-  while ((arg = va_arg(args,id))) {
-    [buttons addObject:arg];
+  if (other_btn_title) {
+    va_list args;
+    va_start(args, other_btn_title);
+    id arg = nil;
+
+    while ((arg = va_arg(args,id))) {
+      [buttons addObject:arg];
+    }
+
+    va_end(args);
   }
-
-  va_end(args);
 
   self = [super initWithTitle:t
                       message:m
@@ -87,7 +89,7 @@
     for (NSString *title in buttons) {
       [self addButtonWithTitle:title];
     }
-    mBlock = [block copy];
+    [self setBlock:block];
   }
 
   // cleanup
@@ -99,8 +101,8 @@
 
 -(void)alertView:(UIAlertView*)av clickedButtonAtIndex:(NSInteger)btn
 {
-  if (mBlock)
-    mBlock(btn);
+  if (_block)
+    _block(btn);
 }
 
 #endif
