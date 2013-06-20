@@ -29,14 +29,14 @@
 
 BOOL clcg_os_geq(NSString* version)
 {
-  NSString *sys = [[UIDevice currentDevice] systemVersion];
-  if (sys == nil)
+  NSString *sys_vers = [[UIDevice currentDevice] systemVersion];
+  if (sys_vers == nil)
     return NO;
   
-  // another way to do it: e.g., 4.3.2 becomes something like 4.3000099
-  //return [sys floatValue] >= [version floatValue];
+  // another way to do it would be to convert to float, however (e.g.)
+  // 4.3.2 becomes something like 4.3000099
   
-  NSComparisonResult r = [sys compare:version options:NSNumericSearch];
+  NSComparisonResult r = [sys_vers compare:version options:NSNumericSearch];
   return (r != NSOrderedAscending);
 }
 
