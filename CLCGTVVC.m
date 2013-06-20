@@ -31,6 +31,7 @@
 
 #import "CLCGTVVC.h"
 #import "CLCGMoreCell.h"
+#import "clcg_device_utils.h"
 
 #define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
 
@@ -148,6 +149,19 @@
 {
   [super viewDidAppear:animated];
   [mTableView flashScrollIndicators];
+}
+
+
+- (void)viewWillLayoutSubviews
+{
+  if (clcg_os_geq(@"7")) {
+    // on iOS 7 the content view of the scroll-view expands below the
+    // navbar and status bar, so we need to tell it where the content
+    // actually should start from
+    [[self tableView] setContentInset:
+     UIEdgeInsetsMake(CGRectGetMaxY([[[self navigationController] navigationBar] frame]),
+                      0, [self tabBarH], 0)];
+  }
 }
 
 
