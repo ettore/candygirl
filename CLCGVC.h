@@ -87,6 +87,11 @@ enum CLCGLoadingState {
  */
 -(void)loadFromServerIfNeeded;
 
+
+/*! Forces a reload from the server. */
+-(void)reload;
+
+
 /**
  * Releases all the retained subviews of this view controller. This is called
  * by dealloc and viewDidUnload.

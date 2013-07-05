@@ -114,16 +114,27 @@
 }
 
 
--(void)loadFromServerIfNeeded
-{
-}
-
-
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)to_orient
                                         duration:(NSTimeInterval)duration
 {
   [super willAnimateRotationToInterfaceOrientation:to_orient duration:duration];
   [self centerSpinnerAndEmptyPlaceholder];
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Load from server
+
+
+-(void)loadFromServerIfNeeded
+{
+}
+
+
+-(void)reload
+{
+  [self setLoadState:CLCG_OUTDATED];
+  [self loadFromServerIfNeeded];
 }
 
 
