@@ -15,6 +15,13 @@
 
 
 @implementation CLCGImageView
+{
+  ASIHTTPRequest  *mReq;
+
+  // target and action for "on tap" event
+  id              mTapTarget;
+  SEL             mTapAction;
+}
 
 
 -(void)dealloc
@@ -69,7 +76,7 @@
   
   mReq = [CLCGImageLoader loadImageForURL:normalurl
                                 retinaURL:retinaurl
-                                 useCache:NO
+                                 useCache:YES
                                     block:^(UIImage *img, int http_status) {
                                       if (img) {
                                         [self setImage:img];

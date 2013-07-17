@@ -7,21 +7,12 @@
 
 #import "CLCGImageLoader.h"
 
-@class ASIHTTPRequest;
-
 
 @interface CLCGImageView : UIImageView
-{
-  ASIHTTPRequest  *mReq;
-  
-  // target and action for "on tap" event
-  id              mTapTarget;
-  SEL             mTapAction;
-}
 
 -(void)loadImageForURL:(NSString*)url retinaURL:(NSString*)retinaurl;
 
-/**
+/*!
  * Adds an action to on touch-up event. The action signature is the standard:
  *   -(void)theAction:(id)sender;
  */
