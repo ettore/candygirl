@@ -7,8 +7,11 @@
 
 #import "CLCGImageLoader.h"
 
+typedef void (^CLCGImageViewOnLoadCallback)(UIImage *img, int http_status);
 
 @interface CLCGImageView : UIImageView
+
+@property (nonatomic, copy) CLCGImageViewOnLoadCallback callback;
 
 -(void)loadImageForURL:(NSString*)url retinaURL:(NSString*)retinaurl;
 

@@ -91,6 +91,11 @@
                                         CLCG_P(@"Error loading image. HTTP status=%d",
                                                http_status);
                                       }
+                                      
+                                      if (_callback) {
+                                        _callback(img, http_status);
+                                      }
+                                      
                                       CLCG_REL(mReq);
                                     }];
   [mReq retain];
