@@ -26,10 +26,8 @@
 #ifndef CLCG_VIEWPORT_H_
 #define CLCG_VIEWPORT_H_
 
-#import <Foundation/Foundation.h>
-
-#define DEFAULT_PADDING           9.0f
-#define DEFAULT_PADDING_COMFORT   8.0f
+#define CLCG_PADDING           10.0f
+#define CLCG_PADDING_COMFORT    8.0f
 
 #ifdef __cplusplus
 extern "C" {

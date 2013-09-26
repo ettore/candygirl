@@ -36,7 +36,7 @@
     [[self textLabel] setNumberOfLines:1];//set to 0 and calc height dynamically
     [[self textLabel] setTextColor:[UIColor blackColor]];
     [[self textLabel] setBackgroundColor:[UIColor clearColor]];
-    [[self textLabel] setTextAlignment:UITextAlignmentCenter];
+    [[self textLabel] setTextAlignment:NSTextAlignmentCenter];
     [[self textLabel] setText:text];
     [[self textLabel] setFont:[UIFont boldSystemFontOfSize:18]];
 

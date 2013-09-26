@@ -165,7 +165,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   [[self imageView] setFrame:CGRectMake(_padding, _padding, _imgW, _imgH)];
 
   // these should not change
-  const CGFloat cellh = [self h];
+  const CGFloat max_cellh = CLCG_MAX_CELL_H;
   const CGFloat imgw = [[self imageView] w];
   const CGFloat x = [[self commonLayouter] xRightOfImage];
   const CGFloat w = [CLCGCellCommonLayouter textLabelWidthWithCellW:[self w]
@@ -173,26 +173,29 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                                                             padding:_padding];
 
   // layout text label
-  sz = CGSizeMake(w, cellh);
+  sz = CGSizeMake(w, max_cellh);
   sz = [[[self textLabel] text] sizeWithFont:[[self textLabel] font]
-                           constrainedToSize:sz
-                               lineBreakMode:UILineBreakModeWordWrap];
+                           constrainedToSize:sz 
+                               lineBreakMode:NSLineBreakByWordWrapping];
+  sz.height = ceilf(sz.height);
   r = CGRectMake(x, _padding, w, sz.height);
   [[self textLabel] setFrame:r];
   
   // layout detail label
-  sz = CGSizeMake(w, cellh);
+  sz = CGSizeMake(w, max_cellh);
   sz = [[[self detailTextLabel] text] sizeWithFont:[[self detailTextLabel] font]
                                  constrainedToSize:sz
-                                     lineBreakMode:UILineBreakModeWordWrap];
+                                     lineBreakMode:NSLineBreakByWordWrapping];
+  sz.height = ceilf(sz.height);
   r = CGRectMake(x, [[self textLabel] low] + (int)(_padding/2), sz.width, sz.height);
   [[self detailTextLabel] setFrame:r];
 
   // info text label
-  sz = CGSizeMake(w, cellh);
+  sz = CGSizeMake(w, max_cellh);
   sz = [[_infoTextLabel text] sizeWithFont:[_infoTextLabel font]
                          constrainedToSize:sz
-                             lineBreakMode:UILineBreakModeWordWrap];
+                             lineBreakMode:NSLineBreakByWordWrapping];
+  sz.height = ceilf(sz.height);
   r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_padding/2), w, sz.height);
   [[self infoTextLabel] setFrame:r];
 }
@@ -225,9 +228,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   CGFloat label_w, h;
   const CGFloat cell_maxh = CLCG_MAX_CELL_H;
   
-  // adding _padding for cell margins (L & R) and right margin of img
-  // Note: using `self` here seems necessary to properly invoke polymorphism on
-  // maxAccessoryWidth, called by textLabelWidthWithCellW:imageW:padding:.
+  // adding padding for cell margins (L & R) and right margin of img
   label_w = [CLCGCellCommonLayouter textLabelWidthWithCellW:cell_maxw
                                                      imageW:imgw
                                                     padding:padding];
@@ -236,27 +237,28 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   sz = CGSizeMake(label_w, cell_maxh);
   sz = [text sizeWithFont:text_font
               constrainedToSize:sz
-                  lineBreakMode:UILineBreakModeWordWrap];
+                  lineBreakMode:NSLineBreakByWordWrapping];
   h = sz.height;
   
-  // add detail text size.
+  // add detail text size
   if ([detailtext length] > 0) {
     h += padding + [detailtext sizeWithFont:detail_font
                           constrainedToSize:CGSizeMake(label_w, cell_maxh)
-                              lineBreakMode:UILineBreakModeWordWrap].height;
+                              lineBreakMode:NSLineBreakByWordWrapping].height;
   }
 
   // now we have to add space for info text + 1 padding unit
   if ([infotext length] > 0) {
     h += padding + [infotext sizeWithFont:info_font
                         constrainedToSize:CGSizeMake(label_w, cell_maxh)
-                            lineBreakMode:UILineBreakModeWordWrap].height;
+                            lineBreakMode:NSLineBreakByWordWrapping].height;
   }
 
   // add padding above and below cell content
   h = MAX(h, imgh) + padding*2;
   
-  return h;
+  // round up to avoid occasional rendering glitches in tableview separators
+  return ceilf(h);
 }
 
 

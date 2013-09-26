@@ -32,6 +32,7 @@
 #import "CLCGTVVC.h"
 #import "CLCGMoreCell.h"
 #import "clcg_device_utils.h"
+#import "clcg_viewport.h"
 
 #define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
 
@@ -125,10 +126,19 @@
 -(void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  CGFloat left_inset;
 
   if ([mTableView style] == UITableViewStyleGrouped) {
     // necessary to avoid default striped background for grouped tableviews
     [mTableView setBackgroundView:nil];
+    left_inset = CLCG_PADDING;
+  } else {
+    left_inset = 0.0f;
+  }
+  
+  if (clcg_os_geq(@"7")) {
+    [mTableView setSeparatorInset:UIEdgeInsetsMake(0, left_inset, 0, 0)];
   }
 }
 
@@ -154,13 +164,15 @@
 
 - (void)viewWillLayoutSubviews
 {
+  [super viewWillLayoutSubviews];
+  
   if (clcg_os_geq(@"7")) {
     // on iOS 7 the content view of the scroll-view expands below the
     // navbar and status bar, so we need to tell it where the content
     // actually should start from
-    [[self tableView] setContentInset:
-     UIEdgeInsetsMake(CGRectGetMaxY([[[self navigationController] navigationBar] frame]),
-                      0, [self tabBarH], 0)];
+    CGRect frame = [[[self navigationController] navigationBar] frame];
+    [mTableView setContentInset:
+     UIEdgeInsetsMake(CGRectGetMaxY(frame), 0, [self tabBarH], 0)];
   }
 }
 

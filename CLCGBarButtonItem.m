@@ -165,10 +165,9 @@
 
 
 /*
- This method MUST NOT be invoked with `img` and `title` both non-nil.
- The non-nil value will be used. 
- If `img` and `title` are both nil, the systemItem will be considered,
- otherwise it will be ignored.
+ This method shouldn't be invoked with `img` and `title` both non-nil. In that 
+ case the `title` will be ignored. Otherwise, the non-nil value will be used.
+ If `img` and `title` are both nil, a Refresh systemItem will be used instead.
  */
 - (id)initWithImage:(UIImage*)img
             orTitle:(NSString*)title
@@ -179,7 +178,7 @@
 {
   return [self initWithImage:img
                      orTitle:title
-                orSystemItem:UIBarButtonSystemItemDone
+                orSystemItem:UIBarButtonSystemItemRefresh
                        style:style
                       target:target
                       action:action
@@ -202,6 +201,9 @@
     self = [super initWithBarButtonSystemItem:item target:target action:action];
     mIsSystemItem = YES;
   } else {
+    if (img) {
+      title = nil;
+    }
     self = [super initWithTitle:title style:style target:target action:action];
     mIsSystemItem = NO;
   }

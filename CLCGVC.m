@@ -152,8 +152,8 @@
   [label release];
   [mEmptyLabel setTextColor:[UIColor darkGrayColor]];
   [mEmptyLabel setFont:[UIFont systemFontOfSize:14]];
-  [mEmptyLabel setTextAlignment:UITextAlignmentCenter];
-  [mEmptyLabel setLineBreakMode:UILineBreakModeWordWrap];
+  [mEmptyLabel setTextAlignment:NSTextAlignmentCenter];
+  [mEmptyLabel setLineBreakMode:NSLineBreakByWordWrapping];
   [mEmptyLabel setNumberOfLines:0];//use as many lines as needed
 
   cont = [[UIView alloc] initWithFrame:[[self view] frame]];
@@ -175,7 +175,7 @@
         [self createEmptyView];
 
       [mEmptyLabel setText:msg];
-      [mEmptyLabel sizeToFitWidth:([mainview w] - DEFAULT_PADDING*2)];
+      [mEmptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
       [mainview addSubview:mEmptyContainer];
       [mEmptyContainer setNeedsLayout];
     }

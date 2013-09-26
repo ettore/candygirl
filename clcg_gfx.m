@@ -54,8 +54,8 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title)
   UILabel *l = [[UILabel alloc] initWithFrame:titlerect];
   [l setFont:[UIFont fontWithName:@"TrebuchetMS" size:14]];
   [l setNumberOfLines:0];
-  [l setTextAlignment:UITextAlignmentCenter];
-  [l setLineBreakMode:UILineBreakModeWordWrap];
+  [l setTextAlignment:NSTextAlignmentCenter];
+  [l setLineBreakMode:NSLineBreakByWordWrapping];
   [l setText:title];
   [l setBackgroundColor:[UIColor clearColor]];
   [v addSubview:l];
