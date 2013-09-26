@@ -26,13 +26,11 @@
 //  Created by Ettore Pasquini on 9/22/11.
 //
 
-#import <UIKit/UIKit.h>
-
 #import "clcg_macros.h"
 #import "clcg_debug.h"
 
 #import "CLCGUIImageViewCategory.h"
-
+#import "CLCGUIViewCategory.h"
 
 @implementation UIImageView (UIImageViewCategory)
 
@@ -50,7 +48,7 @@
   vratio   = viewh / vieww;
   if (vratio > imgratio) {
     newvh = viewh * imgratio / vratio;
-    [self setHeight:newvh];
+    [self setH:newvh];
   }
 }
 

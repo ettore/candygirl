@@ -149,6 +149,38 @@
 }
 
 
+- (CGPoint)origin {
+  return [self frame].origin;
+}
+
+
+- (void)setOrigin:(CGPoint)origin {
+  CGRect frame = [self frame];
+  frame.origin = origin;
+  [self setFrame:frame];
+}
+
+
+- (CGFloat)centerX {
+  return [self center].x;
+}
+
+
+- (void)setCenterX:(CGFloat)centerX {
+  [self setCenter:CGPointMake(centerX, [self center].y)];
+}
+
+
+- (CGFloat)centerY {
+  return [self center].y;
+}
+
+
+- (void)setCenterY:(CGFloat)centerY {
+  [self setCenter:CGPointMake([self center].x, centerY)];
+}
+
+
 - (UIView *)findFirstResponder
 {
   if (self.isFirstResponder) {        

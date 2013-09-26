@@ -4,7 +4,7 @@
 //
 //  Created by Ettore Pasquini on 5/1/13.
 //
-
+#import <QuartzCore/QuartzCore.h>
 #import "CLCGCellCommonLayouter.h"
 #import "CLCGCell.h"
 

@@ -60,4 +60,13 @@
 /*! Set view size leaving origin unchanged. */
 -(void)setSz:(CGSize)size;
 
+- (CGPoint)origin;
+- (void)setOrigin:(CGPoint)origin;
+
+- (CGFloat)centerX;
+- (void)setCenterX:(CGFloat)centerX;
+
+- (CGFloat)centerY;
+- (void)setCenterY:(CGFloat)centerY;
+
 @end
