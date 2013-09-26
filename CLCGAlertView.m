@@ -34,9 +34,10 @@
 -(void)dealloc
 {
   [self setBlock:nil];
+#if !__has_feature(objc_arc)
   [super dealloc];
+#endif
 }
-
 
 -(id)initWithTitle:(NSString *)t
            message:(NSString *)m
@@ -92,9 +93,11 @@
     [self setBlock:block];
   }
 
+#if !__has_feature(objc_arc)
   // cleanup
   [buttons release];
-
+#endif
+  
   return self;
 }
 
