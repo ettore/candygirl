@@ -32,6 +32,12 @@
 @implementation UIView (Candygirl)
 
 
+-(void)centerVertically
+{
+  [self centerVerticallyWithOffset:0];
+}
+
+
 -(void)centerVerticallyWithOffset:(CGFloat)offset
 {
   CGSize sz;
@@ -45,11 +51,17 @@
 
 -(void)centerHorizontally
 {
+  [self centerHorizontallyWithOffset:0];
+}
+
+
+-(void)centerHorizontallyWithOffset:(CGFloat)offset
+{
   CGSize sz;
   CGFloat x;
 
   sz = [[self superview] frame].size;
-  x = (sz.width - [self w])/2;
+  x = (sz.width - [self w])/2 + offset;
   [self setX:x];
 }
 

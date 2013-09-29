@@ -31,6 +31,14 @@
 /** Moves the X position of the view to the center of its superview. */
 -(void)centerHorizontally;
 
+/**
+ * Moves the X position of the view to the center of its superview, plus an
+ * additional offset. */
+-(void)centerHorizontallyWithOffset:(CGFloat)offset;
+
+/** Moves the Y position of the view to the center of its superview. */
+-(void)centerVertically;
+
 /** 
  * Moves the Y position of the view to the center of its superview, plus an
  * additional offset. */
