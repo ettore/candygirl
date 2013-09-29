@@ -62,6 +62,10 @@
 // this is called by the super class dealloc and viewDidUnload
 -(void)releaseRetainedSubviews
 {
+  // avoid "message sent to deallocated instance" errors on iOS 7
+  [mTableView setDelegate:nil];
+  [mTableView setDataSource:nil];
+
   CLCG_REL(mTableView);
   [super releaseRetainedSubviews];
 }
