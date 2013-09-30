@@ -5,6 +5,11 @@
 
 @interface UIViewController (Candygirl)
 
+/*!
+ Returns the top offset for the view in case you don't want content to appear 
+ behind a translucent or transparent UIKit bar. This method accounts for both
+ status and navigation bar.
+ */
 - (CGFloat)viewTopOffset;
 
 /*!
