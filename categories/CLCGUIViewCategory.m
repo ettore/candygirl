@@ -66,6 +66,13 @@
 }
 
 
+-(void)centerHorizontallyInRect:(CGRect)rect
+{
+  CGFloat x = (rect.size.width - [self w])/2;
+  [self setX:(rect.origin.x + x)];
+}
+
+
 -(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font
 {
   CGSize sz;

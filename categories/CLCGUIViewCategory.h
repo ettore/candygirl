@@ -28,21 +28,28 @@
 
 @interface UIView (Candygirl)
 
-/** Moves the X position of the view to the center of its superview. */
+/*! Moves the X position of the view to the center of its superview. */
 -(void)centerHorizontally;
 
-/**
+/*!
  * Moves the X position of the view to the center of its superview, plus an
- * additional offset. */
+ * additional offset. 
+ */
 -(void)centerHorizontallyWithOffset:(CGFloat)offset;
 
-/** Moves the Y position of the view to the center of its superview. */
+/*! Moves the Y position of the view to the center of its superview. */
 -(void)centerVertically;
 
-/** 
+/*!
  * Moves the Y position of the view to the center of its superview, plus an
- * additional offset. */
+ * additional offset. 
+ */
 -(void)centerVerticallyWithOffset:(CGFloat)offset;
+
+/*!
+ * Centers this view in the given rect.
+ */
+-(void)centerHorizontallyInRect:(CGRect)rect;
 
 -(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font;
 -(UIView*)findFirstResponder;
