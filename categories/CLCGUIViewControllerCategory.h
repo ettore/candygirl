@@ -5,6 +5,8 @@
 
 @interface UIViewController (Candygirl)
 
+- (CGFloat)viewTopOffset;
+
 /*!
  Let the receiver view controller present another view controller modally 
  with animation and no completion handler.

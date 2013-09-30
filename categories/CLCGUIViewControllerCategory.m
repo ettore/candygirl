@@ -11,23 +11,42 @@
 @implementation UIViewController (Candygirl)
 
 
+- (CGFloat)viewTopOffset
+{
+  CGFloat top = 0.0f;
+  if ([self respondsToSelector:@selector(topLayoutGuide)]) {
+    top = [[self topLayoutGuide] length];
+  }
+  return top;
+}
+
+
 -(void)presentVC:(UIViewController*)vc
 {
+  // check if project deployment target is iOS 4.x
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
   if (clcg_os_geq(@"5.0")) {
     [self presentViewController:vc animated:YES completion:nil];
   } else {
     [self presentModalViewController:vc animated:YES];
   }
+#else
+  [self presentViewController:vc animated:YES completion:nil];
+#endif
 }
 
 
 -(void)dismissVC
 {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
   if (clcg_os_geq(@"5.0")) {
     [self dismissViewControllerAnimated:YES completion:nil];
   } else {
     [self dismissModalViewControllerAnimated:YES];
   }
+#else
+  [self dismissViewControllerAnimated:YES completion:nil];
+#endif
 }
 
 
