@@ -13,6 +13,13 @@
 - (CGFloat)viewTopOffset;
 
 /*!
+ Returns the bottom offset for the view in case you don't want content to appear
+ behind a translucent or transparent UIKit bar. This method accounts for 
+ tab-bars and toolbars.
+ */
+- (CGFloat)viewBottomOffset;
+
+/*!
  Let the receiver view controller present another view controller modally 
  with animation and no completion handler.
  Handles presentModalViewController:animated: deprecation.

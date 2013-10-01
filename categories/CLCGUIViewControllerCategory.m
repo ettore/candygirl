@@ -21,6 +21,16 @@
 }
 
 
+- (CGFloat)viewBottomOffset
+{
+  CGFloat bottom = 0.0f;
+  if ([self respondsToSelector:@selector(bottomLayoutGuide)]) {
+    bottom = [[self bottomLayoutGuide] length];
+  }
+  return bottom;
+}
+
+
 -(void)presentVC:(UIViewController*)vc
 {
   // check if project deployment target is iOS 4.x
