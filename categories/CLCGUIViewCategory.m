@@ -154,13 +154,41 @@
 }
 
 
-- (CGSize)sz
+-(void)setXForR:(CGFloat)r
+{
+  [self setX:(r - [self h])];
+}
+
+
+-(void)setYForLow:(CGFloat)low
+{
+  [self setY:(low - [self h])];
+}
+
+
+-(void)setWForR:(CGFloat)r
+{
+  if ([self x] < r) {
+    [self setW:(r - [self y])];
+  }
+}
+
+
+-(void)setHForLow:(CGFloat)low
+{
+  if ([self y] < low) {
+    [self setH:(low - [self y])];
+  }
+}
+
+
+-(CGSize)sz
 {
   return [self frame].size;
 }
 
 
-- (void)setSz:(CGSize)size
+-(void)setSz:(CGSize)size
 {
   CGRect frame = [self frame];
   frame.size = size;
@@ -168,39 +196,44 @@
 }
 
 
-- (CGPoint)origin {
+-(CGPoint)origin
+{
   return [self frame].origin;
 }
 
 
-- (void)setOrigin:(CGPoint)origin {
+-(void)setOrigin:(CGPoint)origin {
   CGRect frame = [self frame];
   frame.origin = origin;
   [self setFrame:frame];
 }
 
 
-- (CGFloat)centerX {
+-(CGFloat)centerX
+{
   return [self center].x;
 }
 
 
-- (void)setCenterX:(CGFloat)centerX {
+-(void)setCenterX:(CGFloat)centerX
+{
   [self setCenter:CGPointMake(centerX, [self center].y)];
 }
 
 
-- (CGFloat)centerY {
+-(CGFloat)centerY
+{
   return [self center].y;
 }
 
 
-- (void)setCenterY:(CGFloat)centerY {
+-(void)setCenterY:(CGFloat)centerY
+{
   [self setCenter:CGPointMake([self center].x, centerY)];
 }
 
 
-- (UIView *)findFirstResponder
+-(UIView*)findFirstResponder
 {
   if (self.isFirstResponder) {        
     return self;     
