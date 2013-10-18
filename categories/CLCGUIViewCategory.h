@@ -69,6 +69,30 @@
 /*! The abscissa position at the right of this view, i.e. X + Width. */
 -(CGFloat)r;
 
+/*!
+ Changes the X position of the view in order to set the given
+ "right" (x + width) value.
+ */
+-(void)setXForR:(CGFloat)r;
+
+/*!
+ Changes the Y position of the view in order to set the given 
+ "low" (y + height) value.
+ */
+-(void)setYForLow:(CGFloat)low;
+
+/*!
+ Changes the width of the view in order to set the given
+ "right" (x + width) value.
+ */
+-(void)setWForR:(CGFloat)r;
+
+/*!
+ Changes the height of the view in order to set the given 
+ "low" (y + height) value.
+ */
+-(void)setHForLow:(CGFloat)low;
+
 /*! @return The view size. */
 -(CGSize)sz;
 
