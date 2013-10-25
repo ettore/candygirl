@@ -108,4 +108,20 @@
 - (CGFloat)centerY;
 - (void)setCenterY:(CGFloat)centerY;
 
+/*! 
+ Creates and adds a spinner to the center of the view. A pre-existing spinner
+ can be passed in and in that case it will be used, otherwise a new one will be
+ created. The spinner will then be added as a subview, centered horizontally 
+ and vertically.
+ 
+ @param spinner The spinner to be used; if nil, a new spinner will be created.
+ */
+-(UIActivityIndicatorView*)showSpinner:(UIActivityIndicatorView*)spinner;
+
+/*! 
+ Removes the given spinner from the subviews of this view.
+ @param spinner Spinner to be removed. No-op if spinner is nil.
+ */
+-(void)hideSpinner:(UIActivityIndicatorView*)spinner;
+
 @end

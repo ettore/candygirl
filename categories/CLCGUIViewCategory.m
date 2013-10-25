@@ -27,7 +27,7 @@
 
 
 #import "CLCGUIViewCategory.h"
-
+#import "clcg_gfx.h"
 
 @implementation UIView (Candygirl)
 
@@ -230,6 +230,39 @@
 -(void)setCenterY:(CGFloat)centerY
 {
   [self setCenter:CGPointMake([self center].x, centerY)];
+}
+
+
+-(UIActivityIndicatorView*)showSpinner:(UIActivityIndicatorView*)spinner
+{
+  // if spinner is already a subview, no need to add it (or create it)
+  if (![[self subviews] containsObject:spinner]) {
+    if (nil == spinner) {
+      spinner = [[UIActivityIndicatorView alloc]
+                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+      [spinner autorelease];
+    }
+
+    // the spinner is not added to the view yet, so add it
+    [self addSubview:spinner];
+  }
+
+  [spinner centerHorizontally];
+  [spinner centerVertically];
+  [self setNeedsLayout];
+
+  // go! and make sure to show it
+  [spinner startAnimating];
+  [self bringSubviewToFront:spinner];
+
+  return spinner;
+}
+
+
+-(void)hideSpinner:(UIActivityIndicatorView*)spinner
+{
+  [spinner stopAnimating];
+  clcg_safe_remove_from_superview(spinner);
 }
 
 
