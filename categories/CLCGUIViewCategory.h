@@ -124,4 +124,12 @@
  */
 -(void)hideSpinner:(UIActivityIndicatorView*)spinner;
 
+/*!
+ Adds a light gray border around the view. 
+ 
+ @param insets Use insets to offset the border by a certain number of pixels
+               in the 4 directions.
+*/
+-(void)addBorderWithInsets:(UIEdgeInsets)insets;
+
 @end
