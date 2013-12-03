@@ -26,27 +26,13 @@
 //
 
 
+#import "tgmath.h"
+
 #import "CLCGUIViewCategory.h"
 #import "clcg_gfx.h"
 
+
 @implementation UIView (Candygirl)
-
-
--(void)centerVertically
-{
-  [self centerVerticallyWithOffset:0];
-}
-
-
--(void)centerVerticallyWithOffset:(CGFloat)offset
-{
-  CGSize sz;
-  CGFloat y;
-  
-  sz = [[self superview] frame].size;
-  y = (sz.height - [self h])/2 + offset;
-  [self setY:y];
-}
 
 
 -(void)centerHorizontally
@@ -62,14 +48,38 @@
 
   sz = [[self superview] frame].size;
   x = (sz.width - [self w])/2 + offset;
-  [self setX:x];
+  [self setX:round(x)];
 }
 
 
 -(void)centerHorizontallyInRect:(CGRect)rect
 {
   CGFloat x = (rect.size.width - [self w])/2;
-  [self setX:(rect.origin.x + x)];
+  [self setX:round(rect.origin.x + x)];
+}
+
+
+-(void)centerVertically
+{
+  [self centerVerticallyWithOffset:0];
+}
+
+
+-(void)centerVerticallyWithOffset:(CGFloat)offset
+{
+  CGSize sz;
+  CGFloat y;
+
+  sz = [[self superview] frame].size;
+  y = (sz.height - [self h])/2 + offset;
+  [self setY:round(y)];
+}
+
+
+-(void)centerVerticallyInRect:(CGRect)rect
+{
+  CGFloat y = (rect.size.height - [self h])/2;
+  [self setY:round(rect.origin.y + y)];
 }
 
 

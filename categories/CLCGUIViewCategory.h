@@ -47,9 +47,14 @@
 -(void)centerVerticallyWithOffset:(CGFloat)offset;
 
 /*!
- * Centers this view in the given rect.
+ * Centers this view horizontally in the given rect.
  */
 -(void)centerHorizontallyInRect:(CGRect)rect;
+
+/*!
+ * Centers this view vertically in the given rect.
+ */
+-(void)centerVerticallyInRect:(CGRect)rect;
 
 -(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font;
 -(UIView*)findFirstResponder;
