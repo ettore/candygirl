@@ -41,19 +41,26 @@ BOOL clcg_os_geq(NSString* version)
 }
 
 
-BOOL clcg_is_iphone5(void)
+BOOL clcg_is_ipad(void)
 {
-  CGSize sz = [[UIScreen mainScreen] bounds].size;
-  return (!clcg_is_ipad() && sz.height > 480.0f);
+  if (clcg_os_geq(@"3.2")) {
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+  } else {
+    return NO;
+  }
 }
 
 
-BOOL clcg_is_ipad(void)
+BOOL clcg_is_iphone(void)
 {
-  if (clcg_os_geq(@"3.2"))
-    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
-  else
-    return NO;
+  return clcg_is_ipad() == NO;
+}
+
+
+BOOL clcg_is_iphone5(void)
+{
+  CGSize sz = [[UIScreen mainScreen] bounds].size;
+  return (clcg_is_iphone() && sz.height > 480.0f);
 }
 
 

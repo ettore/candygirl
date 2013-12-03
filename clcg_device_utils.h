@@ -63,9 +63,12 @@ extern "C" {
 
   /** @return YES if the device has a Retina display. */
   BOOL clcg_has_retina(void);
-  
+
   /** @return YES if the device is an iPad. */
   BOOL clcg_is_ipad(void);
+
+  /** @return YES if the device is iPhone or iPod type device. */
+  BOOL clcg_is_iphone(void);
 
   /** @return YES if the device is an iPhone5 or other tall non-tablet device. */
   BOOL clcg_is_iphone5(void);
