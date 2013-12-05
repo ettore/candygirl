@@ -189,24 +189,6 @@
 
 
 //------------------------------------------------------------------------------
-#pragma mark - Utils
-
-
--(CGFloat)navBarH
-{
-  UINavigationBar *nb = [[self navigationController] navigationBar];
-  return (nb ? [nb h] : 0.0f);
-}
-
-
--(CGFloat)tabBarH
-{
-  UITabBar *tb = [[self tabBarController] tabBar];
-  return (tb ? [tb h] : 0.0f);
-}
-
-
-//------------------------------------------------------------------------------
 #pragma mark - Memory Mgmt
 
 

@@ -33,6 +33,8 @@
 #import "CLCGMoreCell.h"
 #import "clcg_device_utils.h"
 #import "clcg_viewport.h"
+#import "CLCGUIViewControllerCategory.h"
+
 
 #define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
 

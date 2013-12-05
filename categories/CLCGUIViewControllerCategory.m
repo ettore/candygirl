@@ -5,6 +5,7 @@
 //
 
 #import "clcg_device_utils.h"
+#import "CLCGUIViewCategory.h"
 #import "CLCGUIViewControllerCategory.h"
 
 
@@ -28,6 +29,20 @@
     bottom = [[self bottomLayoutGuide] length];
   }
   return bottom;
+}
+
+
+-(CGFloat)navBarH
+{
+  UINavigationBar *nb = [[self navigationController] navigationBar];
+  return (nb ? [nb h] : 0.0f);
+}
+
+
+-(CGFloat)tabBarH
+{
+  UITabBar *tb = [[self tabBarController] tabBar];
+  return (tb ? [tb h] : 0.0f);
 }
 
 

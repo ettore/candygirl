@@ -19,6 +19,23 @@
  */
 - (CGFloat)viewBottomOffset;
 
+
+/**
+ * Helper method that returns the height of the nav bar of the navigation
+ * controller hosting this view controller. If no navigation controller is
+ * present, it will return 0.
+ */
+-(CGFloat)navBarH;
+
+
+/**
+ * Helper method that returns the height of the tab bar that includes the view
+ * of this view controller as a subview. If no tab bar is present,
+ * it will return 0.
+ */
+-(CGFloat)tabBarH;
+
+
 /*!
  Let the receiver view controller present another view controller modally 
  with animation and no completion handler.
