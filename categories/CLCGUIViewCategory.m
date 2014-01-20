@@ -179,7 +179,7 @@
 -(void)setWForR:(CGFloat)r
 {
   if ([self x] < r) {
-    [self setW:(r - [self y])];
+    [self setW:(r - [self x])];
   }
 }
 
