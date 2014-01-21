@@ -168,21 +168,6 @@
 }
 
 
-- (void)viewWillLayoutSubviews
-{
-  [super viewWillLayoutSubviews];
-  
-  if (clcg_os_geq(@"7")) {
-    // on iOS 7 the content view of the scroll-view expands below the
-    // navbar and status bar, so we need to tell it where the content
-    // actually should start from
-    CGRect frame = [[[self navigationController] navigationBar] frame];
-    [mTableView setContentInset:
-     UIEdgeInsetsMake(CGRectGetMaxY(frame), 0, [self tabBarH], 0)];
-  }
-}
-
-
 //-----------------------------------------------------------------------------
 #pragma mark - UITableView behavior
 
