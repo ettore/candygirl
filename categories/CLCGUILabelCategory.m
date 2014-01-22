@@ -6,6 +6,8 @@
 //  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
+#import "tgmath.h"
+
 #import "CLCGUILabelCategory.h"
 #import "CLCGUIViewCategory.h"
 
@@ -20,14 +22,14 @@
   sz = CGSizeMake(w, INT_MAX);
   sz = [[self text] sizeWithFont:[self font] constrainedToSize:sz];
 
-  [self setW:sz.width];
-  [self setH:sz.height];
+  [self setW:ceil(sz.width)];
+  [self setH:ceil(sz.height)];
 }
 
 
 -(void)resizeHeightForText
 {
-  return [self resizeHeightForText:[self text] font:[self font]];
+  [self resizeHeightForText:[self text] font:[self font]];
 }
 
 
