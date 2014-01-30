@@ -225,6 +225,7 @@
     [self loadFromServerIfNeeded];
     more = (CLCGMoreCell *)[self tableView:tv moreButtonCellForRow:ip];
     [more didStartRequestingMore];
+    [tv deselectRowAtIndexPath:ip animated:YES];
   } else {
     [self tableView:tv didSelectNormalRow:ip];
   }
