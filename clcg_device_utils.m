@@ -64,6 +64,12 @@ BOOL clcg_is_iphone5(void)
 }
 
 
+void clcg_show_network_activity(BOOL show)
+{
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
+}
+
+
 void clcg_removepref(NSString *key)
 {
   NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];

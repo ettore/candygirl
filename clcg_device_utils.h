@@ -30,6 +30,9 @@
 extern "C" {
 #endif
 
+  /*! @abstract Show/hide spinner for network activity in status bar. */
+  void clcg_show_network_activity(BOOL show);
+
   /** Removes a key from the prefs and synchronizes them. */
   void clcg_removepref(NSString *key);
   
