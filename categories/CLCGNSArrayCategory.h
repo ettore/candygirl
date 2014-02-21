@@ -31,21 +31,42 @@
 @interface NSArray (Candygirl)
 
 
-/**
- * @return A new array where each element is the result of calling `block`
- *         on every item of the original array.
+/*!
+ @return A new array where each element is the result of calling `block`
+         on every item of the original array.
  */
 -(NSArray*)mapBlock:(id(^)(id item))block;
 
 
-/**
- * Executes `item_method` on every item of the array.
- * Note: `item_method` must return an object, not a scalar value.
- *
- * @return A new array where each element is the result of calling `item_method`
- *         on every item of the original array.
+/*!
+ @discussion
+ Executes `item_method` on every item of the array.
+ Note: `item_method` must return an object, not a scalar value.
+ 
+ @return A new array where each element is the result of calling `item_method`
+         on every item of the original array.
  */
 -(NSArray*)map:(SEL)item_method;
+
+
+/*!
+ @discussion
+ Combines (i.e. reduces, folds) all elements of the receiving array
+ into an accumulated result by running the given block on each element.
+ 
+ Note: The return type of `block`, the type of `current_accumulator` and
+ the type of `initial_accumulator` must match.
+
+ @param block The function that will be run on the current value of the 
+    accumulator using a given item of the array.
+ @param initial_accumulator_value This is the initial value that will be passed
+    to the block the first time it is executed.
+ 
+ @return The final value of the accumulator
+ */
+-(id)reduceWithAccumulator:(id)initial_accumulator
+                     block:(id(^)(id current_accumulator, id item))block;
+
 
 
 @end

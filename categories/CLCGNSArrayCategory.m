@@ -44,7 +44,6 @@
   }
 
   return a;
-
 }
 
 
@@ -57,6 +56,17 @@
   }
 
   return a;
+}
+
+
+-(id)reduceWithAccumulator:(id)accumulator
+                     block:(id(^)(id current_accumulator, id item))block
+{
+  for (id item in self) {
+    accumulator = block(accumulator, item);
+  }
+
+  return accumulator;
 }
 
 
