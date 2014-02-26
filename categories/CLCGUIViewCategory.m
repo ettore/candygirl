@@ -278,11 +278,11 @@
 
 -(UIView*)findFirstResponder
 {
-  if (self.isFirstResponder) {        
+  if ([self isFirstResponder]) {
     return self;     
   }
   
-  for (UIView *subView in self.subviews) {
+  for (UIView *subView in [self subviews]) {
     UIView *firstResponder = [subView findFirstResponder];
     
     if (firstResponder != nil) {
@@ -296,13 +296,10 @@
 
 -(void)addBorderWithInsets:(UIEdgeInsets)insets
 {
-  //TODO probably we could do this with just a sublayer and no subview?
   UIView *border_line = [[[UIView alloc] init] autorelease];
   [[border_line layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
-  [[border_line layer] setBorderWidth:0.5];
-  [border_line setFrame:CGRectMake(insets.left, insets.top,
-                                   [self w]-insets.left-insets.right,
-                                   [self h]-insets.top-insets.bottom)];
+  [[border_line layer] setBorderWidth:1.0];
+  [border_line setFrame:UIEdgeInsetsInsetRect([self bounds], insets)];
   [border_line setAutoresizingMask:(UIViewAutoresizingFlexibleHeight
                                     |UIViewAutoresizingFlexibleWidth)];
   [self addSubview:border_line];
