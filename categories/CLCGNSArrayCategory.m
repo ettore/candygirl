@@ -35,7 +35,7 @@
 @implementation NSArray (Candygirl)
 
 
--(NSArray*)mapBlock:(id(^)(id item))block
+-(NSArray*)map:(id(^)(id item))block
 {
   NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
 
@@ -47,7 +47,7 @@
 }
 
 
--(NSArray*)map:(SEL)item_method
+-(NSArray*)mapSelector:(SEL)item_method
 {
   NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
 
@@ -59,14 +59,14 @@
 }
 
 
--(id)reduceWithAccumulator:(id)accumulator
-                     block:(id(^)(id current_accumulator, id item))block
+-(id)reduceWithStart:(id)acc
+               block:(id(^)(id current_acc, id item))block;
 {
   for (id item in self) {
-    accumulator = block(accumulator, item);
+    acc = block(acc, item);
   }
 
-  return accumulator;
+  return acc;
 }
 
 
