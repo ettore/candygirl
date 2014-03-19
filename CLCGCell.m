@@ -179,7 +179,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                                lineBreakMode:NSLineBreakByWordWrapping];
   sz.height = ceilf(sz.height);
   r = CGRectMake(x, _padding, w, sz.height);
-  [[self textLabel] setFrame:r];
+  [[self textLabel] setFrame:CGRectIntegral(r)];
   
   // layout detail label
   sz = CGSizeMake(w, max_cellh);
@@ -188,7 +188,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                                      lineBreakMode:NSLineBreakByWordWrapping];
   sz.height = ceilf(sz.height);
   r = CGRectMake(x, [[self textLabel] low] + (int)(_padding/2), sz.width, sz.height);
-  [[self detailTextLabel] setFrame:r];
+  [[self detailTextLabel] setFrame:CGRectIntegral(r)];
 
   // info text label
   sz = CGSizeMake(w, max_cellh);
@@ -197,7 +197,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                              lineBreakMode:NSLineBreakByWordWrapping];
   sz.height = ceilf(sz.height);
   r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_padding/2), w, sz.height);
-  [[self infoTextLabel] setFrame:r];
+  [[self infoTextLabel] setFrame:CGRectIntegral(r)];
 }
 
 

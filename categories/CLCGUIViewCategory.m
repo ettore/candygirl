@@ -48,14 +48,14 @@
 
   sz = [[self superview] frame].size;
   x = (sz.width - [self w])/2 + offset;
-  [self setX:round(x)];
+  [self setX:x];
 }
 
 
 -(void)centerHorizontallyInRect:(CGRect)rect
 {
   CGFloat x = (rect.size.width - [self w])/2;
-  [self setX:round(rect.origin.x + x)];
+  [self setX:(rect.origin.x + x)];
 }
 
 
@@ -72,14 +72,14 @@
 
   sz = [[self superview] frame].size;
   y = (sz.height - [self h])/2 + offset;
-  [self setY:round(y)];
+  [self setY:y];
 }
 
 
 -(void)centerVerticallyInRect:(CGRect)rect
 {
   CGFloat y = (rect.size.height - [self h])/2;
-  [self setY:round(rect.origin.y + y)];
+  [self setY:(rect.origin.y + y)];
 }
 
 
@@ -103,7 +103,7 @@
 -(void)setX:(CGFloat)x
 {
   CGRect r = [self frame];
-  r.origin.x = x;
+  r.origin.x = round(x);
   [self setFrame:r];
 }
 
@@ -117,7 +117,7 @@
 -(void)setY:(CGFloat)y
 {
   CGRect r = [self frame];
-  r.origin.y = y;
+  r.origin.y = round(y);
   [self setFrame:r];
 }
 
@@ -131,7 +131,7 @@
 -(void)setW:(CGFloat)w
 {
   CGRect r = [self frame];
-  r.size.width = w;
+  r.size.width = round(w);
   [self setFrame:r];
 }
 
@@ -145,7 +145,7 @@
 -(void)setH:(CGFloat)h
 {
   CGRect r = [self frame];
-  r.size.height = h;
+  r.size.height = round(h);
   [self setFrame:r];
 }
 
