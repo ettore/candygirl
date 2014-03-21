@@ -56,7 +56,7 @@
   [self setSpinner:ai];
   [ai release];
   
-  cont = [[UIView alloc] initWithFrame:[[self view] frame]];
+  cont = [[UIView alloc] initWithFrame:[[self view] bounds]];
   [cont setBackgroundColor:mSpinnerBackgroundColor];
   [cont setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
   [cont addSubview:mSpinner];
