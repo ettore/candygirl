@@ -103,8 +103,8 @@
 -(void)setX:(CGFloat)x
 {
   CGRect r = [self frame];
-  r.origin.x = round(x);
-  [self setFrame:r];
+  r.origin.x = x;
+  [self setFrame:CGRectIntegral(r)];
 }
 
 
@@ -117,8 +117,8 @@
 -(void)setY:(CGFloat)y
 {
   CGRect r = [self frame];
-  r.origin.y = round(y);
-  [self setFrame:r];
+  r.origin.y = y;
+  [self setFrame:CGRectIntegral(r)];
 }
 
 
@@ -131,8 +131,8 @@
 -(void)setW:(CGFloat)w
 {
   CGRect r = [self frame];
-  r.size.width = round(w);
-  [self setFrame:r];
+  r.size.width = w;
+  [self setFrame:CGRectIntegral(r)];
 }
 
 
@@ -145,8 +145,8 @@
 -(void)setH:(CGFloat)h
 {
   CGRect r = [self frame];
-  r.size.height = round(h);
-  [self setFrame:r];
+  r.size.height = h;
+  [self setFrame:CGRectIntegral(r)];
 }
 
 
