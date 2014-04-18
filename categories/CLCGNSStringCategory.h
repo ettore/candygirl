@@ -66,10 +66,13 @@
 -(NSString*)URLEncode;
 
 /*! Trims whitespaces only. */
--(NSString *)trimws;
+-(NSString*)trimws;
 
 /*! Trims whitespaces and new lines too. */
--(NSString *)trimwsnl;
+-(NSString*)trimwsnl;
+
+/*! Trims all content after the first occurrence of `search_str'. */
+-(NSString*)trimAfterFirstOccurrence:(NSString*)search_str;
 
 /*!
  * Trims and attempts to fix the receiver by adding the "http://" scheme

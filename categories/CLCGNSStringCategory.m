@@ -142,6 +142,19 @@
 }
 
 
+-(NSString*)trimAfterFirstOccurrence:(NSString*)search_str
+{
+  NSRange range;
+
+  range = [self rangeOfString:search_str];
+  if (range.location == NSNotFound) {
+    return self;
+  } else {
+    return [self substringToIndex:range.location];
+  }
+}
+
+
 -(NSString*)fixURLString
 {
   NSString *result;
@@ -156,8 +169,9 @@
     // such as `ttp://example.com', it returns:
     // LSOpenCFURLRef() returned -10814 for URL ttp://example.com
     range = [result rangeOfString:@"://" options:NSCaseInsensitiveSearch];
-    if (range.location == NSNotFound)
+    if (range.location == NSNotFound) {
       result = [@"http://" stringByAppendingString:result];
+    }
   }
   
   return result;
