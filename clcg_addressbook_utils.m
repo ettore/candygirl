@@ -45,13 +45,9 @@ static NSMutableArray *clcg__process_ab(ABAddressBookRef ab);
 #pragma mark - Public definitions
 
 
-void clcg_addressbook_load_contacts(CLCGABCallback callback)
+void clcg_addressbook_load_contacts(dispatch_queue_t currq, CLCGABCallback callback)
 {
   ABAddressBookRef ab;
-
-  // get the current queue 'cause we can only access a ABAddressBookRef object
-  // from the one queue (therefore ensuring thread-safety)
-  dispatch_queue_t currq = dispatch_get_current_queue();
 
   // make sure to keep a valid object on the heap
   callback = [[callback copy] autorelease];
@@ -82,7 +78,10 @@ void clcg_addressbook_load_contacts(CLCGABCallback callback)
     }
   } else {
     // iOS 4/5
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     ab = ABAddressBookCreate();
+#pragma clang diagnostic pop
     NSMutableArray *people = clcg__process_ab(ab);
     callback(people, YES, nil);
     CFRelease(ab);

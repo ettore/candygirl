@@ -43,7 +43,8 @@ typedef void (^CLCGABCallback)(NSMutableArray *people, BOOL granted, NSError *er
    The callback itself is called on the same thread this function is being
    called on. (To ensure ABAddressBook thread-safety.)
    */
-  void clcg_addressbook_load_contacts(CLCGABCallback callback);
+  void clcg_addressbook_load_contacts(dispatch_queue_t currq,
+                                      CLCGABCallback callback);
 
 #ifdef __cplusplus
 }
