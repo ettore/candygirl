@@ -52,9 +52,7 @@
 #endif
 
 
-// designated initializer.
-// @param opt the dictionary received by application:didFinishLaunchWithOptions:
--(id)initWithOptions:(NSDictionary*)opt
+-(id)init
 {
   if (!(self = [super init]))
     return nil;
@@ -62,6 +60,14 @@
   mIsPushRegistered = NO;
   mHasSyncedDeviceToken = NO;
   mBadgeCount = -1;
+
+  return self;
+}
+
+
+// @param opt the dictionary received by application:didFinishLaunchWithOptions:
+-(void)configureWithInitialOptions:(NSDictionary*)opt
+{
   if (opt) {
     NSDictionary *payld;
     
@@ -69,15 +75,7 @@
     payld = [opt objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     [self setOptions:payld];
   }
-  
-  return self;
-}
-
-
-// overriding superclass' designated initializer
--(id)init
-{
-  return [self initWithOptions:nil];
+  [self registerForAllNotifications];
 }
 
 

@@ -50,8 +50,8 @@
 // instead of parsing it each time.
 @property(nonatomic,retain) NSDictionary *options;
 
-// Pass the dictionary received by application:didFinishLaunchWithOptions:.
--(id)initWithOptions:(NSDictionary*)opt;
+// @param opt The dictionary received by application:didFinishLaunchWithOptions:
+-(void)configureWithInitialOptions:(NSDictionary*)opt;
 
 // @returns YES if the user has push notifications enabled for this app.
 //           NO if the user disables all push notifications in Settings.
