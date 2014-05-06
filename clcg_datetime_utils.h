@@ -44,11 +44,33 @@
 extern "C" {
 #endif
 
-/** Get the year out of a date object. */
+/*! Get the year out of a date object. */
 NSInteger clcg_date_year(NSDate *d);
 
-/** Formats `d` as `X days Y hour Z seconds agp` from todays date/time. */
+/*! 
+ @abstract
+ Formats `d` as `X days Y hour Z seconds ago` from today's date/time.
+ @discussion
+ Formatting assumes you have defined the following strings in your 
+ localizable.strings file: "year", "month", "day", "hour", "minute", "second", 
+ plus their respective plurals, plus the "just about now" string.
+ */
 NSString *clcg_ago_format(NSDate *d);
+
+/*! 
+ @abstract
+ Formats `d` according to a localized "ago_format_minimal" string.
+ @discussion
+ This function assumes you have defined the following strings in your 
+ localizable.strings file:
+ "ago_format_minimal.year"
+ "ago_format_minimal.month"
+ "ago_format_minimal.day"
+ "ago_format_minimal.hour"
+ "ago_format_minimal.minutes"
+ "ago_format_minimal.seconds".
+ */
+NSString *clcg_ago_format_minimal(NSDate *d);
 
 #ifdef __cplusplus
 }

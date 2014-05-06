@@ -47,20 +47,26 @@ NSInteger clcg_date_year(NSDate *d)
 }
 
 
-NSString *clcg_ago_format(NSDate *d)
+NSDateComponents *date_components_from(NSDate *d)
 {
   NSCalendar *greg;
   unsigned int flags;
-  NSDateComponents *dc;
   NSDate *now = [NSDate date];
-  NSInteger t;
-  NSString *res, *interval;
 
   greg = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  [greg autorelease];
   flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |
   NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-  dc = [greg components:flags fromDate:d toDate:now options:0];
-  [greg release];
+  return [greg components:flags fromDate:d toDate:now options:0];
+}
+
+
+NSString *clcg_ago_format(NSDate *d)
+{
+  NSDateComponents *dc = date_components_from(d);
+
+  NSInteger t;
+  NSString *res, *interval;
 
   if ((t = [dc year])) {
     interval = ((t == 1) ? CLCG_LOC(@"year") : CLCG_LOC(@"years"));
@@ -82,3 +88,30 @@ NSString *clcg_ago_format(NSDate *d)
   
   return res;
 }
+
+
+NSString *clcg_ago_format_minimal(NSDate *d)
+{
+  NSDateComponents *dc = date_components_from(d);
+
+  NSInteger t;
+  NSString *interval;
+
+  if ((t = [dc year])) {
+    interval = CLCG_LOC(@"ago_format_minimal.year");
+  } else if ((t = [dc month])) {
+    interval = CLCG_LOC(@"ago_format_minimal.month");
+  } else if ((t = [dc day])) {
+    interval = CLCG_LOC(@"ago_format_minimal.day");
+  } else if ((t = [dc hour])) {
+    interval = CLCG_LOC(@"ago_format_minimal.hour");;
+  } else if ((t = [dc minute])) {
+    interval = CLCG_LOC(@"ago_format_minimal.minutes");;
+  } else {
+    t = [dc second];
+    interval = CLCG_LOC(@"ago_format_minimal.seconds");
+  }
+  return [NSString stringWithFormat:@"%d%@",t,interval];
+  
+}
+
