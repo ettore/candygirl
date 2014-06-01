@@ -79,14 +79,9 @@
                                  useCache:YES
                                     block:^(UIImage *img, int http_status) {
                                       if (img) {
-                                        [self setImage:img];
-
-                                        //TODO we should resize the image view
-                                        //accordingly to `img` size. But if we're
-                                        //not sure to always get retina images
-                                        //this could lead to displaying an
-                                        //image that's too big or too small.
-
+                                        dispatch_async(dispatch_get_main_queue(), ^{
+                                          [self setImage:img];
+                                        });
                                       } else {
                                         CLCG_P(@"Error loading image. HTTP status=%d",
                                                http_status);
