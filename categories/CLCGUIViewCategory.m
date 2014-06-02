@@ -29,6 +29,7 @@
 #import "tgmath.h"
 
 #import "CLCGUIViewCategory.h"
+#import "CLCGNSStringCategory.h"
 #import "clcg_gfx.h"
 
 
@@ -304,6 +305,75 @@
                                     |UIViewAutoresizingFlexibleWidth)];
   [self addSubview:border_line];
   [self sendSubviewToBack:border_line];
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - layout methods
+
+
+-(void)putImageView:(UIImageView*)img_view
+          toRightOf:(UIView*)horiz_align_view
+              below:(UIView*)vert_align_view
+       horizPadding:(CGFloat)padding_horiz
+        vertPadding:(CGFloat)padding_vert
+{
+  CGRect r;
+  CGFloat x, y;
+
+  x = CGRectGetMaxX(horiz_align_view.frame) + padding_horiz;
+  y = CGRectGetMaxY(vert_align_view.frame) + padding_vert;
+  r = img_view.frame;
+  r = CGRectMake(x, y, CGRectGetWidth(r), CGRectGetHeight(r));
+  [img_view setFrame:r];
+}
+
+
+-(void)putTextView:(UIView*)view
+    containingText:(NSString*)text
+              font:(UIFont*)font
+         toRightOf:(UIView*)horiz_align_view
+             below:(UIView*)vert_align_view
+      horizPadding:(CGFloat)padding_horiz
+       vertPadding:(CGFloat)padding_vert
+          maxWidth:(CGFloat)max_w
+{
+  CGRect r;
+  CGFloat x, y, w;
+  CGSize text_size;
+
+  x = CGRectGetMaxX(horiz_align_view.frame) + padding_horiz;
+  y = CGRectGetMaxY(vert_align_view.frame) + padding_vert;
+  w = max_w - x - padding_horiz;
+
+  if ([view respondsToSelector:@selector(numberOfLines)]) {
+    CGFloat h = [@"Mj" sizeWithMaxW:max_w font:font].height;
+    h *= [(id)view numberOfLines];
+    text_size = [text sizeWithMaxW:w maxH:h font:font];
+  } else {
+    text_size = [text sizeWithMaxW:w font:font];
+  }
+
+  r = CGRectMake(x, y, w, text_size.height);
+  [view setFrame:r];
+}
+
+
+-(void)putView:(UIView<CLCGUIViewLayout>*)view
+     toRightOf:(UIView*)horiz_align_view
+         below:(UIView*)vert_align_view
+  horizPadding:(CGFloat)padding_horiz
+   vertPadding:(CGFloat)padding_vert
+      maxWidth:(CGFloat)max_w
+{
+  CGRect r;
+  CGFloat x, y, w;
+
+  x = CGRectGetMaxX(horiz_align_view.frame) + padding_horiz;
+  y = CGRectGetMaxY(vert_align_view.frame) + padding_vert;
+  w = max_w - x - padding_horiz;
+  r = CGRectMake(x, y, w, [view calculatedHeightForWidth:w]);
+  [view setFrame:r];
 }
 
 

@@ -31,6 +31,7 @@
 
 #import "CLCGNSStringCategory.h"
 #import "NSMutableCharacterSetCategory.h"
+#import "clcg_viewport.h"
 
 
 @implementation NSString (Candygirl)
@@ -198,6 +199,37 @@
     return [trimmed substringToIndex:max_len];
   
   return trimmed;
+}
+
+
+-(CGSize)sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font
+{
+  return [self sizeWithMaxW:max_w maxH:clcg_screensize().height font:font];
+}
+
+
+-(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h font:(UIFont*)font
+{
+  if (max_h == 0.0f) {
+    max_h = clcg_screensize().height;
+  }
+
+  if (clcg_os_geq(@"7")) {
+    NSParagraphStyle *paragraph_style = [NSParagraphStyle defaultParagraphStyle];
+    return [self
+            boundingRectWithSize:CGSizeMake(max_w, max_h)
+            options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine
+            attributes:@{NSFontAttributeName:font,
+                         NSParagraphStyleAttributeName:paragraph_style}
+            context:nil].size;
+  } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [self sizeWithFont:font
+            constrainedToSize:CGSizeMake(max_w, max_h)
+                lineBreakMode:NSLineBreakByWordWrapping];
+#pragma clang diagnostic pop
+  }
 }
 
 

@@ -89,4 +89,22 @@
  */
 -(NSString *)shortenedName:(int)max_len;
 
+/*!
+ Measures the size of this string with a max width assuming word wrapping 
+ line break and a max height as device height.
+
+ This is a wrapper for -boundingRectWithSize:options:attributes:context: and
+ sizeWithFont:forWidth:lineBreakMode:.
+ */
+-(CGSize)sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font;
+
+/*!
+ Measures the size of this string with a max width/height assuming word 
+ wrapping line break.
+
+ This is a wrapper for -boundingRectWithSize:options:attributes:context: and
+ sizeWithFont:forWidth:lineBreakMode:.
+ */
+-(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h font:(UIFont*)font;
+
 @end
