@@ -31,6 +31,7 @@
 #import "CLCGUIViewCategory.h"
 #import "CLCGNSStringCategory.h"
 #import "clcg_gfx.h"
+#import "NSAttributedString+CLCG.h"
 
 
 @implementation UIView (Candygirl)
@@ -307,72 +308,90 @@
   [self sendSubviewToBack:border_line];
 }
 
+//------------------------------------------------------------------------------
+#pragma mark - height measuring methods
+
+-(CGFloat)heightForWidth:(CGFloat)w useAttributed:(BOOL)use_attributed
+{
+  CGSize text_size = CGSizeZero;
+
+  if (use_attributed && [self respondsToSelector:@selector(attributedText)]) {
+    NSAttributedString *attr_text = [(id)self attributedText];
+    if ([attr_text length] > 0) {
+      if ([self respondsToSelector:@selector(numberOfLines)]) {
+        NSAttributedString *s = [attr_text attributedSubstringFromRange:
+                                 NSMakeRange(0,1)];
+        CGFloat h = [s sizeWithMaxW:w].height + 1.0f;
+        h *= [(id)self numberOfLines];
+        text_size = [attr_text sizeWithMaxW:w maxH:h];
+      } else {
+        text_size = [attr_text sizeWithMaxW:w];
+      }
+    }
+  } else if ([self respondsToSelector:@selector(text)]
+             && [self respondsToSelector:@selector(font)]) {
+    NSString *text = [(id)self text];
+    UIFont *font = [(id)self font];
+    if ([text length] > 0) {
+      if ([self respondsToSelector:@selector(numberOfLines)]) {
+        CGFloat h = [@"Mj" sizeWithMaxW:w font:font].height;
+        h *= [(id)self numberOfLines];
+        text_size = [text sizeWithMaxW:w maxH:h font:font];
+      } else {
+        text_size = [text sizeWithMaxW:w font:font];
+      }
+    }
+  }
+
+  return roundf(text_size.height);
+}
 
 //------------------------------------------------------------------------------
 #pragma mark - layout methods
 
 
--(void)putImageView:(UIImageView*)img_view
-          toRightOf:(UIView*)horiz_align_view
-              below:(UIView*)vert_align_view
-       horizPadding:(CGFloat)padding_horiz
-        vertPadding:(CGFloat)padding_vert
-{
-  CGRect r;
-  CGFloat x, y;
-
-  x = CGRectGetMaxX(horiz_align_view.frame) + padding_horiz;
-  y = CGRectGetMaxY(vert_align_view.frame) + padding_vert;
-  r = img_view.frame;
-  r = CGRectMake(x, y, CGRectGetWidth(r), CGRectGetHeight(r));
-  [img_view setFrame:r];
-}
-
-
 -(void)putTextView:(UIView*)view
-    containingText:(NSString*)text
-              font:(UIFont*)font
+ useAttributedText:(BOOL)use_attributed
          toRightOf:(UIView*)horiz_align_view
-             below:(UIView*)vert_align_view
       horizPadding:(CGFloat)padding_horiz
+             below:(UIView*)vert_align_view
        vertPadding:(CGFloat)padding_vert
           maxWidth:(CGFloat)max_w
 {
   CGRect r;
   CGFloat x, y, w;
-  CGSize text_size;
 
-  x = CGRectGetMaxX(horiz_align_view.frame) + padding_horiz;
-  y = CGRectGetMaxY(vert_align_view.frame) + padding_vert;
-  w = max_w - x - padding_horiz;
+  x = roundf(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  y = roundf(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  w = max_w - x;
+  CGFloat h = [view heightForWidth:w useAttributed:use_attributed];
 
-  if ([view respondsToSelector:@selector(numberOfLines)]) {
-    CGFloat h = [@"Mj" sizeWithMaxW:max_w font:font].height;
-    h *= [(id)view numberOfLines];
-    text_size = [text sizeWithMaxW:w maxH:h font:font];
-  } else {
-    text_size = [text sizeWithMaxW:w font:font];
-  }
-
-  r = CGRectMake(x, y, w, text_size.height);
+  r = CGRectMake(x, y, w, h);
   [view setFrame:r];
 }
 
 
 -(void)putView:(UIView<CLCGUIViewLayout>*)view
      toRightOf:(UIView*)horiz_align_view
-         below:(UIView*)vert_align_view
   horizPadding:(CGFloat)padding_horiz
+         below:(UIView*)vert_align_view
    vertPadding:(CGFloat)padding_vert
       maxWidth:(CGFloat)max_w
+      resizing:(BOOL)resize
 {
   CGRect r;
-  CGFloat x, y, w;
+  CGFloat x, y, w, h;
 
-  x = CGRectGetMaxX(horiz_align_view.frame) + padding_horiz;
-  y = CGRectGetMaxY(vert_align_view.frame) + padding_vert;
-  w = max_w - x - padding_horiz;
-  r = CGRectMake(x, y, w, [view calculatedHeightForWidth:w]);
+  x = roundf(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  y = roundf(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  if (resize) {
+    w = max_w - x;
+    h = [view calculatedHeightForWidth:w];
+  } else {
+    w = [view w];
+    h = [view h];
+  }
+  r = CGRectMake(x, y, w, h);
   [view setFrame:r];
 }
 

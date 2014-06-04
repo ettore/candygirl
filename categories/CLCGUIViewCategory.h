@@ -146,37 +146,24 @@
 */
 -(void)addBorderWithInsets:(UIEdgeInsets)insets;
 
-/*!
- @abstract Lays out an image subview.
- @param subview          The subview to be layed out.
- @param horiz_align_view Lay out subview to the right of horiz_align_view.
- @param vert_align_view  Lay out subview below vert_align_view.
- @param padding_horiz    Horizontal padding between horiz_align_view and subview.
- @param padding_vert     Vertical padding between vert_align_view and subview.
- */
--(void)putImageView:(UIImageView*)subview
-          toRightOf:(UIView*)horiz_align_view
-              below:(UIView*)vert_align_view
-       horizPadding:(CGFloat)padding_horiz
-        vertPadding:(CGFloat)padding_vert;
+-(CGFloat)heightForWidth:(CGFloat)w useAttributed:(BOOL)use_attributed;
+
 
 /*!
  @abstract Lays out a text subview, such as UILabel, UITextView.
  @param subview          The subview to be layed out.
- @param text             The text to appear inside subview.
- @param font             The font to be used by subview to render text.
+ @param use_attributed   use the attributed content from subview.
  @param horiz_align_view Lay out subview to the right of horiz_align_view.
- @param vert_align_view  Lay out subview below vert_align_view.
  @param padding_horiz    Horizontal padding between horiz_align_view and subview.
+ @param vert_align_view  Lay out subview below vert_align_view.
  @param padding_vert     Vertical padding between vert_align_view and subview.
- @param max_w            The max width that subview will be sized to.
+ @param max_w            The max width available to the subview.
  */
 -(void)putTextView:(UIView*)subview
-    containingText:(NSString*)text
-              font:(UIFont*)font
+ useAttributedText:(BOOL)use_attributed
          toRightOf:(UIView*)horiz_align_view
-             below:(UIView*)vert_align_view
       horizPadding:(CGFloat)padding_horiz
+             below:(UIView*)vert_align_view
        vertPadding:(CGFloat)padding_vert
           maxWidth:(CGFloat)max_w;
 
@@ -184,17 +171,20 @@
  @abstract Lays out a subview.
  @param subview          The subview to be layed out.
  @param horiz_align_view Lay out subview to the right of horiz_align_view.
- @param vert_align_view  Lay out subview below vert_align_view.
  @param padding_horiz    Horizontal padding between horiz_align_view and subview.
+ @param vert_align_view  Lay out subview below vert_align_view.
  @param padding_vert     Vertical padding between vert_align_view and subview.
- @param max_w            The max width that subview will be sized to.
+ @param max_w            The max width available to the subview.
+ @param resize           Whether the subview should be resized according to
+                         @link CLCGUIViewLayout @/link protocol.
  */
 -(void)putView:(UIView<CLCGUIViewLayout>*)subview
      toRightOf:(UIView*)horiz_align_view
-         below:(UIView*)vert_align_view
   horizPadding:(CGFloat)padding_horiz
+         below:(UIView*)vert_align_view
    vertPadding:(CGFloat)padding_vert
-      maxWidth:(CGFloat)max_w;
+      maxWidth:(CGFloat)max_w
+      resizing:(BOOL)resize;
 
 @end
 
