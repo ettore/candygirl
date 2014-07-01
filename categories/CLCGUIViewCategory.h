@@ -161,10 +161,8 @@
  */
 -(void)putTextView:(UIView*)subview
  useAttributedText:(BOOL)use_attributed
-         toRightOf:(UIView*)horiz_align_view
-      horizPadding:(CGFloat)padding_horiz
-             below:(UIView*)vert_align_view
-       vertPadding:(CGFloat)padding_vert
+         toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
+             below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
           maxWidth:(CGFloat)max_w;
 
 /*!
@@ -179,10 +177,8 @@
                          @link CLCGUIViewLayout @/link protocol.
  */
 -(void)putView:(UIView<CLCGUIViewLayout>*)subview
-     toRightOf:(UIView*)horiz_align_view
-  horizPadding:(CGFloat)padding_horiz
-         below:(UIView*)vert_align_view
-   vertPadding:(CGFloat)padding_vert
+     toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
+         below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
       maxWidth:(CGFloat)max_w
       resizing:(BOOL)resize;
 

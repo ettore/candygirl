@@ -343,56 +343,52 @@
     }
   }
 
-  return roundf(text_size.height);
+  return text_size.height;
 }
 
 //------------------------------------------------------------------------------
 #pragma mark - layout methods
 
 
--(void)putTextView:(UIView*)view
+-(void)putTextView:(UIView*)subview
  useAttributedText:(BOOL)use_attributed
-         toRightOf:(UIView*)horiz_align_view
-      horizPadding:(CGFloat)padding_horiz
-             below:(UIView*)vert_align_view
-       vertPadding:(CGFloat)padding_vert
+         toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
+             below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
           maxWidth:(CGFloat)max_w
 {
   CGRect r;
   CGFloat x, y, w;
 
-  x = roundf(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  y = roundf(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
   w = max_w - x;
-  CGFloat h = [view heightForWidth:w useAttributed:use_attributed];
+  CGFloat h = round([subview heightForWidth:w useAttributed:use_attributed]);
 
   r = CGRectMake(x, y, w, h);
-  [view setFrame:r];
+  [subview setFrame:r];
 }
 
 
--(void)putView:(UIView<CLCGUIViewLayout>*)view
-     toRightOf:(UIView*)horiz_align_view
-  horizPadding:(CGFloat)padding_horiz
-         below:(UIView*)vert_align_view
-   vertPadding:(CGFloat)padding_vert
+-(void)putView:(UIView<CLCGUIViewLayout>*)subview
+     toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
+         below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
       maxWidth:(CGFloat)max_w
       resizing:(BOOL)resize
 {
   CGRect r;
   CGFloat x, y, w, h;
 
-  x = roundf(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  y = roundf(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
   if (resize) {
     w = max_w - x;
-    h = [view calculatedHeightForWidth:w];
+    h = [subview calculatedHeightForWidth:w];
   } else {
-    w = [view w];
-    h = [view h];
+    w = [subview w];
+    h = [subview h];
   }
   r = CGRectMake(x, y, w, h);
-  [view setFrame:r];
+  [subview setFrame:r];
 }
 
 
