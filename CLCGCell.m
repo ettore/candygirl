@@ -90,16 +90,17 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 
 
 // designated initializer
--(id)initWithImageWidth:(CGFloat)w 
+-(id)initWithImageWidth:(CGFloat)w
                  height:(CGFloat)h
                 padding:(CGFloat)padding
-                reuseId:(NSString*)cid;
+                reuseId:(NSString*)reuse_id
 {
-  self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cid];
+  self = [super initWithStyle:UITableViewCellStyleSubtitle
+              reuseIdentifier:reuse_id];
   if (self) {
     _imgW = w;
     _imgH = h;
-    _padding = padding;
+    _viewportPadding = _innerPadding = padding;
     [self setCommonLayouter:[[[CLCGCellCommonLayouter alloc] initWithCell:self] autorelease]];
     [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
     [[self textLabel] setTextColor:[UIColor blackColor]];
@@ -109,7 +110,6 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
     [[self detailTextLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     [[self detailTextLabel] setNumberOfLines:0];
     [[self detailTextLabel] setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
-    [[self imageView] setFrame:CGRectMake(padding, padding, w, h)];
     [[self imageView] setAutoresizesSubviews:YES];
     [[self imageView] setAutoresizingMask:UIViewAutoresizingNone];
     [[self imageView] setContentMode:UIViewContentModeScaleAspectFit];
@@ -162,7 +162,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   [super layoutSubviews];
 
   // layout image view
-  [[self imageView] setFrame:CGRectMake(_padding, _padding, _imgW, _imgH)];
+  [[self imageView] setFrame:CGRectMake(_viewportPadding, _innerPadding, _imgW, _imgH)];
 
   // these should not change
   const CGFloat max_cellh = CLCG_MAX_CELL_H;
@@ -170,15 +170,13 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   const CGFloat x = [[self commonLayouter] xRightOfImage];
   const CGFloat w = [CLCGCellCommonLayouter textLabelWidthWithCellW:[self w]
                                                              imageW:imgw
-                                                            padding:_padding];
+                                                    viewportPadding:_viewportPadding
+                                                       innerPadding:_innerPadding];
 
   // layout text label
-  sz = CGSizeMake(w, max_cellh);
-  sz = [[[self textLabel] text] sizeWithFont:[[self textLabel] font]
-                           constrainedToSize:sz 
-                               lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [self calculateTextLabelSizeForCellWidth:w];
   sz.height = ceilf(sz.height);
-  r = CGRectMake(x, _padding, w, sz.height);
+  r = CGRectMake(x, _innerPadding, w, sz.height);
   [[self textLabel] setFrame:CGRectIntegral(r)];
   
   // layout detail label
@@ -187,7 +185,8 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                                  constrainedToSize:sz
                                      lineBreakMode:NSLineBreakByWordWrapping];
   sz.height = ceilf(sz.height);
-  r = CGRectMake(x, [[self textLabel] low] + (int)(_padding/2), sz.width, sz.height);
+  r = CGRectMake(x, [[self textLabel] low] + (int)(_innerPadding/2),
+                 sz.width, sz.height);
   [[self detailTextLabel] setFrame:CGRectIntegral(r)];
 
   // info text label
@@ -196,8 +195,19 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                          constrainedToSize:sz
                              lineBreakMode:NSLineBreakByWordWrapping];
   sz.height = ceilf(sz.height);
-  r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_padding/2), w, sz.height);
+  r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_innerPadding/2),
+                 w, sz.height);
   [[self infoTextLabel] setFrame:CGRectIntegral(r)];
+}
+
+
+-(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text
+{
+  CGSize sz = CGSizeMake(w_available_for_text, CLCG_MAX_CELL_H);
+  sz = [[[self textLabel] text] sizeWithFont:[[self textLabel] font]
+                           constrainedToSize:sz
+                               lineBreakMode:NSLineBreakByWordWrapping];
+  return sz;
 }
 
 
@@ -231,7 +241,8 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   // adding padding for cell margins (L & R) and right margin of img
   label_w = [CLCGCellCommonLayouter textLabelWidthWithCellW:cell_maxw
                                                      imageW:imgw
-                                                    padding:padding];
+                                            viewportPadding:padding
+                                               innerPadding:padding];
 
   // measure main text size
   sz = CGSizeMake(label_w, cell_maxh);

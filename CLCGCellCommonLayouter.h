@@ -34,7 +34,7 @@
 @property(nonatomic,readonly,retain) UIImageView *imageView NS_AVAILABLE_IOS(3_0);
 - (void)setNeedsLayout;
 @property(nonatomic,assign)   BOOL      emphasized;
-@property(nonatomic,readonly) CGFloat   padding;
+@property(nonatomic,readonly) CGFloat   viewportPadding;
 @property(nonatomic,retain)   UIColor   *normalColor;
 @property(nonatomic,retain)   UIColor   *emphasisColor;
 
@@ -90,7 +90,10 @@
  @discussion Calculates the possible width available to the text label in any
  CLCGCell, accounting for image width, accessory view, and padding.
  */
-+(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw imageW:(CGFloat)w padding:(CGFloat)p;
++(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
+                           imageW:(CGFloat)imgw
+                  viewportPadding:(CGFloat)viewport_pad
+                     innerPadding:(CGFloat)internal_pad;
 
 
 @end

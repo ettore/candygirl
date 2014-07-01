@@ -60,7 +60,8 @@
 
 // properties declared in CLCGCell protocol
 @property(nonatomic,assign)   BOOL      emphasized;
-@property(nonatomic,readonly) CGFloat   padding;
+@property(nonatomic,readonly) CGFloat   viewportPadding;
+@property(nonatomic) CGFloat   innerPadding;
 @property(nonatomic,retain)   UIColor   *normalColor;
 @property(nonatomic,retain)   UIColor   *emphasisColor;
 
@@ -106,6 +107,12 @@
  */
 +(CGFloat)maxAccessoryWidth;
 +(void)setMaxAccessoryWidth:(CGFloat)w;
+
+/*! 
+ Calculates the size of the text of textLabel (the top UILabel in this cell).
+ @param w_available_for_text The actual width that the text label can occupy.
+ */
+-(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text;
 
 @end
 

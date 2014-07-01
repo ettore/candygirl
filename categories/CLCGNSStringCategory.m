@@ -32,6 +32,7 @@
 #import "CLCGNSStringCategory.h"
 #import "NSMutableCharacterSetCategory.h"
 #import "clcg_viewport.h"
+#import "clcg_device_utils.h"
 
 
 @implementation NSString (Candygirl)

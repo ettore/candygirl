@@ -72,7 +72,7 @@
 -(CGFloat)xRightOfImage
 {
   CGRect r = [[_cell imageView] frame];
-  return r.origin.x + r.size.width + [_cell padding];
+  return r.origin.x + r.size.width + [_cell viewportPadding];
 }
 
 
@@ -85,10 +85,13 @@
  - padding on the right side of the image, if we have it,
  - padding on the left side of the accessory view, if we have it.
  */
-+(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw imageW:(CGFloat)imgw padding:(CGFloat)pad
++(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
+                           imageW:(CGFloat)imgw
+                  viewportPadding:(CGFloat)viewport_pad
+                     innerPadding:(CGFloat)pad
 {
   CGFloat accw = [CLCGCell maxAccessoryWidth];
-  return maxw - imgw - pad*2 - (imgw>0 ? pad:0) - accw - (accw>0 ? pad:0);
+  return maxw - imgw - viewport_pad*2 - (imgw>0 ? pad:0) - accw - (accw>0 ? pad:0);
 }
 
 
