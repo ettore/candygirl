@@ -114,12 +114,9 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
     [[self detailTextLabel] setLineBreakMode:NSLineBreakByWordWrapping];
     [[self detailTextLabel] setNumberOfLines:0];
     [[self detailTextLabel] setBaselineAdjustment:UIBaselineAdjustmentAlignCenters];
-    _mainImageView = [[CLCGImageView alloc] initWithFrame:CGRectZero];
-    [_mainImageView setAutoresizesSubviews:YES];
-    [_mainImageView setAutoresizingMask:UIViewAutoresizingNone];
-    [_mainImageView setContentMode:UIViewContentModeScaleAspectFit];
-    [self addSubview:_mainImageView];
     [[super imageView] removeFromSuperview];
+    _mainImageView = [[CLCGImageView alloc] initWithFrame:CGRectZero];
+    [self addSubview:_mainImageView];
     [[self textLabel] setFont:[UIFont boldSystemFontOfSize:15.0f]];  //reasonable default
     [[self detailTextLabel] setFont:[UIFont systemFontOfSize:12.0f]];//reasonable default
     [_infoTextLabel setFont:[UIFont systemFontOfSize:12.0f]];        //reasonable default
