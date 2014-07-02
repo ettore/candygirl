@@ -39,6 +39,9 @@
 
 #import "CLCGCellCommonLayouter.h"
 
+@class CLCGImageView;
+
+
 /*!
  @class CLCGCell
  @abstract A reusable cell capable of rendering 3 blocks of text and an image.
@@ -64,6 +67,8 @@
 @property(nonatomic) CGFloat   innerPadding;
 @property(nonatomic,retain)   UIColor   *normalColor;
 @property(nonatomic,retain)   UIColor   *emphasisColor;
+
+@property(nonatomic,retain) CLCGCellCommonLayouter *commonLayouter;
 
 /*! 
  The designated initializer.
@@ -108,11 +113,27 @@
 +(CGFloat)maxAccessoryWidth;
 +(void)setMaxAccessoryWidth:(CGFloat)w;
 
+-(void)addTapActionOnImage:(void(^)())block;
+
 /*! 
  Calculates the size of the text of textLabel (the top UILabel in this cell).
  @param w_available_for_text The actual width that the text label can occupy.
  */
 -(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text;
+
+/*!
+ This method calculates the possible width available to text content.
+ It accounts for:
+ - image width
+ - accessory item (we assume it's either present/absent on all views)
+ - padding left and right of the _cell's borders,
+ - padding on the right side of the image, if we have it,
+ - padding on the left side of the accessory view, if we have it.
+ */
++(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
+                           imageW:(CGFloat)imgw
+                  viewportPadding:(CGFloat)viewport_pad
+                     innerPadding:(CGFloat)internal_pad;
 
 @end
 

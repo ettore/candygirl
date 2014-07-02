@@ -39,6 +39,7 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
+    [self setUserInteractionEnabled:YES];
     [self setAutoresizesSubviews:YES];
     [self setAutoresizingMask:UIViewAutoresizingNone];
     [self setContentMode:UIViewContentModeScaleAspectFit];
@@ -62,8 +63,9 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
   [super touchesEnded:touches withEvent:event];
-  if ([touches count] == 1)
+  if ([touches count] == 1) {
     [mTapTarget performSelector:mTapAction withObject:self];
+  }
 }
 
 

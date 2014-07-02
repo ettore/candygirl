@@ -72,26 +72,7 @@
 -(CGFloat)xRightOfImage
 {
   CGRect r = [[_cell imageView] frame];
-  return r.origin.x + r.size.width + [_cell viewportPadding];
-}
-
-
-/*!
- This method calculates the available width for the text content.
- It accounts for:
- - image width
- - accessory item (we assume it's either present/absent on all views)
- - padding left and right of the _cell's borders,
- - padding on the right side of the image, if we have it,
- - padding on the left side of the accessory view, if we have it.
- */
-+(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
-                           imageW:(CGFloat)imgw
-                  viewportPadding:(CGFloat)viewport_pad
-                     innerPadding:(CGFloat)pad
-{
-  CGFloat accw = [CLCGCell maxAccessoryWidth];
-  return maxw - imgw - viewport_pad*2 - (imgw>0 ? pad:0) - accw - (accw>0 ? pad:0);
+  return r.origin.x + r.size.width + [_cell innerPadding];
 }
 
 
