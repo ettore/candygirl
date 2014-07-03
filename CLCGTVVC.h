@@ -1,3 +1,4 @@
+
 /*
  Copyright (c) 2012, Ettore Pasquini
  Copyright (c) 2012, Cubelogic
@@ -62,12 +63,6 @@
 }
 
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
-@property(nonatomic,assign) int page;
-@property(nonatomic,assign) int perPage;
-@property(nonatomic,assign) BOOL supportsPagination; /*! Disabled by default */
-@property(nonatomic,assign) int itemsTotal;
-@property(nonatomic,assign) int itemsEnd;
-@property(nonatomic,retain) NSString *moreButtonText;
 @property(nonatomic,retain,readonly) NSMutableArray *items;
 
 /*! Still the designated initializer. Defaults style to UITableViewStylePlain. */
@@ -91,22 +86,56 @@
 /*! Deselects all currently selected rows. */
 -(void)deselectAll:(BOOL)animated;
 
-/*! 
- Creates a standard "More..." CLCGMoreCell using @link moreButtonText @/link 
- as its text. 
- */
--(UITableViewCell*)tableView:(UITableView*)tv moreButtonCellForRow:(NSIndexPath*)ip;
-
-/*! 
+/*!
  @discussion Handles loading the next page in case pagination is supported
   and the user tapped on the "more" row, otherwise calls
   @link tableView::didSelectNormalRow: @/link
  */
 -(void)tableView:(UITableView*)tv didSelectRowAtIndexPath:(NSIndexPath*)ip;
 
-/*!  Does nothing by default. */
+
+//------------------------------------------------------------------------------
+#pragma mark - Pagination
+
+@property(nonatomic,assign) BOOL supportsPagination; /*! Disabled by default */
+
+@property(nonatomic,assign) int page;
+@property(nonatomic,assign) int perPage;
+
+/*! 
+ The current page end index. 
+ You need to set this in order for pagination to work.
+ */
+@property(nonatomic,assign) int itemsEnd;
+
+/*! 
+ 
+ You need to set this in order for pagination to work. 
+ */
+@property(nonatomic,assign) int itemsTotal;
+
+@property(nonatomic,retain) NSString *moreButtonText;
+
+/*!
+ Creates a standard "More..." CLCGMoreCell using @link moreButtonText @/link
+ as its text.
+ */
+-(UITableViewCell*)tableView:(UITableView*)tv moreButtonCellForRow:(NSIndexPath*)ip;
+
+/*!
+ Invoked for row that are not the "more" row.
+ @return 0 byt default.
+ */
+-(CGFloat)tableView:(UITableView*)tv heightForNormalRowAtIndexPath:(NSIndexPath*)ip;
+
+/*!
+ Invoked when a row that is not the "more" row is selected.
+ Does nothing by default.
+ */
 -(void)tableView:(UITableView*)tv didSelectNormalRow:(NSIndexPath*)ip;
 
 -(BOOL)isMoreRow:(NSIndexPath*)ip;
 
+
 @end
+

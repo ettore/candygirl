@@ -237,6 +237,25 @@
 }
 
 
+-(CGFloat)tableView:(UITableView*)tv heightForRowAtIndexPath:(NSIndexPath*)ip
+{
+  CGFloat h;
+
+  if ([self isMoreRow:ip]) {
+    h = [CLCGMoreCell cellHeight];
+  } else {
+    h = [self tableView:tv heightForNormalRowAtIndexPath:ip];
+  }
+
+  return h;
+}
+
+
+-(CGFloat)tableView:(UITableView*)tv heightForNormalRowAtIndexPath:(NSIndexPath*)ip
+{
+  return 0;
+}
+
 //-----------------------------------------------------------------------------
 #pragma mark - UITableViewDataSource
 
