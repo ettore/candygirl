@@ -33,6 +33,7 @@
   self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
   if (self) {
     [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    [self setBackgroundColor:[UIColor clearColor]];
     [[self textLabel] setNumberOfLines:1];//set to 0 and calc height dynamically
     [[self textLabel] setTextColor:[UIColor blackColor]];
     [[self textLabel] setBackgroundColor:[UIColor clearColor]];
