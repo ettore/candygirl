@@ -311,7 +311,9 @@
 //------------------------------------------------------------------------------
 #pragma mark - height measuring methods
 
--(CGFloat)heightForWidth:(CGFloat)w useAttributed:(BOOL)use_attributed
+-(CGFloat)textHeightForWidth:(CGFloat)w
+               useAttributed:(BOOL)use_attributed
+                useLineLimit:(BOOL)use_line_limit
 {
   CGSize text_size = CGSizeZero;
 
@@ -333,7 +335,7 @@
     NSString *text = [(id)self text];
     UIFont *font = [(id)self font];
     if ([text length] > 0) {
-      if ([self respondsToSelector:@selector(numberOfLines)]) {
+      if (use_line_limit && [self respondsToSelector:@selector(numberOfLines)]) {
         CGFloat h = [@"Mj" sizeWithMaxW:w font:font].height;
         h *= [(id)self numberOfLines];
         text_size = [text sizeWithMaxW:w maxH:h font:font];
@@ -356,16 +358,23 @@
              below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
           maxWidth:(CGFloat)max_w
 {
-  CGRect r;
-  CGFloat x, y, w;
+  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  const CGFloat w = max_w - x;
+  const CGFloat h = round([subview textHeightForWidth:w
+                                        useAttributed:use_attributed
+                                         useLineLimit:YES]);
+  [subview setFrame:CGRectMake(x, y, w, h)];
+}
 
-  x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
-  w = max_w - x;
-  CGFloat h = round([subview heightForWidth:w useAttributed:use_attributed]);
 
-  r = CGRectMake(x, y, w, h);
-  [subview setFrame:r];
+-(void)putView:(UIView*)subview
+     toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
+         below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
+{
+  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  [subview setFrame:CGRectMake(x, y, [subview w], [subview h])];
 }
 
 
@@ -373,22 +382,12 @@
      toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
          below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
       maxWidth:(CGFloat)max_w
-      resizing:(BOOL)resize
 {
-  CGRect r;
-  CGFloat x, y, w, h;
-
-  x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
-  if (resize) {
-    w = max_w - x;
-    h = [subview calculatedHeightForWidth:w];
-  } else {
-    w = [subview w];
-    h = [subview h];
-  }
-  r = CGRectMake(x, y, w, h);
-  [subview setFrame:r];
+  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  const CGFloat w = max_w - x;
+  const CGFloat h = [subview calculatedHeightForWidth:w];
+  [subview setFrame:CGRectMake(x, y, w, h)];
 }
 
 

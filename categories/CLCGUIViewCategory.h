@@ -146,7 +146,20 @@
 */
 -(void)addBorderWithInsets:(UIEdgeInsets)insets;
 
--(CGFloat)heightForWidth:(CGFloat)w useAttributed:(BOOL)use_attributed;
+
+/*!
+ @discussion 
+ Calculates the height of the text contained in this view. This works by
+ inspecting the presence of (`text` + 'font`) and/or `attributedText` methods. 
+ If none is present, the returned height will be 0.
+ @param w The width available to contain text
+ @param use_attributed Use the attributed version of text
+ @param use_line_limit Use the numberOfLines property to constrain to max height.
+ @return The height of the eventual text present in this view.
+ */
+-(CGFloat)textHeightForWidth:(CGFloat)w
+               useAttributed:(BOOL)use_attributed
+                useLineLimit:(BOOL)use_line_limit;
 
 
 /*!
@@ -166,21 +179,33 @@
           maxWidth:(CGFloat)max_w;
 
 /*!
- @abstract Lays out a subview.
+ @abstract
+ Lays out a subview.
+ @param subview          The subview to be layed out.
+ @param horiz_align_view Lay out subview to the right of horiz_align_view.
+ @param padding_horiz    Horizontal padding between horiz_align_view and subview.
+ @param vert_align_view  Lay out subview below vert_align_view.
+ @param padding_vert     Vertical padding between vert_align_view and subview.
+ */
+-(void)putView:(UIView*)subview
+     toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
+         below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert;
+
+/*!
+ @abstract 
+ Lays out a subview, resizing it according to @link CLCGUIViewLayout @/link 
+ protocol.
  @param subview          The subview to be layed out.
  @param horiz_align_view Lay out subview to the right of horiz_align_view.
  @param padding_horiz    Horizontal padding between horiz_align_view and subview.
  @param vert_align_view  Lay out subview below vert_align_view.
  @param padding_vert     Vertical padding between vert_align_view and subview.
  @param max_w            The max width available to the subview.
- @param resize           Whether the subview should be resized according to
-                         @link CLCGUIViewLayout @/link protocol.
  */
 -(void)putView:(UIView<CLCGUIViewLayout>*)subview
      toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
          below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
-      maxWidth:(CGFloat)max_w
-      resizing:(BOOL)resize;
+      maxWidth:(CGFloat)max_w;
 
 @end
 
