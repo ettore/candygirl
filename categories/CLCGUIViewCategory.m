@@ -320,7 +320,7 @@
   if (use_attributed && [self respondsToSelector:@selector(attributedText)]) {
     NSAttributedString *attr_text = [(id)self attributedText];
     if ([attr_text length] > 0) {
-      if ([self respondsToSelector:@selector(numberOfLines)]) {
+      if (use_line_limit && [self respondsToSelector:@selector(numberOfLines)]) {
         NSAttributedString *s = [attr_text attributedSubstringFromRange:
                                  NSMakeRange(0,1)];
         CGFloat h = [s sizeWithMaxW:w].height + 1.0f;
@@ -361,9 +361,9 @@
   const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
   const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
   const CGFloat w = max_w - x;
-  const CGFloat h = round([subview textHeightForWidth:w
-                                        useAttributed:use_attributed
-                                         useLineLimit:YES]);
+  const CGFloat h = ceil([subview textHeightForWidth:w
+                                       useAttributed:use_attributed
+                                        useLineLimit:YES]);
   [subview setFrame:CGRectMake(x, y, w, h)];
 }
 

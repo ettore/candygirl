@@ -30,6 +30,7 @@
 
 /*!
  Use this method to provide a height calculation for your view, given a width.
+ @return A rounded-up value of the height needed to properly display this view.
  */
 -(CGFloat)calculatedHeightForWidth:(const CGFloat)w;
 
