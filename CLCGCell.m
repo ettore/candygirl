@@ -336,5 +336,27 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark - Helpers
+
+
+-(void)loadImageForURL:(NSString*)img_url
+             retinaURL:(NSString*)retina_img_url
+               context:(id)cell_cxt_obj
+{
+  [self setContext:cell_cxt_obj];
+  [CLCGImageLoader loadImageForURL:img_url
+                         retinaURL:retina_img_url
+                          useCache:YES
+                             block:^(UIImage *img, int status)
+   {
+     if ([self context] == cell_cxt_obj) {
+       [self showImage:img
+              animated:(status != CLCGImageStatusCached)];
+     }
+   }];
+}
+
+
 @end
 

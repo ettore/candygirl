@@ -135,5 +135,14 @@
                   viewportPadding:(CGFloat)viewport_pad
                      innerPadding:(CGFloat)internal_pad;
 
+/*!
+ Load an image for the cell that displaying info of particular object(context).
+ If the image loads after the cell is reused, the context will be different and
+ the outdated image will not appear.
+ */
+-(void)loadImageForURL:(NSString*)img_url
+             retinaURL:(NSString*)retina_img_url
+               context:(id)cell_cxt_obj;
+
 @end
 
