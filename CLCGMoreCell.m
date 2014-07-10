@@ -74,7 +74,7 @@
 -(void)layoutSubviews
 {
   [super layoutSubviews];
-  [[self textLabel] setW:[self w]];
+  [[self textLabel] setW:([self w] - [[self textLabel] x]*2)];
 }
 
 
