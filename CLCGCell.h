@@ -144,5 +144,15 @@
              retinaURL:(NSString*)retina_img_url
                context:(id)cell_cxt_obj;
 
+
+//------------------------------------------------------------------------------
+#pragma mark - styling
+
++(UIFont*)textFont;
++(UIFont*)detailFont;
++(UIFont*)infoFont;
+
+
+
 @end
 

@@ -117,9 +117,9 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
     [[super imageView] removeFromSuperview];
     _mainImageView = [[CLCGImageView alloc] initWithFrame:CGRectZero];
     [self addSubview:_mainImageView];
-    [[self textLabel] setFont:[UIFont boldSystemFontOfSize:15.0f]];  //reasonable default
-    [[self detailTextLabel] setFont:[UIFont systemFontOfSize:12.0f]];//reasonable default
-    [_infoTextLabel setFont:[UIFont systemFontOfSize:12.0f]];        //reasonable default
+    [[self textLabel] setFont:[[self class] textFont]];
+    [[self detailTextLabel] setFont:[[self class] detailFont]];
+    [_infoTextLabel setFont:[[self class] infoFont]];
     [self setEmphasisColor:[UIColor colorWithRed:1.0 green:0.98 blue:0.85 alpha:1.0]];
     [self setNormalColor:[UIColor whiteColor]];
 
@@ -356,6 +356,29 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
      }
    }];
 }
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Styling
+
+
++(UIFont*)textFont
+{
+  return [UIFont boldSystemFontOfSize:15.0f];  //reasonable default
+}
+
+
++(UIFont*)detailFont
+{
+  return [UIFont systemFontOfSize:12.0f]; //reasonable default
+}
+
+
++(UIFont*)infoFont
+{
+  return [UIFont systemFontOfSize:12.0f]; //reasonable default
+}
+
 
 
 @end
