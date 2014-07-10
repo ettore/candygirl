@@ -75,7 +75,8 @@
     [mReq cancel];
     CLCG_REL(mReq);
   }
-  
+
+  [self setImage:nil];
   mReq = [CLCGImageLoader loadImageForURL:normalurl
                                 retinaURL:retinaurl
                                  useCache:YES
