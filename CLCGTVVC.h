@@ -134,6 +134,16 @@
  */
 -(void)tableView:(UITableView*)tv didSelectNormalRow:(NSIndexPath*)ip;
 
+/*!
+ Invoked for cells that are not the "more" row.
+ Subclasses must override this method just like they would override 
+ -tableView:cellForRowAtIndexPath:, ignoring handling of the more cell since
+ that is handled by CLCGTVVC.
+ @return nil by default.
+ */
+-(UITableViewCell*)tableView:(UITableView*)tv
+ normalCellForRowAtIndexPath:(NSIndexPath*)ip;
+
 -(BOOL)isMoreRow:(NSIndexPath*)ip;
 
 

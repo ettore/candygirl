@@ -211,6 +211,14 @@
 }
 
 
+-(void)reload
+{
+  self.page = 1;
+  [self.items removeAllObjects];
+  [super reload];
+}
+
+
 //-----------------------------------------------------------------------------
 #pragma mark - UITableViewDelegate
 
@@ -241,7 +249,7 @@
 {
   CGFloat h;
 
-  if ([self isMoreRow:ip]) {
+  if ([self isMoreRow:ip] && [self supportsPagination]) {
     h = [CLCGMoreCell cellHeight];
   } else {
     h = [self tableView:tv heightForNormalRowAtIndexPath:ip];
@@ -268,15 +276,31 @@
 
 -(NSInteger)tableView:(UITableView*)tv numberOfRowsInSection:(NSInteger)sect
 {
-  if (mItemsEnd < mItemsTotal && [self supportsPagination])
+  if (mItemsEnd < mItemsTotal && [self supportsPagination]) {
     return [mItems count] + 1; //for the "More..." button
-  else
+  } else {
     return [mItems count];
+  }
 }
 
 
 -(UITableViewCell*)tableView:(UITableView*)tv cellForRowAtIndexPath:(NSIndexPath*)ip
 {
+  if ([self isMoreRow:ip] && [self supportsPagination]) {
+    return [self tableView:tv moreButtonCellForRow:ip];
+  } else {
+    return [self tableView:tv normalCellForRowAtIndexPath:ip];
+  }
+}
+
+
+-(UITableViewCell*)tableView:(UITableView*)tv
+ normalCellForRowAtIndexPath:(NSIndexPath*)ip
+{
+#ifdef DEBUG
+  [NSException raise:NSInternalInconsistencyException
+              format:@"You forgot to override tableView:normalCellForRowAtIndexPath:"];
+#endif
   return nil;
 }
 
