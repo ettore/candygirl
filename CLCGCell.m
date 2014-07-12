@@ -86,8 +86,8 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 // overriding super-class designated initializer
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)cid
 {
-  return [self initWithImageWidth:CLCGCELL_IMG_DEFAULT_W 
-                           height:CLCGCELL_IMG_DEFAULT_H 
+  return [self initWithImageWidth:[[self class] imageSize].width
+                           height:[[self class] imageSize].height
                           padding:0
                           reuseId:cid];
 }
@@ -263,6 +263,23 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 +(CGFloat)cellHeightForText:(NSString*)text
                  detailText:(NSString*)detailtext
                    infoText:(NSString*)infotext
+                   maxWidth:(CGFloat)cell_maxw
+{
+  return [self cellHeightForText:text
+                      detailText:detailtext
+                        infoText:infotext
+                            font:[self textFont]
+                      detailFont:[self detailFont]
+                        infoFont:[self infoFont]
+                        maxWidth:cell_maxw
+                          imageW:[[self class] imageSize].width
+                          imageH:[[self class] imageSize].height
+                         padding:[[self class] viewportPadding]];
+}
+
++(CGFloat)cellHeightForText:(NSString*)text
+                 detailText:(NSString*)detailtext
+                   infoText:(NSString*)infotext
                        font:(UIFont*)text_font
                  detailFont:(UIFont*)detail_font
                    infoFont:(UIFont*)info_font
@@ -360,6 +377,18 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 
 //------------------------------------------------------------------------------
 #pragma mark - Styling
+
+
++(CGFloat)viewportPadding
+{
+  return CLCG_DEFAULT_VIEWPORT_PADDING;
+}
+
+
++(CGSize)imageSize
+{
+  return CGSizeMake(CLCGCELL_IMG_DEFAULT_W, CLCGCELL_IMG_DEFAULT_H);
+}
 
 
 +(UIFont*)textFont

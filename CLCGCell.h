@@ -84,8 +84,42 @@
                 padding:(CGFloat)padding
                 reuseId:(NSString*)cid;
 
-/*! 
- Calculates the height of the cell in accordance with all given parameters. 
+/*!
+ Executes block if a tap on the imageView happens.
+ */
+-(void)addTapActionOnImage:(void(^)())block;
+
+/*!
+ Load an image for the cell that displaying info of particular object(context).
+ If the image loads after the cell is reused, the context will be different and
+ the outdated image will not appear.
+ */
+-(void)loadImageForURL:(NSString*)img_url
+             retinaURL:(NSString*)retina_img_url
+               context:(id)cell_cxt_obj;
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Height calculation methods
+
+/*!
+ Calculates the size of the text of textLabel (the top UILabel in this cell).
+ @param w_available_for_text The actual width that the text label can occupy.
+ */
+-(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text;
+
+/*!
+ Uses styling class methods to derive height measurement that belong to
+ these cells.
+ */
++(CGFloat)cellHeightForText:(NSString*)text
+                 detailText:(NSString*)detailtext
+                   infoText:(NSString*)infotext
+                   maxWidth:(CGFloat)cell_maxw;
+
+/*!
+ @deprecated
+ Calculates the height of the cell in accordance with all given parameters.
  */
 +(CGFloat)cellHeightForText:(NSString*)text
                  detailText:(NSString*)detailtext
@@ -98,28 +132,22 @@
                      imageH:(CGFloat)imgh
                     padding:(CGFloat)padding;
 
-/*! 
+/*!
  @abstract The max width accounted during layout calculations for the
-    accessory view or discolosure arrow.
+ accessory view or disclosure arrow.
  @discussion By default, CLCGCell does not use a true accessory view; rather,
-    it employs the default UITableViewCellAccessoryDisclosureIndicator type.
-    If you use actual custom views for your accessory element, you should 
-    probably create a subclass and override this method with actual 
-    measurements.
-    If you don't use any accessory item, override this method and return 0.
- @return A constant value that should account for the size of a default 
-    accessory type.
+ it employs the default UITableViewCellAccessoryDisclosureIndicator type.
+ If you use actual custom views for your accessory element, you should
+ probably create a subclass and override this method with actual
+ measurements.
+ If you don't use any accessory item, override this method and return 0.
+ @return A constant value that should account for the size of a default
+ accessory type.
  */
 +(CGFloat)maxAccessoryWidth;
+
+/*! @deprecated */
 +(void)setMaxAccessoryWidth:(CGFloat)w;
-
--(void)addTapActionOnImage:(void(^)())block;
-
-/*! 
- Calculates the size of the text of textLabel (the top UILabel in this cell).
- @param w_available_for_text The actual width that the text label can occupy.
- */
--(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text;
 
 /*!
  This method calculates the possible width available to text content.
@@ -135,19 +163,12 @@
                   viewportPadding:(CGFloat)viewport_pad
                      innerPadding:(CGFloat)internal_pad;
 
-/*!
- Load an image for the cell that displaying info of particular object(context).
- If the image loads after the cell is reused, the context will be different and
- the outdated image will not appear.
- */
--(void)loadImageForURL:(NSString*)img_url
-             retinaURL:(NSString*)retina_img_url
-               context:(id)cell_cxt_obj;
-
-
 //------------------------------------------------------------------------------
-#pragma mark - styling
+#pragma mark - Styling class methods
 
+
++(CGFloat)viewportPadding;
++(CGSize)imageSize;
 +(UIFont*)textFont;
 +(UIFont*)detailFont;
 +(UIFont*)infoFont;
