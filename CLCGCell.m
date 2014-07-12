@@ -28,6 +28,7 @@
  POSSIBILITY OF SUCH DAMAGE.
  */
 
+#import <tgmath.h>
 #import <QuartzCore/QuartzCore.h>
 
 #import "clcg_macros.h"
@@ -184,24 +185,23 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 {
   CGRect r;
   CGSize sz;
+  const Class class = [self class];
   
   [super layoutSubviews];
 
   // layout image view
-  [_mainImageView setFrame:CGRectMake(_viewportPadding, _innerPadding, _imgW, _imgH)];
+  const CGRect img_frame = CGRectMake(_viewportPadding, [class topBottomPadding],
+                                      _imgW, _imgH);
+  [_mainImageView setFrame:img_frame];
 
   // these should not change
   const CGFloat max_cellh = CLCG_MAX_CELL_H;
-  const CGFloat imgw = [_mainImageView w];
-  const CGFloat x = [[self commonLayouter] xRightOfImage];
-  const CGFloat w = [[self class] textLabelWidthWithCellW:[self w]
-                                                   imageW:imgw
-                                          viewportPadding:_viewportPadding
-                                             innerPadding:_innerPadding];
+  const CGFloat x = CGRectGetMaxX(img_frame) + [class imageRightPadding];
+  const CGFloat w = [[self class] textLabelWidthWithCellW:[self w]];
 
   // layout text label
   sz = [self calculateTextLabelSizeForCellWidth:w];
-  sz.height = ceilf(sz.height);
+  sz.height = ceil(sz.height);
   r = CGRectMake(x, [_mainImageView y], w, sz.height);
   [[self textLabel] setFrame:CGRectIntegral(r)];
   
@@ -210,7 +210,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   sz = [[[self detailTextLabel] text] sizeWithFont:[[self detailTextLabel] font]
                                  constrainedToSize:sz
                                      lineBreakMode:NSLineBreakByWordWrapping];
-  sz.height = ceilf(sz.height);
+  sz.height = ceil(sz.height);
   r = CGRectMake(x, [[self textLabel] low] + (int)(_innerPadding/2),
                  sz.width, sz.height);
   [[self detailTextLabel] setFrame:CGRectIntegral(r)];
@@ -220,7 +220,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   sz = [[_infoTextLabel text] sizeWithFont:[_infoTextLabel font]
                          constrainedToSize:sz
                              lineBreakMode:NSLineBreakByWordWrapping];
-  sz.height = ceilf(sz.height);
+  sz.height = ceil(sz.height);
   r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_innerPadding/2),
                  w, sz.height);
   [_infoTextLabel setFrame:CGRectIntegral(r)];
@@ -249,14 +249,16 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 }
 
 
-
 +(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
-                           imageW:(CGFloat)imgw
-                  viewportPadding:(CGFloat)viewport_pad
-                     innerPadding:(CGFloat)pad
 {
-  CGFloat accw = [self maxAccessoryWidth];
-  return maxw - imgw - viewport_pad*2 - (imgw>0 ? pad:0) - accw - (accw>0 ? pad:0);
+  const CGFloat accw = [self maxAccessoryWidth];
+  const CGFloat imgw = [self imageSize].width;
+
+  CGFloat w = maxw - imgw - [self viewportPadding]*2 - accw;
+  w -= (imgw > 0 ? [self imageRightPadding] : 0);
+  w -= (accw > 0 ? [self accessoryViewLeftPadding] : 0);
+
+  return w;
 }
 
 
@@ -272,9 +274,9 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                       detailFont:[self detailFont]
                         infoFont:[self infoFont]
                         maxWidth:cell_maxw
-                          imageW:[[self class] imageSize].width
-                          imageH:[[self class] imageSize].height
-                         padding:[[self class] viewportPadding]];
+                          imageW:[self imageSize].width
+                          imageH:[self imageSize].height
+                         padding:[self viewportPadding]];
 }
 
 +(CGFloat)cellHeightForText:(NSString*)text
@@ -291,12 +293,10 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   CGSize sz;
   CGFloat label_w, h;
   const CGFloat cell_maxh = CLCG_MAX_CELL_H;
+  const CGFloat inner_padding = [self innerPadding];
   
   // adding padding for cell margins (L & R) and right margin of img
-  label_w = [self textLabelWidthWithCellW:cell_maxw
-                                   imageW:imgw
-                          viewportPadding:padding
-                             innerPadding:padding];
+  label_w = [self textLabelWidthWithCellW:cell_maxw];
 
   // measure main text size
   sz = CGSizeMake(label_w, cell_maxh);
@@ -307,23 +307,23 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   
   // add detail text size
   if ([detailtext length] > 0) {
-    h += padding + [detailtext sizeWithFont:detail_font
-                          constrainedToSize:CGSizeMake(label_w, cell_maxh)
-                              lineBreakMode:NSLineBreakByWordWrapping].height;
+    h += inner_padding + [detailtext sizeWithFont:detail_font
+                                constrainedToSize:CGSizeMake(label_w, cell_maxh)
+                                    lineBreakMode:NSLineBreakByWordWrapping].height;
   }
 
   // now we have to add space for info text + 1 padding unit
   if ([infotext length] > 0) {
-    h += padding + [infotext sizeWithFont:info_font
-                        constrainedToSize:CGSizeMake(label_w, cell_maxh)
-                            lineBreakMode:NSLineBreakByWordWrapping].height;
+    h += inner_padding + [infotext sizeWithFont:info_font
+                              constrainedToSize:CGSizeMake(label_w, cell_maxh)
+                                  lineBreakMode:NSLineBreakByWordWrapping].height;
   }
 
   // add padding above and below cell content
-  h = MAX(h, imgh) + padding*2;
+  h = MAX(h, imgh) + [self topBottomPadding]*2;
   
   // round up to avoid occasional rendering glitches in tableview separators
-  return ceilf(h);
+  return ceil(h);
 }
 
 
@@ -380,6 +380,30 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 
 
 +(CGFloat)viewportPadding
+{
+  return CLCG_DEFAULT_VIEWPORT_PADDING;
+}
+
+
++(CGFloat)topBottomPadding
+{
+  return CLCG_DEFAULT_VIEWPORT_PADDING;
+}
+
+
++(CGFloat)imageRightPadding
+{
+  return CLCG_DEFAULT_VIEWPORT_PADDING;
+}
+
+
++(CGFloat)accessoryViewLeftPadding
+{
+  return CLCG_DEFAULT_VIEWPORT_PADDING;
+}
+
+
++(CGFloat)innerPadding
 {
   return CLCG_DEFAULT_VIEWPORT_PADDING;
 }

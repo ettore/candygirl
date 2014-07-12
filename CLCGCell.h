@@ -158,17 +158,19 @@
  - padding on the right side of the image, if we have it,
  - padding on the left side of the accessory view, if we have it.
  */
-+(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw
-                           imageW:(CGFloat)imgw
-                  viewportPadding:(CGFloat)viewport_pad
-                     innerPadding:(CGFloat)internal_pad;
++(CGFloat)textLabelWidthWithCellW:(CGFloat)maxw;
 
 //------------------------------------------------------------------------------
 #pragma mark - Styling class methods
 
 
 +(CGFloat)viewportPadding;
++(CGFloat)topBottomPadding;
++(CGFloat)imageRightPadding;
++(CGFloat)accessoryViewLeftPadding;
++(CGFloat)innerPadding;
 +(CGSize)imageSize;
+
 +(UIFont*)textFont;
 +(UIFont*)detailFont;
 +(UIFont*)infoFont;
