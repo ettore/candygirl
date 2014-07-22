@@ -56,7 +56,13 @@ enum CLCGLoadingState {
   id<CLCGPopoverContentDelegate> mPopoverContentDelegate;
 }
 
+/*! 
+ Subclasses should set the loading state accordingly, before/during/after
+ loading content, depending what loading means in each VC. E.g. it should be 
+ set to CLCG_LOADED even if there was no api call being performed.
+ */
 @property(nonatomic,assign) enum CLCGLoadingState loadState;
+
 @property(nonatomic,retain) IBOutlet UIView *spinnerContainer;
 @property(nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
 @property(nonatomic) UIActivityIndicatorViewStyle  spinnerStyle;
