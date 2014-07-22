@@ -40,7 +40,10 @@
   NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
 
   for (id item in self) {
-    [a addObject:block(item)];
+    id new_item = block(item);
+    if (new_item) {
+      [a addObject:new_item];
+    }
   }
 
   return a;
@@ -49,13 +52,9 @@
 
 -(NSArray*)mapSelector:(SEL)item_method
 {
-  NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
-
-  for (id item in self) {
-    [a addObject:[item performSelector:item_method]];
-  }
-
-  return a;
+  return [self map:^id(id item) {
+    return [item performSelector:item_method];
+  }];
 }
 
 
