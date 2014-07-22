@@ -146,6 +146,10 @@
   if (clcg_os_geq(@"7")) {
     [mTableView setSeparatorInset:UIEdgeInsetsMake(0, left_inset, 0, 0)];
   }
+
+  // This is needed to suppress extra table separators which appear if there
+  // aren't many rows in the tableview.
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 
