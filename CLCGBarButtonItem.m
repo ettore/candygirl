@@ -10,10 +10,6 @@
 #import "CLCGTogglerView.h"
 
 
-@interface CLCGBarButtonItem ()
--(UIActivityIndicatorView*)spinner;
-@end
-
 @implementation CLCGBarButtonItem
 {
   CLCGTogglerView             *mToggler;

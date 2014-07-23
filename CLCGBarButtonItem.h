@@ -44,4 +44,6 @@ enum CLCGBarButtonItemState {
             action:(SEL)action
             height:(CGFloat)height;
 
+-(UIActivityIndicatorView*)spinner;
+
 @end
