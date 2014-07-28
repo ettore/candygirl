@@ -265,8 +265,9 @@
 
 -(CGFloat)tableView:(UITableView*)tv heightForNormalRowAtIndexPath:(NSIndexPath*)ip
 {
-  return 0;
+  return tv.rowHeight;
 }
+
 
 //-----------------------------------------------------------------------------
 #pragma mark - UITableViewDataSource
