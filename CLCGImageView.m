@@ -39,17 +39,32 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
-    [self setUserInteractionEnabled:YES];
-    [self setAutoresizesSubviews:YES];
-    [self setAutoresizingMask:UIViewAutoresizingNone];
-    [self setContentMode:UIViewContentModeScaleAspectFit];
+    [self clcg_preparePrivate];
   }
   return self;
 }
 
 
+-(void)awakeFromNib
+{
+  [super awakeFromNib];
+  [self clcg_preparePrivate];
+}
+
+
+-(void)clcg_preparePrivate
+{
+  [self setUserInteractionEnabled:YES];
+  [self setAutoresizesSubviews:YES];
+  [self setAutoresizingMask:UIViewAutoresizingNone];
+  [self setContentMode:UIViewContentModeScaleAspectFit];
+}
+
+
 -(void)addTarget:(id)target onTapAction:(SEL)action
 {
+  [self setUserInteractionEnabled:YES];
+
   mTapAction = action;
 
   // we want to keep an "assign" memory policy here to avoid circular references
