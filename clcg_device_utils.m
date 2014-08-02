@@ -127,6 +127,13 @@ NSString *clcg_getpref_str(NSString *key)
 }
 
 
+id clcg_getpref_obj(NSString *key)
+{
+  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+  return [defs objectForKey:key];
+}
+
+
 NSString *clcg_device_resolution(void)
 {
   CGFloat scale;

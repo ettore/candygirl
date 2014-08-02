@@ -58,6 +58,9 @@ extern "C" {
   /** @return A string pref value from the user defaults. */
   NSString *clcg_getpref_str(NSString *key);
 
+  /** @return An object from the user defaults. */
+  id clcg_getpref_obj(NSString *key);
+
   /** @return A string with the resolution (in pixel) and the scale value. */
   NSString *clcg_device_resolution(void);
   
