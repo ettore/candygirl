@@ -217,11 +217,17 @@
 
   if (clcg_os_geq(@"7")) {
     NSParagraphStyle *paragraph_style = [NSParagraphStyle defaultParagraphStyle];
+    NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithCapacity:2];
+    attrs[NSParagraphStyleAttributeName] = paragraph_style;
+    if (font) {
+      attrs[NSFontAttributeName] = font;
+    }
+    [attrs autorelease];
+
     return [self
             boundingRectWithSize:CGSizeMake(max_w, max_h)
             options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine
-            attributes:@{NSFontAttributeName:font,
-                         NSParagraphStyleAttributeName:paragraph_style}
+            attributes:attrs
             context:nil].size;
   } else {
 #pragma clang diagnostic push
