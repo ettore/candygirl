@@ -47,20 +47,6 @@
     it easy to swap it out while downloading content from the net.
  */
 @interface CLCGTVVC : CLCGVC<UITableViewDelegate,UITableViewDataSource>
-{
-  UITableViewStyle        mStyle;
-  UITableView             *mTableView;
-
-  // array containing the models of the table-view items.
-  NSMutableArray          *mItems;
-
-  // support for pagination. Disabled by default.
-  int                     mPage;
-  int                     mPerPage;
-  int                     mItemsTotal; //total number of items
-  int                     mItemsEnd;   //current number of items being displayed
-  NSString                *mMoreButtonText;
-}
 
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
 @property(nonatomic,retain,readonly) NSMutableArray *items;
@@ -98,7 +84,6 @@
 #pragma mark - Pagination
 
 @property(nonatomic,assign) BOOL supportsPagination; /*! Disabled by default */
-
 @property(nonatomic,assign) int page;
 @property(nonatomic,assign) int perPage;
 

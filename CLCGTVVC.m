@@ -39,14 +39,18 @@
 #define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
 
 @implementation CLCGTVVC
+{
+  UITableViewStyle        _style;
+}
 
 
-@synthesize page = mPage;
-@synthesize perPage = mPerPage;
-@synthesize itemsTotal = mItemsTotal;
-@synthesize itemsEnd = mItemsEnd;
-@synthesize moreButtonText = mMoreButtonText;
-@synthesize items = mItems;
+@synthesize page = _page;
+@synthesize perPage = _perPage;
+@synthesize itemsTotal = _itemsTotal;
+@synthesize itemsEnd = _itemsEnd;
+@synthesize moreButtonText = _moreButtonText;
+@synthesize items = _items;
+@synthesize tableView = _tableView;
 
 
 //-----------------------------------------------------------------------------
@@ -55,8 +59,8 @@
 
 -(void)dealloc
 {
-  CLCG_REL(mItems);
-  CLCG_REL(mMoreButtonText);
+  CLCG_REL(_items);
+  CLCG_REL(_moreButtonText);
   [super dealloc];
 }
 
@@ -65,10 +69,10 @@
 -(void)releaseRetainedSubviews
 {
   // avoid "message sent to deallocated instance" errors on iOS 7
-  [mTableView setDelegate:nil];
-  [mTableView setDataSource:nil];
+  [_tableView setDelegate:nil];
+  [_tableView setDataSource:nil];
 
-  CLCG_REL(mTableView);
+  CLCG_REL(_tableView);
   [super releaseRetainedSubviews];
 }
 
@@ -78,7 +82,7 @@
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    mStyle = UITableViewStylePlain;
+    _style = UITableViewStylePlain;
     [self doInitCore];
   }
   return self;
@@ -89,7 +93,7 @@
 {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
-    mStyle = style;
+    _style = style;
     [self doInitCore];
   }
   return self;
@@ -98,8 +102,9 @@
 
 -(void)doInitCore
 {
-  mPage = 1;
-  mPerPage = -1; // pagination is disabled by default
+  _items = [[NSMutableArray alloc] init];
+  _page = 1;
+  _perPage = -1; // pagination is disabled by default
 }
 
 
@@ -110,7 +115,7 @@
 -(void)loadBaseView
 {
   UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
-  UITableView *tv = [[UITableView alloc] initWithFrame:CGRectZero style:mStyle];
+  UITableView *tv = [[UITableView alloc] initWithFrame:CGRectZero style:_style];
   
   // set views to expand to all available area
   UIViewAutoresizing expandmask;
@@ -135,16 +140,16 @@
   
   CGFloat left_inset;
 
-  if ([mTableView style] == UITableViewStyleGrouped) {
+  if ([_tableView style] == UITableViewStyleGrouped) {
     // necessary to avoid default striped background for grouped tableviews
-    [mTableView setBackgroundView:nil];
+    [_tableView setBackgroundView:nil];
     left_inset = CLCG_PADDING;
   } else {
     left_inset = 0.0f;
   }
   
   if (clcg_os_geq(@"7")) {
-    [mTableView setSeparatorInset:UIEdgeInsetsMake(0, left_inset, 0, 0)];
+    [_tableView setSeparatorInset:UIEdgeInsetsMake(0, left_inset, 0, 0)];
   }
 
   // This is needed to suppress extra table separators which appear if there
@@ -168,7 +173,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [mTableView flashScrollIndicators];
+  [_tableView flashScrollIndicators];
 }
 
 
@@ -178,26 +183,26 @@
 
 -(UITableView*)tableView
 {
-  return mTableView;
+  return _tableView;
 }
 
 
 -(void)setTableView:(UITableView *)tv
 {
-  if (![mTableView isEqual:tv]) {
-    [mTableView release];
-    mTableView = [tv retain];
-    [mTableView setDelegate:self];
-    [mTableView setDataSource:self];
+  if (![_tableView isEqual:tv]) {
+    [_tableView release];
+    _tableView = [tv retain];
+    [_tableView setDelegate:self];
+    [_tableView setDataSource:self];
   }
 }
 
 
 -(void)deselectAll:(BOOL)animated
 {
-  NSArray *selips = [mTableView indexPathsForSelectedRows];
-  for (NSIndexPath *ip in selips) {
-    [mTableView deselectRowAtIndexPath:ip animated:animated];
+  NSArray *selected_ips = [_tableView indexPathsForSelectedRows];
+  for (NSIndexPath *ip in selected_ips) {
+    [_tableView deselectRowAtIndexPath:ip animated:animated];
   }
 }
 
@@ -205,13 +210,13 @@
 -(void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
   [super setEditing:editing animated:animated];
-  [mTableView setEditing:editing animated:animated];
+  [_tableView setEditing:editing animated:animated];
 }
 
 
 -(BOOL)isMoreRow:(NSIndexPath*)ip
 {
-  return (mItemsEnd < mItemsTotal && [ip row] == (NSInteger)[mItems count]);
+  return (_itemsEnd < _itemsTotal && [ip row] == (NSInteger)[_items count]);
 }
 
 
@@ -232,7 +237,7 @@
   if ([self isMoreRow:ip] && [self supportsPagination]) {
     CLCGMoreCell *more;
 
-    mPage++;
+    _page++;
     [self setLoadState:CLCG_OUTDATED];
     [self loadFromServerIfNeeded];
     more = (CLCGMoreCell *)[self tableView:tv moreButtonCellForRow:ip];
@@ -281,10 +286,10 @@
 
 -(NSInteger)tableView:(UITableView*)tv numberOfRowsInSection:(NSInteger)sect
 {
-  if (mItemsEnd < mItemsTotal && [self supportsPagination]) {
-    return [mItems count] + 1; //for the "More..." button
+  if (_itemsEnd < _itemsTotal && [self supportsPagination]) {
+    return [_items count] + 1; //for the "More..." button
   } else {
-    return [mItems count];
+    return [_items count];
   }
 }
 
@@ -317,7 +322,8 @@
   cell = (CLCGMoreCell*)[tv dequeueReusableCellWithIdentifier:CLCGTVVC_MORE_CID];
 
   if (cell == nil) {
-    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID withText:mMoreButtonText];
+    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID
+                                      withText:_moreButtonText];
     [cell autorelease];
   }
 
@@ -334,13 +340,13 @@
 
 -(BOOL)supportsPagination
 {
-  return mPerPage > 0;
+  return _perPage > 0;
 }
 
 
 -(void)setSupportsPagination:(BOOL)flag
 {
-  mPerPage = (flag ? PER_PAGE_DEFAULT : -1);
+  _perPage = (flag ? PER_PAGE_DEFAULT : -1);
 }
 
 
