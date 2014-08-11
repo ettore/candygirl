@@ -112,21 +112,19 @@
 
 -(NSString*)URLEncode
 {
-  NSString *s;
-  
-  s = NSMakeCollectable(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                                (
-#if __has_feature(objc_arc)
-                                                                 __bridge
-#endif
-                                                                 CFStringRef)self,
-                                                                NULL, 
-                                                                CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"),
-                                                                kCFStringEncodingUTF8));
-	if (s)
-		return [s autorelease];
-	else
+  CFStringRef s;
+
+  s = CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
+                                              (__bridge CFStringRef)self,
+                                              NULL,
+                                              CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"),
+                                              kCFStringEncodingUTF8);
+  NSString *nss = CFBridgingRelease(s);
+	if (nss) {
+		return nss;
+	} else {
     return @"";
+  }
 }
 
 
@@ -222,7 +220,6 @@
     if (font) {
       attrs[NSFontAttributeName] = font;
     }
-    [attrs autorelease];
 
     return [self
             boundingRectWithSize:CGSizeMake(max_w, max_h)

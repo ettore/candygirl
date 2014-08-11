@@ -44,25 +44,11 @@
 }
 
 
-@synthesize page = _page;
-@synthesize perPage = _perPage;
-@synthesize itemsTotal = _itemsTotal;
-@synthesize itemsEnd = _itemsEnd;
-@synthesize moreButtonText = _moreButtonText;
-@synthesize items = _items;
 @synthesize tableView = _tableView;
 
 
 //-----------------------------------------------------------------------------
 #pragma mark - Init, dealloc, memory mgmt
-
-
--(void)dealloc
-{
-  CLCG_REL(_items);
-  CLCG_REL(_moreButtonText);
-  [super dealloc];
-}
 
 
 // this is called by the super class dealloc and viewDidUnload
@@ -72,7 +58,6 @@
   [_tableView setDelegate:nil];
   [_tableView setDataSource:nil];
 
-  CLCG_REL(_tableView);
   [super releaseRetainedSubviews];
 }
 
@@ -127,10 +112,6 @@
   [self setView:v];
   [self setTableView:tv];
   [v addSubview:tv];
-
-  // cleanup
-  [v release];
-  [tv release];
 }
 
 
@@ -190,8 +171,7 @@
 -(void)setTableView:(UITableView *)tv
 {
   if (![_tableView isEqual:tv]) {
-    [_tableView release];
-    _tableView = [tv retain];
+    _tableView = tv;
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
   }
@@ -324,10 +304,9 @@
   if (cell == nil) {
     cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID
                                       withText:_moreButtonText];
-    [cell autorelease];
   }
 
-  if (mLoadState != CLCG_LOADING)
+  if (self.loadState != CLCG_LOADING)
     [cell didStopRequestingMore];
 
   return cell;

@@ -14,13 +14,6 @@
 @implementation CLCGMoreCell
 
 
--(void)dealloc
-{
-  CLCG_REL(mSpinner);
-  [super dealloc];
-}
-
-
 -(id)initReusingId:(NSString*)reuse_id
 {
   return [self initReusingId:reuse_id withText:CLCG_LOC(@"More...")];

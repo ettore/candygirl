@@ -12,17 +12,13 @@
 
 @implementation CLCGBarButtonItem
 {
-  CLCGTogglerView             *mToggler;
-  enum CLCGBarButtonItemState mState;
-  BOOL                        mIsSystemItem;
+  CLCGTogglerView             *_toggler;
+  CLCGBarButtonItemState      _buttonState;
+  BOOL                        _isSystemItem;
 }
 
 
--(void)dealloc
-{
-  CLCG_REL(mToggler);
-  [super dealloc];
-}
+@synthesize state = _buttonState;
 
 
 //------------------------------------------------------------------------------
@@ -113,16 +109,16 @@
 
 -(void)setState:(enum CLCGBarButtonItemState)state
 {
-  if (state != mState) {
+  if (state != _buttonState) {
     switch (state) {
       case CLCGBarButtonItemStateReady:
-        if (mIsSystemItem) {
+        if (_isSystemItem) {
           // remove customView so that UIBarButtonItem system graphics are rendered
           [self setCustomView:nil];
         } else {
-          [mToggler setState:CLCGTogglerFirstView];
+          [_toggler setTogglerState:CLCGTogglerFirstView];
           if ([[self title] length] == 0) {
-            [self setCustomView:mToggler];
+            [self setCustomView:_toggler];
           } else {
             [self setCustomView:nil];
           }
@@ -130,29 +126,29 @@
         break;
       case CLCGBarButtonItemStateBusy:
         // show the spinner
-        [mToggler setState:CLCGTogglerSecondView];
-        [self setCustomView:mToggler];
+        [_toggler setTogglerState:CLCGTogglerSecondView];
+        [self setCustomView:_toggler];
         break;
       case CLCGBarButtonItemStateHidden:
-        [mToggler setState:CLCGTogglerFirstView];
-        [[mToggler firstView] setHidden:YES];
+        [_toggler setTogglerState:CLCGTogglerFirstView];
+        [[_toggler firstView] setHidden:YES];
         if ([[self title] length] > 0) {
           // for a textual button, this will "show" the empty button we created.
-          [self setCustomView:mToggler];
+          [self setCustomView:_toggler];
         }
         break;
       default:
         break;
     }
 
-    mState = state;
+    _buttonState = state;
   }
 }
 
 
 -(enum CLCGBarButtonItemState)state
 {
-  return mState;
+  return _buttonState;
 }
 
 
@@ -195,13 +191,13 @@
 
   if (img == nil && [title length] == 0) {
     self = [super initWithBarButtonSystemItem:item target:target action:action];
-    mIsSystemItem = YES;
+    _isSystemItem = YES;
   } else {
     if (img) {
       title = nil;
     }
     self = [super initWithTitle:title style:style target:target action:action];
-    mIsSystemItem = NO;
+    _isSystemItem = NO;
   }
 
   if (self) {
@@ -214,8 +210,7 @@
     second = [[UIActivityIndicatorView alloc]
               initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     [second startAnimating];
-    [second autorelease];
-    
+
     // set up first view
     b = [UIButton buttonWithType:UIButtonTypeCustom];
     if (img) {
@@ -232,7 +227,7 @@
       [b setBackgroundColor:[UIColor clearColor]];
 
       w = MAX(imgsz.width, [second w]);
-      first = [[[UIView alloc] initWithFrame:CGRectMake(0,0,w,h)] autorelease];
+      first = [[UIView alloc] initWithFrame:CGRectMake(0,0,w,h)];
       x = (w - imgsz.width)/2;
       y = (h - imgsz.height)/2;
       [b setFrame:CGRectMake(x, y, imgsz.width, imgsz.height)];
@@ -247,9 +242,9 @@
     [b addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 
     // set up the toggler view
-    mToggler = [[CLCGTogglerView alloc] initWithFrame:CGRectMake(0,0,w,h)];
-    [mToggler setFirstView:first];
-    [mToggler setSecondView:second];
+    _toggler = [[CLCGTogglerView alloc] initWithFrame:CGRectMake(0,0,w,h)];
+    [_toggler setFirstView:first];
+    [_toggler setSecondView:second];
 
     [self setState:CLCGBarButtonItemStateReady];
   }
@@ -259,7 +254,7 @@
 
 -(UIActivityIndicatorView*)spinner
 {
-  return (UIActivityIndicatorView*)[mToggler secondView];
+  return (UIActivityIndicatorView*)[_toggler secondView];
 }
 
 

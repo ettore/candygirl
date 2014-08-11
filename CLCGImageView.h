@@ -17,7 +17,7 @@ typedef void (^CLCGImageViewOnLoadCallback)(UIImage *img, int http_status);
 
 /*!
  * Adds an action to on touch-up event. The action signature is the standard:
- *   -(void)theAction:(id)sender;
+ *   -(void)theAction
  */
 -(void)addTarget:(id)target onTapAction:(SEL)action;
 

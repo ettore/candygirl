@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-enum CLCGTogglerState {
+typedef NS_ENUM(NSInteger, CLCGTogglerState) {
   CLCGTogglerFirstView,
   CLCGTogglerSecondView,
 };
@@ -18,15 +18,10 @@ enum CLCGTogglerState {
  * the 2 subviews take up the whole space (frames coincide).
  */
 @interface CLCGTogglerView : UIView
-{
-  UIView *mFirstView;
-  UIView *mSecondView;
-  enum CLCGTogglerState mState;
-}
 
 @property(nonatomic,retain) UIView *firstView;
 @property(nonatomic,retain) UIView *secondView;
-@property(nonatomic,assign) enum CLCGTogglerState state;
+@property(nonatomic,assign) CLCGTogglerState togglerState;
 
 /** By default, the receiver is condfigured to show the first view. */
 - (id)initWithFrame:(CGRect)frame;

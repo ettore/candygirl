@@ -11,13 +11,6 @@
 #import "CLCGImageLoader.h"
 
 @interface CLCGLayer : CALayer
-{
-  ASIHTTPRequest  *mReq;
-  
-  // non-retained pointer to an external cache where to store the UIImage 
-  // object we fetched.
-  NSCache         *mCache;
-}
 
 /**
  * Loads image from a URL and sets it as this layer's contents.

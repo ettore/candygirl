@@ -5,7 +5,7 @@
 //
 
 
-enum CLCGBarButtonItemState {
+typedef NS_ENUM(NSInteger, CLCGBarButtonItemState) {
   CLCGBarButtonItemStateReady = 1,
   CLCGBarButtonItemStateBusy,
   CLCGBarButtonItemStateHidden,
@@ -25,7 +25,7 @@ enum CLCGBarButtonItemState {
  */
 @interface CLCGBarButtonItem : UIBarButtonItem
 
-@property(nonatomic,assign) enum CLCGBarButtonItemState state;
+@property(nonatomic) CLCGBarButtonItemState state;
 
 -(id)initWithBarButtonSystemItem:(UIBarButtonSystemItem)item
                           target:(id)target

@@ -34,9 +34,6 @@ typedef void (^CLCGImageLoaderCallback)(UIImage *img, int http_status);
 
 @property(nonatomic,retain,readonly) NSCache *cache;
 
-// singleton instance
-+(CLCGImageLoader*)i;
-
 +(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
                         retinaURL:(NSString*)retinaurl
                          useCache:(BOOL)use_cache

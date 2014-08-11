@@ -42,7 +42,6 @@ NSInteger clcg_date_year(NSDate *d)
   
   greg = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   comps = [greg components:NSYearCalendarUnit fromDate:d];
-  [greg release];
   return [comps year];
 }
 
@@ -54,7 +53,6 @@ NSDateComponents *date_components_from(NSDate *d)
   NSDate *now = [NSDate date];
 
   greg = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-  [greg autorelease];
   flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |
   NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
   return [greg components:flags fromDate:d toDate:now options:0];

@@ -9,6 +9,6 @@ use of categories whenever possible, clear and terse names. Generally speaking,
 I want to be able to use these classes easily in any iOS project, just plug 
 them in and go.
 
-(The name comes from a great song by Low)
+Compile with ARC.
 
 License: BSD 3-Clause [ http://opensource.org/licenses/BSD-3-Clause ]

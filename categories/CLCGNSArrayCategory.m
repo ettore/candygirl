@@ -50,14 +50,6 @@
 }
 
 
--(NSArray*)mapSelector:(SEL)item_method
-{
-  return [self map:^id(id item) {
-    return [item performSelector:item_method];
-  }];
-}
-
-
 -(id)reduceWithStart:(id)acc
                block:(id(^)(id current_acc, id item))block;
 {

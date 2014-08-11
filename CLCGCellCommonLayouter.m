@@ -11,13 +11,6 @@
 @implementation CLCGCellCommonLayouter
 
 
--(void)dealloc
-{
-  [self setCell:nil];
-  [super dealloc];
-}
-
-
 -(id)initWithCell:(id<CLCGCell>)cell
 {
   self = [super init];

@@ -28,15 +28,20 @@
 
 
 @implementation CLCGVC
+{
+  // loading/spinner views
+  UIView                        *_spinnerContainer;
+  UIActivityIndicatorView       *_spinner;
+  UIActivityIndicatorViewStyle  _spinnerStyle;
+  UIColor                       *_spinnerBackgroundColor;
 
-@synthesize spinnerContainer = mSpinnerContainer;
-@synthesize spinner = mSpinner;
-@synthesize spinnerStyle = mSpinnerStyle;
-@synthesize spinnerBackgroundColor = mSpinnerBackgroundColor;
-@synthesize popoverContentDelegate = mPopoverContentDelegate;
-@synthesize emptyLabel = mEmptyLabel;
-@synthesize emptyContainer = mEmptyContainer;
-@synthesize loadState = mLoadState;
+  // support for empty content case
+  UIView                        *_emptyContainer;
+  UILabel                       *_emptyLabel;
+
+  // network state
+  enum CLCGLoadingState         _loadState;
+}
 
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -44,9 +49,9 @@
   CLCG_P(@"INIT...");
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    mSpinnerStyle = UIActivityIndicatorViewStyleGray;
+    _spinnerStyle = UIActivityIndicatorViewStyleGray;
     [self setSpinnerBackgroundColor:[UIColor whiteColor]];
-    mLoadState = CLCG_NOT_LOADED;
+    _loadState = CLCG_NOT_LOADED;
   }
   return self;
 }
@@ -62,23 +67,21 @@
   UIView *cont;
   UIActivityIndicatorView *ai;
 
-  ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:mSpinnerStyle];
+  ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:_spinnerStyle];
   [self setSpinner:ai];
-  [ai release];
-  
+
   cont = [[UIView alloc] initWithFrame:[[self view] bounds]];
-  [cont setBackgroundColor:mSpinnerBackgroundColor];
+  [cont setBackgroundColor:_spinnerBackgroundColor];
   [cont setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-  [cont addSubview:mSpinner];
+  [cont addSubview:_spinner];
   [self setSpinnerContainer:cont];
-  [cont release];
 }
 
 
 -(void)centerSpinner
 {
-  [mSpinner centerVerticallyWithOffset:0];
-  [mSpinner centerHorizontally];
+  [_spinner centerVerticallyWithOffset:0];
+  [_spinner centerHorizontally];
 }
 
 
@@ -88,31 +91,31 @@
   CGFloat two_lines_offset = 2*[@"Mj" sizeWithMaxW:[[self view] w]
                                               font:[_retryLabel font]].height;
 
-  [mEmptyLabel centerVerticallyWithOffset:-two_lines_offset];
-  [mEmptyLabel centerHorizontally];
+  [_emptyLabel centerVerticallyWithOffset:-two_lines_offset];
+  [_emptyLabel centerHorizontally];
   [_retryLabel centerHorizontally];
-  [_retryLabel setY:ceil([mEmptyLabel low] + two_lines_offset)];
+  [_retryLabel setY:ceil([_emptyLabel low] + two_lines_offset)];
 }
 
 
 -(void)showLoadingView:(BOOL)show
 {
   if (show) {
-    if (![[[self view] subviews] containsObject:mSpinnerContainer]) {
-      if (mSpinnerContainer == nil) {
+    if (![[[self view] subviews] containsObject:_spinnerContainer]) {
+      if (_spinnerContainer == nil) {
         [self createSpinnerView];
       }
       
-      [[self view] addSubview:mSpinnerContainer];
-      [mSpinnerContainer setNeedsLayout];
+      [[self view] addSubview:_spinnerContainer];
+      [_spinnerContainer setNeedsLayout];
     }
     
     [self centerSpinner];
-    [mSpinner startAnimating];
-    [[self view] bringSubviewToFront:mSpinnerContainer];
+    [_spinner startAnimating];
+    [[self view] bringSubviewToFront:_spinnerContainer];
   } else {
-    [mSpinner stopAnimating];
-    clcg_safe_remove_from_superview(mSpinnerContainer);
+    [_spinner stopAnimating];
+    clcg_safe_remove_from_superview(_spinnerContainer);
   }
 }
 
@@ -172,18 +175,16 @@
   {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     [self setEmptyLabel:label];
-    [label release];
-    [mEmptyLabel setTextColor:[UIColor darkGrayColor]];
-    [mEmptyLabel setFont:[UIFont systemFontOfSize:EMPTY_VIEW_FONT_SIZE]];
-    [mEmptyLabel setTextAlignment:NSTextAlignmentCenter];
-    [mEmptyLabel setLineBreakMode:NSLineBreakByWordWrapping];
-    [mEmptyLabel setNumberOfLines:0];//use as many lines as needed
+    [_emptyLabel setTextColor:[UIColor darkGrayColor]];
+    [_emptyLabel setFont:[UIFont systemFontOfSize:EMPTY_VIEW_FONT_SIZE]];
+    [_emptyLabel setTextAlignment:NSTextAlignmentCenter];
+    [_emptyLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    [_emptyLabel setNumberOfLines:0];//use as many lines as needed
   }
 
   {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     [self setRetryLabel:label];
-    [label release];
     [_retryLabel setTextColor:[UIColor darkGrayColor]];
     [_retryLabel setFont:[UIFont systemFontOfSize:EMPTY_VIEW_FONT_SIZE]];
     [_retryLabel setTextAlignment:NSTextAlignmentCenter];
@@ -196,17 +197,15 @@
   cont = [[UIView alloc] initWithFrame:[[self view] frame]];
   [cont setBackgroundColor:[UIColor whiteColor]];
   [cont setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-  [cont addSubview:mEmptyLabel];
+  [cont addSubview:_emptyLabel];
   [cont addSubview:_retryLabel];
   UITapGestureRecognizer *tap_recognizer = [[UITapGestureRecognizer alloc]
                                             initWithTarget:self
                                             action:@selector(reload)];
   tap_recognizer.numberOfTapsRequired = 1;
   [cont addGestureRecognizer:tap_recognizer];
-  [tap_recognizer autorelease];
 
   [self setEmptyContainer:cont];
-  [cont release];
 }
 
 
@@ -215,21 +214,21 @@
   if (msg) {
     UIView *mainview = [self view];
 
-    if (![[mainview subviews] containsObject:mEmptyContainer]) {
-      if (mEmptyContainer == nil) {
+    if (![[mainview subviews] containsObject:_emptyContainer]) {
+      if (_emptyContainer == nil) {
         [self createEmptyView];
       }
 
-      [mEmptyLabel setText:msg];
-      [mEmptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
-      [mainview addSubview:mEmptyContainer];
-      [mEmptyContainer setNeedsLayout];
+      [_emptyLabel setText:msg];
+      [_emptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
+      [mainview addSubview:_emptyContainer];
+      [_emptyContainer setNeedsLayout];
     }
 
     [self centerEmptyPlaceholder];
-    [mainview bringSubviewToFront:mEmptyContainer];
+    [mainview bringSubviewToFront:_emptyContainer];
   } else {
-    clcg_safe_remove_from_superview(mEmptyContainer);
+    clcg_safe_remove_from_superview(_emptyContainer);
   }
 }
 
@@ -240,21 +239,13 @@
 
 -(void)releaseRetainedSubviews
 {
-  CLCG_REL(mSpinner);
-  CLCG_REL(mSpinnerContainer);
-  CLCG_REL(mEmptyLabel);
-  CLCG_REL(_retryLabel);
-  CLCG_REL(mEmptyContainer);
 }
 
 
 -(void)dealloc
 {
   CLCG_P(@"%@", self);
-  mPopoverContentDelegate = nil;
-  CLCG_REL(mSpinnerBackgroundColor);
   [self releaseRetainedSubviews];
-  [super dealloc];
 }
 
 

@@ -13,25 +13,23 @@
 #import "clcg_device_utils.h"
 #import "CLCGImageView.h"
 
+@interface CLCGImageView ()
+@property(nonatomic,strong) ASIHTTPRequest  *req;
+@end
 
 @implementation CLCGImageView
 {
-  ASIHTTPRequest  *mReq;
-
   // target and action for "on tap" event
-  id              mTapTarget;
-  SEL             mTapAction;
+  id              _tapTarget;
+  SEL             _tapAction;
 }
 
 
 -(void)dealloc
 {
-  [mReq clearDelegatesAndCancel];
-  CLCG_REL(mReq);
-
-  mTapTarget = nil;
-  mTapAction = nil;
-  [super dealloc];
+  [_req clearDelegatesAndCancel];
+  _tapTarget = nil;
+  _tapAction = nil;
 }
 
 
@@ -65,33 +63,29 @@
 {
   [self setUserInteractionEnabled:YES];
 
-  mTapAction = action;
+  _tapAction = action;
 
   // we want to keep an "assign" memory policy here to avoid circular references
   // with container classes, who are likely to retain us. For instance, on a 
   // memory warning situation the container or vc will release us, and once 
   // viewDidLoad is re-hit, the client code will reassign the target in there.
-  mTapTarget = target;
-}
+  _tapTarget = target;
 
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-  [super touchesEnded:touches withEvent:event];
-  if ([touches count] == 1) {
-    [mTapTarget performSelector:mTapAction withObject:self];
-  }
+  UITapGestureRecognizer *tap_recognizer = [[UITapGestureRecognizer alloc]
+                                            initWithTarget:_tapTarget
+                                            action:_tapAction];
+  tap_recognizer.numberOfTapsRequired = 1;
+  [self addGestureRecognizer:tap_recognizer];
 }
 
 
 -(void)loadImageForURL:(NSString*)normalurl retinaURL:(NSString*)retinaurl
 {
-  if (mReq) {
-    [mReq cancel];
-    CLCG_REL(mReq);
+  if (_req) {
+    [_req cancel];
   }
 
-  mReq = [CLCGImageLoader loadImageForURL:normalurl
+  self.req = [CLCGImageLoader loadImageForURL:normalurl
                                 retinaURL:retinaurl
                                  useCache:YES
                                     block:^(UIImage *img, int http_status) {
@@ -104,13 +98,10 @@
                                                http_status);
                                       }
                                       
-                                      if (_callback) {
-                                        _callback(img, http_status);
+                                      if (self.callback) {
+                                        self.callback(img, http_status);
                                       }
-                                      
-                                      CLCG_REL(mReq);
                                     }];
-  [mReq retain];
 }
 
 

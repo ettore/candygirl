@@ -18,12 +18,6 @@
 
 @synthesize cache = mCache;
 
--(void)dealloc
-{
-  CLCG_REL(mCache);
-  [super dealloc];
-}
-
 
 -(id)init
 {
@@ -66,8 +60,6 @@
   }
   
   if (url) {
-    [url autorelease];
-    
     if (use_cache) {
       UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:[url absoluteString]];
       if (img) {
@@ -76,14 +68,17 @@
       }
     }
     
-    block = [[block copy] autorelease];//make sure it's on the heap
+    block = [block copy];//make sure it's on the heap
     
     // configure the request
     req = [[ASIHTTPRequest alloc] initWithURL:url];
     [req addRequestHeader:@"Accept-Encoding" value:@"gzip"];
     
+    CLCG_MAKE_WEAK(req);
+
     // Note: this callback is not just for success cases!
     [req setCompletionBlock:^{
+      CLCG_MAKE_STRONG(req);
       NSData *data = [req responseData];
       UIImage *img = [UIImage imageWithData:data];
       if (img == nil) {
@@ -99,14 +94,12 @@
     
     // set callback for request failure (usually for no network cases)
     [req setFailedBlock:^{
+      CLCG_MAKE_STRONG(req);
       [CLCGImageLoader reportErrorForRequest:req block:block];
     }];
     
     // execute the request
     [req startAsynchronous];
-    
-    // cleanup
-    [req autorelease];
   }
   
   return req;

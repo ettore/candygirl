@@ -27,7 +27,7 @@
 #ifndef CLCG_MACROS_H_
 #define CLCG_MACROS_H_
 
-/**
+/*!
  * Borrowed from Apple's AvailabiltyInternal.h header. There's no reason why we 
  * shouldn't be able to use this macro, as it's a gcc-supported flag.
  * Here's what we based it off of.
@@ -45,13 +45,23 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
+// weak and strong references
+
+/*! Macro to create a weak reference to an object. */
+#define CLCG_MAKE_WEAK(OBJ)   __weak   __typeof__(OBJ) OBJ ## _weak_ = (OBJ);
+
+/*! Macro to create a strong reference to an object. */
+#define CLCG_MAKE_STRONG(OBJ) __strong __typeof__(OBJ) OBJ = OBJ ## _weak_;
+
+
+////////////////////////////////////////////////////////////////////////////////
 // Flags
 
-/**
+/*!
  * For when the flag might be a set of bits, this will ensure that the exact 
  * set of bits in the flag have been set in the value.
  */
 #define IS_MASK_SET(value, flag)  (((value) & (flag)) == (flag))
 
-#endif //ifdef CLCG_LMACROS_H
 
+#endif //ifdef CLCG_LMACROS_H

@@ -252,7 +252,6 @@
     if (nil == spinner) {
       spinner = [[UIActivityIndicatorView alloc]
                  initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-      [spinner autorelease];
     }
 
     // the spinner is not added to the view yet, so add it
@@ -298,7 +297,7 @@
 
 -(void)addBorderWithInsets:(UIEdgeInsets)insets
 {
-  UIView *border_line = [[[UIView alloc] init] autorelease];
+  UIView *border_line = [[UIView alloc] init];
   [[border_line layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
   [[border_line layer] setBorderWidth:1.0];
   [border_line setFrame:UIEdgeInsetsInsetRect([self bounds], insets)];

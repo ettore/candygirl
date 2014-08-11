@@ -40,23 +40,8 @@ enum CLCGLoadingState {
 
 
 @interface CLCGVC : UIViewController
-{
-  UIView                        *mSpinnerContainer;
-  UIActivityIndicatorView       *mSpinner;
-  UIActivityIndicatorViewStyle  mSpinnerStyle;
-  UIColor                       *mSpinnerBackgroundColor;
 
-  enum CLCGLoadingState   mLoadState;
-
-  // support for empty content case
-  UIView                        *mEmptyContainer;
-  UILabel                       *mEmptyLabel;
-
-  // support for showing this vc in a iPad popover
-  id<CLCGPopoverContentDelegate> mPopoverContentDelegate;
-}
-
-/*! 
+/*!
  Subclasses should set the loading state accordingly, before/during/after
  loading content, depending what loading means in each VC. E.g. it should be 
  set to CLCG_LOADED even if there was no api call being performed.
@@ -69,7 +54,7 @@ enum CLCGLoadingState {
 @property(nonatomic,retain) UIColor *spinnerBackgroundColor;
 @property(nonatomic,retain) IBOutlet UIView *emptyContainer;
 @property(nonatomic,retain) IBOutlet UILabel *emptyLabel;
-@property(nonatomic,assign) id<CLCGPopoverContentDelegate> popoverContentDelegate;
+@property(nonatomic,weak) id<CLCGPopoverContentDelegate> popoverContentDelegate;
 
 
 /**

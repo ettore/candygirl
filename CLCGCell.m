@@ -70,19 +70,6 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   CGFloat   _imgH;
 }
 
--(void)dealloc
-{
-  [self setInfoTextLabel:nil];
-  [self setImgUrl:nil];
-  [self setContext:nil];
-  [self setNormalColor:nil];
-  [self setEmphasisColor:nil];
-  [self setCommonLayouter:nil];
-  [self setMainImageView:nil];
-  [self setTapActionBlock:nil];
-  [super dealloc];
-}
-
 
 // overriding super-class designated initializer
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)cid
@@ -106,7 +93,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
     _imgW = w;
     _imgH = h;
     _viewportPadding = _innerPadding = padding;
-    [self setCommonLayouter:[[[CLCGCellCommonLayouter alloc] initWithCell:self] autorelease]];
+    [self setCommonLayouter:[[CLCGCellCommonLayouter alloc] initWithCell:self]];
     [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
     [[self textLabel] setTextColor:[UIColor blackColor]];
     [[self textLabel] setLineBreakMode:NSLineBreakByWordWrapping];
@@ -140,7 +127,6 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
     UIView *bgview = [[UIView alloc] initWithFrame:CGRectZero];
     [bgview setOpaque:YES];
     [self setBackgroundView:bgview];
-    [bgview release];
 
     [self setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
   }

@@ -40,17 +40,6 @@
 
 /*!
  @discussion
- Executes `item_method` on every item of the array.
- Note: `item_method` must return an object, not a scalar value.
- 
- @return A new array where each element is the result of calling `item_method`
-         on every item of the original array.
- */
--(NSArray*)mapSelector:(SEL)item_method;
-
-
-/*!
- @discussion
  Combines (i.e. reduces, folds) all elements of the receiving array
  into an accumulated result by running the given block on each element.
  

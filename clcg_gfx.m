@@ -71,8 +71,7 @@ UIImage *clcg_do_snapshot(UIView *v, NSString *title)
   
   // cleanup
   [l removeFromSuperview];
-  [l release];
-  
+
   return snapshot;
 }
 
@@ -139,6 +138,5 @@ void clcg_attach_spinny2cell(CGFloat size, UITableViewCell *cell)
   
   spinny = clcg_new_spinny(size);
   [cell setAccessoryView:spinny];
-  [spinny release];
 }
 

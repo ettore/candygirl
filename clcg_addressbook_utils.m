@@ -50,31 +50,31 @@ void clcg_addressbook_load_contacts(dispatch_queue_t currq, CLCGABCallback callb
   ABAddressBookRef ab;
 
   // make sure to keep a valid object on the heap
-  callback = [[callback copy] autorelease];
+  callback = [callback copy];
 
   // check existence of function, only defined in iOS 6
   if (&ABAddressBookCreateWithOptions != NULL) {
     // iOS 6+
     CFErrorRef error = nil;
-    ab = ABAddressBookCreateWithOptions(NULL,&error);
+    ab = ABAddressBookCreateWithOptions(NULL, &error);
     if (error || ab == nil) {
-      callback(nil, NO, (NSError*)error);
+      callback(nil, NO, (__bridge NSError*)error);
       if (ab)
         CFRelease(ab);
     } else {
-      ABAddressBookRequestAccessWithCompletion(ab, [[^(bool granted, CFErrorRef err) {
+      ABAddressBookRequestAccessWithCompletion(ab, [^(bool granted, CFErrorRef err) {
         // the callback could occur in the background, but the address book
         // must be accessed on the thread it was created on
-        dispatch_async(currq, [[^{
+        dispatch_async(currq, [^{
           if (err || !granted) {
-            callback(nil, granted, (NSError*)err);
+            callback(nil, granted, (__bridge NSError*)err);
           } else {
             NSMutableArray *people = clcg__process_ab(ab);
             callback(people, YES, nil);
             CFRelease(ab);
           }
-        } copy] autorelease]);
-      } copy] autorelease]);
+        } copy]);
+      } copy]);
     }
   } else {
     // iOS 4/5
@@ -110,7 +110,7 @@ static NSMutableArray *clcg__process_ab(ABAddressBookRef ab)
                     (void*)sortorder);
 
   // don't forget to autorelease the result to be a nice cocoa citizen
-  NSMutableArray *arr = (NSMutableArray*)people;
-  return [arr autorelease];
+  NSMutableArray *arr = (__bridge NSMutableArray*)people;
+  return arr;
 }
 

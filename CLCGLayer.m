@@ -7,13 +7,24 @@
 //
 
 
+//TODO: remove this dependency!
 #import "ASIHTTPRequest.h"
 
 #import "clcg_macros.h"
 #import "clcg_str_utils.h"
 #import "clcg_device_utils.h"
-
 #import "CLCGLayer.h"
+
+
+@interface CLCGLayer ()
+
+// non-retained pointer to an external cache where to store the UIImage
+// object we fetched.
+@property(nonatomic,weak) NSCache *cache;
+
+@property(nonatomic,strong) ASIHTTPRequest  *req;
+
+@end
 
 
 @implementation CLCGLayer
@@ -22,17 +33,14 @@
 -(void)dealloc
 {
   [self cleanupLayer];
-  [super dealloc];
 }
 
 
 -(void)cleanupLayer
 {
   [self setContents:nil];
-  mCache = nil;
-
-  [mReq clearDelegatesAndCancel];
-  CLCG_REL(mReq);
+  _cache = nil;
+  [_req clearDelegatesAndCancel];
 }
 
 
@@ -40,31 +48,29 @@
              retinaURL:(NSString*)retinaurl
                  cache:(NSCache*)cache
 {
-  if (mReq) {
-    [mReq cancel];
-    CLCG_REL(mReq);
+  if (_req) {
+    [_req cancel];
   }
   
-  mCache = cache;
+  self.cache = cache;
 
   // don't use the built-in CLCGImageLoader cache if we're using an external cache
-  mReq = [CLCGImageLoader loadImageForURL:normalurl
-                                retinaURL:retinaurl
-                                 useCache:(mCache == nil)
-                                    block:^(UIImage *img, int http_status) {
-                                      if (img) {
-                                        [mCache setObject:img
-                                                   forKey:[[mReq originalURL] absoluteString]];
-                                        [self setContents:(id)[img CGImage]];
-                                      } else {
-                                        CLCG_P(@"Error loading image. HTTP status=%d",
-                                               http_status);
-                                      }
-                                      CLCG_REL(mReq);
-                                    }];
-  
-  // will release in the block callback
-  [mReq retain];
+  self.req = [CLCGImageLoader loadImageForURL:normalurl
+                                    retinaURL:retinaurl
+                                     useCache:(_cache == nil)
+                                        block:^(UIImage *img, int http_status) {
+                                          if (img) {
+                                            [self.cache
+                                             setObject:img
+                                             forKey:[[self.req
+                                                      originalURL] absoluteString]];
+                                            [self setContents:(id)[img CGImage]];
+                                          } else {
+                                            CLCGP(@"Error loading image. HTTP status=%d",
+                                                   http_status);
+                                          }
+                                          self.req = nil;
+                                        }];
 }
 
 
