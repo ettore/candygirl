@@ -155,12 +155,12 @@
  If none is present, the returned height will be 0.
  @param w The width available to contain text
  @param use_attributed Use the attributed version of text
- @param use_line_limit Use the numberOfLines property to constrain to max height.
+ @param line_limit The limit number of lines to constrain the max height.
  @return The height of the eventual text present in this view.
  */
 -(CGFloat)textHeightForWidth:(CGFloat)w
                useAttributed:(BOOL)use_attributed
-                useLineLimit:(BOOL)use_line_limit;
+                   lineLimit:(NSUInteger)line_limit;
 
 
 /*!
@@ -172,12 +172,14 @@
  @param vert_align_view  Lay out subview below vert_align_view.
  @param padding_vert     Vertical padding between vert_align_view and subview.
  @param max_w            The max width available to the subview.
+ @param line_limit The limit number of lines to constrain the max height.
  */
 -(void)putTextView:(UIView*)subview
  useAttributedText:(BOOL)use_attributed
          toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
              below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
-          maxWidth:(CGFloat)max_w;
+          maxWidth:(CGFloat)max_w
+         lineLimit:(NSUInteger)line_limit;
 
 /*!
  @abstract

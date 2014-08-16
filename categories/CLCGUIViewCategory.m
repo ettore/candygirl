@@ -312,18 +312,18 @@
 
 -(CGFloat)textHeightForWidth:(CGFloat)w
                useAttributed:(BOOL)use_attributed
-                useLineLimit:(BOOL)use_line_limit
+                   lineLimit:(NSUInteger)line_limit
 {
   CGSize text_size = CGSizeZero;
 
   if (use_attributed && [self respondsToSelector:@selector(attributedText)]) {
     NSAttributedString *attr_text = [(id)self attributedText];
     if ([attr_text length] > 0) {
-      if (use_line_limit && [self respondsToSelector:@selector(numberOfLines)]) {
+      if (line_limit > 0){
         NSAttributedString *s = [attr_text attributedSubstringFromRange:
                                  NSMakeRange(0,1)];
-        CGFloat h = [s sizeWithMaxW:w].height + 1.0f;
-        h *= [(id)self numberOfLines];
+        CGFloat h = ceil([s sizeWithMaxW:w].height);
+        h *= line_limit;
         text_size = [attr_text sizeWithMaxW:w maxH:h];
       } else {
         text_size = [attr_text sizeWithMaxW:w];
@@ -334,9 +334,9 @@
     NSString *text = [(id)self text];
     UIFont *font = [(id)self font];
     if ([text length] > 0) {
-      if (use_line_limit && [self respondsToSelector:@selector(numberOfLines)]) {
+      if (line_limit > 0){ 
         CGFloat h = [@"Mj" sizeWithMaxW:w font:font].height;
-        h *= [(id)self numberOfLines];
+        h *= line_limit;
         text_size = [text sizeWithMaxW:w maxH:h font:font];
       } else {
         text_size = [text sizeWithMaxW:w font:font];
@@ -356,13 +356,15 @@
          toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
              below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
           maxWidth:(CGFloat)max_w
+         lineLimit:(NSUInteger)line_limit
 {
   const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
   const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
   const CGFloat w = max_w - x;
+
   const CGFloat h = ceil([subview textHeightForWidth:w
                                        useAttributed:use_attributed
-                                        useLineLimit:YES]);
+                                           lineLimit:line_limit]);
   [subview setFrame:CGRectMake(x, y, w, h)];
 }
 

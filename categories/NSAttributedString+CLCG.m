@@ -28,7 +28,9 @@
   if (clcg_os_geq(@"7")) {
     return [[self string]
             boundingRectWithSize:CGSizeMake(max_w, max_h)
-            options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine
+            options:(NSStringDrawingUsesLineFragmentOrigin
+                     |NSStringDrawingTruncatesLastVisibleLine
+                     |NSStringDrawingUsesFontLeading)
             attributes:attrs
             context:nil].size;
   } else {
