@@ -17,7 +17,7 @@
 
 
 #define EMPTY_VIEW_FONT_SIZE  14
-
+#define SPINNER_TEXT_MAX_WIDTH 280
 
 //------------------------------------------------------------------------------
 #pragma mark -
@@ -57,6 +57,17 @@
 }
 
 
+-(void)viewWillLayoutSubviews
+{
+  [super viewWillLayoutSubviews];
+
+  // in case a spinner view was added (showLoadingView:), make sure to center it
+  if (_spinnerContainer.superview != nil) {
+    [self centerSpinner];
+  }
+}
+
+
 //------------------------------------------------------------------------------
 #pragma mark - Spinner
 
@@ -68,20 +79,47 @@
   UIActivityIndicatorView *ai;
 
   ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:_spinnerStyle];
-  [self setSpinner:ai];
+  _spinner = ai;
+  _spinnerLabel1 = [[UILabel alloc] init];
+  _spinnerLabel2 = [[UILabel alloc] init];
 
   cont = [[UIView alloc] initWithFrame:[[self view] bounds]];
-  [cont setBackgroundColor:_spinnerBackgroundColor];
-  [cont setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+  cont.backgroundColor = _spinnerBackgroundColor;
+  cont.autoresizingMask = (UIViewAutoresizingFlexibleWidth
+                           |UIViewAutoresizingFlexibleHeight);
   [cont addSubview:_spinner];
-  [self setSpinnerContainer:cont];
+  [cont addSubview:_spinnerLabel1];
+  [cont addSubview:_spinnerLabel2];
+  self.spinnerContainer = cont;
 }
 
 
 -(void)centerSpinner
 {
-  [_spinner centerVerticallyWithOffset:0];
+  // put the spinner slightly above the mid-line
   [_spinner centerHorizontally];
+  [_spinner centerVerticallyWithOffset:-(4*CLCG_PADDING)];
+
+  // The spinner text is intended for short text that can be read while waiting.
+  CGFloat text_max_height = clcg_screensize().height/2;
+
+  [_spinnerLabel1 setW:SPINNER_TEXT_MAX_WIDTH];
+  [_spinnerLabel1 setY:([_spinner low] + 2*CLCG_PADDING)];
+  CGSize best_size = [_spinnerLabel1.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
+                                                  maxH:text_max_height
+                                                  font:_spinnerLabel1.font];
+  
+  [_spinnerLabel1 setSz:best_size];
+  [_spinnerLabel1 centerHorizontally];
+  [_spinnerLabel1 setFrame:CGRectIntegral(_spinnerLabel1.frame)];
+
+  [_spinnerLabel2 setY:([_spinnerLabel1 low] + CLCG_PADDING)];
+  best_size = [_spinnerLabel2.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
+                                           maxH:text_max_height
+                                           font:_spinnerLabel2.font];
+  [_spinnerLabel2 setSz:best_size];
+  [_spinnerLabel2 setXForR:[_spinnerLabel1 r]];
+  [_spinnerLabel2 setFrame:CGRectIntegral(_spinnerLabel2.frame)];
 }
 
 
@@ -109,8 +147,7 @@
       [[self view] addSubview:_spinnerContainer];
       [_spinnerContainer setNeedsLayout];
     }
-    
-    [self centerSpinner];
+
     [_spinner startAnimating];
     [[self view] bringSubviewToFront:_spinnerContainer];
   } else {

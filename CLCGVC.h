@@ -41,36 +41,15 @@ enum CLCGLoadingState {
 
 @interface CLCGVC : UIViewController
 
+//------------------------------------------------------------------------------
+#pragma mark - Loading logic
+
 /*!
  Subclasses should set the loading state accordingly, before/during/after
  loading content, depending what loading means in each VC. E.g. it should be 
  set to CLCG_LOADED even if there was no api call being performed.
  */
 @property(nonatomic,assign) enum CLCGLoadingState loadState;
-
-@property(nonatomic,retain) IBOutlet UIView *spinnerContainer;
-@property(nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
-@property(nonatomic) UIActivityIndicatorViewStyle  spinnerStyle;
-@property(nonatomic,retain) UIColor *spinnerBackgroundColor;
-@property(nonatomic,retain) IBOutlet UIView *emptyContainer;
-@property(nonatomic,retain) IBOutlet UILabel *emptyLabel;
-@property(nonatomic,weak) id<CLCGPopoverContentDelegate> popoverContentDelegate;
-
-
-/**
- * If msg is non-nil, this method shows and aligns the given message to the
- * center of the screen. Otherwise, it removes the message if it was displayed.
- */
--(void)showEmptyMessage:(NSString*)msg;
-
-
-/**
- * If show == YES, shows and aligns the spinny indicator to the center 
- * of the screen. 
- * If show == NO, removes the spinny indicator if it was displayed, or do 
- * nothing otherwise.
- */
--(void)showLoadingView:(BOOL)show;
 
 /*!
  @discussion Subclasses should override this method and initiate here any
@@ -82,6 +61,40 @@ enum CLCGLoadingState {
 /*! Forces a reload from the server. */
 -(void)reload;
 
+//------------------------------------------------------------------------------
+#pragma mark - Loading view / Spinner
+
+@property(nonatomic,retain) IBOutlet UIView *spinnerContainer;
+@property(nonatomic,retain) IBOutlet UIActivityIndicatorView *spinner;
+@property(nonatomic) UIActivityIndicatorViewStyle  spinnerStyle;
+@property(nonatomic,retain) UIColor *spinnerBackgroundColor;
+@property(nonatomic,retain) IBOutlet UILabel *spinnerLabel1;
+@property(nonatomic,retain) IBOutlet UILabel *spinnerLabel2;
+
+/**
+ * If show == YES, shows and aligns the spinny indicator to the center
+ * of the screen.
+ * If show == NO, removes the spinny indicator if it was displayed, or do
+ * nothing otherwise.
+ */
+-(void)showLoadingView:(BOOL)show;
+
+//------------------------------------------------------------------------------
+#pragma mark - No content / empty response
+
+@property(nonatomic,retain) IBOutlet UIView *emptyContainer;
+@property(nonatomic,retain) IBOutlet UILabel *emptyLabel;
+
+/**
+ * If msg is non-nil, this method shows and aligns the given message to the
+ * center of the screen. Otherwise, it removes the message if it was displayed.
+ */
+-(void)showEmptyMessage:(NSString*)msg;
+
+//------------------------------------------------------------------------------
+#pragma mark - Misc
+
+@property(nonatomic,weak) id<CLCGPopoverContentDelegate> popoverContentDelegate;
 
 /**
  * Releases all the retained subviews of this view controller. This is called
