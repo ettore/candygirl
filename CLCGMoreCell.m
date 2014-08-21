@@ -1,9 +1,6 @@
 //
 //  CLCGMoreCell.m
-//  Goodreads
-//
 //  Created by Ettore Pasquini on 10/29/12.
-//
 //
 
 #import "clcg_bundle_utils.h"
@@ -11,63 +8,92 @@
 #import "CLCGUIViewCategory.h"
 #import "CLCGMoreCell.h"
 
+
 @implementation CLCGMoreCell
+{
+  UIActivityIndicatorView *_spinner;
+}
 
 
--(id)initReusingId:(NSString*)reuse_id
+// superclass designated initializer
+-(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuse_id
 {
   return [self initReusingId:reuse_id withText:CLCG_LOC(@"More...")];
 }
 
 
 // designated initializer
--(id)initReusingId:(NSString*)reuse_id withText:(NSString*)text
+-(id)initReusingId:(NSString*)reuse_id
+          withText:(NSString*)text
 {
   self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuse_id];
   if (self) {
-    [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     [self setBackgroundColor:[UIColor clearColor]];
-    [[self textLabel] setNumberOfLines:1];//set to 0 and calc height dynamically
-    [[self textLabel] setTextColor:[UIColor blackColor]];
-    [[self textLabel] setBackgroundColor:[UIColor clearColor]];
-    [[self textLabel] setTextAlignment:NSTextAlignmentCenter];
-    [[self textLabel] setText:text];
-    [[self textLabel] setFont:[UIFont boldSystemFontOfSize:18]];
-
-    mSpinner = [[UIActivityIndicatorView alloc]
+    [self setAccessoryType:UITableViewCellAccessoryNone];
+    _spinner = [[UIActivityIndicatorView alloc]
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [self setAccessoryView:mSpinner];
-    [mSpinner setHidden:YES];
+    [self addSubview:_spinner];
+
+    if (text == nil) {
+      [_spinner startAnimating];
+      self.textLabel.hidden = YES;
+    } else {
+      [_spinner setHidden:YES];
+      [self.textLabel setNumberOfLines:1];
+      [self.textLabel setTextColor:[UIColor blackColor]];
+      [self.textLabel setBackgroundColor:[UIColor clearColor]];
+      [self.textLabel setTextAlignment:NSTextAlignmentCenter];
+      [self.textLabel setText:text];
+      [self.textLabel setFont:[UIFont boldSystemFontOfSize:18]];
+      self.textLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth
+                                         | UIViewAutoresizingFlexibleHeight);
+
+      UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]
+                                            initWithTarget:self
+                                            action:@selector(didTap)];
+      [self addGestureRecognizer:recognizer];
+
+      // required to let the tap reach to the underlying tableview
+      recognizer.cancelsTouchesInView = NO;
+    }
   }
 
   return self;
 }
 
 
--(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuse_id
+-(void)didTap
 {
-  return [self initReusingId:reuse_id];
+  if (_spinner.isHidden) {
+    [self showSpinner:YES];
+  }
 }
 
 
--(void)didStartRequestingMore
+-(void)showSpinner:(BOOL)display_spinner
 {
-  [mSpinner startAnimating];
-  [mSpinner setHidden:NO];
-}
-
-
--(void)didStopRequestingMore
-{
-  [mSpinner stopAnimating];
-  [mSpinner setHidden:YES];
+  [self.textLabel setHidden:display_spinner];
+  [_spinner setHidden:!display_spinner];
+  if (display_spinner) {
+    [_spinner startAnimating];
+  } else {
+    [_spinner stopAnimating];
+  }
+  [self setNeedsLayout];
 }
 
 
 -(void)layoutSubviews
 {
   [super layoutSubviews];
-  [[self textLabel] setW:([self w] - [[self textLabel] x]*2)];
+
+  [_spinner centerHorizontally];
+  [_spinner centerVertically];
+
+  [self.textLabel setW:([self w] - [self.textLabel x]*2)];
+  [self.textLabel centerHorizontally];
+  [self.textLabel centerVertically];
 }
 
 

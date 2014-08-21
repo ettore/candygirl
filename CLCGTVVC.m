@@ -196,7 +196,7 @@
 
 -(BOOL)isMoreRow:(NSIndexPath*)ip
 {
-  return (_itemsEnd < _itemsTotal && [ip row] == (NSInteger)[_items count]);
+  return (_itemsEnd < _itemsTotal && (NSUInteger)[ip row] == [_items count]);
 }
 
 
@@ -215,13 +215,9 @@
 -(void)tableView:(UITableView*)tv didSelectRowAtIndexPath:(NSIndexPath*)ip
 {
   if ([self isMoreRow:ip] && [self supportsPagination]) {
-    CLCGMoreCell *more;
-
     _page++;
     [self setLoadState:CLCG_OUTDATED];
     [self loadFromServerIfNeeded];
-    more = (CLCGMoreCell *)[self tableView:tv moreButtonCellForRow:ip];
-    [more didStartRequestingMore];
     [tv deselectRowAtIndexPath:ip animated:YES];
   } else {
     [self tableView:tv didSelectNormalRow:ip];
@@ -282,6 +278,10 @@
     return [self tableView:tv normalCellForRowAtIndexPath:ip];
   }
 }
+  
+
+//------------------------------------------------------------------------------
+#pragma mark - Pagination Support
 
 
 -(UITableViewCell*)tableView:(UITableView*)tv
@@ -306,15 +306,10 @@
                                       withText:_moreButtonText];
   }
 
-  if (self.loadState != CLCG_LOADING)
-    [cell didStopRequestingMore];
+  [cell showSpinner:(self.loadState == CLCG_LOADING) || _autoload];
 
   return cell;
 }
-
-
-//------------------------------------------------------------------------------
-#pragma mark - Pagination Support
 
 
 -(BOOL)supportsPagination

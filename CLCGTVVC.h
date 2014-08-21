@@ -86,6 +86,7 @@
 @property(nonatomic,assign) BOOL supportsPagination; /*! Disabled by default */
 @property(nonatomic,assign) int page;
 @property(nonatomic,assign) int perPage;
+@property(nonatomic,assign) BOOL autoload;
 
 /*! 
  The current page end index. 
@@ -130,7 +131,6 @@
  normalCellForRowAtIndexPath:(NSIndexPath*)ip;
 
 -(BOOL)isMoreRow:(NSIndexPath*)ip;
-
 
 @end
 
