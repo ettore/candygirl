@@ -37,25 +37,10 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
-    [self clcg_preparePrivate];
+    [self setUserInteractionEnabled:YES];
+    [self setContentMode:UIViewContentModeScaleAspectFit];
   }
   return self;
-}
-
-
--(void)awakeFromNib
-{
-  [super awakeFromNib];
-  [self clcg_preparePrivate];
-}
-
-
--(void)clcg_preparePrivate
-{
-  [self setUserInteractionEnabled:YES];
-  [self setAutoresizesSubviews:YES];
-  [self setAutoresizingMask:UIViewAutoresizingNone];
-  [self setContentMode:UIViewContentModeScaleAspectFit];
 }
 
 
