@@ -35,19 +35,17 @@
                 initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     [self addSubview:_spinner];
 
+    self.textLabel.numberOfLines = 1;
+    self.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.textLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth
+                                       | UIViewAutoresizingFlexibleHeight);
     if (text == nil) {
       [_spinner startAnimating];
       self.textLabel.hidden = YES;
     } else {
       [_spinner setHidden:YES];
-      [self.textLabel setNumberOfLines:1];
-      [self.textLabel setTextColor:[UIColor blackColor]];
-      [self.textLabel setBackgroundColor:[UIColor clearColor]];
-      [self.textLabel setTextAlignment:NSTextAlignmentCenter];
       [self.textLabel setText:text];
       [self.textLabel setFont:[UIFont boldSystemFontOfSize:18]];
-      self.textLabel.autoresizingMask = (UIViewAutoresizingFlexibleWidth
-                                         | UIViewAutoresizingFlexibleHeight);
 
       UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]
                                             initWithTarget:self
