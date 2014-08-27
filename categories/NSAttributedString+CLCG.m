@@ -13,14 +13,14 @@
 
 -(CGSize)sizeWithMaxW:(CGFloat)max_w
 {
-  return [self sizeWithMaxW:max_w maxH:clcg_screensize().height];
+  return [self sizeWithMaxW:max_w maxH:CGFLOAT_MAX];
 }
 
 
 -(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h
 {
   if (max_h == 0.0f) {
-    max_h = clcg_screensize().height;
+    max_h = CGFLOAT_MAX;
   }
 
   NSDictionary *attrs = [self attributesAtIndex:0 effectiveRange:NULL];
