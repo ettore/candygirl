@@ -48,6 +48,7 @@ static NSMutableArray *clcg__process_ab(ABAddressBookRef ab);
 void clcg_addressbook_load_contacts(dispatch_queue_t currq, CLCGABCallback callback)
 {
   ABAddressBookRef ab;
+  NSDictionary *user_info;
 
   // make sure to keep a valid object on the heap
   callback = [callback copy];
@@ -56,25 +57,63 @@ void clcg_addressbook_load_contacts(dispatch_queue_t currq, CLCGABCallback callb
   if (&ABAddressBookCreateWithOptions != NULL) {
     // iOS 6+
     CFErrorRef error = nil;
-    ab = ABAddressBookCreateWithOptions(NULL, &error);
-    if (error || ab == nil) {
-      callback(nil, NO, (__bridge NSError*)error);
-      if (ab)
-        CFRelease(ab);
-    } else {
-      ABAddressBookRequestAccessWithCompletion(ab, [^(bool granted, CFErrorRef err) {
-        // the callback could occur in the background, but the address book
-        // must be accessed on the thread it was created on
-        dispatch_async(currq, [^{
-          if (err || !granted) {
-            callback(nil, granted, (__bridge NSError*)err);
-          } else {
-            NSMutableArray *people = clcg__process_ab(ab);
-            callback(people, YES, nil);
+
+    ABAuthorizationStatus auth = ABAddressBookGetAuthorizationStatus();
+    switch (auth) {
+      case kABAuthorizationStatusRestricted:
+        // there's nothing the user can do to change this (e.g. parental
+        // controls restrictions, etc)
+        user_info = @{NSLocalizedDescriptionKey :
+                        CLCG_LOC(@"Unable to access address book.")};
+        callback(nil, NO, [[NSError alloc]
+                           initWithDomain:@"CLCG"
+                           code:-1
+                           userInfo:user_info]);
+        break;
+      case kABAuthorizationStatusDenied: {
+        // user denied access in the past. They need to manually go change it
+        // in iOS's Settings.app.
+        NSString *app_name = [[NSBundle mainBundle]
+                              objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        user_info = @{
+                      NSLocalizedDescriptionKey :
+                        CLCG_LOC(@"An error occurred while trying to access your address book."),
+
+                      NSLocalizedRecoverySuggestionErrorKey :
+                        [NSString stringWithFormat:
+                         CLCG_LOC(@"Please open the Settings app and enable access to %@ in Privacy > Contacts."),
+                         app_name]
+                      };
+
+        callback(nil, NO, [[NSError alloc] initWithDomain:@"CLCG"
+                                                     code:-2
+                                                 userInfo:user_info]);
+        break;
+      }
+      case kABAuthorizationStatusNotDetermined:
+        // the user never asked for these permissions ever before
+      case kABAuthorizationStatusAuthorized:
+        ab = ABAddressBookCreateWithOptions(NULL, &error);
+        if (error || ab == nil) {
+          callback(nil, NO, (__bridge NSError*)error);
+          if (ab)
             CFRelease(ab);
-          }
-        } copy]);
-      } copy]);
+        } else {
+          ABAddressBookRequestAccessWithCompletion(ab, [^(bool granted, CFErrorRef err) {
+            // the callback could occur in the background, but the address book
+            // must be accessed on the thread it was created on
+            dispatch_async(currq, [^{
+              if (err || !granted) {
+                callback(nil, granted, (__bridge NSError*)err);
+              } else {
+                NSMutableArray *people = clcg__process_ab(ab);
+                callback(people, YES, nil);
+                CFRelease(ab);
+              }
+            } copy]);
+          } copy]);
+        }
+        break;
     }
   } else {
     // iOS 4/5

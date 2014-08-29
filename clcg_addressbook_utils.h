@@ -42,8 +42,10 @@ typedef void (^CLCGABCallback)(NSMutableArray *people, BOOL granted, NSError *er
    Load contacts from the device's address book and returns them via a callback.
    The callback itself is called on the same thread this function is being
    called on. (To ensure ABAddressBook thread-safety.)
+   @param current_queue   Queue to be used to perform the authorization call.
+   @param callback        Must not be NULL.
    */
-  void clcg_addressbook_load_contacts(dispatch_queue_t currq,
+  void clcg_addressbook_load_contacts(dispatch_queue_t current_queue,
                                       CLCGABCallback callback);
 
 #ifdef __cplusplus
