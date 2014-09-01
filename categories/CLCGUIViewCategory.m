@@ -310,6 +310,9 @@
 //------------------------------------------------------------------------------
 #pragma mark - height measuring methods
 
+
+// TODO: this method is fairly expensive if used with attributed strings.
+// it would be good to implement some form of caching of these heights.
 -(CGFloat)textHeightForWidth:(CGFloat)w
                useAttributed:(BOOL)use_attributed
                    lineLimit:(NSUInteger)line_limit
@@ -389,6 +392,17 @@
   const CGFloat w = max_w - x;
   const CGFloat h = [subview calculatedHeightForWidth:w];
   [subview setFrame:CGRectMake(x, y, w, h)];
+}
+
+
+-(void)addTarget:(id)target forTapAction:(SEL)action
+{
+  self.userInteractionEnabled = YES;
+  UITapGestureRecognizer *tap_recognizer = [[UITapGestureRecognizer alloc]
+                                            initWithTarget:target
+                                            action:action];
+  tap_recognizer.numberOfTapsRequired = 1;
+  [self addGestureRecognizer:tap_recognizer];
 }
 
 

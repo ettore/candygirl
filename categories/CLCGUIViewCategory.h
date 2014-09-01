@@ -210,5 +210,7 @@
          below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
       maxWidth:(CGFloat)max_w;
 
+-(void)addTarget:(id)target forTapAction:(SEL)action;
+
 @end
 
