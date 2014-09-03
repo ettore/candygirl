@@ -307,6 +307,7 @@
   [self sendSubviewToBack:border_line];
 }
 
+
 //------------------------------------------------------------------------------
 #pragma mark - height measuring methods
 
@@ -321,6 +322,10 @@
 
   if (use_attributed && [self respondsToSelector:@selector(attributedText)]) {
     NSAttributedString *attr_text = [(id)self attributedText];
+
+    // TODO: instead of calculating these sizes each time, we should consider
+    // caching these somewhere
+
     if ([attr_text length] > 0) {
       if (line_limit > 0){
         NSAttributedString *s = [attr_text attributedSubstringFromRange:
@@ -350,6 +355,7 @@
   return text_size.height;
 }
 
+
 //------------------------------------------------------------------------------
 #pragma mark - layout methods
 
@@ -364,7 +370,6 @@
   const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
   const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
   const CGFloat w = max_w - x;
-
   const CGFloat h = ceil([subview textHeightForWidth:w
                                        useAttributed:use_attributed
                                            lineLimit:line_limit]);

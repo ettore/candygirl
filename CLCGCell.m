@@ -151,7 +151,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 -(void)addTapActionOnImage:(void(^)())block;
 {
   self.tapActionBlock = block;
-  [_mainImageView addTarget:self onTapAction:@selector(tapAction:)];
+  [_mainImageView addTarget:self forTapAction:@selector(tapAction:)];
 }
 
 

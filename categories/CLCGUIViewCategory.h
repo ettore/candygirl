@@ -210,6 +210,10 @@
          below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
       maxWidth:(CGFloat)max_w;
 
+/*!
+ * Adds an action to be performed on a tap event occurring on the view. 
+ * The action signature is a standard -(void)theAction.
+ */
 -(void)addTarget:(id)target forTapAction:(SEL)action;
 
 @end

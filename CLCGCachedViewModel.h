@@ -15,5 +15,8 @@
                        useAttributed:(BOOL)use_attributed
                            lineLimit:(NSUInteger)line_limit;
 
+-(CGFloat)cachedHeightForAttributedString:(NSAttributedString*)attr_str
+                                    width:(CGFloat)w
+                                lineLimit:(NSUInteger)line_limit;
 
 @end

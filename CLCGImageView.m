@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
+// deprecated: we should really abstract this out of the class
 #import "ASIHTTPRequest.h"
 
 #import "clcg_macros.h"
@@ -14,22 +15,15 @@
 #import "CLCGImageView.h"
 
 @interface CLCGImageView ()
-@property(nonatomic,strong) ASIHTTPRequest  *req;
+@property(nonatomic,strong) ASIHTTPRequest  *req; //deprecated
 @end
 
 @implementation CLCGImageView
-{
-  // target and action for "on tap" event
-  id              _tapTarget;
-  SEL             _tapAction;
-}
 
 
 -(void)dealloc
 {
   [_req clearDelegatesAndCancel];
-  _tapTarget = nil;
-  _tapAction = nil;
 }
 
 
@@ -41,26 +35,6 @@
     [self setContentMode:UIViewContentModeScaleAspectFit];
   }
   return self;
-}
-
-
--(void)addTarget:(id)target onTapAction:(SEL)action
-{
-  [self setUserInteractionEnabled:YES];
-
-  _tapAction = action;
-
-  // we want to keep an "assign" memory policy here to avoid circular references
-  // with container classes, who are likely to retain us. For instance, on a 
-  // memory warning situation the container or vc will release us, and once 
-  // viewDidLoad is re-hit, the client code will reassign the target in there.
-  _tapTarget = target;
-
-  UITapGestureRecognizer *tap_recognizer = [[UITapGestureRecognizer alloc]
-                                            initWithTarget:_tapTarget
-                                            action:_tapAction];
-  tap_recognizer.numberOfTapsRequired = 1;
-  [self addGestureRecognizer:tap_recognizer];
 }
 
 

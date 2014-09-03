@@ -15,10 +15,4 @@ typedef void (^CLCGImageViewOnLoadCallback)(UIImage *img, int http_status);
 
 -(void)loadImageForURL:(NSString*)url retinaURL:(NSString*)retinaurl;
 
-/*!
- * Adds an action to on touch-up event. The action signature is the standard:
- *   -(void)theAction
- */
--(void)addTarget:(id)target onTapAction:(SEL)action;
-
 @end
