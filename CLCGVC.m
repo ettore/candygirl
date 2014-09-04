@@ -152,7 +152,13 @@
     [[self view] bringSubviewToFront:_spinnerContainer];
   } else {
     [_spinner stopAnimating];
-    clcg_safe_remove_from_superview(_spinnerContainer);
+    [UIView animateWithDuration:0.3 animations:^{
+      self.spinnerContainer.alpha = 0.0;
+    } completion:^(BOOL finished) {
+      clcg_safe_remove_from_superview(self.spinnerContainer);
+      // reset so that it's visible next time
+      self.spinnerContainer.alpha = 1.0;
+    }];
   }
 }
 
