@@ -368,11 +368,14 @@
          lineLimit:(NSUInteger)line_limit
 {
   const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  CGFloat y = round(CGRectGetMaxY(vert_align_view.frame));
   const CGFloat w = max_w - x;
   const CGFloat h = ceil([subview textHeightForWidth:w
                                        useAttributed:use_attributed
                                            lineLimit:line_limit]);
+  if (h > 0) {
+    y += padding_vert;
+  }
   [subview setFrame:CGRectMake(x, y, w, h)];
 }
 
