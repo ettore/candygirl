@@ -7,6 +7,7 @@
 //
 
 #import "NSAttributedString+CLCG.h"
+#import <CoreText/CoreText.h>
 
 @implementation NSAttributedString (CLCG)
 
@@ -23,24 +24,16 @@
     max_h = CGFLOAT_MAX;
   }
 
-  NSDictionary *attrs = [self attributesAtIndex:0 effectiveRange:NULL];
+  CTFramesetterRef framesetter;
+  framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self);
 
-  if (clcg_os_geq(@"7")) {
-    return [[self string]
-            boundingRectWithSize:CGSizeMake(max_w, max_h)
-            options:(NSStringDrawingUsesLineFragmentOrigin
-                     |NSStringDrawingTruncatesLastVisibleLine
-                     |NSStringDrawingUsesFontLeading)
-            attributes:attrs
-            context:nil].size;
-  } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    return [[self string] sizeWithFont:attrs[NSFontAttributeName]
-                     constrainedToSize:CGSizeMake(max_w, max_h)
-                         lineBreakMode:NSLineBreakByWordWrapping];
-#pragma clang diagnostic pop
-  }
+  CGSize max_size = CGSizeMake(max_w, max_h);
+  CGSize fit_size;
+  fit_size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
+                                                          CFRangeMake(0, [self length]),
+                                                          NULL, max_size, NULL);
+  CFRelease(framesetter);
+  return fit_size;
 }
 
 @end
