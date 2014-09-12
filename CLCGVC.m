@@ -96,28 +96,29 @@
 
 -(void)centerSpinner
 {
-  // put the spinner slightly above the mid-line
-  [_spinner centerHorizontally];
-  [_spinner centerVerticallyWithOffset:-(4*CLCG_PADDING)];
-
   // The spinner text is intended for short text that can be read while waiting.
   CGFloat text_max_height = clcg_screensize().height/2;
+  CGSize text_size = [_spinnerLabel1.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
+                                                  maxH:text_max_height
+                                                  font:_spinnerLabel1.font];
+
+  // put the spinner slightly above the mid-line
+  [_spinner centerHorizontally];
+  [_spinner centerVerticallyWithOffset:(text_size.height == 0 ?
+                                        0 : -(4*CLCG_PADDING))];
 
   [_spinnerLabel1 setW:SPINNER_TEXT_MAX_WIDTH];
   [_spinnerLabel1 setY:([_spinner low] + 2*CLCG_PADDING)];
-  CGSize best_size = [_spinnerLabel1.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
-                                                  maxH:text_max_height
-                                                  font:_spinnerLabel1.font];
-  
-  [_spinnerLabel1 setSz:best_size];
+
+  [_spinnerLabel1 setSz:text_size];
   [_spinnerLabel1 centerHorizontally];
   [_spinnerLabel1 setFrame:CGRectIntegral(_spinnerLabel1.frame)];
 
   [_spinnerLabel2 setY:([_spinnerLabel1 low] + CLCG_PADDING)];
-  best_size = [_spinnerLabel2.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
+  text_size = [_spinnerLabel2.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
                                            maxH:text_max_height
                                            font:_spinnerLabel2.font];
-  [_spinnerLabel2 setSz:best_size];
+  [_spinnerLabel2 setSz:text_size];
   [_spinnerLabel2 setXForR:[_spinnerLabel1 r]];
   [_spinnerLabel2 setFrame:CGRectIntegral(_spinnerLabel2.frame)];
 }
