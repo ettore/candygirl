@@ -36,6 +36,7 @@ enum CLCGLoadingState {
  */
 @protocol CLCGPopoverContentDelegate
 -(void)didInvokeDismissAction:(UIViewController*)vc_in_popover;
+-(void)popoverContentSizeDidChange:(CGSize)size;
 @end
 
 
