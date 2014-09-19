@@ -4,10 +4,9 @@
 //
 //  Created by Pasquini, Ettore on 6/2/14.
 //
-//
 
+#import <tgmath.h>
 #import "NSAttributedString+CLCG.h"
-#import <CoreText/CoreText.h>
 
 @implementation NSAttributedString (CLCG)
 
@@ -24,16 +23,17 @@
     max_h = CGFLOAT_MAX;
   }
 
-  CTFramesetterRef framesetter;
-  framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)self);
+  NSStringDrawingOptions options = (NSStringDrawingUsesLineFragmentOrigin
+                                    |NSStringDrawingTruncatesLastVisibleLine
+                                    |NSStringDrawingUsesFontLeading);
 
-  CGSize max_size = CGSizeMake(max_w, max_h);
-  CGSize fit_size;
-  fit_size = CTFramesetterSuggestFrameSizeWithConstraints(framesetter,
-                                                          CFRangeMake(0, [self length]),
-                                                          NULL, max_size, NULL);
-  CFRelease(framesetter);
-  return fit_size;
+  CGSize size = [self boundingRectWithSize:CGSizeMake(max_w, max_h)
+                                   options:options
+                                   context:nil].size;
+  return (CGSize){
+    .height = ceil(size.height),
+    .width = ceil(size.width)
+  };
 }
 
 @end
