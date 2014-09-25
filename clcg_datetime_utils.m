@@ -61,30 +61,27 @@ NSDateComponents *date_components_from(NSDate *d)
 
 NSString *clcg_ago_format(NSDate *d)
 {
-  NSDateComponents *dc = date_components_from(d);
+  NSDateComponents *comps = date_components_from(d);
+  NSInteger ago;
+  NSString *ago_unit;
 
-  NSInteger t;
-  NSString *res, *interval;
-
-  if ((t = [dc year])) {
-    interval = ((t == 1) ? CLCG_LOC(@"year") : CLCG_LOC(@"years"));
-  } else if ((t = [dc month])) {
-    interval = ((t == 1) ? CLCG_LOC(@"month") : CLCG_LOC(@"months"));
-  } else if ((t = [dc day])) {
-    interval = ((t == 1) ? CLCG_LOC(@"day") : CLCG_LOC(@"days"));
-  } else if ((t = [dc hour])) {
-    interval = ((t == 1) ? CLCG_LOC(@"hour") : CLCG_LOC(@"hours"));
-  } else if ((t = [dc minute])) {
-    interval = ((t == 1) ? CLCG_LOC(@"minute") : CLCG_LOC(@"minutes"));
-  } else if ((t = [dc second])) {
-   interval = ((t == 1) ? CLCG_LOC(@"second") : CLCG_LOC(@"seconds"));
+  if ((ago = [comps year])) {
+    ago_unit = ((ago == 1) ? CLCG_LOC(@"year") : CLCG_LOC(@"years"));
+  } else if ((ago = [comps month])) {
+    ago_unit = ((ago == 1) ? CLCG_LOC(@"month") : CLCG_LOC(@"months"));
+  } else if ((ago = [comps day])) {
+    ago_unit = ((ago == 1) ? CLCG_LOC(@"day") : CLCG_LOC(@"days"));
+  } else if ((ago = [comps hour])) {
+    ago_unit = ((ago == 1) ? CLCG_LOC(@"hour") : CLCG_LOC(@"hours"));
+  } else if ((ago = [comps minute])) {
+    ago_unit = ((ago == 1) ? CLCG_LOC(@"minute") : CLCG_LOC(@"minutes"));
+  } else if ((ago = [comps second])) {
+    ago_unit = ((ago == 1) ? CLCG_LOC(@"second") : CLCG_LOC(@"seconds"));
   } else {
     return CLCG_LOC(@"just about now");
   }
 
-  res = [NSString stringWithFormat:@"%d %@ %@",t,interval,CLCG_LOC(@"ago")];
-  
-  return res;
+  return [NSString stringWithFormat:@"%ld %@ %@",(long)ago,ago_unit,CLCG_LOC(@"ago")];
 }
 
 
@@ -92,24 +89,23 @@ NSString *clcg_ago_format_minimal(NSDate *d)
 {
   NSDateComponents *dc = date_components_from(d);
 
-  NSInteger t;
-  NSString *interval;
+  NSInteger ago;
+  NSString *ago_unit;
 
-  if ((t = [dc year])) {
-    interval = CLCG_LOC(@"ago_format_minimal.year");
-  } else if ((t = [dc month])) {
-    interval = CLCG_LOC(@"ago_format_minimal.month");
-  } else if ((t = [dc day])) {
-    interval = CLCG_LOC(@"ago_format_minimal.day");
-  } else if ((t = [dc hour])) {
-    interval = CLCG_LOC(@"ago_format_minimal.hour");;
-  } else if ((t = [dc minute])) {
-    interval = CLCG_LOC(@"ago_format_minimal.minutes");;
+  if ((ago = [dc year])) {
+    ago_unit = CLCG_LOC(@"ago_format_minimal.year");
+  } else if ((ago = [dc month])) {
+    ago_unit = CLCG_LOC(@"ago_format_minimal.month");
+  } else if ((ago = [dc day])) {
+    ago_unit = CLCG_LOC(@"ago_format_minimal.day");
+  } else if ((ago = [dc hour])) {
+    ago_unit = CLCG_LOC(@"ago_format_minimal.hour");;
+  } else if ((ago = [dc minute])) {
+    ago_unit = CLCG_LOC(@"ago_format_minimal.minutes");;
   } else {
-    t = [dc second];
-    interval = CLCG_LOC(@"ago_format_minimal.seconds");
+    ago = [dc second];
+    ago_unit = CLCG_LOC(@"ago_format_minimal.seconds");
   }
-  return [NSString stringWithFormat:@"%d%@",t,interval];
-  
+  return [NSString stringWithFormat:@"%ld%@", (long)ago, ago_unit];
 }
 

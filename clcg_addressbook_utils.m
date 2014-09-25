@@ -142,11 +142,10 @@ static NSMutableArray *clcg__process_ab(ABAddressBookRef ab)
 
   // sort by name
   CFRange fullrange = CFRangeMake(0, CFArrayGetCount(people));
-  ABPersonSortOrdering sortorder = ABPersonGetSortOrdering();
   CFArraySortValues(people,
                     fullrange,
                     (CFComparatorFunction)ABPersonComparePeopleByName,
-                    (void*)sortorder);
+                    NULL);
 
   // don't forget to autorelease the result to be a nice cocoa citizen
   NSMutableArray *arr = (__bridge NSMutableArray*)people;

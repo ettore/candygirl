@@ -98,7 +98,7 @@ void clcg_popping_vc_from_hiding(UINavigationController *nc,
   //UIViewController *curr = [nc topViewController];
   
   NSArray *vcs = [nc viewControllers];
-  int cnt = [vcs count];
+  NSUInteger cnt = [vcs count];
   if (cnt >= 2) {
     UIViewController *prev = [vcs objectAtIndex:cnt-2];
     if (shouldhide_callback(prev)) {

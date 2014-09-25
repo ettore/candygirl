@@ -92,13 +92,13 @@
  The current page end index. 
  You need to set this in order for pagination to work.
  */
-@property(nonatomic,assign) int itemsEnd;
+@property(nonatomic,assign) NSInteger itemsEnd;
 
 /*! 
  
  You need to set this in order for pagination to work. 
  */
-@property(nonatomic,assign) int itemsTotal;
+@property(nonatomic,assign) NSInteger itemsTotal;
 
 @property(nonatomic,retain) NSString *moreButtonText;
 

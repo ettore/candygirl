@@ -180,7 +180,7 @@
 
 -(NSString*)shortenedName:(int)max_len
 {
-  int len = [self length];
+  NSUInteger len = [self length];
   if (len <= max_len)
     return self;
   

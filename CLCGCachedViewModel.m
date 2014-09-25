@@ -101,7 +101,8 @@
                                  width:(CGFloat)w
                              lineLimit:(NSUInteger)line_limit
 {
-  return [NSString stringWithFormat:@"%u-%.2f-%u", [attr_str hash], w, line_limit];
+  return [NSString stringWithFormat:@"%lu-%.2f-%lu",
+          (unsigned long)[attr_str hash], w, (unsigned long)line_limit];
 }
 
 
@@ -119,12 +120,13 @@
              && [view respondsToSelector:@selector(font)]) {
     NSString *text = [(id)self text];
     UIFont *font = [(id)self font];
-    text_hash = [NSString stringWithFormat:@"%u-%u", [text hash], [font hash]];
+    text_hash = [NSString stringWithFormat:@"%lu-%lu", (unsigned long)[text hash],
+                 (unsigned long)[font hash]];
   } else {
-    text_hash = [NSString stringWithFormat:@"%u", [view hash]];
+    text_hash = [NSString stringWithFormat:@"%lu", (unsigned long)[view hash]];
   }
 
-  return [NSString stringWithFormat:@"%@-%.2f-%u", text_hash, w, line_limit];
+  return [NSString stringWithFormat:@"%@-%.2f-%lu", text_hash, w, (unsigned long)line_limit];
 }
 
 @end
