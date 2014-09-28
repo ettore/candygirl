@@ -30,12 +30,17 @@
 
 CGFloat clcg_statusbar_h()
 {
-  const UIInterfaceOrientation orient = clcg_orientation();
   const CGSize sz = [[UIApplication sharedApplication] statusBarFrame].size;
-  if (UIInterfaceOrientationIsPortrait(orient)) {
+
+  if (clcg_os_geq(@"8.0")) {
     return sz.height;
   } else {
-    return sz.width;
+    const UIInterfaceOrientation orient = clcg_orientation();
+    if (UIInterfaceOrientationIsPortrait(orient)) {
+      return sz.height;
+    } else {
+      return sz.width;
+    }
   }
 }
 
