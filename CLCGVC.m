@@ -269,12 +269,13 @@
         [self createEmptyView];
       }
 
-      [_emptyLabel setText:msg];
-      [_emptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
       [mainview addSubview:_emptyContainer];
-      [_emptyContainer setNeedsLayout];
     }
 
+    [_emptyLabel setText:msg];
+    [_emptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
+
+    [_emptyContainer setNeedsLayout];
     [self centerEmptyPlaceholder];
     [mainview bringSubviewToFront:_emptyContainer];
   } else {
