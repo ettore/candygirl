@@ -66,7 +66,9 @@ BOOL clcg_is_iphone5(void)
 
 void clcg_show_network_activity(BOOL show)
 {
+#ifndef CLCG_APP_EXTENSIONS
   [UIApplication sharedApplication].networkActivityIndicatorVisible = show;
+#endif
 }
 
 

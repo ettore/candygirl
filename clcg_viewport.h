@@ -33,7 +33,9 @@
 extern "C" {
 #endif
 
-  /** 
+#ifndef CLCG_APP_EXTENSIONS
+  
+  /**
    * Returns the current device orientation. 
    */
   UIInterfaceOrientation clcg_orientation();
@@ -48,7 +50,8 @@ extern "C" {
    * orientation. 
    */
   CGFloat clcg_statusbar_h();
-  
+#endif
+
 #ifdef __cplusplus
 }
 #endif

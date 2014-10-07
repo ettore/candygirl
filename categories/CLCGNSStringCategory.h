@@ -89,6 +89,8 @@
  */
 -(NSString *)shortenedName:(int)max_len;
 
+#ifndef CLCG_APP_EXTENSIONS
+
 /*!
  Measures the size of this string with a max width assuming word wrapping 
  line break and a max height as device height.
@@ -106,5 +108,7 @@
  sizeWithFont:forWidth:lineBreakMode:.
  */
 -(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h font:(UIFont*)font;
+
+#endif
 
 @end

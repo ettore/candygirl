@@ -200,6 +200,7 @@
   return trimmed;
 }
 
+#ifndef CLCG_APP_EXTENSIONS
 
 -(CGSize)sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font
 {
@@ -236,6 +237,7 @@
   }
 }
 
+#endif
 
 @end
 

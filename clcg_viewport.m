@@ -26,8 +26,9 @@
 #import "clcg_debug.h"
 #import "clcg_viewport.h"
 #import "clcg_device_utils.h"
-#import "UIApplicationCategory.h"
 
+
+#ifndef CLCG_APP_EXTENSIONS
 CGFloat clcg_statusbar_h()
 {
   const CGSize sz = [[UIApplication sharedApplication] statusBarFrame].size;
@@ -64,3 +65,4 @@ CGSize clcg_screensize()
   
   return bounds.size;
 }
+#endif
