@@ -74,4 +74,9 @@
 // reset badge count explicitly
 -(void)setBadgeCount:(NSInteger)count;
 
+/*!
+ @return YES if the app is currently enabled for app badges notifications.
+ */
++(BOOL)isAppBadgeEnabled;
+
 @end

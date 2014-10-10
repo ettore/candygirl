@@ -65,6 +65,10 @@
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark - registration
+
+
 // @param opt the dictionary received by application:didFinishLaunchWithOptions:
 -(void)configureWithInitialOptions:(NSDictionary*)opt
 {
@@ -92,12 +96,21 @@
 
 -(void)registerForAllNotifications
 {
-  CLCG_P(@"Registering for Push Notifications...");
+  NSLog(@"Registering for Push Notifications...");
+
   UIApplication *app = [UIApplication sharedApplication];
-  [app registerForRemoteNotificationTypes: 
-   (UIRemoteNotificationTypeBadge 
-    | UIRemoteNotificationTypeAlert
-    | UIRemoteNotificationTypeSound)];
+  if (clcg_os_geq(@"8")) {
+    [app registerUserNotificationSettings:
+     [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
+                                                   | UIUserNotificationTypeAlert
+                                                   | UIUserNotificationTypeBadge)
+                                       categories:nil]];
+    [app registerForRemoteNotifications];
+  } else {
+    [app registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge
+                                              | UIRemoteNotificationTypeAlert
+                                              | UIRemoteNotificationTypeSound)];
+  }
 }
 
 
@@ -116,12 +129,14 @@
   //            ntohl(tokdata[0]), ntohl(tokdata[1]), ntohl(tokdata[2]), 
   //            ntohl(tokdata[3]), ntohl(tokdata[4]), ntohl(tokdata[5]),
   //            ntohl(tokdata[6]), ntohl(tokdata[7])];
-  
+
+  // TODO: replace this with something more reliable, e.g. a NSData category:
+  //  NSString *str2 = [devtoken_data bytesString];
+  //  CLCG_ASSERT([str2 compare:str2] == NSOrderedSame);
   tokstr = [[[[devtoken_data description] 
-              stringByReplacingOccurrencesOfString:@"<" withString:@""] 
+              stringByReplacingOccurrencesOfString:@"<" withString:@""]
              stringByReplacingOccurrencesOfString:@">" withString:@""] 
             stringByReplacingOccurrencesOfString:@" " withString:@""];
-  
   [self setDeviceToken:tokstr];
   mIsPushRegistered = YES;
 }
@@ -134,6 +149,27 @@
   [self setDeviceToken:nil];
   mIsPushRegistered = NO;
 }
+
+
+//------------------------------------------------------------------------------
+#pragma mark - utils
+
+
++(BOOL)isAppBadgeEnabled
+{
+  UIApplication *app = [UIApplication sharedApplication];
+  if (clcg_os_geq(@"8")) {
+    UIUserNotificationSettings *notif_settings = [app currentUserNotificationSettings];
+    return ([app isRegisteredForRemoteNotifications]
+            && (notif_settings.types & UIUserNotificationTypeBadge));
+  } else {
+    return [app enabledRemoteNotificationTypes] & UIRemoteNotificationTypeBadge;
+  }
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - state
 
 
 -(NSDictionary*)options
