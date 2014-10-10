@@ -55,14 +55,16 @@ UIInterfaceOrientation clcg_orientation()
 CGSize clcg_screensize()
 {
   CGRect bounds = [[UIScreen mainScreen] bounds];
-  const UIInterfaceOrientation orientation = clcg_orientation();
-  
-  if (UIInterfaceOrientationIsLandscape(orientation)) {
-    CGFloat w = bounds.size.width;
-    bounds.size.width = bounds.size.height;
-    bounds.size.height = w;
+
+  if (! clcg_os_geq(@"8.0")) {
+    const UIInterfaceOrientation orientation = clcg_orientation();
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+      CGFloat w = bounds.size.width;
+      bounds.size.width = bounds.size.height;
+      bounds.size.height = w;
+    }
   }
-  
+
   return bounds.size;
 }
 #endif
