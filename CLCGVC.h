@@ -81,7 +81,7 @@ enum CLCGLoadingState {
 -(void)showLoadingView:(BOOL)show;
 
 //------------------------------------------------------------------------------
-#pragma mark - No content / empty response
+#pragma mark - Displaying empty or error states
 
 @property(nonatomic,retain) IBOutlet UIView *emptyContainer;
 @property(nonatomic,retain) IBOutlet UILabel *emptyLabel;

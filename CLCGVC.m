@@ -69,7 +69,7 @@
 
 
 //------------------------------------------------------------------------------
-#pragma mark - Spinner
+#pragma mark - Spinner / Loading view
 
 
 // just creates the spinner view and subviews, without adding to view stack
@@ -124,22 +124,13 @@
 }
 
 
--(void)centerEmptyPlaceholder
-{
-  // height of 2 lines of text
-  CGFloat two_lines_offset = 2*[@"Mj" sizeWithMaxW:[[self view] w]
-                                              font:[_retryLabel font]].height;
-
-  [_emptyLabel centerVerticallyWithOffset:-two_lines_offset];
-  [_emptyLabel centerHorizontally];
-  [_retryLabel centerHorizontally];
-  [_retryLabel setY:ceil([_emptyLabel low] + two_lines_offset)];
-}
-
-
 -(void)showLoadingView:(BOOL)show
 {
   if (show) {
+    // make sure to clean up previous error states messages (e.g. when we
+    // re-request the page after a failure.)
+    [self showEmptyMessage:nil];
+
     if (![[[self view] subviews] containsObject:_spinnerContainer]) {
       if (_spinnerContainer == nil) {
         [self createSpinnerView];
@@ -215,7 +206,7 @@
 
 
 //------------------------------------------------------------------------------
-#pragma mark - Empty Placeholder View
+#pragma mark - Empty / Error states view
 
 
 -(void)createEmptyView
@@ -284,6 +275,19 @@
 }
 
 
+-(void)centerEmptyPlaceholder
+{
+  // height of 2 lines of text
+  CGFloat two_lines_offset = 2*[@"Mj" sizeWithMaxW:[[self view] w]
+                                              font:[_retryLabel font]].height;
+
+  [_emptyLabel centerVerticallyWithOffset:-two_lines_offset];
+  [_emptyLabel centerHorizontally];
+  [_retryLabel centerHorizontally];
+  [_retryLabel setY:ceil([_emptyLabel low] + two_lines_offset)];
+}
+
+
 //------------------------------------------------------------------------------
 #pragma mark - Memory Mgmt
 
@@ -311,6 +315,7 @@
 -(void)didReceiveMemoryWarning
 {
   CLCG_P(@"%@", self);
+  [self setLoadState:CLCG_OUTDATED];
   [super didReceiveMemoryWarning];
 }
 
@@ -319,14 +324,14 @@
 #pragma mark - Rotation
 
 
-// iOS 6
+// iOS >= 6
 -(BOOL)shouldAutorotate
 {
   return YES;
 }
 
 
-// iOS 6
+// iOS >= 6
 - (NSUInteger)supportedInterfaceOrientations {
   // by default, UIInterfaceOrientationMaskAllButUpsideDown is returned on
   // iPhone. Override that and let the default be the project level setting.
