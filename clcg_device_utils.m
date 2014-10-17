@@ -170,5 +170,5 @@ BOOL clcg_has_retina(void)
   // Note: iOS 4.0 - 4.1 were never released for the iPad, so no need to worry 
   // about those cases.
   return ([screen respondsToSelector:@selector(displayLinkWithTarget:selector:)] 
-          && [screen scale] == 2.0);
+          && [screen scale] >= 2.0);
 }
