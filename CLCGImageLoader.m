@@ -1,11 +1,9 @@
 //
 //  CLCGImageLoader.m
-//  Goodreads
-//
 //  Created by Ettore Pasquini on 9/3/12.
-//  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
+// TODO remove this horrible dependency
 #import "ASIHTTPRequest.h"
 
 #import "clcg_macros.h"
@@ -15,16 +13,17 @@
 #import "CLCGImageLoader.h"
 
 @implementation CLCGImageLoader
-
-@synthesize cache = mCache;
+{
+  NSCache         *_cache;
+}
 
 
 -(id)init
 {
   self = [super init];
   if (self) {
-    mCache = [[NSCache alloc] init];
-    [mCache setCountLimit:40];
+    _cache = [[NSCache alloc] init];
+    [_cache setCountLimit:40];
   }
   return self;
 }
@@ -42,23 +41,50 @@
 }
 
 
-+(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
-                        retinaURL:(NSString*)retinaurl
++(ASIHTTPRequest*)loadImageForURL:(NSString*)normal_url
+                        retinaURL:(NSString*)retina_url
+                         useCache:(BOOL)use_cache
+                            block:(CLCGImageLoaderCallback)block
+{
+  return [self loadImageForURL:normal_url
+                     retinaURL:retina_url
+                   retinaHDURL:nil
+                      useCache:use_cache
+                         block:block];
+}
+
+
+
+
+
++(ASIHTTPRequest*)loadImageForURL:(NSString*)normal_url
+                        retinaURL:(NSString*)retina_url
+                      retinaHDURL:(NSString*)retina_hd_url
                          useCache:(BOOL)use_cache
                             block:(CLCGImageLoaderCallback)block
 {
   NSURL *url = nil;
   __block ASIHTTPRequest *req = nil;
-  
-  if (clcg_has_retina()) {
-    if (!clcg_str_isblank(retinaurl))
-      url = [[NSURL alloc] initWithString:retinaurl];
-    else if (!clcg_str_isblank(normalurl))
-      url = [[NSURL alloc] initWithString:normalurl];
-  } else if (!clcg_str_isblank(normalurl)) {
-    url = [[NSURL alloc] initWithString:normalurl];
+  const CGFloat screen_scale = [UIScreen mainScreen].scale;
+  const BOOL is_retina_hd = (screen_scale >= 3.0);
+  const BOOL is_retina = (screen_scale >= 2.0);
+
+  if (is_retina_hd &&
+      !clcg_str_isblank(retina_hd_url)) {
+    url = [[NSURL alloc] initWithString:retina_hd_url];
   }
-  
+
+  if (url == nil
+      && is_retina
+      && !clcg_str_isblank(retina_url)) {
+    url = [[NSURL alloc] initWithString:retina_url];
+  }
+
+  if (url == nil
+      && !clcg_str_isblank(normal_url)) {
+    url = [[NSURL alloc] initWithString:normal_url];
+  }
+
   if (url) {
     if (use_cache) {
       UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:[url absoluteString]];
@@ -80,6 +106,7 @@
     [req setCompletionBlock:^{
       CLCG_MAKE_STRONG(req);
       NSData *data = [req responseData];
+      // TODO: we should likely use imageWithData:scale: instead. 
       UIImage *img = [UIImage imageWithData:data];
       if (img == nil) {
         [CLCGImageLoader reportErrorForRequest:req block:block];

@@ -1,9 +1,6 @@
 //
 //  CLCGImageLoader.h
-//  Goodreads
-//
 //  Created by Ettore Pasquini on 9/3/12.
-//  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -28,14 +25,23 @@ typedef void (^CLCGImageLoaderCallback)(UIImage *img, int http_status);
 
 
 @interface CLCGImageLoader : NSObject
-{
-  NSCache         *mCache;
-}
 
 @property(nonatomic,retain,readonly) NSCache *cache;
 
+/*! 
+ @deprecated
+ */
 +(ASIHTTPRequest*)loadImageForURL:(NSString*)normalurl 
                         retinaURL:(NSString*)retinaurl
+                         useCache:(BOOL)use_cache
+                            block:(CLCGImageLoaderCallback)block;
+
+/*!
+ @deprecated
+ */
++(ASIHTTPRequest*)loadImageForURL:(NSString*)normal_url
+                        retinaURL:(NSString*)retina_url
+                      retinaHDURL:(NSString*)retina_hd_url
                          useCache:(BOOL)use_cache
                             block:(CLCGImageLoaderCallback)block;
 

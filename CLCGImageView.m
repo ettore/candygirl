@@ -1,9 +1,6 @@
 //
 //  CLCGImageView.m
-//  Goodreads
-//
 //  Created by Ettore Pasquini on 6/4/12.
-//  Copyright (c) 2012 Goodreads. All rights reserved.
 //
 
 // deprecated: we should really abstract this out of the class
@@ -37,30 +34,40 @@
   return self;
 }
 
+-(void)loadImageForURL:(NSString*)normal_url
+             retinaURL:(NSString*)retina_url
+{
+  [self loadImageForURL:normal_url
+              retinaURL:retina_url
+            retinaHDURL:nil];
+}
 
--(void)loadImageForURL:(NSString*)normalurl retinaURL:(NSString*)retinaurl
+-(void)loadImageForURL:(NSString*)normal_url
+             retinaURL:(NSString*)retina_url
+           retinaHDURL:(NSString*)retina_hd_url
 {
   if (_req) {
     [_req cancel];
   }
 
-  self.req = [CLCGImageLoader loadImageForURL:normalurl
-                                retinaURL:retinaurl
-                                 useCache:YES
-                                    block:^(UIImage *img, int http_status) {
-                                      if (img) {
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                          [self setImage:img];
-                                        });
-                                      } else {
-                                        CLCG_P(@"Error loading image. HTTP status=%d",
-                                               http_status);
-                                      }
-                                      
-                                      if (self.callback) {
-                                        self.callback(img, http_status);
-                                      }
-                                    }];
+  self.req = [CLCGImageLoader loadImageForURL:normal_url
+                                    retinaURL:retina_url
+                                  retinaHDURL:retina_hd_url
+                                     useCache:YES
+                                        block:^(UIImage *img, int http_status){
+                                          if (img) {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                              [self setImage:img];
+                                            });
+                                          } else {
+                                            CLCG_P(@"Error loading image. HTTP status=%d",
+                                                   http_status);
+                                          }
+                                          
+                                          if (self.callback) {
+                                            self.callback(img, http_status);
+                                          }
+                                        }];
 }
 
 
