@@ -137,6 +137,9 @@
       }
       
       [[self view] addSubview:_spinnerContainer];
+      UIAccessibilityPostNotification(UIAccessibilityLayoutChangedNotification,
+                                      nil);
+
       [_spinnerContainer setNeedsLayout];
     }
 
