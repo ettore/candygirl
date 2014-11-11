@@ -86,6 +86,8 @@
   }
 
   if (url) {
+    block = [block copy];//make sure it's on the heap
+
     if (use_cache) {
       UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:[url absoluteString]];
       if (img) {
@@ -93,8 +95,6 @@
         return nil;
       }
     }
-    
-    block = [block copy];//make sure it's on the heap
     
     // configure the request
     req = [[ASIHTTPRequest alloc] initWithURL:url];
