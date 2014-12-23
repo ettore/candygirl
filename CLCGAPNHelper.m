@@ -31,22 +31,21 @@
 
 
 @interface CLCGAPNHelper ()
-@property(nonatomic,retain,readwrite) NSString *deviceToken;
+@property(nonatomic,strong,readwrite) NSString *deviceToken;
 @end
 
 
 @implementation CLCGAPNHelper
-
-@synthesize isPushRegistered = mIsPushRegistered;
-@synthesize hasSyncedDeviceToken = mHasSyncedDeviceToken;
-@synthesize deviceToken = mDeviceToken;
+{
+  NSInteger _badgeCount;  //negative values means unassigned
+}
 
 
 #if !__has_feature(objc_arc)
 -(void)dealloc
 {
-  [mDeviceToken release];
-  [mOptions release];
+  [_deviceToken release];
+  [_options release];
   [super dealloc];
 }
 #endif
@@ -57,9 +56,7 @@
   if (!(self = [super init]))
     return nil;
   
-  mIsPushRegistered = NO;
-  mHasSyncedDeviceToken = NO;
-  mBadgeCount = -1;
+  _badgeCount = -1;
 
   return self;
 }
@@ -79,7 +76,6 @@
     payld = [opt objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     [self setOptions:payld];
   }
-  [self registerForAllNotifications];
 }
 
 
@@ -138,7 +134,7 @@
              stringByReplacingOccurrencesOfString:@">" withString:@""] 
             stringByReplacingOccurrencesOfString:@" " withString:@""];
   [self setDeviceToken:tokstr];
-  mIsPushRegistered = YES;
+  _isPushRegistered = YES;
 }
 
 
@@ -147,7 +143,7 @@
   CLCG_P(@"Registration for APN failed: %@", [err description]);
 
   [self setDeviceToken:nil];
-  mIsPushRegistered = NO;
+  _isPushRegistered = NO;
 }
 
 
@@ -172,54 +168,48 @@
 #pragma mark - state
 
 
--(NSDictionary*)options
-{
-  return mOptions;
-}
-
-
 -(void)setOptions:(NSDictionary*)opt
 {
 #if !__has_feature(objc_arc)
   [opt retain];
   [mOptions release];
 #endif
-  mOptions = opt;
+  _options = opt;
   [self parseBadgeCount];
 }
 
 
 -(void)parseBadgeCount
 {
-  if (mOptions == nil)
-    mBadgeCount = 0;
+  if (_options == nil)
+    _badgeCount = 0;
   
-  NSDictionary *aps = [mOptions objectForKey:@"aps"];
+  NSDictionary *aps = [_options objectForKey:@"aps"];
   if (aps == nil)
-    mBadgeCount = 0;
+    _badgeCount = 0;
   
   id badgeobj = [aps objectForKey:@"badge"];
   if (badgeobj)
-    mBadgeCount = [badgeobj integerValue];
+    _badgeCount = [badgeobj integerValue];
 }
 
 
--(NSUInteger)badgeCount
+-(NSInteger)badgeCount
 {
   // if we have a valid value (>0) return that
-  if (mBadgeCount >= 0)
-    return mBadgeCount;
+  if (_badgeCount >= 0)
+    return _badgeCount;
   
   // ... otherwise parse options
   [self parseBadgeCount];
   
-  return (NSUInteger)mBadgeCount;
+  return _badgeCount;
 }
 
 
 -(void)setBadgeCount:(NSInteger)count
 {
-  mBadgeCount = count;
+  _badgeCount = count;
 }
 
 

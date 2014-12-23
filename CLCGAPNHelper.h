@@ -30,49 +30,57 @@
 
 
 @interface CLCGAPNHelper : NSObject 
-{
-  BOOL mIsPushRegistered;
-  BOOL mHasSyncedDeviceToken;
-  NSString *mDeviceToken; //comes from APNS once you register
-  NSDictionary *mOptions; //comes from application:didFinishLaunchingWithOptions:
-  NSInteger mBadgeCount;  //negative values means unassigned
-}
 
 @property(nonatomic) BOOL isPushRegistered;
 @property(nonatomic) BOOL hasSyncedDeviceToken;
-@property(nonatomic,retain,readonly) NSString *deviceToken;
+@property(nonatomic,strong,readonly) NSString *deviceToken;
 
-// Curent options dictionary. This dictionary contains the notifications
-// payload. We get one when a new notification is received while the app is in
-// the foreground, or when you "View" the notification to bring the app in the
-// foreground.
-// TODO: might want to parse the dictionary and just save the individual info,
-// instead of parsing it each time.
-@property(nonatomic,retain) NSDictionary *options;
+/*!
+ Current options dictionary. This dictionary contains the notifications
+ payload. We get one when a new notification is received while the app is in
+ the foreground, or when you "View" the notification to bring the app in the
+ foreground.
+ TODO: might want to parse the dictionary and just save the individual info,
+ instead of parsing it each time.
+ */
+@property(nonatomic,strong) NSDictionary *options;
 
-// @param opt The dictionary received by application:didFinishLaunchWithOptions:
+/*! The current badge count. A negative value means badge is unassigned. */
+@property(nonatomic) NSInteger badgeCount;
+
+/*!
+ @abstract Save the initial options received by 
+ application:didFinishLaunchWithOptions: for later processing.
+ @param opt The dictionary received by application:didFinishLaunchWithOptions:.
+ */
 -(void)configureWithInitialOptions:(NSDictionary*)opt;
 
-// @returns YES if the user has push notifications enabled for this app.
-//           NO if the user disables all push notifications in Settings.
+/*!
+ @return YES if the user has push notifications enabled for this app.
+          NO if the user disables all push notifications in Settings.
+ */
 +(BOOL)hasPushNotificationsEnabled;
 
-// registers for sounds, badges, alerts.
+/*! 
+ @abstract 
+ Registers for sounds, badges, alerts.
+
+ @discussion
+ Handles the differences in registering across iOS versions. Call this as a
+ shortcut to register for all push notifications.
+ */
 -(void)registerForAllNotifications;
 
-// Typically you want to call this from
-// application:didRegisterForRemoteNotificationsWithDeviceToken:
-// to save the device token.
+/*!
+ @discussion
+ Typically you want to call this from
+ application:didRegisterForRemoteNotificationsWithDeviceToken:
+ to save the device token.
+ */
 -(void)receivedDeviceToken:(NSData*)device_token;
 
-// adjust state in case registration with APNS failed.
+/*! adjust state in case registration with APNS failed. */
 -(void)registrationFailed:(NSError*)err;
-
-// returns current badge count.
--(NSUInteger)badgeCount;
-
-// reset badge count explicitly
--(void)setBadgeCount:(NSInteger)count;
 
 /*!
  @return YES if the app is currently enabled for app badges notifications.
