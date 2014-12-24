@@ -28,8 +28,8 @@
 
 #import "tgmath.h"
 
-#import "CLCGUIViewCategory.h"
-#import "CLCGNSStringCategory.h"
+#import "UIView+CLCG.h"
+#import "NSString+CLCG.h"
 #import "clcg_gfx.h"
 #import "NSAttributedString+CLCG.h"
 

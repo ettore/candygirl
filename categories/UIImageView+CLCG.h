@@ -1,5 +1,5 @@
 // Copyright (c) 2011, Ettore Pasquini
-// Copyright (c) 2011, Goodreads
+// Copyright (c) 2011, Cubelogic
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without 
@@ -26,36 +26,20 @@
 //  Created by Ettore Pasquini on 9/22/11.
 //
 
-#import "clcg_macros.h"
-#import "clcg_debug.h"
 
-#import "CLCGUIImageViewCategory.h"
-#import "CLCGUIViewCategory.h"
+@interface UIImageView (Candygirl)
 
-@implementation UIImageView (UIImageViewCategory)
-
-// we want to not change the width and in case the contained 
-// UIImageView.height > UIImage.height, we want to resize the imageView to the 
-// same size of the UIImage. Otherwise do nothing.
--(void)keepWidthTrimHeight:(CGFloat)viewh
-{
-  CGFloat imgw, imgh, vieww, imgratio, vratio, newvh;
-  
-  imgw = [[self image] size].width;
-  imgh = [[self image] size].height;
-  vieww = [self frame].size.width;
-  imgratio = imgh / imgw;
-  vratio   = viewh / vieww;
-  if (vratio > imgratio) {
-    newvh = viewh * imgratio / vratio;
-    [self setH:newvh];
-  }
-}
+/**
+ * This function resizes the UIImageView when the contained UIImage would leave
+ * some whitespace above and below it. This happens if the height/width ratio 
+ * of the UIImage is less than the ratio of the UIImageView.
+ * This is especially useful when using UIViewContentModeScaleAspectFit.
+ * This function never changes the width of a UIImageView.
+ * 
+ * @param maxviewh This is the reference height of the UIImageView that will be 
+ *                 used for calculating the ratio and related resizing.
+ *
+ */
+-(void)keepWidthTrimHeight:(CGFloat)maxviewh;
 
 @end
-
-
-
-
-
-

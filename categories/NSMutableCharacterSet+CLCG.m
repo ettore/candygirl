@@ -29,7 +29,8 @@
  */
 
 
-#import "NSMutableCharacterSetCategory.h"
+#import "NSMutableCharacterSet+CLCG.h"
+
 
 @implementation NSMutableCharacterSet (Candygirl)
 

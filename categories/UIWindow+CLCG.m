@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Cubelogic. All rights reserved.
 //
 
-#import "UIWindowCategory.h"
+#import "UIWindow+CLCG.h"
 
 @implementation UIWindow (Candygirl)
 

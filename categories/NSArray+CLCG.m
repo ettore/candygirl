@@ -29,17 +29,35 @@
  */
 
 
-#import "NSMutableArrayCategory.h"
+#import "NSArray+CLCG.h"
 
 
-@implementation NSMutableArray (Candygirl)
+@implementation NSArray (Candygirl)
 
 
-- (void)replaceObject:(id)o1 withObject:(id)o2
+-(NSArray*)map:(id(^)(id item))block
 {
-  NSUInteger i = [self indexOfObject:o1];
-  if (i != NSNotFound)
-    [self replaceObjectAtIndex:i withObject:o2];
+  NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
+
+  for (id item in self) {
+    id new_item = block(item);
+    if (new_item) {
+      [a addObject:new_item];
+    }
+  }
+
+  return a;
+}
+
+
+-(id)reduceWithStart:(id)acc
+               block:(id(^)(id current_acc, id item))block;
+{
+  for (id item in self) {
+    acc = block(acc, item);
+  }
+
+  return acc;
 }
 
 

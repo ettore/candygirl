@@ -1,4 +1,3 @@
-
 /*
  Copyright (c) 2012, Ettore Pasquini
  Copyright (c) 2012, Cubelogic
@@ -46,7 +45,7 @@
  @note This class puts the tableView as a subview of [self view] making
     it easy to swap it out while downloading content from the net.
  */
-@interface CLCGTVVC : CLCGVC<UITableViewDelegate,UITableViewDataSource>
+@interface CLCGTableViewVC : CLCGVC<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
 @property(nonatomic,retain,readonly) NSMutableArray *items;
@@ -124,7 +123,7 @@
  Invoked for cells that are not the "more" row.
  Subclasses must override this method just like they would override 
  -tableView:cellForRowAtIndexPath:, ignoring handling of the more cell since
- that is handled by CLCGTVVC.
+ that is handled by CLCGTableViewVC.
  @return nil by default.
  */
 -(UITableViewCell*)tableView:(UITableView*)tv

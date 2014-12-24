@@ -29,8 +29,8 @@
  */
 
 
-#import "CLCGNSStringCategory.h"
-#import "NSMutableCharacterSetCategory.h"
+#import "NSString+CLCG.h"
+#import "NSMutableCharacterSet+CLCG.h"
 #import "clcg_viewport.h"
 #import "clcg_device_utils.h"
 

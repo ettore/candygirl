@@ -1,4 +1,5 @@
-// Copyright (c) 2012, Cubelogic
+// Copyright (c) 2011, Ettore Pasquini
+// Copyright (c) 2011, Cubelogic
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -22,16 +23,13 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 //
-//  Created by Pasquini, Ettore on 11/7/13.
+//  Created by Ettore Pasquini on 6/4/12.
 //
 
+@interface UILabel (Candygirl)
 
-@interface UIColor (Candygirl)
+-(void)resizeHeightForText;
 
-/** @return A color that's 25% brighter than self. */
-- (UIColor *)lighterColor;
-
-/** @return A color that's 25% darker than self. */
-- (UIColor *)darkerColor;
+-(void)sizeToFitWidth:(CGFloat)w;
 
 @end

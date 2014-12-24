@@ -33,7 +33,7 @@
 
 #import "clcg_macros.h"
 #import "clcg_viewport.h"
-#import "CLCGUIViewCategory.h"
+#import "UIView+CLCG.h"
 #import "CLCGCell.h"
 #import "CLCGImageView.h"
 

@@ -26,6 +26,9 @@
 //
 
 
+//==============================================================================
+
+
 @protocol CLCGUIViewLayout
 
 /*!
@@ -35,6 +38,10 @@
 -(CGFloat)calculatedHeightForWidth:(const CGFloat)w;
 
 @end
+
+
+//==============================================================================
+
 
 @interface UIView (Candygirl)
 

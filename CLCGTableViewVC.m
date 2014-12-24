@@ -29,16 +29,16 @@
  */
 
 
-#import "CLCGTVVC.h"
+#import "CLCGTableViewVC.h"
 #import "CLCGMoreCell.h"
 #import "clcg_device_utils.h"
 #import "clcg_viewport.h"
-#import "CLCGUIViewControllerCategory.h"
+#import "UIViewController+CLCG.h"
 
 
 #define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
 
-@implementation CLCGTVVC
+@implementation CLCGTableViewVC
 {
   UITableViewStyle        _style;
 }
