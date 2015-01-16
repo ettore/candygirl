@@ -178,11 +178,12 @@
 }
 
 
--(NSString*)shortenedName:(int)max_len
+-(NSString*)shortenedName:(NSUInteger)max_len
 {
   NSUInteger len = [self length];
-  if (len <= max_len)
+  if (len <= max_len) {
     return self;
+  }
   
   NSCharacterSet *charset = [NSMutableCharacterSet punctSpaces];
   NSString *trimmed = [self stringByTrimmingCharactersInSet:charset];

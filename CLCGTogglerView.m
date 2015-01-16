@@ -29,6 +29,7 @@
 
 #import "CLCGTogglerView.h"
 #import "clcg_gfx.h"
+#import "clcg_debug.h"
 
 
 @implementation CLCGTogglerView

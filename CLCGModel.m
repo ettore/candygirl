@@ -49,8 +49,9 @@
  */
 -(BOOL)containsWords:(NSArray*)words
 {
-  if (mSearchable == nil)
+  if (mSearchable == nil) {
     return NO;
+  }
 
   for (NSString *w in words) {
     NSRange r = [mSearchable rangeOfString:w options:NSCaseInsensitiveSearch];
@@ -59,6 +60,21 @@
   }
   return YES;
 }
+
+
+-(BOOL)containsPrefix:(NSString*)prefix
+{
+  NSArray *words = [mSearchable componentsSeparatedByCharactersInSet:
+                    [NSCharacterSet whitespaceCharacterSet]];
+
+  for (NSString *w in words) {
+    if ([w hasPrefix:prefix]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
 
 
 -(BOOL)matches:(NSPredicate*)pred

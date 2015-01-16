@@ -1,5 +1,5 @@
 //
-//  UIWindowCategory.m
+//  UIWindow+CLCG.m
 //  PostalChess
 //
 //  Created by Ettore Pasquini on 11/18/12.

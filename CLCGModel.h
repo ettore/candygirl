@@ -37,4 +37,9 @@
 -(BOOL)containsWords:(NSArray*)words;
 -(BOOL)matches:(NSPredicate*)pred;
 
+/*!
+ Returns YES if any word in the searchable starts with the prefix.
+ */
+-(BOOL)containsPrefix:(NSString*)prefix;
+
 @end

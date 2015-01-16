@@ -87,7 +87,7 @@
  * If the first word is still too long, it will be returned truncated with a
  * tolerance of + 2 additional chars. No ellipses are added.
  */
--(NSString *)shortenedName:(int)max_len;
+-(NSString *)shortenedName:(NSUInteger)max_len;
 
 #ifndef CLCG_APP_EXTENSIONS
 

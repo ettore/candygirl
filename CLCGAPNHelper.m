@@ -28,6 +28,7 @@
 
 #import "CLCGAPNHelper.h"
 #import "clcg_debug.h"
+#import "clcg_device_utils.h"
 
 
 @interface CLCGAPNHelper ()
@@ -172,7 +173,7 @@
 {
 #if !__has_feature(objc_arc)
   [opt retain];
-  [mOptions release];
+  [_options release];
 #endif
   _options = opt;
   [self parseBadgeCount];

@@ -36,7 +36,7 @@
 #import "UIViewController+CLCG.h"
 
 
-#define CLCGTVVC_MORE_CID     @"CLCGTVVC_MORE_CID"
+#define CLCGTableViewVC_MORE_CID     @"CLCGTableViewVC_MORE_CID"
 
 @implementation CLCGTableViewVC
 {
@@ -299,10 +299,10 @@
 {
   CLCGMoreCell *cell;
 
-  cell = (CLCGMoreCell*)[tv dequeueReusableCellWithIdentifier:CLCGTVVC_MORE_CID];
+  cell = (CLCGMoreCell*)[tv dequeueReusableCellWithIdentifier:CLCGTableViewVC_MORE_CID];
 
   if (cell == nil) {
-    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTVVC_MORE_CID
+    cell = [[CLCGMoreCell alloc] initReusingId:CLCGTableViewVC_MORE_CID
                                       withText:_moreButtonText];
   }
 
