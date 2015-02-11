@@ -57,9 +57,15 @@
 
 /*!
  @return YES if the user has push notifications enabled for this app.
-          NO if the user disables all push notifications in Settings.
+          NO if the user disabled all push notifications in Settings.
+ Note: at app startup (before registration), this will return NO.
  */
 +(BOOL)hasPushNotificationsEnabled;
+
+/*!
+ @return YES if the user has enabled badge push notifications settings.
+ */
++(BOOL)hasPushNotificationsBadgeEnabled;
 
 /*! 
  @abstract 

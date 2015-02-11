@@ -91,6 +91,22 @@
 }
 
 
++(BOOL)hasPushNotificationsBadgeEnabled
+{
+  if (clcg_os_geq(@"8")) {
+    if ([self hasPushNotificationsEnabled] == NO) {
+      return NO;
+    } else {
+      UIApplication *app = [UIApplication sharedApplication];
+      return (app.currentUserNotificationSettings.types & UIUserNotificationTypeBadge);
+    }
+  } else {
+    UIApplication *app = [UIApplication sharedApplication];
+    return ([app enabledRemoteNotificationTypes] & UIRemoteNotificationTypeBadge);
+  }
+}
+
+
 -(void)registerForAllNotifications
 {
   NSLog(@"Registering for Push Notifications...");
