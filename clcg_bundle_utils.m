@@ -23,6 +23,8 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#import <Foundation/Foundation.h>
+
 #import "clcg_bundle_utils.h"
 
 SystemSoundID clcg_create_short_snd(NSString *filename, NSString *ext)

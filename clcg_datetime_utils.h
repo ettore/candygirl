@@ -33,6 +33,8 @@
 #ifndef CLCG_DATETIME_UTILS_H_
 #define CLCG_DATETIME_UTILS_H_
 
+#import <Foundation/Foundation.h>
+
 #define CLCG_MINUTE   60
 #define CLCG_HOUR     (60 * CLCG_MINUTE)
 #define CLCG_DAY      (24 * CLCG_HOUR)

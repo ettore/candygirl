@@ -26,6 +26,8 @@
 #ifndef CLCG_VIEWPORT_H_
 #define CLCG_VIEWPORT_H_
 
+#import <UIKit/UIKit.h>
+
 #define CLCG_PADDING           10.0f
 #define CLCG_PADDING_COMFORT    8.0f
 
