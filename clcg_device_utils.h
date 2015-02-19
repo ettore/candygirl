@@ -76,8 +76,8 @@ extern "C" {
   /** @return YES if the device is iPhone or iPod type device. */
   BOOL clcg_is_iphone(void);
 
-  /** @return YES if the device is an iPhone5 or other tall non-tablet device. */
-  BOOL clcg_is_iphone5(void);
+  /** @return YES if the device is an iphone6 or bigger (including iPads). */
+  BOOL clcg_geq_iphone6(void);
 
   /**
    * @return YES if the OS version is >= than given version. The version string
