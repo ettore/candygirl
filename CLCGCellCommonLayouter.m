@@ -70,8 +70,7 @@
   CALayer *layer = [[_cell imageView] layer];
 
   if (animated) {
-    // once the img view has been layed out once, no need to re-lay it out again
-    [_cell setNeedsLayout]; //layout will happen in next update cycle
+    [_cell setNeedsDisplay];
     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"opacity"];
     [anim setDuration:0.4]; // seconds
     [anim setFromValue:[NSNumber numberWithFloat:0.0]];

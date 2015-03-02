@@ -101,6 +101,17 @@ if (am_i_being_debugged()) { __asm__("int $3\n" : : ); }; } \
 #endif // #ifdef DEBUG
 #define CLCGASSERT CLCG_ASSERT
 
+
+///////////////////////////////////////////////////////////////////////////////
+// exception macro
+
+#ifdef DEBUG
+#define CLCG_INCONSISTENCY(msg,obj) {[NSException raise:NSInternalInconsistencyException format:@"%@ Class: %@",msg,NSStringFromClass([obj class])];}
+#else
+#define CLCG_INCONSISTENCY(msg,obj) ((void)0)
+#endif
+
+
 #ifdef __cplusplus
 }
 #endif

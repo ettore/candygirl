@@ -63,7 +63,6 @@
 
 // properties declared in CLCGCell protocol
 @property(nonatomic,assign)   BOOL      emphasized;
-@property(nonatomic,readonly) CGFloat   viewportPadding;
 @property(nonatomic) CGFloat   innerPadding;
 @property(nonatomic,retain)   UIColor   *normalColor;
 @property(nonatomic,retain)   UIColor   *emphasisColor;

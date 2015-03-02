@@ -92,7 +92,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   if (self) {
     _imgW = w;
     _imgH = h;
-    _viewportPadding = _innerPadding = padding;
+    _innerPadding = padding;
     [self setCommonLayouter:[[CLCGCellCommonLayouter alloc] initWithCell:self]];
     [self setSelectionStyle:UITableViewCellSelectionStyleBlue];
     [[self textLabel] setTextColor:[UIColor blackColor]];
@@ -176,7 +176,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   [super layoutSubviews];
 
   // layout image view
-  const CGRect img_frame = CGRectMake(_viewportPadding, [class topBottomPadding],
+  const CGRect img_frame = CGRectMake([class viewportPadding], [class topBottomPadding],
                                       _imgW, _imgH);
   [_mainImageView setFrame:img_frame];
 
@@ -348,6 +348,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                context:(id)cell_cxt_obj
 {
   [self setContext:cell_cxt_obj];
+  [self showImage:nil]; //avoid showing previous image on a recycled cell
   [CLCGImageLoader loadImageForURL:img_url
                          retinaURL:retina_img_url
                           useCache:YES

@@ -53,12 +53,11 @@
 
 @property(nonatomic,retain) UIView      *backgroundView;
 @property(nonatomic,readonly,retain) UIImageView *imageView NS_AVAILABLE_IOS(3_0);
-- (void)setNeedsLayout;
 @property(nonatomic,assign)   BOOL      emphasized;
-@property(nonatomic,readonly) CGFloat   viewportPadding;
 @property(nonatomic,readonly) CGFloat   innerPadding;
 @property(nonatomic,retain)   UIColor   *normalColor;
 @property(nonatomic,retain)   UIColor   *emphasisColor;
+- (void)setNeedsDisplay;
 
 @end
 
