@@ -198,7 +198,7 @@
 {
   [super willAnimateRotationToInterfaceOrientation:to_orient duration:duration];
   [self centerSpinner];
-  [self centerEmptyPlaceholder];
+  [self centerEmptyView];
 }
 
 
@@ -278,9 +278,10 @@
 
     [_emptyLabel setText:msg];
     [_emptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
+    [_retryLabel setHidden:YES];
 
     [_emptyContainer setNeedsLayout];
-    [self centerEmptyPlaceholder];
+    [self centerEmptyView];
     [mainview bringSubviewToFront:_emptyContainer];
   } else {
     clcg_safe_remove_from_superview(_emptyContainer);
@@ -288,7 +289,14 @@
 }
 
 
--(void)centerEmptyPlaceholder
+-(void)showErrorMessage:(NSString*)msg
+{
+  [self showEmptyMessage:msg];
+  _retryLabel.hidden = NO;
+}
+
+
+-(void)centerEmptyView
 {
   // height of 2 lines of text
   CGFloat two_lines_offset = 2*[@"Mj" sizeWithMaxW:[[self view] w]

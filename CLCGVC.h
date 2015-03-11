@@ -38,7 +38,7 @@ enum CLCGLoadingState {
 };
 
 
-/**
+/*!
  * If your CLCGVC view controller is presented as content inside of a 
  * UIPopoverController, and you want to be notified when the user 
  * performs an action inside your content view controller (such as hitting a 
@@ -92,7 +92,7 @@ enum CLCGLoadingState {
 @property(nonatomic,strong) IBOutlet UILabel *spinnerLabel1;
 @property(nonatomic,strong) IBOutlet UILabel *spinnerLabel2;
 
-/**
+/*!
  * If show == YES, shows and aligns the spinny indicator to the center
  * of the screen.
  * If show == NO, removes the spinny indicator if it was displayed, or do
@@ -103,21 +103,46 @@ enum CLCGLoadingState {
 //------------------------------------------------------------------------------
 #pragma mark - Displaying empty or error states
 
+/*!
+ The container that contains the empty or error messages, as well as the 
+ Tap to Reload label in the latter case. This view spans the whole screen.
+ */
 @property(nonatomic,strong) IBOutlet UIView *emptyContainer;
+
+/*!
+ Label that displays the message for empty case (no data or error).
+ */
 @property(nonatomic,strong) IBOutlet UILabel *emptyLabel;
 
-/**
+/*!
  * If msg is non-nil, this method shows and aligns the given message to the
  * center of the screen. Otherwise, it removes the message if it was displayed.
  */
 -(void)showEmptyMessage:(NSString*)msg;
+
+/*!
+ * If msg is non-nil, this method shows and aligns the given message to the
+ * center of the screen. Otherwise, it removes the message if it was displayed.
+ * It also displays a Tap to Reload label.
+ */
+-(void)showErrorMessage:(NSString*)msg;
+
+/*!
+ This method creates the view to render the message for no data/error case.
+ */
+-(void)createEmptyView;
+
+/*!
+ Aligns the empty label to the center of the emptyContainer.
+ */
+-(void)centerEmptyView;
 
 //------------------------------------------------------------------------------
 #pragma mark - Misc
 
 @property(nonatomic,weak) id<CLCGPopoverContentDelegate> popoverContentDelegate;
 
-/**
+/*!
  * Releases all the retained subviews of this view controller. This is called
  * by dealloc and viewDidUnload.
  * Subclasses should override this method and release their subviews here.
