@@ -109,7 +109,7 @@
 
 -(void)registerForAllNotifications
 {
-  NSLog(@"Registering for Push Notifications...");
+  CLCGP(@"Registering for Push Notifications...");
 
   UIApplication *app = [UIApplication sharedApplication];
   if (clcg_os_geq(@"8")) {
