@@ -1,0 +1,569 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E5D025BC1AEF3A2400154583 /* libCandygirl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D025B01AEF3A2400154583 /* libCandygirl.a */; };
+		E5D0262A1AEF3A9B00154583 /* clcg_addressbook_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */; };
+		E5D0262B1AEF3A9B00154583 /* clcg_bundle_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EC1AEF3A9B00154583 /* clcg_bundle_utils.m */; };
+		E5D0262C1AEF3A9B00154583 /* clcg_datetime_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EE1AEF3A9B00154583 /* clcg_datetime_utils.m */; };
+		E5D0262D1AEF3A9B00154583 /* clcg_debug.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025F01AEF3A9B00154583 /* clcg_debug.m */; };
+		E5D0262E1AEF3A9B00154583 /* clcg_device_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025F21AEF3A9B00154583 /* clcg_device_utils.m */; };
+		E5D0262F1AEF3A9B00154583 /* clcg_gfx.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025F41AEF3A9B00154583 /* clcg_gfx.m */; };
+		E5D026301AEF3A9B00154583 /* clcg_math.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025F71AEF3A9B00154583 /* clcg_math.m */; };
+		E5D026311AEF3A9B00154583 /* clcg_str_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025F91AEF3A9B00154583 /* clcg_str_utils.m */; };
+		E5D026321AEF3A9B00154583 /* clcg_viewport.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025FB1AEF3A9B00154583 /* clcg_viewport.m */; };
+		E5D026331AEF3A9B00154583 /* CLCGAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025FD1AEF3A9B00154583 /* CLCGAlertView.m */; };
+		E5D026341AEF3A9B00154583 /* CLCGAPNHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025FF1AEF3A9B00154583 /* CLCGAPNHelper.m */; };
+		E5D026351AEF3A9B00154583 /* CLCGBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026011AEF3A9B00154583 /* CLCGBarButtonItem.m */; };
+		E5D026361AEF3A9B00154583 /* CLCGCachedViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026031AEF3A9B00154583 /* CLCGCachedViewModel.m */; };
+		E5D026371AEF3A9B00154583 /* CLCGCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026051AEF3A9B00154583 /* CLCGCell.m */; };
+		E5D026381AEF3A9B00154583 /* CLCGCellCommonLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026071AEF3A9B00154583 /* CLCGCellCommonLayouter.m */; };
+		E5D0263A1AEF3A9B00154583 /* CLCGImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D0260B1AEF3A9B00154583 /* CLCGImageLoader.m */; };
+		E5D0263B1AEF3A9B00154583 /* CLCGImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D0260D1AEF3A9B00154583 /* CLCGImageView.m */; };
+		E5D0263C1AEF3A9B00154583 /* CLCGLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D0260F1AEF3A9B00154583 /* CLCGLayer.m */; };
+		E5D0263D1AEF3A9B00154583 /* CLCGModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026111AEF3A9B00154583 /* CLCGModel.m */; };
+		E5D0263E1AEF3A9B00154583 /* CLCGMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026131AEF3A9B00154583 /* CLCGMoreCell.m */; };
+		E5D0263F1AEF3A9B00154583 /* CLCGTableViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026151AEF3A9B00154583 /* CLCGTableViewVC.m */; };
+		E5D026401AEF3A9B00154583 /* CLCGTogglerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026171AEF3A9B00154583 /* CLCGTogglerView.m */; };
+		E5D026411AEF3A9B00154583 /* CLCGVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D026191AEF3A9B00154583 /* CLCGVC.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E5D025BD1AEF3A2400154583 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5D025A81AEF3A2400154583 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E5D025AF1AEF3A2400154583;
+			remoteInfo = Candygirl;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E5D025AE1AEF3A2400154583 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E5D025B01AEF3A2400154583 /* libCandygirl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCandygirl.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5D025BB1AEF3A2400154583 /* CandygirlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CandygirlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5D025C11AEF3A2400154583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E5D025E91AEF3A9B00154583 /* clcg_addressbook_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_addressbook_utils.h; sourceTree = "<group>"; };
+		E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_addressbook_utils.m; sourceTree = "<group>"; };
+		E5D025EB1AEF3A9B00154583 /* clcg_bundle_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_bundle_utils.h; sourceTree = "<group>"; };
+		E5D025EC1AEF3A9B00154583 /* clcg_bundle_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_bundle_utils.m; sourceTree = "<group>"; };
+		E5D025ED1AEF3A9B00154583 /* clcg_datetime_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_datetime_utils.h; sourceTree = "<group>"; };
+		E5D025EE1AEF3A9B00154583 /* clcg_datetime_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_datetime_utils.m; sourceTree = "<group>"; };
+		E5D025EF1AEF3A9B00154583 /* clcg_debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_debug.h; sourceTree = "<group>"; };
+		E5D025F01AEF3A9B00154583 /* clcg_debug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_debug.m; sourceTree = "<group>"; };
+		E5D025F11AEF3A9B00154583 /* clcg_device_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_device_utils.h; sourceTree = "<group>"; };
+		E5D025F21AEF3A9B00154583 /* clcg_device_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_device_utils.m; sourceTree = "<group>"; };
+		E5D025F31AEF3A9B00154583 /* clcg_gfx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_gfx.h; sourceTree = "<group>"; };
+		E5D025F41AEF3A9B00154583 /* clcg_gfx.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_gfx.m; sourceTree = "<group>"; };
+		E5D025F51AEF3A9B00154583 /* clcg_macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_macros.h; sourceTree = "<group>"; };
+		E5D025F61AEF3A9B00154583 /* clcg_math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_math.h; sourceTree = "<group>"; };
+		E5D025F71AEF3A9B00154583 /* clcg_math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_math.m; sourceTree = "<group>"; };
+		E5D025F81AEF3A9B00154583 /* clcg_str_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_str_utils.h; sourceTree = "<group>"; };
+		E5D025F91AEF3A9B00154583 /* clcg_str_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_str_utils.m; sourceTree = "<group>"; };
+		E5D025FA1AEF3A9B00154583 /* clcg_viewport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_viewport.h; sourceTree = "<group>"; };
+		E5D025FB1AEF3A9B00154583 /* clcg_viewport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_viewport.m; sourceTree = "<group>"; };
+		E5D025FC1AEF3A9B00154583 /* CLCGAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGAlertView.h; sourceTree = "<group>"; };
+		E5D025FD1AEF3A9B00154583 /* CLCGAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGAlertView.m; sourceTree = "<group>"; };
+		E5D025FE1AEF3A9B00154583 /* CLCGAPNHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGAPNHelper.h; sourceTree = "<group>"; };
+		E5D025FF1AEF3A9B00154583 /* CLCGAPNHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGAPNHelper.m; sourceTree = "<group>"; };
+		E5D026001AEF3A9B00154583 /* CLCGBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGBarButtonItem.h; sourceTree = "<group>"; };
+		E5D026011AEF3A9B00154583 /* CLCGBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGBarButtonItem.m; sourceTree = "<group>"; };
+		E5D026021AEF3A9B00154583 /* CLCGCachedViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGCachedViewModel.h; sourceTree = "<group>"; };
+		E5D026031AEF3A9B00154583 /* CLCGCachedViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGCachedViewModel.m; sourceTree = "<group>"; };
+		E5D026041AEF3A9B00154583 /* CLCGCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGCell.h; sourceTree = "<group>"; };
+		E5D026051AEF3A9B00154583 /* CLCGCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGCell.m; sourceTree = "<group>"; };
+		E5D026061AEF3A9B00154583 /* CLCGCellCommonLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGCellCommonLayouter.h; sourceTree = "<group>"; };
+		E5D026071AEF3A9B00154583 /* CLCGCellCommonLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGCellCommonLayouter.m; sourceTree = "<group>"; };
+		E5D0260A1AEF3A9B00154583 /* CLCGImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGImageLoader.h; sourceTree = "<group>"; };
+		E5D0260B1AEF3A9B00154583 /* CLCGImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGImageLoader.m; sourceTree = "<group>"; };
+		E5D0260C1AEF3A9B00154583 /* CLCGImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGImageView.h; sourceTree = "<group>"; };
+		E5D0260D1AEF3A9B00154583 /* CLCGImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGImageView.m; sourceTree = "<group>"; };
+		E5D0260E1AEF3A9B00154583 /* CLCGLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGLayer.h; sourceTree = "<group>"; };
+		E5D0260F1AEF3A9B00154583 /* CLCGLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGLayer.m; sourceTree = "<group>"; };
+		E5D026101AEF3A9B00154583 /* CLCGModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGModel.h; sourceTree = "<group>"; };
+		E5D026111AEF3A9B00154583 /* CLCGModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGModel.m; sourceTree = "<group>"; };
+		E5D026121AEF3A9B00154583 /* CLCGMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGMoreCell.h; sourceTree = "<group>"; };
+		E5D026131AEF3A9B00154583 /* CLCGMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGMoreCell.m; sourceTree = "<group>"; };
+		E5D026141AEF3A9B00154583 /* CLCGTableViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGTableViewVC.h; sourceTree = "<group>"; };
+		E5D026151AEF3A9B00154583 /* CLCGTableViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGTableViewVC.m; sourceTree = "<group>"; };
+		E5D026161AEF3A9B00154583 /* CLCGTogglerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGTogglerView.h; sourceTree = "<group>"; };
+		E5D026171AEF3A9B00154583 /* CLCGTogglerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGTogglerView.m; sourceTree = "<group>"; };
+		E5D026181AEF3A9B00154583 /* CLCGVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGVC.h; sourceTree = "<group>"; };
+		E5D026191AEF3A9B00154583 /* CLCGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGVC.m; sourceTree = "<group>"; };
+		E5D026421AEF3AB000154583 /* categories */ = {isa = PBXFileReference; lastKnownFileType = folder; path = categories; sourceTree = "<group>"; };
+		E5D026491AEF3CE300154583 /* candygirl-prefix-header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "candygirl-prefix-header.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E5D025AD1AEF3A2400154583 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5D025B81AEF3A2400154583 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5D025BC1AEF3A2400154583 /* libCandygirl.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E5D025A71AEF3A2400154583 = {
+			isa = PBXGroup;
+			children = (
+				E5D026491AEF3CE300154583 /* candygirl-prefix-header.pch */,
+				E5D026431AEF3ABE00154583 /* functions */,
+				E5D026461AEF3B4400154583 /* helpers */,
+				E5D026421AEF3AB000154583 /* categories */,
+				E5D026471AEF3B6400154583 /* models */,
+				E5D026451AEF3B0100154583 /* controllers */,
+				E5D026441AEF3AD200154583 /* views & graphics */,
+				E5D025BF1AEF3A2400154583 /* CandygirlTests */,
+				E5D025B11AEF3A2400154583 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E5D025B11AEF3A2400154583 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E5D025B01AEF3A2400154583 /* libCandygirl.a */,
+				E5D025BB1AEF3A2400154583 /* CandygirlTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E5D025BF1AEF3A2400154583 /* CandygirlTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5D025C01AEF3A2400154583 /* Supporting Files */,
+			);
+			path = CandygirlTests;
+			sourceTree = "<group>";
+		};
+		E5D025C01AEF3A2400154583 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E5D025C11AEF3A2400154583 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E5D026431AEF3ABE00154583 /* functions */ = {
+			isa = PBXGroup;
+			children = (
+				E5D025E91AEF3A9B00154583 /* clcg_addressbook_utils.h */,
+				E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */,
+				E5D025EB1AEF3A9B00154583 /* clcg_bundle_utils.h */,
+				E5D025EC1AEF3A9B00154583 /* clcg_bundle_utils.m */,
+				E5D025ED1AEF3A9B00154583 /* clcg_datetime_utils.h */,
+				E5D025EE1AEF3A9B00154583 /* clcg_datetime_utils.m */,
+				E5D025EF1AEF3A9B00154583 /* clcg_debug.h */,
+				E5D025F01AEF3A9B00154583 /* clcg_debug.m */,
+				E5D025F11AEF3A9B00154583 /* clcg_device_utils.h */,
+				E5D025F21AEF3A9B00154583 /* clcg_device_utils.m */,
+				E5D025F31AEF3A9B00154583 /* clcg_gfx.h */,
+				E5D025F41AEF3A9B00154583 /* clcg_gfx.m */,
+				E5D025F51AEF3A9B00154583 /* clcg_macros.h */,
+				E5D025F61AEF3A9B00154583 /* clcg_math.h */,
+				E5D025F71AEF3A9B00154583 /* clcg_math.m */,
+				E5D025F81AEF3A9B00154583 /* clcg_str_utils.h */,
+				E5D025F91AEF3A9B00154583 /* clcg_str_utils.m */,
+				E5D025FA1AEF3A9B00154583 /* clcg_viewport.h */,
+				E5D025FB1AEF3A9B00154583 /* clcg_viewport.m */,
+			);
+			name = functions;
+			sourceTree = "<group>";
+		};
+		E5D026441AEF3AD200154583 /* views & graphics */ = {
+			isa = PBXGroup;
+			children = (
+				E5D025FC1AEF3A9B00154583 /* CLCGAlertView.h */,
+				E5D025FD1AEF3A9B00154583 /* CLCGAlertView.m */,
+				E5D026121AEF3A9B00154583 /* CLCGMoreCell.h */,
+				E5D026131AEF3A9B00154583 /* CLCGMoreCell.m */,
+				E5D026161AEF3A9B00154583 /* CLCGTogglerView.h */,
+				E5D026171AEF3A9B00154583 /* CLCGTogglerView.m */,
+				E5D026001AEF3A9B00154583 /* CLCGBarButtonItem.h */,
+				E5D026011AEF3A9B00154583 /* CLCGBarButtonItem.m */,
+				E5D026041AEF3A9B00154583 /* CLCGCell.h */,
+				E5D026051AEF3A9B00154583 /* CLCGCell.m */,
+				E5D0260E1AEF3A9B00154583 /* CLCGLayer.h */,
+				E5D0260F1AEF3A9B00154583 /* CLCGLayer.m */,
+				E5D026061AEF3A9B00154583 /* CLCGCellCommonLayouter.h */,
+				E5D026071AEF3A9B00154583 /* CLCGCellCommonLayouter.m */,
+				E5D0260A1AEF3A9B00154583 /* CLCGImageLoader.h */,
+				E5D0260B1AEF3A9B00154583 /* CLCGImageLoader.m */,
+				E5D0260C1AEF3A9B00154583 /* CLCGImageView.h */,
+				E5D0260D1AEF3A9B00154583 /* CLCGImageView.m */,
+			);
+			name = "views & graphics";
+			sourceTree = "<group>";
+		};
+		E5D026451AEF3B0100154583 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E5D026141AEF3A9B00154583 /* CLCGTableViewVC.h */,
+				E5D026151AEF3A9B00154583 /* CLCGTableViewVC.m */,
+				E5D026181AEF3A9B00154583 /* CLCGVC.h */,
+				E5D026191AEF3A9B00154583 /* CLCGVC.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		E5D026461AEF3B4400154583 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				E5D025FE1AEF3A9B00154583 /* CLCGAPNHelper.h */,
+				E5D025FF1AEF3A9B00154583 /* CLCGAPNHelper.m */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
+		E5D026471AEF3B6400154583 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				E5D026021AEF3A9B00154583 /* CLCGCachedViewModel.h */,
+				E5D026031AEF3A9B00154583 /* CLCGCachedViewModel.m */,
+				E5D026101AEF3A9B00154583 /* CLCGModel.h */,
+				E5D026111AEF3A9B00154583 /* CLCGModel.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E5D025AF1AEF3A2400154583 /* Candygirl */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5D025C41AEF3A2400154583 /* Build configuration list for PBXNativeTarget "Candygirl" */;
+			buildPhases = (
+				E5D025AC1AEF3A2400154583 /* Sources */,
+				E5D025AD1AEF3A2400154583 /* Frameworks */,
+				E5D025AE1AEF3A2400154583 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Candygirl;
+			productName = Candygirl;
+			productReference = E5D025B01AEF3A2400154583 /* libCandygirl.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		E5D025BA1AEF3A2400154583 /* CandygirlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5D025C71AEF3A2400154583 /* Build configuration list for PBXNativeTarget "CandygirlTests" */;
+			buildPhases = (
+				E5D025B71AEF3A2400154583 /* Sources */,
+				E5D025B81AEF3A2400154583 /* Frameworks */,
+				E5D025B91AEF3A2400154583 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5D025BE1AEF3A2400154583 /* PBXTargetDependency */,
+			);
+			name = CandygirlTests;
+			productName = CandygirlTests;
+			productReference = E5D025BB1AEF3A2400154583 /* CandygirlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E5D025A81AEF3A2400154583 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = Cubelogic;
+				TargetAttributes = {
+					E5D025AF1AEF3A2400154583 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					E5D025BA1AEF3A2400154583 = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = E5D025AB1AEF3A2400154583 /* Build configuration list for PBXProject "Candygirl" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E5D025A71AEF3A2400154583;
+			productRefGroup = E5D025B11AEF3A2400154583 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E5D025AF1AEF3A2400154583 /* Candygirl */,
+				E5D025BA1AEF3A2400154583 /* CandygirlTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E5D025B91AEF3A2400154583 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E5D025AC1AEF3A2400154583 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5D026411AEF3A9B00154583 /* CLCGVC.m in Sources */,
+				E5D026301AEF3A9B00154583 /* clcg_math.m in Sources */,
+				E5D0262F1AEF3A9B00154583 /* clcg_gfx.m in Sources */,
+				E5D026331AEF3A9B00154583 /* CLCGAlertView.m in Sources */,
+				E5D0263E1AEF3A9B00154583 /* CLCGMoreCell.m in Sources */,
+				E5D0262C1AEF3A9B00154583 /* clcg_datetime_utils.m in Sources */,
+				E5D0262E1AEF3A9B00154583 /* clcg_device_utils.m in Sources */,
+				E5D026341AEF3A9B00154583 /* CLCGAPNHelper.m in Sources */,
+				E5D0262B1AEF3A9B00154583 /* clcg_bundle_utils.m in Sources */,
+				E5D0262D1AEF3A9B00154583 /* clcg_debug.m in Sources */,
+				E5D026381AEF3A9B00154583 /* CLCGCellCommonLayouter.m in Sources */,
+				E5D026321AEF3A9B00154583 /* clcg_viewport.m in Sources */,
+				E5D0263C1AEF3A9B00154583 /* CLCGLayer.m in Sources */,
+				E5D026361AEF3A9B00154583 /* CLCGCachedViewModel.m in Sources */,
+				E5D0262A1AEF3A9B00154583 /* clcg_addressbook_utils.m in Sources */,
+				E5D026401AEF3A9B00154583 /* CLCGTogglerView.m in Sources */,
+				E5D0263D1AEF3A9B00154583 /* CLCGModel.m in Sources */,
+				E5D0263F1AEF3A9B00154583 /* CLCGTableViewVC.m in Sources */,
+				E5D026371AEF3A9B00154583 /* CLCGCell.m in Sources */,
+				E5D026311AEF3A9B00154583 /* clcg_str_utils.m in Sources */,
+				E5D026351AEF3A9B00154583 /* CLCGBarButtonItem.m in Sources */,
+				E5D0263B1AEF3A9B00154583 /* CLCGImageView.m in Sources */,
+				E5D0263A1AEF3A9B00154583 /* CLCGImageLoader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5D025B71AEF3A2400154583 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E5D025BE1AEF3A2400154583 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E5D025AF1AEF3A2400154583 /* Candygirl */;
+			targetProxy = E5D025BD1AEF3A2400154583 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		E5D025C21AEF3A2400154583 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = categories;
+			};
+			name = Debug;
+		};
+		E5D025C31AEF3A2400154583 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_RECEIVER_WEAK = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = YES;
+				GCC_WARN_SIGN_COMPARE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = categories;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E5D025C51AEF3A2400154583 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "candygirl-prefix-header.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		E5D025C61AEF3A2400154583 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREFIX_HEADER = "candygirl-prefix-header.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		E5D025C81AEF3A2400154583 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CandygirlTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E5D025C91AEF3A2400154583 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CandygirlTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E5D025AB1AEF3A2400154583 /* Build configuration list for PBXProject "Candygirl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5D025C21AEF3A2400154583 /* Debug */,
+				E5D025C31AEF3A2400154583 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5D025C41AEF3A2400154583 /* Build configuration list for PBXNativeTarget "Candygirl" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5D025C51AEF3A2400154583 /* Debug */,
+				E5D025C61AEF3A2400154583 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5D025C71AEF3A2400154583 /* Build configuration list for PBXNativeTarget "CandygirlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5D025C81AEF3A2400154583 /* Debug */,
+				E5D025C91AEF3A2400154583 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E5D025A81AEF3A2400154583 /* Project object */;
+}

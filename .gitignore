@@ -1,0 +1,59 @@
+# OS X temporary files that should never be committed
+# c.f. http://www.westwind.com/reference/os-x/invisibles.html
+
+.DS_Store
+.Trashes
+*.swp
+
+# Xcode temporary files that should never be committed
+
+*~.nib
+
+# Xcode build files - slash on the end, so we only remove the FOLDER, not any
+# files that were badly named "DerivedData"
+
+DerivedData/
+build/
+
+# Xcode private settings (window sizes, bookmarks, breakpoints, custom executables, smart groups)
+# This is complicated:
+#
+# SOMETIMES you need to put this file in version control.
+# Apple designed it poorly - if you use "custom executables", they are
+# saved in this file.
+# 99% of projects do NOT use those, so they do NOT want to version control this file.
+# ..but if you're in the 1%, comment out the line "*.pbxuser"
+
+# .pbxuser: http://lists.apple.com/archives/xcode-users/2004/Jan/msg00193.html
+
+*.pbxuser
+
+# .mode1v3: http://lists.apple.com/archives/xcode-users/2007/Oct/msg00465.html
+
+*.mode1v3
+
+# .mode2v3: http://lists.apple.com/archives/xcode-users/2007/Oct/msg00465.html
+
+*.mode2v3
+
+# .perspectivev3: http://stackoverflow.com/questions/5223297/xcode-projects-what-is-a-perspectivev3-file
+
+*.perspectivev3
+
+# NB: also, whitelist the default ones, some projects need to use these
+!default.pbxuser
+!default.mode1v3
+!default.mode2v3
+!default.perspectivev3
+
+# semi-personal settings
+#
+# OPTION 1: throw away ALL personal settings including custom schemes!
+#           (unless they are "shared")
+# NB: this is exclusive with OPTION 2 below
+xcuserdata
+
+# OPTION 2: get rid of ALL personal settings, but KEEP SOME OF THEM
+# NB: this *requires* git v1.8.2 or above
+#xcuserdata/**/*
+#!xcuserdata/**/xcschemes/*

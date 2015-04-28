@@ -1,0 +1,15 @@
+//
+//  candygirl-prefix-header.pch
+//  Candygirl
+//
+//  Created by Ettore Pasquini on 4/27/15.
+//  Copyright (c) 2015 Cubelogic. All rights reserved.
+//
+
+#ifndef Candygirl_candygirl_prefix_header_pch
+#define Candygirl_candygirl_prefix_header_pch
+
+@import Foundation;
+@import UIKit;
+
+#endif

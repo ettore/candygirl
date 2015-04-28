@@ -32,7 +32,7 @@
 #import <AddressBook/AddressBook.h>
 
 #import "clcg_addressbook_utils.h"
-
+#import "clcg_bundle_utils.h"
 
 
 //------------------------------------------------------------------------------
@@ -119,6 +119,7 @@ void clcg_addressbook_load_contacts(dispatch_queue_t currq, CLCGABCallback callb
     // iOS 4/5
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#pragma clang diagnostic ignored "-Wunreachable-code"
     ab = ABAddressBookCreate();
 #pragma clang diagnostic pop
     NSMutableArray *people = clcg__process_ab(ab);

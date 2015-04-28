@@ -193,6 +193,8 @@
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 -(void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)to_orient
                                         duration:(NSTimeInterval)duration
 {
@@ -200,6 +202,7 @@
   [self centerSpinner];
   [self centerEmptyView];
 }
+#pragma clang diagnostic pop
 
 
 //------------------------------------------------------------------------------
@@ -325,12 +328,15 @@
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 -(void)viewDidUnload
 {
   CLCG_P(@"%@", self);
   [self releaseRetainedSubviews];
   [super viewDidUnload];
 }
+#pragma clang diagnostic pop
 
 
 -(void)didReceiveMemoryWarning
@@ -360,11 +366,15 @@
 }
 
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 // iOS < 6
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)orient
 {
   return YES;
 }
+#pragma clang diagnostic pop
+
 
 
 @end

@@ -263,9 +263,9 @@
 -(NSInteger)tableView:(UITableView*)tv numberOfRowsInSection:(NSInteger)sect
 {
   if (_itemsEnd < _itemsTotal && [self supportsPagination]) {
-    return [_items count] + 1; //for the "More..." button
+    return (NSInteger)[_items count] + 1; //for the "More..." button
   } else {
-    return [_items count];
+    return (NSInteger)[_items count];
   }
 }
 
