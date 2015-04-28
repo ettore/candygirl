@@ -53,6 +53,8 @@
   if (self) {
     [self setUserInteractionEnabled:YES];
     [self setContentMode:UIViewContentModeScaleAspectFit];
+    [self setOpaque:YES];
+    [self setClearsContextBeforeDrawing:NO];
   }
   return self;
 }
