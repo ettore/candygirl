@@ -29,6 +29,7 @@
 //TODO: remove this dependency!
 #import "ASIHTTPRequest.h"
 
+#import "clcg_debug.h"
 #import "clcg_macros.h"
 #import "clcg_str_utils.h"
 #import "clcg_device_utils.h"
@@ -78,8 +79,9 @@
                                     retinaURL:retinaurl
                                      useCache:(_cache == nil)
                                         block:^(UIImage *img, int http_status) {
+                                          NSCache *cache = self.cache;
                                           if (img) {
-                                            [self.cache
+                                            [cache
                                              setObject:img
                                              forKey:[[self.req
                                                       originalURL] absoluteString]];

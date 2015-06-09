@@ -30,6 +30,7 @@
 // TODO remove this horrible dependency
 #import "ASIHTTPRequest.h"
 
+#import "clcg_debug.h"
 #import "clcg_macros.h"
 #import "clcg_str_utils.h"
 #import "clcg_device_utils.h"

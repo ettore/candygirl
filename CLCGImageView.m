@@ -29,6 +29,7 @@
 // deprecated: we should really abstract this out of the class
 #import "ASIHTTPRequest.h"
 
+#import "clcg_debug.h"
 #import "clcg_macros.h"
 #import "clcg_str_utils.h"
 #import "clcg_device_utils.h"
@@ -85,8 +86,8 @@
                                               [self setImage:img];
                                             });
                                           } else {
-                                            CLCG_P(@"Error loading image. HTTP status=%d",
-                                                   http_status);
+                                            CLCGP(@"Error loading image. HTTP status=%d",
+                                                  http_status);
                                           }
                                           
                                           if (self.callback) {

@@ -57,3 +57,7 @@ xcuserdata
 # NB: this *requires* git v1.8.2 or above
 #xcuserdata/**/*
 #!xcuserdata/**/xcschemes/*
+
+# CocoaPods
+
+Pods/
