@@ -84,7 +84,16 @@ extern "C" {
    *         can be something like "4.3.2".
    */
   BOOL clcg_os_geq(NSString* version);
-  
+
+  /**
+   * @return Apple model name for current device.
+   *
+   * like "iPhone6,1" (iPhone 5s,model A1433, A1533 | GSM)
+   * or "iPhone7,1" (iPhone 6 Plus)
+   *
+   */
+  NSString *clcg_device_name();
+
 #ifdef __cplusplus
 }
 #endif

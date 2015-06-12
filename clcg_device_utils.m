@@ -22,8 +22,9 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
-
+#import <sys/utsname.h>
 #import <UIKit/UIKit.h>
+
 #import "clcg_device_utils.h"
 
 
@@ -168,3 +169,16 @@ BOOL clcg_has_retina(void)
   return ([screen respondsToSelector:@selector(displayLinkWithTarget:selector:)]
           && [screen scale] >= 2.0);
 }
+
+
+NSString* clcg_device_name()
+{
+  struct utsname systemInfo;
+
+  uname(&systemInfo);
+
+  return [NSString stringWithCString:systemInfo.machine
+                            encoding:NSUTF8StringEncoding];
+}
+
+
