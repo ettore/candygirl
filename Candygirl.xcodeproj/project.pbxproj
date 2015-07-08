@@ -325,7 +325,7 @@
 		E5D025A81AEF3A2400154583 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Cubelogic;
 				TargetAttributes = {
 					E5D025AF1AEF3A2400154583 = {

@@ -101,13 +101,25 @@
 -(CGSize)sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font;
 
 /*!
- Measures the size of this string with a max width/height assuming word 
+ Same as @link sizeWithMaxW:maxH:font:paragraphStyle: @/link with a default
+ paragraph style.
+ */
+-(CGSize)sizeWithMaxW:(CGFloat)max_w
+                 maxH:(CGFloat)max_h
+                 font:(UIFont*)font;
+
+/*!
+ Measures the size of this string with a max width/height assuming word
  wrapping line break.
 
  This is a wrapper for -boundingRectWithSize:options:attributes:context: and
  sizeWithFont:forWidth:lineBreakMode:.
  */
--(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h font:(UIFont*)font;
+-(CGSize)sizeWithMaxW:(CGFloat)max_w
+                 maxH:(CGFloat)max_h
+                 font:(UIFont*)font
+       paragraphStyle:(NSParagraphStyle*)style;
+
 
 #endif
 

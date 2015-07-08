@@ -203,22 +203,38 @@
 
 #ifndef CLCG_APP_EXTENSIONS
 
--(CGSize)sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font
+-(CGSize)sizeWithMaxW:(CGFloat)max_w
+                 font:(UIFont*)font
 {
-  return [self sizeWithMaxW:max_w maxH:clcg_screensize().height font:font];
+  return [self sizeWithMaxW:max_w
+                       maxH:CGFLOAT_MAX
+                       font:font];
 }
 
 
--(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h font:(UIFont*)font
+-(CGSize)sizeWithMaxW:(CGFloat)max_w
+                 maxH:(CGFloat)max_h
+                 font:(UIFont*)font
+{
+  return [self sizeWithMaxW:max_w
+                       maxH:max_h
+                       font:font
+             paragraphStyle:[NSParagraphStyle defaultParagraphStyle]];
+}
+
+
+-(CGSize)sizeWithMaxW:(CGFloat)max_w
+                 maxH:(CGFloat)max_h
+                 font:(UIFont*)font
+       paragraphStyle:(NSParagraphStyle*)style
 {
   if (max_h == 0.0f) {
     max_h = clcg_screensize().height;
   }
 
   if (clcg_os_geq(@"7")) {
-    NSParagraphStyle *paragraph_style = [NSParagraphStyle defaultParagraphStyle];
     NSMutableDictionary *attrs = [[NSMutableDictionary alloc] initWithCapacity:2];
-    attrs[NSParagraphStyleAttributeName] = paragraph_style;
+    attrs[NSParagraphStyleAttributeName] = style;
     if (font) {
       attrs[NSFontAttributeName] = font;
     }
