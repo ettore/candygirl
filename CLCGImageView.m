@@ -81,18 +81,18 @@
                                   retinaHDURL:retina_hd_url
                                      useCache:YES
                                         block:^(UIImage *img, int http_status){
-                                          if (img) {
-                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                            if (img) {
                                               [self setImage:img];
-                                            });
-                                          } else {
-                                            CLCGP(@"Error loading image. HTTP status=%d",
-                                                  http_status);
-                                          }
+                                            } else {
+                                              CLCGP(@"Error loading image. HTTP status=%d",
+                                                    http_status);
+                                            }
                                           
-                                          if (self.callback) {
-                                            self.callback(img, http_status);
-                                          }
+                                            if (self.callback) {
+                                              self.callback(img, http_status);
+                                            }
+                                          });
                                         }];
 }
 
