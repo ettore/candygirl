@@ -1,14 +1,14 @@
-Candygirl 
-
-The unassuming iOS framework
+Candygirl
 
 This is a collection of helper classes and functions for iOS development.
 
-The guiding principles so far are: short inheritance hierarchy, loose coupling, 
-use of categories whenever possible, clear and terse names. Generally speaking, 
-I want to be able to use these classes easily in any iOS project, just plug 
+The guiding principles so far are: short inheritance hierarchy, loose coupling,
+use of categories whenever possible, clear and terse names. Generally speaking,
+I want to be able to use these classes easily in any iOS project, just plug
 them in and go.
 
 Compile with ARC.
 
 License: BSD 3-Clause [ http://opensource.org/licenses/BSD-3-Clause ]
+
+https://www.youtube.com/watch?v=AAFACPp1_no
