@@ -37,6 +37,12 @@
 #import "CLCGCell.h"
 #import "CLCGImageView.h"
 
+/* 
+ ------------------------------------------------------------------------------
+ This entire class is deprecated.
+ It will be removed in its entirety in the future.
+ ------------------------------------------------------------------------------
+*/
 
 static CGFloat sMaxAccessoryWidth = CLCG_DEFAULT_ACCESSORY_TYPE_W;
 
@@ -180,8 +186,6 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                                       _imgW, _imgH);
   [_mainImageView setFrame:img_frame];
 
-  // these should not change
-  const CGFloat max_cellh = CLCG_MAX_CELL_H;
   const CGFloat x = CGRectGetMaxX(img_frame) + [class imageRightPadding];
   const CGFloat w = [[self class] textLabelWidthWithCellW:[self w]];
 
@@ -192,20 +196,14 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   [[self textLabel] setFrame:CGRectIntegral(r)];
   
   // layout detail label
-  sz = CGSizeMake(w, max_cellh);
-  sz = [[[self detailTextLabel] text] sizeWithFont:[[self detailTextLabel] font]
-                                 constrainedToSize:sz
-                                     lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [self calculateDetailLabelSizeForCellWidth:w];
   sz.height = ceil(sz.height);
   r = CGRectMake(x, [[self textLabel] low] + (int)(_innerPadding/2),
                  sz.width, sz.height);
   [[self detailTextLabel] setFrame:CGRectIntegral(r)];
 
   // info text label
-  sz = CGSizeMake(w, max_cellh);
-  sz = [[_infoTextLabel text] sizeWithFont:[_infoTextLabel font]
-                         constrainedToSize:sz
-                             lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [self calculateInfoLabelSizeForCellWidth:w];
   sz.height = ceil(sz.height);
   r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_innerPadding/2),
                  w, sz.height);
@@ -219,6 +217,26 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   sz = [[[self textLabel] text] sizeWithFont:[[self textLabel] font]
                            constrainedToSize:sz
                                lineBreakMode:NSLineBreakByWordWrapping];
+  return sz;
+}
+
+
+-(CGSize)calculateDetailLabelSizeForCellWidth:(CGFloat)w_available_for_text
+{
+  CGSize sz = CGSizeMake(w_available_for_text, CLCG_MAX_CELL_H);
+  sz = [[[self detailTextLabel] text] sizeWithFont:[[self detailTextLabel] font]
+                                 constrainedToSize:sz
+                                     lineBreakMode:NSLineBreakByWordWrapping];
+  return sz;
+}
+
+
+-(CGSize)calculateInfoLabelSizeForCellWidth:(CGFloat)w_available_for_text
+{
+  CGSize sz = CGSizeMake(w_available_for_text, CLCG_MAX_CELL_H);
+  sz = [[[self infoTextLabel] text] sizeWithFont:[[self infoTextLabel] font]
+                                 constrainedToSize:sz
+                                     lineBreakMode:NSLineBreakByWordWrapping];
   return sz;
 }
 
@@ -264,6 +282,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                           imageH:[self imageSize].height
                          padding:[self viewportPadding]];
 }
+
 
 +(CGFloat)cellHeightForText:(NSString*)text
                  detailText:(NSString*)detailtext

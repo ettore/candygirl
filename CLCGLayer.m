@@ -36,6 +36,9 @@
 #import "CLCGLayer.h"
 
 
+/*!
+ @deprecated
+ */
 @interface CLCGLayer ()
 
 // non-retained pointer to an external cache where to store the UIImage

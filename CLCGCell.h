@@ -29,6 +29,14 @@
  */
 
 
+/*
+ ------------------------------------------------------------------------------
+ This entire class is deprecated.
+ It will be removed in its entirety in the future.
+ ------------------------------------------------------------------------------
+ */
+
+
 /*!
  @abstract The max cell height used in layout calculations.
  @discussion UIKit says that the max height of a cell should not exceed 2009px.
@@ -54,6 +62,8 @@
   if it's set as an "emphasized" cell. 
   The layout of all components is performed accordingly, adding padding 
   between elements.
+ 
+ @deprecated
  */
 @interface CLCGCell : UITableViewCell <CLCGCell, CLCGCellCommonLayouter>
 
@@ -106,6 +116,18 @@
  @param w_available_for_text The actual width that the text label can occupy.
  */
 -(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text;
+
+/*!
+ Calculates the size of the text of detailTextLabel.
+ @param w_available_for_text The actual width that the text label can occupy.
+ */
+-(CGSize)calculateDetailLabelSizeForCellWidth:(CGFloat)w_available_for_text;
+
+/*!
+ Calculates the size of the text of infoTextLabel.
+ @param w_available_for_text The actual width that the text label can occupy.
+ */
+-(CGSize)calculateInfoLabelSizeForCellWidth:(CGFloat)w_available_for_text;
 
 /*!
  Uses styling class methods to derive height measurement that belong to

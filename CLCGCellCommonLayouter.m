@@ -26,6 +26,13 @@
 //  Created by Ettore Pasquini on 5/1/13.
 //
 
+/*
+ ------------------------------------------------------------------------------
+ The classes and protocols on this file are deprecated.
+ They will be removed in the future.
+ ------------------------------------------------------------------------------
+*/
+
 #import <QuartzCore/QuartzCore.h>
 #import "CLCGCellCommonLayouter.h"
 #import "CLCGCell.h"

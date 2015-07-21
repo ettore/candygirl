@@ -28,9 +28,10 @@
 
 
 /*! 
- @class
- 
- @description
+ @class CLCGMoreCell
+ @abstract 
+ A "More..." cell for table view pagination.
+ @discussion
  This cell renders a centered "Load More" text along with a spinner once 
  loading begins. It is possible to configure the cell to always display the
  spinner, for use cases like infinite scrolling.

@@ -30,6 +30,9 @@
 
 #import "CLCGImageLoader.h"
 
+/*!
+ @deprecated
+ */
 @interface CLCGLayer : CALayer
 
 /**

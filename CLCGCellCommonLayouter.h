@@ -26,6 +26,13 @@
 //  Created by Ettore Pasquini on 5/1/13.
 //
 
+/*
+ ------------------------------------------------------------------------------
+ The classes and protocols on this file are deprecated.
+ They will be removed in the future.
+ ------------------------------------------------------------------------------
+*/
+
 /*!
  @discussion Since we don't control the disclosure indicator size (and we need
  to know the width when we calc the cell height in the TV controller) let's
@@ -65,7 +72,9 @@
 //==============================================================================
 #pragma mark
 
-
+/*!
+ @deprecated
+ */
 @protocol CLCGCellCommonLayouter
 
 /*! Changes the background color according to the current `emphasized' state. */
@@ -94,8 +103,11 @@
 
 
 /*!
+ @discussion
  Common layout and display logic for our default cells, composed of a image
  on the left side, and 3 text fields on the right side.
+
+ @deprecated
  */
 @interface CLCGCellCommonLayouter : NSObject <CLCGCellCommonLayouter>
 

@@ -155,6 +155,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		E595C5681B5E3AB2007605AB /* legacy / deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				E5D026041AEF3A9B00154583 /* CLCGCell.h */,
+				E5D026051AEF3A9B00154583 /* CLCGCell.m */,
+				E5D026061AEF3A9B00154583 /* CLCGCellCommonLayouter.h */,
+				E5D026071AEF3A9B00154583 /* CLCGCellCommonLayouter.m */,
+				E5D0260E1AEF3A9B00154583 /* CLCGLayer.h */,
+				E5D0260F1AEF3A9B00154583 /* CLCGLayer.m */,
+			);
+			name = "legacy / deprecated";
+			sourceTree = "<group>";
+		};
 		E5D025A71AEF3A2400154583 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +178,7 @@
 				E5D026471AEF3B6400154583 /* models */,
 				E5D026451AEF3B0100154583 /* controllers */,
 				E5D026441AEF3AD200154583 /* views & graphics */,
+				E595C5681B5E3AB2007605AB /* legacy / deprecated */,
 				E5D025BF1AEF3A2400154583 /* CandygirlTests */,
 				E5D025B11AEF3A2400154583 /* Products */,
 				23E522CF161F06FE90E67FDE /* Pods */,
@@ -234,12 +248,6 @@
 				E5D026171AEF3A9B00154583 /* CLCGTogglerView.m */,
 				E5D026001AEF3A9B00154583 /* CLCGBarButtonItem.h */,
 				E5D026011AEF3A9B00154583 /* CLCGBarButtonItem.m */,
-				E5D026041AEF3A9B00154583 /* CLCGCell.h */,
-				E5D026051AEF3A9B00154583 /* CLCGCell.m */,
-				E5D0260E1AEF3A9B00154583 /* CLCGLayer.h */,
-				E5D0260F1AEF3A9B00154583 /* CLCGLayer.m */,
-				E5D026061AEF3A9B00154583 /* CLCGCellCommonLayouter.h */,
-				E5D026071AEF3A9B00154583 /* CLCGCellCommonLayouter.m */,
 				E5D0260A1AEF3A9B00154583 /* CLCGImageLoader.h */,
 				E5D0260B1AEF3A9B00154583 /* CLCGImageLoader.m */,
 				E5D0260C1AEF3A9B00154583 /* CLCGImageView.h */,
@@ -251,10 +259,10 @@
 		E5D026451AEF3B0100154583 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E5D026141AEF3A9B00154583 /* CLCGTableViewVC.h */,
-				E5D026151AEF3A9B00154583 /* CLCGTableViewVC.m */,
 				E5D026181AEF3A9B00154583 /* CLCGVC.h */,
 				E5D026191AEF3A9B00154583 /* CLCGVC.m */,
+				E5D026141AEF3A9B00154583 /* CLCGTableViewVC.h */,
+				E5D026151AEF3A9B00154583 /* CLCGTableViewVC.m */,
 			);
 			name = controllers;
 			sourceTree = "<group>";

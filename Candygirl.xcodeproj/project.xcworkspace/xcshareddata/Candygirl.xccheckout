@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>6A23E663-CD2F-4820-BCF4-2C83319C6675</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>Candygirl</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>A7C2FF5F8E6CB0900FD5CA7D97EAAA85DAAA09F2</key>
 		<string>github.com:ettore/candygirl.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Candygirl.xcodeproj/project.xcworkspace</string>
+	<string>Candygirl.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A7C2FF5F8E6CB0900FD5CA7D97EAAA85DAAA09F2</key>
