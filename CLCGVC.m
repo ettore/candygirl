@@ -359,7 +359,11 @@
 
 
 // iOS >= 6
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+#else
+- (NSUInteger)supportedInterfaceOrientations {
+#endif
   // by default, UIInterfaceOrientationMaskAllButUpsideDown is returned on
   // iPhone. Override that and let the default be the project level setting.
   return UIInterfaceOrientationMaskAll;
