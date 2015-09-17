@@ -140,6 +140,19 @@ enum CLCGLoadingState {
 //------------------------------------------------------------------------------
 #pragma mark - Misc
 
+/*!
+ Width of view when it was last on the screen. Used to detect if the screen was
+ rotated upon reappearing.
+ 
+ Will be set in viewDidLayoutSubview and on viewWillDisappear. Subclasses 
+ depending on this value in those methods should use/save it before calling
+ super in either of those methods.
+ */
+@property(nonatomic)        CGFloat  lastViewWidth;
+-(BOOL)viewWidthWasChanged;
+
+
+
 @property(nonatomic,weak) id<CLCGPopoverContentDelegate> popoverContentDelegate;
 
 /*!
