@@ -147,6 +147,17 @@ enum CLCGLoadingState {
 #endif
 
 /*!
+ Width of view when it was last on the screen. Used to detect if the screen was
+ rotated upon reappearing.
+
+ Will be set in viewDidLayoutSubview and on viewWillDisappear. Subclasses
+ depending on this value in those methods should use/save it before calling
+ super in either of those methods.
+ */
+@property(nonatomic)        CGFloat  lastDisplayedViewWidth;
+-(BOOL)viewWidthWasChanged;
+
+/*!
  * Releases all the retained subviews of this view controller. This is called
  * by dealloc and viewDidUnload.
  * Subclasses should override this method and release their subviews here.
