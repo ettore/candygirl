@@ -51,6 +51,18 @@ typedef void (^CLCGImageLoaderCallback)(UIImage *img, int http_status);
 
 @property(nonatomic,retain,readonly) NSCache *cache;
 
+/*!
+ Singleton instance of the CLCGImageLoader
+ */
++(CLCGImageLoader*)i;
+
+/*!
+ @return The largest size image currently stored in cache.
+ */
++(UIImage*)bestCachedImageForURL:(NSString*)normal_url
+                       retinaURL:(NSString*)retina_url
+                     retinaHDURL:(NSString*)retina_hd_url;
+
 /*! 
  @deprecated
  */
