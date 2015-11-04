@@ -80,16 +80,11 @@
 
 
 
-
-
-+(ASIHTTPRequest*)loadImageForURL:(NSString*)normal_url
-                        retinaURL:(NSString*)retina_url
-                      retinaHDURL:(NSString*)retina_hd_url
-                         useCache:(BOOL)use_cache
-                            block:(CLCGImageLoaderCallback)block
++(NSURL*)screenImageURLForURL:(NSString*)normal_url
+                    retinaURL:(NSString*)retina_url
+                  retinaHDURL:(NSString*)retina_hd_url
 {
   NSURL *url = nil;
-  __block ASIHTTPRequest *req = nil;
   const CGFloat screen_scale = [UIScreen mainScreen].scale;
   const BOOL is_retina_hd = (screen_scale >= 3.0);
   const BOOL is_retina = (screen_scale >= 2.0);
@@ -109,7 +104,42 @@
       && !clcg_str_isblank(normal_url)) {
     url = [[NSURL alloc] initWithString:normal_url];
   }
+  return url;
+}
 
+
++(UIImage*)bestCachedImageForURL:(NSString*)normal_url
+                       retinaURL:(NSString*)retina_url
+                     retinaHDURL:(NSString*)retina_hd_url
+{
+  UIImage *img = [[[CLCGImageLoader i] cache] objectForKey:retina_hd_url];
+
+  if (img == nil) {
+    img = [[[CLCGImageLoader i] cache] objectForKey:retina_url];
+  }
+
+  if (img == nil) {
+    img = [[[CLCGImageLoader i] cache] objectForKey:normal_url];
+  }
+
+  if (img) {
+    return img;
+  }
+
+  return nil;
+}
+
+
++(ASIHTTPRequest*)loadImageForURL:(NSString*)normal_url
+                        retinaURL:(NSString*)retina_url
+                      retinaHDURL:(NSString*)retina_hd_url
+                         useCache:(BOOL)use_cache
+                            block:(CLCGImageLoaderCallback)block
+{
+  __block ASIHTTPRequest *req = nil;
+  NSURL *url = [CLCGImageLoader screenImageURLForURL:normal_url
+                                           retinaURL:retina_url
+                                         retinaHDURL:retina_hd_url];
   if (url) {
     block = [block copy];//make sure it's on the heap
 
@@ -120,7 +150,6 @@
         return nil;
       }
     }
-    
     // configure the request
     req = [[ASIHTTPRequest alloc] initWithURL:url];
     [req addRequestHeader:@"Accept-Encoding" value:@"gzip"];
@@ -133,11 +162,12 @@
       NSData *data = [req responseData];
       // TODO: we should likely use imageWithData:scale: instead. 
       UIImage *img = [UIImage imageWithData:data];
+      
       if (img == nil) {
         [CLCGImageLoader reportErrorForRequest:req block:block];
       } else {
         if (use_cache) {
-          [[[CLCGImageLoader i] cache] setObject:img 
+          [[[CLCGImageLoader i] cache] setObject:img
                                           forKey:[[req originalURL] absoluteString]];
         }
         [self returnImage:img status:[req responseStatusCode] block:block];

@@ -78,6 +78,27 @@
 }
 
 
+-(void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  self.lastViewWidth = [self.view w];
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.lastViewWidth = [self.view w];
+}
+
+
+-(BOOL)viewWidthWasChanged
+{
+  return (self.lastViewWidth != 0) &&
+        (self.lastViewWidth != self.view.w);
+}
+
+
 //------------------------------------------------------------------------------
 #pragma mark - Spinner / Loading view
 

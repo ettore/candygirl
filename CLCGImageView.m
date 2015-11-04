@@ -68,6 +68,21 @@
             retinaHDURL:nil];
 }
 
+
+-(void)loadCachedImageIfPossibleForURL:(NSString*)normal_url
+                             retinaURL:(NSString*)retina_url
+                           retinaHDURL:(NSString*)retina_hd_url
+{
+    UIImage *img = [CLCGImageLoader bestCachedImageForURL:normal_url
+                                                retinaURL:retina_url
+                                              retinaHDURL:retina_hd_url];
+    if (img) {
+      [self setImage:img];
+      return;
+    }
+}
+
+
 -(void)loadImageForURL:(NSString*)normal_url
              retinaURL:(NSString*)retina_url
            retinaHDURL:(NSString*)retina_hd_url

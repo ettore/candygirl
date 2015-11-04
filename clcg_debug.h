@@ -48,8 +48,10 @@ extern "C" {
 ///////////////////////////////////////////////////////////////////////////////
 // debugging macros
 
+// Uncomment this if you want to turn on verbose logging
+//#define CLCG_LOGGING 1;
 
-#ifdef DEBUG
+#ifdef CLCG_LOGGING
 #define CLCG_P(xx, ...)  NSLog(@"%s(%d): " xx, __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define CLCG_P(xx, ...)  ((void)0)
@@ -58,7 +60,7 @@ extern "C" {
 
 
 /* e.g. CLCG_PSIZE(@"screen bounds", [[UIScreen mainScreen] bounds]); */
-#ifdef DEBUG
+#ifdef CLCG_LOGGING
 #define CLCG_PRECT(s,r) NSLog(@"%s(%d): %@ (%.0f,%.0f) (%.0f,%.0f)", __PRETTY_FUNCTION__, \
         __LINE__, s, r.origin.x, r.origin.y, r.size.width, r.size.height)
 #else
@@ -68,7 +70,7 @@ extern "C" {
 
 
 /* e.g. CLCG_PSIZE(@"screen size", [[UIScreen mainScreen] bounds].size); */
-#ifdef DEBUG
+#ifdef CLCG_LOGGING
 #define CLCG_PSIZE(s,r) NSLog(@"%s(%d): %@ (%.0f,%.0f)", __PRETTY_FUNCTION__, \
         __LINE__, s, r.width, r.height);
 #else

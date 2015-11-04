@@ -107,6 +107,7 @@
   expandmask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
   [v setAutoresizingMask:expandmask];
   [tv setAutoresizingMask:expandmask];
+  v.translatesAutoresizingMaskIntoConstraints = YES;
 
   // build view hierarchy
   [self setView:v];
