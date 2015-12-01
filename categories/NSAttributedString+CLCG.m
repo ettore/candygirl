@@ -39,6 +39,10 @@
 
 -(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h
 {
+  if ([self length] == 0) {
+    return CGSizeZero;
+  }
+
   if (max_h == 0.0f) {
     max_h = CGFLOAT_MAX;
   }

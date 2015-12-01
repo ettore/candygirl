@@ -228,6 +228,10 @@
                  font:(UIFont*)font
        paragraphStyle:(NSParagraphStyle*)style
 {
+  if ([self length] == 0) {
+    return CGSizeZero;
+  }
+
   if (max_h == 0.0f) {
     max_h = clcg_screensize().height;
   }
