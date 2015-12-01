@@ -27,7 +27,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <Availability.h>
 
 enum CLCGLoadingState {
   CLCG_NOT_LOADED,
@@ -140,7 +140,11 @@ enum CLCGLoadingState {
 //------------------------------------------------------------------------------
 #pragma mark - Misc
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+
 @property(nonatomic,weak) id<CLCGPopoverContentDelegate> popoverContentDelegate;
+
+#endif
 
 /*!
  * Releases all the retained subviews of this view controller. This is called

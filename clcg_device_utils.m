@@ -58,6 +58,13 @@ BOOL clcg_is_iphone(void)
 }
 
 
+BOOL clcg_geq_iphone5(void)
+{
+  CGSize sz = [[UIScreen mainScreen] bounds].size;
+  return (sz.height >= 480.0f);
+}
+
+
 BOOL clcg_geq_iphone6(void)
 {
   CGSize sz = [[UIScreen mainScreen] bounds].size;
