@@ -23,6 +23,7 @@
 // ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE.
 
+#import <Availability.h>
 
 #ifndef CLCG_MACROS_H_
 #define CLCG_MACROS_H_
@@ -48,11 +49,30 @@
 // weak and strong references
 
 /*! Macro to create a weak reference to an object. */
-#define CLCG_MAKE_WEAK(OBJ)   __weak   __typeof__(OBJ) OBJ ## _weak_ = (OBJ);
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#define CLCG_MAKE_WEAK(OBJ)   __weak __typeof__(OBJ) OBJ ## _weak_ = (OBJ);
+#else
+#define CLCG_MAKE_WEAK(OBJ)   __unsafe_unretained __typeof__(OBJ) OBJ ## _weak_ = (OBJ);
+#endif
 
 /*! Macro to create a strong reference to an object. */
-#define CLCG_MAKE_STRONG(OBJ) __strong __typeof__(OBJ) OBJ = OBJ ## _weak_;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
 
+#define CLCG_MAKE_STRONG(OBJ) \
+_Pragma("clang diagnostic push")\
+_Pragma("clang diagnostic ignored \"-Wshadow\"")\
+__strong __typeof__(OBJ) OBJ = OBJ ## _weak_;\
+_Pragma("clang diagnostic pop")
+
+#else
+
+#define CLCG_MAKE_STRONG(OBJ) \
+_Pragma("clang diagnostic push")\
+_Pragma("clang diagnostic ignored \"-Wshadow\"")\
+__typeof__(OBJ) OBJ = OBJ ## _weak_;\
+_Pragma("clang diagnostic pop")
+
+#endif
 
 ////////////////////////////////////////////////////////////////////////////////
 // Flags
