@@ -192,7 +192,7 @@
             status:(int)status
              block:(CLCGImageLoaderCallback)block
 {
-#if DEBUG
+#if CLCG_DEBUG_LOGGING
   if (status != 200 && status >= 100)
     CLCG_P(@"Status code: %d", status);
 #endif

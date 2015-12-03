@@ -33,6 +33,7 @@
 #import "CLCGMoreCell.h"
 #import "clcg_device_utils.h"
 #import "clcg_viewport.h"
+#import "clcg_debug.h"
 #import "UIViewController+CLCG.h"
 
 
@@ -287,10 +288,8 @@
 -(UITableViewCell*)tableView:(UITableView*)tv
  normalCellForRowAtIndexPath:(NSIndexPath*)ip
 {
-#ifdef DEBUG
-  [NSException raise:NSInternalInconsistencyException
-              format:@"You forgot to override tableView:normalCellForRowAtIndexPath:"];
-#endif
+  CLCG_INCONSISTENCY(@"You forgot to override tableView:normalCellForRowAtIndexPath:.",
+                     self);
   return nil;
 }
 

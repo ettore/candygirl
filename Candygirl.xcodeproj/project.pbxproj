@@ -484,6 +484,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					"CLCG_DEBUG_LOGGING=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
