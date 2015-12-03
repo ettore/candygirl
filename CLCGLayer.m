@@ -43,8 +43,11 @@
 
 // non-retained pointer to an external cache where to store the UIImage
 // object we fetched.
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < 50000
+@property(nonatomic,unsafe_unretained) NSCache *cache;
+#else
 @property(nonatomic,weak) NSCache *cache;
-
+#endif
 @property(nonatomic,strong) ASIHTTPRequest  *req;
 
 @end
