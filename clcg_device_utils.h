@@ -83,8 +83,11 @@ extern "C" {
   BOOL clcg_geq_iphone6(void);
 
   /**
-   * @return YES if the OS version is >= than given version. The version string
-   *         can be something like "4.3.2".
+   @discussion
+   Determine if the current device OS is greater than or equals a given 
+   version string.
+   @param version A string indicating a iOS system version, such as "4.3.2".
+   @return YES if the current device OS version is >= than given `version'.
    */
   BOOL clcg_os_geq(NSString* version);
 

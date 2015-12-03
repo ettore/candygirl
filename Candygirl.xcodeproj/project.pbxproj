@@ -112,7 +112,7 @@
 		E5D026191AEF3A9B00154583 /* CLCGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGVC.m; sourceTree = "<group>"; };
 		E5D026421AEF3AB000154583 /* categories */ = {isa = PBXFileReference; lastKnownFileType = folder; path = categories; sourceTree = "<group>"; };
 		E5D026491AEF3CE300154583 /* candygirl-prefix-header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "candygirl-prefix-header.pch"; sourceTree = "<group>"; };
-		E5ECD0F71B26778300762A8A /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		E5ECD0F71B26778300762A8A /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E5ECD0F81B2677A400762A8A /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -561,19 +561,6 @@
 			baseConfigurationReference = 96D57838F33BFDD5A33E3CD7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "candygirl-prefix-header.pch";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-l\"Pods-ASIHTTPRequest\"",
-					"-l\"Pods-Reachability\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -584,19 +571,6 @@
 			baseConfigurationReference = 66E83D59C93E0F93B1F7DEB9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "candygirl-prefix-header.pch";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-l\"Pods-ASIHTTPRequest\"",
-					"-l\"Pods-Reachability\"",
-					"-framework",
-					"\"CFNetwork\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"MobileCoreServices\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
