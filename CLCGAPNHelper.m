@@ -54,9 +54,10 @@
 
 -(id)init
 {
-  if (!(self = [super init]))
+  if (!(self = [super init])) {
     return nil;
-  
+  }
+
   _badgeCount = -1;
 
   return self;
@@ -82,9 +83,12 @@
 
 +(BOOL)hasPushNotificationsEnabled
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if (clcg_os_geq(@"8")) {
     return [[UIApplication sharedApplication] isRegisteredForRemoteNotifications];
-  } else {
+  } else
+#endif
+  {
     return ([[UIApplication sharedApplication] enabledRemoteNotificationTypes]
             != UIRemoteNotificationTypeNone);
   }
@@ -93,6 +97,7 @@
 
 +(BOOL)hasPushNotificationsBadgeEnabled
 {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if (clcg_os_geq(@"8")) {
     if ([self hasPushNotificationsEnabled] == NO) {
       return NO;
@@ -100,7 +105,9 @@
       UIApplication *app = [UIApplication sharedApplication];
       return (app.currentUserNotificationSettings.types & UIUserNotificationTypeBadge);
     }
-  } else {
+  } else
+#endif
+  {
     UIApplication *app = [UIApplication sharedApplication];
     return ([app enabledRemoteNotificationTypes] & UIRemoteNotificationTypeBadge);
   }
@@ -112,6 +119,7 @@
   CLCGP(@"Registering for Push Notifications...");
 
   UIApplication *app = [UIApplication sharedApplication];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if (clcg_os_geq(@"8")) {
     [app registerUserNotificationSettings:
      [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
@@ -119,7 +127,9 @@
                                                    | UIUserNotificationTypeBadge)
                                        categories:nil]];
     [app registerForRemoteNotifications];
-  } else {
+  } else
+#endif
+  {
     [app registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge
                                               | UIRemoteNotificationTypeAlert
                                               | UIRemoteNotificationTypeSound)];
@@ -131,8 +141,9 @@
 {
   CLCG_P(@"Registered for APN: deviceToken=\n%@", [devtoken_data description]);
   
-  if (devtoken_data == nil)
+  if (devtoken_data == nil) {
     return;
+  }
   
   NSString *tokstr;
   
@@ -171,11 +182,14 @@
 +(BOOL)isAppBadgeEnabled
 {
   UIApplication *app = [UIApplication sharedApplication];
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if (clcg_os_geq(@"8")) {
     UIUserNotificationSettings *notif_settings = [app currentUserNotificationSettings];
     return ([app isRegisteredForRemoteNotifications]
             && (notif_settings.types & UIUserNotificationTypeBadge));
-  } else {
+  } else
+#endif
+  {
     return [app enabledRemoteNotificationTypes] & UIRemoteNotificationTypeBadge;
   }
 }
@@ -198,24 +212,28 @@
 
 -(void)parseBadgeCount
 {
-  if (_options == nil)
+  if (_options == nil) {
     _badgeCount = 0;
+  }
   
   NSDictionary *aps = [_options objectForKey:@"aps"];
-  if (aps == nil)
+  if (aps == nil) {
     _badgeCount = 0;
+  }
   
   id badgeobj = [aps objectForKey:@"badge"];
-  if (badgeobj)
+  if (badgeobj) {
     _badgeCount = [badgeobj integerValue];
+  }
 }
 
 
 -(NSInteger)badgeCount
 {
   // if we have a valid value (>0) return that
-  if (_badgeCount >= 0)
+  if (_badgeCount >= 0) {
     return _badgeCount;
+  }
   
   // ... otherwise parse options
   [self parseBadgeCount];
