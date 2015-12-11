@@ -28,6 +28,39 @@
 #ifndef CLCG_MACROS_H_
 #define CLCG_MACROS_H_
 
+
+////////////////////////////////////////////////////////////////////////////////
+// Stringification macros
+
+/*!
+ @defined CLCG_STRINGIFY
+ @abstract Converts input param to a stringified version of itself.
+ @discussion Note that if `str' is itself a macro, the macro won't be expanded.
+ E.g.
+ CLCG_STRINGIFY(my_string) will expand to "my_string".
+
+ #define MY_MACRO      my_string
+ CLCG_STRINGIFY(MY_MACRO) will expand to "MY_MACRO".
+ */
+#define CLCG_STRINGIFY(str) #str
+
+/*!
+ @defined CLCG_STRINGIFY_DEEP
+ @abstract Expands input and adds quotes to stringify the content.
+ @discussion This macro stringifies the actual content of the argument,
+ expanding all other macros eventually applied.
+ E.g.
+ CLCG_STRINGIFY_DEEP(my_string) will expand to "my_string".
+
+ #define MY_MACRO      my_string
+ CLCG_STRINGIFY_DEEP(MY_MACRO) will also expand to "my_string".
+ */
+#define CLCG_STRINGIFY_DEEP(str) CLCG_STRINGIFY(str)
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Deprecation helpers
+
 /*!
  * Borrowed from Apple's AvailabiltyInternal.h header. There's no reason why we 
  * shouldn't be able to use this macro, as it's a gcc-supported flag.
@@ -46,7 +79,7 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// weak and strong references
+// Weak and strong references
 
 /*! Macro to create a weak reference to an object. */
 #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
@@ -74,6 +107,7 @@ _Pragma("clang diagnostic pop")
 
 #endif
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // Flags
 
@@ -84,4 +118,4 @@ _Pragma("clang diagnostic pop")
 #define IS_MASK_SET(value, flag)  (((value) & (flag)) == (flag))
 
 
-#endif //ifdef CLCG_LMACROS_H
+#endif //ifdef CLCG_MACROS_H
