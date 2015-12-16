@@ -32,29 +32,61 @@
 
 
 /*!
+ @abstract Map all elements via a given block.
+
+ @discussion
+ This method traverses the array sequentially and builds a new array where the
+ Nth element is the result of calling the given block with the Nth element of
+ the original array. If a given item is mapped to nil (i.e. block returns nil),
+ the returned array will contain NSNull instead.
+
+ @param block The function to be applied to all elements of the array.
+
  @return A new array where each element is the result of calling `block`
-         on every item of the original array.
+ on every item of the original array.
  */
--(NSArray*)map:(id(^)(id item))block;
+-(NSArray*)clcg_map:(id(^)(id item))block;
 
 
 /*!
+ @abstract Safely map all elements via a given block.
+
+ @discussion
+ This method traverses the array sequentially and builds a new array where the
+ Nth element is the result of calling the given block with the Nth element of
+ the original array. If a given item is mapped to nil (i.e. block returns nil), 
+ the returned array will not include it.
+ 
+ @param block The function to be applied to all elements of the array.
+
+ @return A new array where each element is the result of calling `block`
+         on every item of the original array, minus the items for which block
+         returns nil.
+ */
+-(NSArray*)clcg_mapTrim:(id(^)(id item))block;
+
+
+/*!
+ @abstract Reduces all elements to a single value.
+
  @discussion
  Combines (i.e. reduces, folds) all elements of the receiving array
  into an accumulated result by running the given block on each element.
  
- Note: The return type of `block`, the type of `current_acc` and
- the type of `initial_acc` must match.
+ Note: The return type of `block`, the type of `current_acc` and the type 
+ of `initial_acc` must match.
 
- @param block The function that will be run on the current value of the 
-    accumulator using a given item of the array.
  @param initial_acc This is the initial value that will be passed
     to the block the first time it is executed.
- 
- @return The final value of the accumulator
+ @param block The function that will be run on the current value of the
+    accumulator using a given item of the array. Must return the new value
+    of the accumulator.
+
+ @return The final value of the accumulator. The type of the returned object
+ will match the one returned by `block`.
  */
--(id)reduceWithStart:(id)initial_acc
-               block:(id(^)(id current_acc, id item))block;
+-(id)clcg_reduce:(id)initial_acc
+           block:(id(^)(id current_acc, id item))block;
 
 
 

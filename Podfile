@@ -4,7 +4,17 @@ platform :ios, '4.3'
 
 xcodeproj 'Candygirl'
 
-pod 'ASIHTTPRequest', '~> 1.8.2' #, :inhibit_warnings => true
+def common_pods
+  pod 'ASIHTTPRequest', :inhibit_warnings => true
+end
+
+target "Candygirl" do
+  common_pods
+end
+
+target "CandygirlTests" do
+  common_pods
+end
 
 post_install do |installer_representation|
   installer_representation.pods_project.targets.each do |target|

@@ -7,8 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6255FEB73B64BAC43A105334 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 61E4CAE5EA04C043949A6AD6 /* libPods.a */; };
-		E5D025BC1AEF3A2400154583 /* libCandygirl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D025B01AEF3A2400154583 /* libCandygirl.a */; };
+		5D601DFEA2C34D92451744A5 /* libPods-Candygirl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F28B483D009DA1E17256C91 /* libPods-Candygirl.a */; };
+		A1845630F9C3B10DC406370A /* libPods-CandygirlTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1118EE1E4A04442662A276A7 /* libPods-CandygirlTests.a */; };
+		E513FF7F1C20D10900A82D7F /* CLCGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF7E1C20D10900A82D7F /* CLCGTestCase.m */; };
+		E513FF811C20D10900A82D7F /* libCandygirl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5D025B01AEF3A2400154583 /* libCandygirl.a */; };
+		E513FF891C20D3CA00A82D7F /* NSArray_CLCGTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF881C20D3CA00A82D7F /* NSArray_CLCGTestCase.m */; };
+		E513FFA71C20E33100A82D7F /* NSArray+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF8C1C20E33100A82D7F /* NSArray+CLCG.m */; };
+		E513FFA81C20E33100A82D7F /* NSAttributedString+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF8E1C20E33100A82D7F /* NSAttributedString+CLCG.m */; };
+		E513FFA91C20E33100A82D7F /* NSDate+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF901C20E33100A82D7F /* NSDate+CLCG.m */; };
+		E513FFAA1C20E33100A82D7F /* NSMutableArray+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF921C20E33100A82D7F /* NSMutableArray+CLCG.m */; };
+		E513FFAB1C20E33100A82D7F /* NSMutableCharacterSet+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF941C20E33100A82D7F /* NSMutableCharacterSet+CLCG.m */; };
+		E513FFAC1C20E33100A82D7F /* NSObject+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF961C20E33100A82D7F /* NSObject+CLCG.m */; };
+		E513FFAD1C20E33100A82D7F /* NSString+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF981C20E33100A82D7F /* NSString+CLCG.m */; };
+		E513FFAE1C20E33100A82D7F /* UIColor+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF9A1C20E33100A82D7F /* UIColor+CLCG.m */; };
+		E513FFAF1C20E33100A82D7F /* UIImageView+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF9C1C20E33100A82D7F /* UIImageView+CLCG.m */; };
+		E513FFB01C20E33100A82D7F /* UILabel+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FF9E1C20E33100A82D7F /* UILabel+CLCG.m */; };
+		E513FFB11C20E33100A82D7F /* UITextField+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA01C20E33100A82D7F /* UITextField+CLCG.m */; };
+		E513FFB21C20E33100A82D7F /* UIView+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA21C20E33100A82D7F /* UIView+CLCG.m */; };
+		E513FFB31C20E33100A82D7F /* UIViewController+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA41C20E33100A82D7F /* UIViewController+CLCG.m */; };
+		E513FFB41C20E33100A82D7F /* UIWindow+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA61C20E33100A82D7F /* UIWindow+CLCG.m */; };
 		E5D0262A1AEF3A9B00154583 /* clcg_addressbook_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */; };
 		E5D0262B1AEF3A9B00154583 /* clcg_bundle_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EC1AEF3A9B00154583 /* clcg_bundle_utils.m */; };
 		E5D0262C1AEF3A9B00154583 /* clcg_datetime_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EE1AEF3A9B00154583 /* clcg_datetime_utils.m */; };
@@ -35,7 +52,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E5D025BD1AEF3A2400154583 /* PBXContainerItemProxy */ = {
+		E513FF821C20D10900A82D7F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E5D025A81AEF3A2400154583 /* Project object */;
 			proxyType = 1;
@@ -57,12 +74,46 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F28B483D009DA1E17256C91 /* libPods-Candygirl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Candygirl.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1118EE1E4A04442662A276A7 /* libPods-CandygirlTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CandygirlTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		389A5AEBC85906A9054EC52C /* Pods-CandygirlTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CandygirlTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CandygirlTests/Pods-CandygirlTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3C58E4285D5D8363170F4DAE /* Pods-Candygirl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Candygirl.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Candygirl/Pods-Candygirl.debug.xcconfig"; sourceTree = "<group>"; };
 		61E4CAE5EA04C043949A6AD6 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		66E83D59C93E0F93B1F7DEB9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		96D57838F33BFDD5A33E3CD7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		7BFA583D8D1DF1A62CD57E86 /* Pods-CandygirlTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CandygirlTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-CandygirlTests/Pods-CandygirlTests.release.xcconfig"; sourceTree = "<group>"; };
+		E513FF7C1C20D10900A82D7F /* CandygirlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CandygirlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E513FF7E1C20D10900A82D7F /* CLCGTestCase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLCGTestCase.m; sourceTree = "<group>"; };
+		E513FF801C20D10900A82D7F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E513FF871C20D31800A82D7F /* CLCGTestCase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLCGTestCase.h; sourceTree = "<group>"; };
+		E513FF881C20D3CA00A82D7F /* NSArray_CLCGTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArray_CLCGTestCase.m; sourceTree = "<group>"; };
+		E513FF8B1C20E33100A82D7F /* NSArray+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+CLCG.h"; path = "categories/NSArray+CLCG.h"; sourceTree = "<group>"; };
+		E513FF8C1C20E33100A82D7F /* NSArray+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+CLCG.m"; path = "categories/NSArray+CLCG.m"; sourceTree = "<group>"; };
+		E513FF8D1C20E33100A82D7F /* NSAttributedString+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+CLCG.h"; path = "categories/NSAttributedString+CLCG.h"; sourceTree = "<group>"; };
+		E513FF8E1C20E33100A82D7F /* NSAttributedString+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+CLCG.m"; path = "categories/NSAttributedString+CLCG.m"; sourceTree = "<group>"; };
+		E513FF8F1C20E33100A82D7F /* NSDate+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+CLCG.h"; path = "categories/NSDate+CLCG.h"; sourceTree = "<group>"; };
+		E513FF901C20E33100A82D7F /* NSDate+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+CLCG.m"; path = "categories/NSDate+CLCG.m"; sourceTree = "<group>"; };
+		E513FF911C20E33100A82D7F /* NSMutableArray+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+CLCG.h"; path = "categories/NSMutableArray+CLCG.h"; sourceTree = "<group>"; };
+		E513FF921C20E33100A82D7F /* NSMutableArray+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+CLCG.m"; path = "categories/NSMutableArray+CLCG.m"; sourceTree = "<group>"; };
+		E513FF931C20E33100A82D7F /* NSMutableCharacterSet+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableCharacterSet+CLCG.h"; path = "categories/NSMutableCharacterSet+CLCG.h"; sourceTree = "<group>"; };
+		E513FF941C20E33100A82D7F /* NSMutableCharacterSet+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableCharacterSet+CLCG.m"; path = "categories/NSMutableCharacterSet+CLCG.m"; sourceTree = "<group>"; };
+		E513FF951C20E33100A82D7F /* NSObject+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+CLCG.h"; path = "categories/NSObject+CLCG.h"; sourceTree = "<group>"; };
+		E513FF961C20E33100A82D7F /* NSObject+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+CLCG.m"; path = "categories/NSObject+CLCG.m"; sourceTree = "<group>"; };
+		E513FF971C20E33100A82D7F /* NSString+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+CLCG.h"; path = "categories/NSString+CLCG.h"; sourceTree = "<group>"; };
+		E513FF981C20E33100A82D7F /* NSString+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+CLCG.m"; path = "categories/NSString+CLCG.m"; sourceTree = "<group>"; };
+		E513FF991C20E33100A82D7F /* UIColor+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CLCG.h"; path = "categories/UIColor+CLCG.h"; sourceTree = "<group>"; };
+		E513FF9A1C20E33100A82D7F /* UIColor+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CLCG.m"; path = "categories/UIColor+CLCG.m"; sourceTree = "<group>"; };
+		E513FF9B1C20E33100A82D7F /* UIImageView+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+CLCG.h"; path = "categories/UIImageView+CLCG.h"; sourceTree = "<group>"; };
+		E513FF9C1C20E33100A82D7F /* UIImageView+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+CLCG.m"; path = "categories/UIImageView+CLCG.m"; sourceTree = "<group>"; };
+		E513FF9D1C20E33100A82D7F /* UILabel+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+CLCG.h"; path = "categories/UILabel+CLCG.h"; sourceTree = "<group>"; };
+		E513FF9E1C20E33100A82D7F /* UILabel+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+CLCG.m"; path = "categories/UILabel+CLCG.m"; sourceTree = "<group>"; };
+		E513FF9F1C20E33100A82D7F /* UITextField+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+CLCG.h"; path = "categories/UITextField+CLCG.h"; sourceTree = "<group>"; };
+		E513FFA01C20E33100A82D7F /* UITextField+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+CLCG.m"; path = "categories/UITextField+CLCG.m"; sourceTree = "<group>"; };
+		E513FFA11C20E33100A82D7F /* UIView+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CLCG.h"; path = "categories/UIView+CLCG.h"; sourceTree = "<group>"; };
+		E513FFA21C20E33100A82D7F /* UIView+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CLCG.m"; path = "categories/UIView+CLCG.m"; sourceTree = "<group>"; };
+		E513FFA31C20E33100A82D7F /* UIViewController+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+CLCG.h"; path = "categories/UIViewController+CLCG.h"; sourceTree = "<group>"; };
+		E513FFA41C20E33100A82D7F /* UIViewController+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CLCG.m"; path = "categories/UIViewController+CLCG.m"; sourceTree = "<group>"; };
+		E513FFA51C20E33100A82D7F /* UIWindow+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+CLCG.h"; path = "categories/UIWindow+CLCG.h"; sourceTree = "<group>"; };
+		E513FFA61C20E33100A82D7F /* UIWindow+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+CLCG.m"; path = "categories/UIWindow+CLCG.m"; sourceTree = "<group>"; };
 		E5D025B01AEF3A2400154583 /* libCandygirl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCandygirl.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5D025BB1AEF3A2400154583 /* CandygirlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CandygirlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E5D025C11AEF3A2400154583 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E5D025E91AEF3A9B00154583 /* clcg_addressbook_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_addressbook_utils.h; sourceTree = "<group>"; };
 		E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_addressbook_utils.m; sourceTree = "<group>"; };
 		E5D025EB1AEF3A9B00154583 /* clcg_bundle_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_bundle_utils.h; sourceTree = "<group>"; };
@@ -110,26 +161,27 @@
 		E5D026171AEF3A9B00154583 /* CLCGTogglerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGTogglerView.m; sourceTree = "<group>"; };
 		E5D026181AEF3A9B00154583 /* CLCGVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLCGVC.h; sourceTree = "<group>"; };
 		E5D026191AEF3A9B00154583 /* CLCGVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLCGVC.m; sourceTree = "<group>"; };
-		E5D026421AEF3AB000154583 /* categories */ = {isa = PBXFileReference; lastKnownFileType = folder; path = categories; sourceTree = "<group>"; };
 		E5D026491AEF3CE300154583 /* candygirl-prefix-header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "candygirl-prefix-header.pch"; sourceTree = "<group>"; };
 		E5ECD0F71B26778300762A8A /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E5ECD0F81B2677A400762A8A /* Podfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		EF01B6AD3E467FFDD759C33B /* Pods-Candygirl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Candygirl.release.xcconfig"; path = "Pods/Target Support Files/Pods-Candygirl/Pods-Candygirl.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E513FF791C20D10900A82D7F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E513FF811C20D10900A82D7F /* libCandygirl.a in Frameworks */,
+				A1845630F9C3B10DC406370A /* libPods-CandygirlTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5D025AD1AEF3A2400154583 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6255FEB73B64BAC43A105334 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E5D025B81AEF3A2400154583 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E5D025BC1AEF3A2400154583 /* libCandygirl.a in Frameworks */,
+				5D601DFEA2C34D92451744A5 /* libPods-Candygirl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				61E4CAE5EA04C043949A6AD6 /* libPods.a */,
+				0F28B483D009DA1E17256C91 /* libPods-Candygirl.a */,
+				1118EE1E4A04442662A276A7 /* libPods-CandygirlTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,10 +203,58 @@
 			children = (
 				E5ECD0F71B26778300762A8A /* Podfile */,
 				E5ECD0F81B2677A400762A8A /* Podfile.lock */,
-				96D57838F33BFDD5A33E3CD7 /* Pods.debug.xcconfig */,
-				66E83D59C93E0F93B1F7DEB9 /* Pods.release.xcconfig */,
+				3C58E4285D5D8363170F4DAE /* Pods-Candygirl.debug.xcconfig */,
+				EF01B6AD3E467FFDD759C33B /* Pods-Candygirl.release.xcconfig */,
+				389A5AEBC85906A9054EC52C /* Pods-CandygirlTests.debug.xcconfig */,
+				7BFA583D8D1DF1A62CD57E86 /* Pods-CandygirlTests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		E513FF7D1C20D10900A82D7F /* CandygirlTests */ = {
+			isa = PBXGroup;
+			children = (
+				E513FF801C20D10900A82D7F /* Info.plist */,
+				E513FF871C20D31800A82D7F /* CLCGTestCase.h */,
+				E513FF7E1C20D10900A82D7F /* CLCGTestCase.m */,
+				E513FF881C20D3CA00A82D7F /* NSArray_CLCGTestCase.m */,
+			);
+			path = CandygirlTests;
+			sourceTree = "<group>";
+		};
+		E513FF8A1C20E31C00A82D7F /* categories */ = {
+			isa = PBXGroup;
+			children = (
+				E513FF8B1C20E33100A82D7F /* NSArray+CLCG.h */,
+				E513FF8C1C20E33100A82D7F /* NSArray+CLCG.m */,
+				E513FF8D1C20E33100A82D7F /* NSAttributedString+CLCG.h */,
+				E513FF8E1C20E33100A82D7F /* NSAttributedString+CLCG.m */,
+				E513FF8F1C20E33100A82D7F /* NSDate+CLCG.h */,
+				E513FF901C20E33100A82D7F /* NSDate+CLCG.m */,
+				E513FF911C20E33100A82D7F /* NSMutableArray+CLCG.h */,
+				E513FF921C20E33100A82D7F /* NSMutableArray+CLCG.m */,
+				E513FF931C20E33100A82D7F /* NSMutableCharacterSet+CLCG.h */,
+				E513FF941C20E33100A82D7F /* NSMutableCharacterSet+CLCG.m */,
+				E513FF951C20E33100A82D7F /* NSObject+CLCG.h */,
+				E513FF961C20E33100A82D7F /* NSObject+CLCG.m */,
+				E513FF971C20E33100A82D7F /* NSString+CLCG.h */,
+				E513FF981C20E33100A82D7F /* NSString+CLCG.m */,
+				E513FF991C20E33100A82D7F /* UIColor+CLCG.h */,
+				E513FF9A1C20E33100A82D7F /* UIColor+CLCG.m */,
+				E513FF9B1C20E33100A82D7F /* UIImageView+CLCG.h */,
+				E513FF9C1C20E33100A82D7F /* UIImageView+CLCG.m */,
+				E513FF9D1C20E33100A82D7F /* UILabel+CLCG.h */,
+				E513FF9E1C20E33100A82D7F /* UILabel+CLCG.m */,
+				E513FF9F1C20E33100A82D7F /* UITextField+CLCG.h */,
+				E513FFA01C20E33100A82D7F /* UITextField+CLCG.m */,
+				E513FFA11C20E33100A82D7F /* UIView+CLCG.h */,
+				E513FFA21C20E33100A82D7F /* UIView+CLCG.m */,
+				E513FFA31C20E33100A82D7F /* UIViewController+CLCG.h */,
+				E513FFA41C20E33100A82D7F /* UIViewController+CLCG.m */,
+				E513FFA51C20E33100A82D7F /* UIWindow+CLCG.h */,
+				E513FFA61C20E33100A82D7F /* UIWindow+CLCG.m */,
+			);
+			name = categories;
 			sourceTree = "<group>";
 		};
 		E595C5681B5E3AB2007605AB /* legacy / deprecated */ = {
@@ -174,12 +276,12 @@
 				E5D026491AEF3CE300154583 /* candygirl-prefix-header.pch */,
 				E5D026431AEF3ABE00154583 /* functions */,
 				E5D026461AEF3B4400154583 /* helpers */,
-				E5D026421AEF3AB000154583 /* categories */,
+				E513FF8A1C20E31C00A82D7F /* categories */,
 				E5D026471AEF3B6400154583 /* models */,
 				E5D026451AEF3B0100154583 /* controllers */,
 				E5D026441AEF3AD200154583 /* views & graphics */,
 				E595C5681B5E3AB2007605AB /* legacy / deprecated */,
-				E5D025BF1AEF3A2400154583 /* CandygirlTests */,
+				E513FF7D1C20D10900A82D7F /* CandygirlTests */,
 				E5D025B11AEF3A2400154583 /* Products */,
 				23E522CF161F06FE90E67FDE /* Pods */,
 				08576C0B79903C51F250C584 /* Frameworks */,
@@ -190,25 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				E5D025B01AEF3A2400154583 /* libCandygirl.a */,
-				E5D025BB1AEF3A2400154583 /* CandygirlTests.xctest */,
+				E513FF7C1C20D10900A82D7F /* CandygirlTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		E5D025BF1AEF3A2400154583 /* CandygirlTests */ = {
-			isa = PBXGroup;
-			children = (
-				E5D025C01AEF3A2400154583 /* Supporting Files */,
-			);
-			path = CandygirlTests;
-			sourceTree = "<group>";
-		};
-		E5D025C01AEF3A2400154583 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E5D025C11AEF3A2400154583 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E5D026431AEF3ABE00154583 /* functions */ = {
@@ -290,6 +376,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E513FF7B1C20D10900A82D7F /* CandygirlTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E513FF841C20D10900A82D7F /* Build configuration list for PBXNativeTarget "CandygirlTests" */;
+			buildPhases = (
+				BEC893CF91B60E6046B7DF03 /* Check Pods Manifest.lock */,
+				E513FF781C20D10900A82D7F /* Sources */,
+				E513FF791C20D10900A82D7F /* Frameworks */,
+				E513FF7A1C20D10900A82D7F /* Resources */,
+				7414D7DB99AF025D45CE0838 /* Embed Pods Frameworks */,
+				2CACDF9C391F7D091C385BDF /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E513FF831C20D10900A82D7F /* PBXTargetDependency */,
+			);
+			name = CandygirlTests;
+			productName = CandygirlTests;
+			productReference = E513FF7C1C20D10900A82D7F /* CandygirlTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E5D025AF1AEF3A2400154583 /* Candygirl */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E5D025C41AEF3A2400154583 /* Build configuration list for PBXNativeTarget "Candygirl" */;
@@ -309,24 +416,6 @@
 			productReference = E5D025B01AEF3A2400154583 /* libCandygirl.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		E5D025BA1AEF3A2400154583 /* CandygirlTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E5D025C71AEF3A2400154583 /* Build configuration list for PBXNativeTarget "CandygirlTests" */;
-			buildPhases = (
-				E5D025B71AEF3A2400154583 /* Sources */,
-				E5D025B81AEF3A2400154583 /* Frameworks */,
-				E5D025B91AEF3A2400154583 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E5D025BE1AEF3A2400154583 /* PBXTargetDependency */,
-			);
-			name = CandygirlTests;
-			productName = CandygirlTests;
-			productReference = E5D025BB1AEF3A2400154583 /* CandygirlTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -336,10 +425,10 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Cubelogic;
 				TargetAttributes = {
-					E5D025AF1AEF3A2400154583 = {
-						CreatedOnToolsVersion = 6.2;
+					E513FF7B1C20D10900A82D7F = {
+						CreatedOnToolsVersion = 7.2;
 					};
-					E5D025BA1AEF3A2400154583 = {
+					E5D025AF1AEF3A2400154583 = {
 						CreatedOnToolsVersion = 6.2;
 					};
 				};
@@ -357,13 +446,13 @@
 			projectRoot = "";
 			targets = (
 				E5D025AF1AEF3A2400154583 /* Candygirl */,
-				E5D025BA1AEF3A2400154583 /* CandygirlTests */,
+				E513FF7B1C20D10900A82D7F /* CandygirlTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		E5D025B91AEF3A2400154583 /* Resources */ = {
+		E513FF7A1C20D10900A82D7F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -373,6 +462,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2CACDF9C391F7D091C385BDF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CandygirlTests/Pods-CandygirlTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7414D7DB99AF025D45CE0838 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CandygirlTests/Pods-CandygirlTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A87B12B3C758414F3340E358 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -400,60 +519,125 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Candygirl/Pods-Candygirl-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BEC893CF91B60E6046B7DF03 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E513FF781C20D10900A82D7F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E513FF891C20D3CA00A82D7F /* NSArray_CLCGTestCase.m in Sources */,
+				E513FF7F1C20D10900A82D7F /* CLCGTestCase.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E5D025AC1AEF3A2400154583 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				E5D026411AEF3A9B00154583 /* CLCGVC.m in Sources */,
 				E5D026301AEF3A9B00154583 /* clcg_math.m in Sources */,
+				E513FFAC1C20E33100A82D7F /* NSObject+CLCG.m in Sources */,
 				E5D0262F1AEF3A9B00154583 /* clcg_gfx.m in Sources */,
 				E5D026331AEF3A9B00154583 /* CLCGAlertView.m in Sources */,
 				E5D0263E1AEF3A9B00154583 /* CLCGMoreCell.m in Sources */,
+				E513FFAA1C20E33100A82D7F /* NSMutableArray+CLCG.m in Sources */,
+				E513FFA71C20E33100A82D7F /* NSArray+CLCG.m in Sources */,
 				E5D0262C1AEF3A9B00154583 /* clcg_datetime_utils.m in Sources */,
 				E5D0262E1AEF3A9B00154583 /* clcg_device_utils.m in Sources */,
+				E513FFAD1C20E33100A82D7F /* NSString+CLCG.m in Sources */,
 				E5D026341AEF3A9B00154583 /* CLCGAPNHelper.m in Sources */,
 				E5D0262B1AEF3A9B00154583 /* clcg_bundle_utils.m in Sources */,
+				E513FFAF1C20E33100A82D7F /* UIImageView+CLCG.m in Sources */,
+				E513FFA81C20E33100A82D7F /* NSAttributedString+CLCG.m in Sources */,
+				E513FFB31C20E33100A82D7F /* UIViewController+CLCG.m in Sources */,
 				E5D0262D1AEF3A9B00154583 /* clcg_debug.m in Sources */,
 				E5D026381AEF3A9B00154583 /* CLCGCellCommonLayouter.m in Sources */,
 				E5D026321AEF3A9B00154583 /* clcg_viewport.m in Sources */,
+				E513FFB11C20E33100A82D7F /* UITextField+CLCG.m in Sources */,
 				E5D0263C1AEF3A9B00154583 /* CLCGLayer.m in Sources */,
 				E5D026361AEF3A9B00154583 /* CLCGCachedViewModel.m in Sources */,
 				E5D0262A1AEF3A9B00154583 /* clcg_addressbook_utils.m in Sources */,
 				E5D026401AEF3A9B00154583 /* CLCGTogglerView.m in Sources */,
 				E5D0263D1AEF3A9B00154583 /* CLCGModel.m in Sources */,
+				E513FFA91C20E33100A82D7F /* NSDate+CLCG.m in Sources */,
 				E5D0263F1AEF3A9B00154583 /* CLCGTableViewVC.m in Sources */,
 				E5D026371AEF3A9B00154583 /* CLCGCell.m in Sources */,
+				E513FFB01C20E33100A82D7F /* UILabel+CLCG.m in Sources */,
+				E513FFAE1C20E33100A82D7F /* UIColor+CLCG.m in Sources */,
+				E513FFAB1C20E33100A82D7F /* NSMutableCharacterSet+CLCG.m in Sources */,
+				E513FFB41C20E33100A82D7F /* UIWindow+CLCG.m in Sources */,
 				E5D026311AEF3A9B00154583 /* clcg_str_utils.m in Sources */,
 				E5D026351AEF3A9B00154583 /* CLCGBarButtonItem.m in Sources */,
 				E5D0263B1AEF3A9B00154583 /* CLCGImageView.m in Sources */,
 				E5D0263A1AEF3A9B00154583 /* CLCGImageLoader.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E5D025B71AEF3A2400154583 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E513FFB21C20E33100A82D7F /* UIView+CLCG.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E5D025BE1AEF3A2400154583 /* PBXTargetDependency */ = {
+		E513FF831C20D10900A82D7F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E5D025AF1AEF3A2400154583 /* Candygirl */;
-			targetProxy = E5D025BD1AEF3A2400154583 /* PBXContainerItemProxy */;
+			targetProxy = E513FF821C20D10900A82D7F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		E513FF851C20D10900A82D7F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 389A5AEBC85906A9054EC52C /* Pods-CandygirlTests.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = CandygirlTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cubelogic.CandygirlTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E513FF861C20D10900A82D7F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7BFA583D8D1DF1A62CD57E86 /* Pods-CandygirlTests.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = CandygirlTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cubelogic.CandygirlTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		E5D025C21AEF3A2400154583 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -558,7 +742,7 @@
 		};
 		E5D025C51AEF3A2400154583 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96D57838F33BFDD5A33E3CD7 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 3C58E4285D5D8363170F4DAE /* Pods-Candygirl.debug.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "candygirl-prefix-header.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -568,7 +752,7 @@
 		};
 		E5D025C61AEF3A2400154583 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66E83D59C93E0F93B1F7DEB9 /* Pods.release.xcconfig */;
+			baseConfigurationReference = EF01B6AD3E467FFDD759C33B /* Pods-Candygirl.release.xcconfig */;
 			buildSettings = {
 				GCC_PREFIX_HEADER = "candygirl-prefix-header.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -576,41 +760,18 @@
 			};
 			name = Release;
 		};
-		E5D025C81AEF3A2400154583 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CandygirlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cubelogic.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		E5D025C91AEF3A2400154583 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = CandygirlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cubelogic.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E513FF841C20D10900A82D7F /* Build configuration list for PBXNativeTarget "CandygirlTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E513FF851C20D10900A82D7F /* Debug */,
+				E513FF861C20D10900A82D7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E5D025AB1AEF3A2400154583 /* Build configuration list for PBXProject "Candygirl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -625,15 +786,6 @@
 			buildConfigurations = (
 				E5D025C51AEF3A2400154583 /* Debug */,
 				E5D025C61AEF3A2400154583 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E5D025C71AEF3A2400154583 /* Build configuration list for PBXNativeTarget "CandygirlTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E5D025C81AEF3A2400154583 /* Debug */,
-				E5D025C91AEF3A2400154583 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

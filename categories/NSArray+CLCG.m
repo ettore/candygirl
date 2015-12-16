@@ -2,10 +2,10 @@
  Copyright (c) 2012, Ettore Pasquini
  Copyright (c) 2012, Cubelogic
  All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
- 
+
  * Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
  * Redistributions in binary form must reproduce the above copyright notice,
@@ -14,7 +14,7 @@
  * Neither the name of Cubelogic nor the names of its contributors may be
  used to endorse or promote products derived from this software without
  specific prior written permission.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -35,7 +35,20 @@
 @implementation NSArray (Candygirl)
 
 
--(NSArray*)map:(id(^)(id item))block
+-(NSArray*)clcg_map:(id(^)(id item))block
+{
+  return [self clcg_map:block preserveLength:YES];
+}
+
+
+-(NSArray*)clcg_mapTrim:(id(^)(id item))block
+{
+  return [self clcg_map:block preserveLength:NO];
+}
+
+
+-(NSArray*)clcg_map:(id(^)(id item))block
+     preserveLength:(BOOL)preserve_length
 {
   NSMutableArray *a = [NSMutableArray arrayWithCapacity:[self count]];
 
@@ -43,6 +56,8 @@
     id new_item = block(item);
     if (new_item) {
       [a addObject:new_item];
+    } else if (preserve_length) {
+      [a addObject:[NSNull null]];
     }
   }
 
@@ -50,8 +65,8 @@
 }
 
 
--(id)reduceWithStart:(id)acc
-               block:(id(^)(id current_acc, id item))block;
+-(id)clcg_reduce:(id)acc
+           block:(id(^)(id current_acc, id item))block;
 {
   for (id item in self) {
     acc = block(acc, item);
