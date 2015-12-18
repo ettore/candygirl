@@ -32,7 +32,7 @@
 @implementation UIColor (Candygirl)
 
 
-- (UIColor *)lighterColor
+-(UIColor*)clcg_lighterColor
 {
   CGFloat h, s, b, a;
 
@@ -47,7 +47,7 @@
 }
 
 
-- (UIColor *)darkerColor
+-(UIColor*)clcg_darkerColor
 {
   CGFloat h, s, b, a;
 

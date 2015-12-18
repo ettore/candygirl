@@ -2,10 +2,10 @@
  Copyright (c) 2012, Ettore Pasquini
  Copyright (c) 2012, Cubelogic
  All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
- 
+
  * Redistributions of source code must retain the above copyright notice,
  this list of conditions and the following disclaimer.
  * Redistributions in binary form must reproduce the above copyright notice,
@@ -14,7 +14,7 @@
  * Neither the name of Cubelogic nor the names of its contributors may be
  used to endorse or promote products derived from this software without
  specific prior written permission.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -32,81 +32,81 @@
 @interface NSString (Candygirl)
 
 
-/*! 
+/*!
  Truncates the string (after stripping HTML) if it's longer than 150
  characters, and adds ellipsis if needed.
  */
--(NSString*)ellipsisized;
+-(NSString*)clcg_ellipsisized;
 
 /*!
  Truncates the string (after stripping HTML) if it's longer than a given number
  of characters, and adds ellipsis if needed.
  */
--(NSString*)ellipsisized:(NSUInteger)maxlen;
+-(NSString*)clcg_ellipsisized:(NSUInteger)maxlen;
 
 /*!
  Decodes characters from their respective HTML entities.
  E.g.:    &amp  --->  &;
  */
--(NSString*)HTMLDecoded;
+-(NSString*)clcg_HTMLDecoded;
 
-/*! 
+/*!
  Encodes characters into their respective HTML entities.
  Currently this supports only the predefined XML entities " ' < > &.
  E.g.:    &     --->  &amp;
  */
--(NSString *)HTMLEncoded;
+-(NSString *)clcg_HTMLEncoded;
 
-/*! 
- Strips all HTML tags from the receiver. 
+/*!
+ Strips all HTML tags from the receiver.
  */
--(NSString *)HTMLStripped;
+-(NSString *)clcg_HTMLStripped;
 
 /*! URL-encodes (i.e. %-escapes) the receiver. */
--(NSString*)URLEncode;
+-(NSString*)clcg_URLEncoded;
 
 /*! Trims whitespaces only. */
--(NSString*)trimws;
+-(NSString*)clcg_trimws;
 
 /*! Trims whitespaces and new lines too. */
--(NSString*)trimwsnl;
+-(NSString*)clcg_trimwsnl;
 
 /*! Trims all content after the first occurrence of `search_str'. */
--(NSString*)trimAfterFirstOccurrence:(NSString*)search_str;
+-(NSString*)clcg_truncateAfterFirstOccurrence:(NSString*)search_str;
 
 /*!
  * Trims and attempts to fix the receiver by adding the "http://" scheme
  * specification if no other scheme is present.
  */
--(NSString *)fixURLString;
+-(NSString *)clcg_fixURLString;
 
 /*!
  * @return A shortened version of a given name, taking the first words that
  * match the given length. E.g.
- *      shortenedName(@"Ettore Pasquini", 10) --> "Ettore"
+ *      clcg_shortenedName(@"Ettore Pasquini", 10) --> "Ettore"
  * If the first word is still too long, it will be returned truncated with a
  * tolerance of + 2 additional chars. No ellipses are added.
  */
--(NSString *)shortenedName:(NSUInteger)max_len;
+-(NSString *)clcg_shortenedName:(NSUInteger)max_len;
 
 #ifndef CLCG_APP_EXTENSIONS
 
 /*!
- Measures the size of this string with a max width assuming word wrapping 
+ Measures the size of this string with a max width assuming word wrapping
  line break and a max height as device height.
 
  This is a wrapper for -boundingRectWithSize:options:attributes:context: and
  sizeWithFont:forWidth:lineBreakMode:.
  */
--(CGSize)sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font;
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w font:(UIFont*)font;
 
 /*!
- Same as @link sizeWithMaxW:maxH:font:paragraphStyle: @/link with a default
+ Same as @link clcg_sizeWithMaxW:maxH:font:paragraphStyle: @/link with a default
  paragraph style.
  */
--(CGSize)sizeWithMaxW:(CGFloat)max_w
-                 maxH:(CGFloat)max_h
-                 font:(UIFont*)font;
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w
+                      maxH:(CGFloat)max_h
+                      font:(UIFont*)font;
 
 /*!
  Measures the size of this string with a max width/height assuming word
@@ -115,10 +115,10 @@
  This is a wrapper for -boundingRectWithSize:options:attributes:context: and
  sizeWithFont:forWidth:lineBreakMode:.
  */
--(CGSize)sizeWithMaxW:(CGFloat)max_w
-                 maxH:(CGFloat)max_h
-                 font:(UIFont*)font
-       paragraphStyle:(NSParagraphStyle*)style;
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w
+                      maxH:(CGFloat)max_h
+                      font:(UIFont*)font
+            paragraphStyle:(NSParagraphStyle*)style;
 
 
 #endif

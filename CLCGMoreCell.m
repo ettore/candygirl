@@ -87,12 +87,12 @@
 -(void)didTap
 {
   if (_spinner.isHidden) {
-    [self showSpinner:YES];
+    [self clcg_showSpinner:YES];
   }
 }
 
 
--(void)showSpinner:(BOOL)display_spinner
+-(void)clcg_showSpinner:(BOOL)display_spinner
 {
   [self.textLabel setHidden:display_spinner];
   [_spinner setHidden:!display_spinner];
@@ -109,12 +109,12 @@
 {
   [super layoutSubviews];
 
-  [_spinner centerHorizontally];
-  [_spinner centerVertically];
+  [_spinner clcg_centerHorizontally];
+  [_spinner clcg_centerVertically];
 
-  [self.textLabel setW:([self w] - [self.textLabel x]*2)];
-  [self.textLabel centerHorizontally];
-  [self.textLabel centerVertically];
+  [self.textLabel setClcg_w:([self clcg_w] - [self.textLabel clcg_x]*2)];
+  [self.textLabel clcg_centerHorizontally];
+  [self.textLabel clcg_centerVertically];
 }
 
 

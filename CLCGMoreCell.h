@@ -50,7 +50,7 @@
 // the More cell height is constant
 +(CGFloat)cellHeight;
 
--(void)showSpinner:(BOOL)display_spinner;
+-(void)clcg_showSpinner:(BOOL)display_spinner;
 
 @end
 

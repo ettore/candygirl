@@ -25,12 +25,11 @@
 //  Created by Pasquini, Ettore on 7/30/14.
 //
 
-#import <Foundation/Foundation.h>
 
 @interface NSObject (Candygirl)
 
--(id)performGetter:(SEL)getter;
+-(id)clcg_performGetter:(SEL)getter;
 
--(void)performSetter:(SEL)setter withObject:(id)value;
+-(void)clcg_performSetter:(SEL)setter withObject:(id)value;
 
 @end

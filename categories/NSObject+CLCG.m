@@ -27,10 +27,11 @@
 
 #import "NSObject+CLCG.h"
 
+
 @implementation NSObject (Candygirl)
 
 
--(id)performGetter:(SEL)getter
+-(id)clcg_performGetter:(SEL)getter
 {
   IMP imp = [self methodForSelector:getter];
   id (*func)(id, SEL) = (void *)imp;
@@ -39,7 +40,7 @@
 }
 
 
--(void)performSetter:(SEL)setter withObject:(id)value
+-(void)clcg_performSetter:(SEL)setter withObject:(id)value
 {
   IMP imp = [self methodForSelector:setter];
   CGRect (*func)(id, SEL, id) = (void *)imp;

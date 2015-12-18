@@ -31,13 +31,13 @@
 @implementation NSAttributedString (CLCG)
 
 
--(CGSize)sizeWithMaxW:(CGFloat)max_w
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w
 {
-  return [self sizeWithMaxW:max_w maxH:CGFLOAT_MAX];
+  return [self clcg_sizeWithMaxW:max_w maxH:CGFLOAT_MAX];
 }
 
 
--(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h
 {
   if ([self length] == 0) {
     return CGSizeZero;

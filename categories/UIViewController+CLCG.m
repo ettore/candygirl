@@ -33,7 +33,7 @@
 @implementation UIViewController (Candygirl)
 
 
-- (CGFloat)viewTopOffset
+-(CGFloat)clcg_viewTopOffset
 {
   CGFloat top = 0.0f;
   if ([self respondsToSelector:@selector(topLayoutGuide)]) {
@@ -43,7 +43,7 @@
 }
 
 
-- (CGFloat)viewBottomOffset
+-(CGFloat)clcg_viewBottomOffset
 {
   CGFloat bottom = 0.0f;
   if ([self respondsToSelector:@selector(bottomLayoutGuide)]) {
@@ -53,21 +53,21 @@
 }
 
 
--(CGFloat)navBarH
+-(CGFloat)clcg_navBarH
 {
   UINavigationBar *nb = [[self navigationController] navigationBar];
-  return (nb ? [nb h] : 0.0f);
+  return (nb ? [nb clcg_h] : 0.0f);
 }
 
 
--(CGFloat)tabBarH
+-(CGFloat)clcg_tabBarH
 {
   UITabBar *tb = [[self tabBarController] tabBar];
-  return (tb ? [tb h] : 0.0f);
+  return (tb ? [tb clcg_h] : 0.0f);
 }
 
 
--(void)presentVC:(UIViewController*)vc
+-(void)clcg_presentVC:(UIViewController*)vc
 {
   // check if project deployment target is iOS 4.x
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
@@ -82,7 +82,7 @@
 }
 
 
--(void)dismissVC
+-(void)clcg_dismissVC
 {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
   if (clcg_os_geq(@"5.0")) {
@@ -96,7 +96,7 @@
 }
 
 
--(BOOL)isVisible
+-(BOOL)clcg_isVisible
 {
   // The view's window property is non-nil if a view is currently visible
   // and nil if it has not been added to a window (and therefore can't be

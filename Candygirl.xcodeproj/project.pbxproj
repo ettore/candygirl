@@ -26,6 +26,7 @@
 		E513FFB21C20E33100A82D7F /* UIView+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA21C20E33100A82D7F /* UIView+CLCG.m */; };
 		E513FFB31C20E33100A82D7F /* UIViewController+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA41C20E33100A82D7F /* UIViewController+CLCG.m */; };
 		E513FFB41C20E33100A82D7F /* UIWindow+CLCG.m in Sources */ = {isa = PBXBuildFile; fileRef = E513FFA61C20E33100A82D7F /* UIWindow+CLCG.m */; };
+		E56EAB131C238C3000E38953 /* UIView+CLCGDeprecated.m in Sources */ = {isa = PBXBuildFile; fileRef = E56EAB111C237E5200E38953 /* UIView+CLCGDeprecated.m */; };
 		E5D0262A1AEF3A9B00154583 /* clcg_addressbook_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */; };
 		E5D0262B1AEF3A9B00154583 /* clcg_bundle_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EC1AEF3A9B00154583 /* clcg_bundle_utils.m */; };
 		E5D0262C1AEF3A9B00154583 /* clcg_datetime_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5D025EE1AEF3A9B00154583 /* clcg_datetime_utils.m */; };
@@ -113,6 +114,8 @@
 		E513FFA41C20E33100A82D7F /* UIViewController+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+CLCG.m"; path = "categories/UIViewController+CLCG.m"; sourceTree = "<group>"; };
 		E513FFA51C20E33100A82D7F /* UIWindow+CLCG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+CLCG.h"; path = "categories/UIWindow+CLCG.h"; sourceTree = "<group>"; };
 		E513FFA61C20E33100A82D7F /* UIWindow+CLCG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+CLCG.m"; path = "categories/UIWindow+CLCG.m"; sourceTree = "<group>"; };
+		E56EAB101C237E5200E38953 /* UIView+CLCGDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+CLCGDeprecated.h"; path = "categories/UIView+CLCGDeprecated.h"; sourceTree = "<group>"; };
+		E56EAB111C237E5200E38953 /* UIView+CLCGDeprecated.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+CLCGDeprecated.m"; path = "categories/UIView+CLCGDeprecated.m"; sourceTree = "<group>"; };
 		E5D025B01AEF3A2400154583 /* libCandygirl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCandygirl.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5D025E91AEF3A9B00154583 /* clcg_addressbook_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clcg_addressbook_utils.h; sourceTree = "<group>"; };
 		E5D025EA1AEF3A9B00154583 /* clcg_addressbook_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = clcg_addressbook_utils.m; sourceTree = "<group>"; };
@@ -249,6 +252,8 @@
 				E513FFA01C20E33100A82D7F /* UITextField+CLCG.m */,
 				E513FFA11C20E33100A82D7F /* UIView+CLCG.h */,
 				E513FFA21C20E33100A82D7F /* UIView+CLCG.m */,
+				E56EAB101C237E5200E38953 /* UIView+CLCGDeprecated.h */,
+				E56EAB111C237E5200E38953 /* UIView+CLCGDeprecated.m */,
 				E513FFA31C20E33100A82D7F /* UIViewController+CLCG.h */,
 				E513FFA41C20E33100A82D7F /* UIViewController+CLCG.m */,
 				E513FFA51C20E33100A82D7F /* UIWindow+CLCG.h */,
@@ -569,6 +574,7 @@
 				E513FFAF1C20E33100A82D7F /* UIImageView+CLCG.m in Sources */,
 				E513FFA81C20E33100A82D7F /* NSAttributedString+CLCG.m in Sources */,
 				E513FFB31C20E33100A82D7F /* UIViewController+CLCG.m in Sources */,
+				E56EAB131C238C3000E38953 /* UIView+CLCGDeprecated.m in Sources */,
 				E5D0262D1AEF3A9B00154583 /* clcg_debug.m in Sources */,
 				E5D026381AEF3A9B00154583 /* CLCGCellCommonLayouter.m in Sources */,
 				E5D026321AEF3A9B00154583 /* clcg_viewport.m in Sources */,

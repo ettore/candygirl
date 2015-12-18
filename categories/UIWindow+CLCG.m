@@ -10,7 +10,7 @@
 
 @implementation UIWindow (Candygirl)
 
--(void)show:(UIView*)v
+-(void)clcg_show:(UIView*)v
 {
   [self addSubview:v];
   [self makeKeyAndVisible];

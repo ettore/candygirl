@@ -305,7 +305,7 @@
                                       withText:_moreButtonText];
   }
 
-  [cell showSpinner:(self.loadState == CLCG_LOADING) || _autoload];
+  [cell clcg_showSpinner:(self.loadState == CLCG_LOADING) || _autoload];
 
   return cell;
 }

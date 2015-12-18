@@ -34,7 +34,7 @@
 
 @implementation NSMutableCharacterSet (Candygirl)
 
-+ (NSMutableCharacterSet *)punctSpaces
++(NSMutableCharacterSet*)clcg_punctSpaces
 {
   NSMutableCharacterSet *set;
 

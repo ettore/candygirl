@@ -28,8 +28,8 @@
 
 @interface UILabel (Candygirl)
 
--(void)resizeHeightForText;
+-(void)clcg_resizeHForText;
 
--(void)sizeToFitWidth:(CGFloat)w;
+-(void)clcg_resizeToFitW:(CGFloat)w;
 
 @end

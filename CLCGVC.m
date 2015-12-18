@@ -81,21 +81,21 @@
 -(void)viewDidLayoutSubviews
 {
   [super viewDidLayoutSubviews];
-  self.lastDisplayedViewWidth = [self.view w];
+  self.lastDisplayedViewWidth = [self.view clcg_w];
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
-  self.lastDisplayedViewWidth = [self.view w];
+  self.lastDisplayedViewWidth = [self.view clcg_w];
 }
 
 
 -(BOOL)viewWidthWasChanged
 {
   return (self.lastDisplayedViewWidth != 0 &&
-          self.lastDisplayedViewWidth != self.view.w);
+          self.lastDisplayedViewWidth != [self.view clcg_w]);
 }
 
 
@@ -129,28 +129,28 @@
 {
   // The spinner text is intended for short text that can be read while waiting.
   CGFloat text_max_height = clcg_screensize().height/2;
-  CGSize text_size = [_spinnerLabel1.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
+  CGSize text_size = [_spinnerLabel1.text clcg_sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
                                                   maxH:text_max_height
                                                   font:_spinnerLabel1.font];
 
   // put the spinner slightly above the mid-line
-  [_spinner centerHorizontally];
-  [_spinner centerVerticallyWithOffset:(text_size.height == 0 ?
+  [_spinner clcg_centerHorizontally];
+  [_spinner clcg_centerVerticallyWithOffset:(text_size.height == 0 ?
                                         0 : -(4*CLCG_PADDING))];
 
-  [_spinnerLabel1 setW:SPINNER_TEXT_MAX_WIDTH];
-  [_spinnerLabel1 setY:([_spinner low] + 2*CLCG_PADDING)];
+  [_spinnerLabel1 setClcg_w:SPINNER_TEXT_MAX_WIDTH];
+  [_spinnerLabel1 setClcg_y:([_spinner clcg_low] + 2*CLCG_PADDING)];
 
-  [_spinnerLabel1 setSz:text_size];
-  [_spinnerLabel1 centerHorizontally];
+  [_spinnerLabel1 setClcg_sz:text_size];
+  [_spinnerLabel1 clcg_centerHorizontally];
   [_spinnerLabel1 setFrame:CGRectIntegral(_spinnerLabel1.frame)];
 
-  [_spinnerLabel2 setY:([_spinnerLabel1 low] + CLCG_PADDING)];
-  text_size = [_spinnerLabel2.text sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
+  [_spinnerLabel2 setClcg_y:([_spinnerLabel1 clcg_low] + CLCG_PADDING)];
+  text_size = [_spinnerLabel2.text clcg_sizeWithMaxW:SPINNER_TEXT_MAX_WIDTH
                                            maxH:text_max_height
                                            font:_spinnerLabel2.font];
-  [_spinnerLabel2 setSz:text_size];
-  [_spinnerLabel2 setXForR:[_spinnerLabel1 r]];
+  [_spinnerLabel2 setClcg_sz:text_size];
+  [_spinnerLabel2 clcg_setXForR:[_spinnerLabel1 clcg_r]];
   [_spinnerLabel2 setFrame:CGRectIntegral(_spinnerLabel2.frame)];
 }
 
@@ -301,7 +301,7 @@
     }
 
     [_emptyLabel setText:msg];
-    [_emptyLabel sizeToFitWidth:([mainview w] - CLCG_PADDING*2)];
+    [_emptyLabel clcg_resizeToFitW:([mainview clcg_w] - CLCG_PADDING*2)];
     [_retryLabel setHidden:YES];
 
     [_emptyContainer setNeedsLayout];
@@ -323,13 +323,13 @@
 -(void)centerEmptyView
 {
   // height of 2 lines of text
-  CGFloat two_lines_offset = 2*[@"Mj" sizeWithMaxW:[[self view] w]
+  CGFloat two_lines_offset = 2*[@"Mj" clcg_sizeWithMaxW:[[self view] clcg_w]
                                               font:[_retryLabel font]].height;
 
-  [_emptyLabel centerVerticallyWithOffset:-two_lines_offset];
-  [_emptyLabel centerHorizontally];
-  [_retryLabel centerHorizontally];
-  [_retryLabel setY:ceil([_emptyLabel low] + two_lines_offset)];
+  [_emptyLabel clcg_centerVerticallyWithOffset:-two_lines_offset];
+  [_emptyLabel clcg_centerHorizontally];
+  [_retryLabel clcg_centerHorizontally];
+  [_retryLabel setClcg_y:ceil([_emptyLabel clcg_low] + two_lines_offset)];
 }
 
 

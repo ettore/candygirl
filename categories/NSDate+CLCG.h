@@ -28,6 +28,8 @@
 
 @interface NSDate (Candygirl)
 
-+(NSDate*)dateFromGregorianYear:(NSInteger)y month:(NSInteger)m day:(NSInteger)d;
++(NSDate*)clcg_dateFromGregorianYear:(NSInteger)y
+                               month:(NSInteger)m
+                                 day:(NSInteger)d;
 
 @end

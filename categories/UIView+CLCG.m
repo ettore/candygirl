@@ -37,72 +37,84 @@
 @implementation UIView (Candygirl)
 
 
--(void)centerHorizontally
+//------------------------------------------------------------------------------
+#pragma mark - Easy view centering
+
+
+-(void)clcg_centerHorizontally
 {
-  [self centerHorizontallyWithOffset:0];
+  [self clcg_centerHorizontallyWithOffset:0];
 }
 
 
--(void)centerHorizontallyWithOffset:(CGFloat)offset
+-(void)clcg_centerHorizontallyWithOffset:(CGFloat)offset
 {
   CGSize sz;
   CGFloat x;
 
   sz = [[self superview] frame].size;
-  x = (sz.width - [self w])/2 + offset;
-  [self setX:x];
+  x = (sz.width - [self clcg_w])/2 + offset;
+  [self setClcg_x:x];
 }
 
 
--(void)centerHorizontallyInRect:(CGRect)rect
+-(void)clcg_centerHorizontallyInRect:(CGRect)rect
 {
-  CGFloat x = (rect.size.width - [self w])/2;
-  [self setX:(rect.origin.x + x)];
+  CGFloat x = (rect.size.width - [self clcg_w])/2;
+  [self setClcg_x:(rect.origin.x + x)];
 }
 
 
--(void)centerVertically
+-(void)clcg_centerVertically
 {
-  [self centerVerticallyWithOffset:0];
+  [self clcg_centerVerticallyWithOffset:0];
 }
 
 
--(void)centerVerticallyWithOffset:(CGFloat)offset
+-(void)clcg_centerVerticallyWithOffset:(CGFloat)offset
 {
   CGSize sz;
   CGFloat y;
 
   sz = [[self superview] frame].size;
-  y = (sz.height - [self h])/2 + offset;
-  [self setY:y];
+  y = (sz.height - [self clcg_h])/2 + offset;
+  [self setClcg_y:y];
 }
 
 
--(void)centerVerticallyInRect:(CGRect)rect
+-(void)clcg_centerVerticallyInRect:(CGRect)rect
 {
-  CGFloat y = (rect.size.height - [self h])/2;
-  [self setY:(rect.origin.y + y)];
+  CGFloat y = (rect.size.height - [self clcg_h])/2;
+  [self setClcg_y:(rect.origin.y + y)];
 }
 
 
--(void)resizeHeightForText:(NSString*)txt font:(UIFont*)font
+//------------------------------------------------------------------------------
+#pragma mark - Easy resizing
+
+
+-(void)clcg_resizeHForText:(NSString*)txt font:(UIFont*)font
 {
   CGSize sz;
 
-  sz = CGSizeMake([self w], INT_MAX);
+  sz = CGSizeMake([self clcg_w], INT_MAX);
   sz = [txt sizeWithFont:font constrainedToSize:sz];
 
-  [self setH:ceil(sz.height)];  // Can't round down, may make last line disappear
+  [self setClcg_h:ceil(sz.height)];  // Can't round down, may make last line disappear
 }
 
 
--(CGFloat)x
+//------------------------------------------------------------------------------
+#pragma mark - Easy access to positioning info of view
+
+
+-(CGFloat)clcg_x
 {
   return [self frame].origin.x;
 }
 
 
--(void)setX:(CGFloat)x
+-(void)setClcg_x:(CGFloat)x
 {
   CGRect r = [self frame];
   r.origin.x = round(x);
@@ -110,13 +122,13 @@
 }
 
 
--(CGFloat)y
+-(CGFloat)clcg_y
 {
   return [self frame].origin.y;
 }
 
 
--(void)setY:(CGFloat)y
+-(void)setClcg_y:(CGFloat)y
 {
   CGRect r = [self frame];
   r.origin.y = round(y);
@@ -124,13 +136,13 @@
 }
 
 
--(CGFloat)w
+-(CGFloat)clcg_w
 {
   return [self frame].size.width;
 }
 
 
--(void)setW:(CGFloat)w
+-(void)setClcg_w:(CGFloat)w
 {
   CGRect r = [self frame];
   r.size.width = round(w);
@@ -138,13 +150,13 @@
 }
 
 
--(CGFloat)h
+-(CGFloat)clcg_h
 {
   return [self frame].size.height;
 }
 
 
--(void)setH:(CGFloat)h
+-(void)setClcg_h:(CGFloat)h
 {
   CGRect r = [self frame];
   r.size.height = round(h);
@@ -152,55 +164,40 @@
 }
 
 
--(CGFloat)r
+-(CGFloat)clcg_r
 {
   CGRect r = [self frame];
   return r.origin.x + r.size.width;
 }
 
 
--(CGFloat)low
+-(CGFloat)clcg_low
 {
   CGRect r = [self frame];
   return r.origin.y + r.size.height;
 }
 
 
--(void)setXForR:(CGFloat)r
+-(CGPoint)clcg_origin
 {
-  [self setX:(r - [self w])];
+  return [self frame].origin;
 }
 
 
--(void)setYForLow:(CGFloat)low
-{
-  [self setY:(low - [self h])];
+-(void)setClcg_origin:(CGPoint)origin {
+  CGRect frame = [self frame];
+  frame.origin = origin;
+  [self setFrame:frame];
 }
 
 
--(void)setWForR:(CGFloat)r
-{
-  if ([self x] < r) {
-    [self setW:(r - [self x])];
-  }
-}
-
-
--(void)setHForLow:(CGFloat)low
-{
-  if ([self y] < low) {
-    [self setH:(low - [self y])];
-  }
-}
-
-
--(CGSize)sz
+-(CGSize)clcg_sz
 {
   return [self frame].size;
 }
 
 
--(void)setSz:(CGSize)size
+-(void)setClcg_sz:(CGSize)size
 {
   CGRect frame = [self frame];
   frame.size = size;
@@ -208,44 +205,67 @@
 }
 
 
--(CGPoint)origin
-{
-  return [self frame].origin;
-}
-
-
--(void)setOrigin:(CGPoint)origin {
-  CGRect frame = [self frame];
-  frame.origin = origin;
-  [self setFrame:frame];
-}
-
-
--(CGFloat)centerX
+-(CGFloat)clcg_centerX
 {
   return [self center].x;
 }
 
 
--(void)setCenterX:(CGFloat)centerX
+-(void)setClcg_centerX:(CGFloat)centerX
 {
   [self setCenter:CGPointMake(centerX, [self center].y)];
 }
 
 
--(CGFloat)centerY
+-(CGFloat)clcg_centerY
 {
   return [self center].y;
 }
 
 
--(void)setCenterY:(CGFloat)centerY
+-(void)setClcg_centerY:(CGFloat)centerY
 {
   [self setCenter:CGPointMake([self center].x, centerY)];
 }
 
 
--(UIActivityIndicatorView*)showSpinner:(UIActivityIndicatorView*)spinner
+//------------------------------------------------------------------------------
+#pragma mark - Change x, y, w, h given right or bottom alignment value
+
+
+-(void)clcg_setXForR:(CGFloat)r
+{
+  [self setClcg_x:(r - [self clcg_w])];
+}
+
+
+-(void)clcg_setYForLow:(CGFloat)low
+{
+  [self setClcg_y:(low - [self clcg_h])];
+}
+
+
+-(void)clcg_setWForR:(CGFloat)r
+{
+  if ([self clcg_x] < r) {
+    [self setClcg_w:(r - [self clcg_x])];
+  }
+}
+
+
+-(void)clcg_setHForLow:(CGFloat)low
+{
+  if ([self clcg_y] < low) {
+    [self setClcg_h:(low - [self clcg_y])];
+  }
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark - Spinner positoning
+
+
+-(UIActivityIndicatorView*)clcg_showSpinner:(UIActivityIndicatorView*)spinner
 {
   // if spinner is already a subview, no need to add it (or create it)
   if (![[self subviews] containsObject:spinner]) {
@@ -258,8 +278,8 @@
     [self addSubview:spinner];
   }
 
-  [spinner centerHorizontally];
-  [spinner centerVertically];
+  [spinner clcg_centerHorizontally];
+  [spinner clcg_centerVertically];
   [self setNeedsLayout];
 
   // go! and make sure to show it
@@ -270,21 +290,25 @@
 }
 
 
--(void)hideSpinner:(UIActivityIndicatorView*)spinner
+-(void)clcg_hideSpinner:(UIActivityIndicatorView*)spinner
 {
   [spinner stopAnimating];
   clcg_safe_remove_from_superview(spinner);
 }
 
 
--(UIView*)findFirstResponder
+//------------------------------------------------------------------------------
+#pragma mark - Misc
+
+
+-(UIView*)clcg_findFirstResponder
 {
   if ([self isFirstResponder]) {
     return self;
   }
 
   for (UIView *subView in [self subviews]) {
-    UIView *firstResponder = [subView findFirstResponder];
+    UIView *firstResponder = [subView clcg_findFirstResponder];
 
     if (firstResponder != nil) {
       return firstResponder;
@@ -295,7 +319,7 @@
 }
 
 
--(void)addBorderWithInsets:(UIEdgeInsets)insets
+-(void)clcg_addBorderWithInsets:(UIEdgeInsets)insets
 {
   UIView *border_line = [[UIView alloc] init];
   [[border_line layer] setBorderColor:[[UIColor lightGrayColor] CGColor]];
@@ -309,14 +333,14 @@
 
 
 //------------------------------------------------------------------------------
-#pragma mark - height measuring methods
+#pragma mark - Height measuring methods
 
 
 // TODO: this method is fairly expensive if used with attributed strings.
 // it would be good to implement some form of caching of these heights.
--(CGFloat)textHeightForWidth:(CGFloat)w
-               useAttributed:(BOOL)use_attributed
-                   lineLimit:(NSUInteger)line_limit
+-(CGFloat)clcg_textHForW:(CGFloat)w
+           useAttributed:(BOOL)use_attributed
+               lineLimit:(NSUInteger)line_limit
 {
   CGSize text_size = CGSizeZero;
 
@@ -330,11 +354,11 @@
       if (line_limit > 0){
         NSAttributedString *s = [attr_text attributedSubstringFromRange:
                                  NSMakeRange(0,1)];
-        CGFloat h = ceil([s sizeWithMaxW:w].height);
+        CGFloat h = ceil([s clcg_sizeWithMaxW:w].height);
         h *= line_limit;
-        text_size = [attr_text sizeWithMaxW:w maxH:h];
+        text_size = [attr_text clcg_sizeWithMaxW:w maxH:h];
       } else {
-        text_size = [attr_text sizeWithMaxW:w];
+        text_size = [attr_text clcg_sizeWithMaxW:w];
       }
     }
   } else if ([self respondsToSelector:@selector(text)]
@@ -342,12 +366,12 @@
     NSString *text = [(id)self text];
     UIFont *font = [(id)self font];
     if ([text length] > 0) {
-      if (line_limit > 0){ 
-        CGFloat h = [@"Mj" sizeWithMaxW:w font:font].height;
+      if (line_limit > 0){
+        CGFloat h = [@"Mj" clcg_sizeWithMaxW:w font:font].height;
         h *= line_limit;
-        text_size = [text sizeWithMaxW:w maxH:h font:font];
+        text_size = [text clcg_sizeWithMaxW:w maxH:h font:font];
       } else {
-        text_size = [text sizeWithMaxW:w font:font];
+        text_size = [text clcg_sizeWithMaxW:w font:font];
       }
     }
   }
@@ -357,53 +381,53 @@
 
 
 //------------------------------------------------------------------------------
-#pragma mark - layout methods
+#pragma mark - Layout methods
 
 
--(void)putTextView:(UIView*)subview
- useAttributedText:(BOOL)use_attributed
-         toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
-             below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
-          maxWidth:(CGFloat)max_w
-         lineLimit:(NSUInteger)line_limit
+-(void)clcg_putTextView:(UIView*)subview
+      useAttributedText:(BOOL)use_attributed
+              toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_h
+                  below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_v
+               maxWidth:(CGFloat)max_w
+              lineLimit:(NSUInteger)line_limit
 {
-  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
+  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_h);
   CGFloat y = round(CGRectGetMaxY(vert_align_view.frame));
   const CGFloat w = max_w - x;
-  const CGFloat h = ceil([subview textHeightForWidth:w
-                                       useAttributed:use_attributed
-                                           lineLimit:line_limit]);
+  const CGFloat h = ceil([subview clcg_textHForW:w
+                                   useAttributed:use_attributed
+                                       lineLimit:line_limit]);
   if (h > 0) {
-    y += padding_vert;
+    y += padding_v;
   }
   [subview setFrame:CGRectMake(x, y, w, h)];
 }
 
 
--(void)putView:(UIView*)subview
-     toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
-         below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
+-(void)clcg_putView:(UIView*)subview
+          toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_h
+              below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_v
 {
-  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
-  [subview setFrame:CGRectMake(x, y, [subview w], [subview h])];
+  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_h);
+  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_v);
+  [subview setFrame:CGRectMake(x, y, [subview clcg_w], [subview clcg_h])];
 }
 
 
--(void)putView:(UIView<CLCGUIViewLayout>*)subview
-     toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_horiz
-         below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_vert
-      maxWidth:(CGFloat)max_w
+-(void)clcg_putView:(UIView<CLCGUIViewLayout>*)subview
+          toRightOf:(UIView*)horiz_align_view horizPadding:(CGFloat)padding_h
+              below:(UIView*)vert_align_view   vertPadding:(CGFloat)padding_v
+           maxWidth:(CGFloat)max_w
 {
-  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_horiz);
-  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_vert);
+  const CGFloat x = round(CGRectGetMaxX(horiz_align_view.frame) + padding_h);
+  const CGFloat y = round(CGRectGetMaxY(vert_align_view.frame) + padding_v);
   const CGFloat w = max_w - x;
   const CGFloat h = [subview calculatedHeightForWidth:w];
   [subview setFrame:CGRectMake(x, y, w, h)];
 }
 
 
--(void)addTarget:(id)target forTapAction:(SEL)action
+-(void)clcg_addTarget:(id)target forTapAction:(SEL)action
 {
   self.userInteractionEnabled = YES;
   UITapGestureRecognizer *tap_recognizer = [[UITapGestureRecognizer alloc]

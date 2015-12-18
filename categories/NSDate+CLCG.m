@@ -29,7 +29,9 @@
 
 @implementation NSDate (Candygirl)
 
-+(NSDate*)dateFromGregorianYear:(NSInteger)year month:(NSInteger)month day:(NSInteger)day
++(NSDate*)clcg_dateFromGregorianYear:(NSInteger)year
+                               month:(NSInteger)month
+                                 day:(NSInteger)day
 {
   NSDateComponents *components = [[NSDateComponents alloc] init];
   NSCalendar *gregorian;

@@ -63,11 +63,11 @@
     if (line_limit > 0){
       NSAttributedString *s = [attr_str attributedSubstringFromRange:
                                NSMakeRange(0,1)];
-      CGFloat h = ceil([s sizeWithMaxW:w].height);
+      CGFloat h = ceil([s clcg_sizeWithMaxW:w].height);
       h *= line_limit;
-      text_size = [attr_str sizeWithMaxW:w maxH:h];
+      text_size = [attr_str clcg_sizeWithMaxW:w maxH:h];
     } else {
-      text_size = [attr_str sizeWithMaxW:w];
+      text_size = [attr_str clcg_sizeWithMaxW:w];
     }
 
     val = @(text_size.height);
@@ -90,7 +90,7 @@
   NSNumber *val = [_cache objectForKey:key];
 
   if (val == nil) {
-    const CGFloat h = ceil([view textHeightForWidth:w
+    const CGFloat h = ceil([view clcg_textHForW:w
                                       useAttributed:use_attributed
                                           lineLimit:line_limit]);
     val = @(h);

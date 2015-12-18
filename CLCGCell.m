@@ -157,7 +157,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 -(void)addTapActionOnImage:(void(^)())block;
 {
   self.tapActionBlock = block;
-  [_mainImageView addTarget:self forTapAction:@selector(tapAction:)];
+  [_mainImageView clcg_addTarget:self forTapAction:@selector(tapAction:)];
 }
 
 
@@ -187,25 +187,25 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   [_mainImageView setFrame:img_frame];
 
   const CGFloat x = CGRectGetMaxX(img_frame) + [class imageRightPadding];
-  const CGFloat w = [[self class] textLabelWidthWithCellW:[self w]];
+  const CGFloat w = [[self class] textLabelWidthWithCellW:[self clcg_w]];
 
   // layout text label
   sz = [self calculateTextLabelSizeForCellWidth:w];
   sz.height = ceil(sz.height);
-  r = CGRectMake(x, [_mainImageView y], w, sz.height);
+  r = CGRectMake(x, [_mainImageView clcg_y], w, sz.height);
   [[self textLabel] setFrame:CGRectIntegral(r)];
   
   // layout detail label
   sz = [self calculateDetailLabelSizeForCellWidth:w];
   sz.height = ceil(sz.height);
-  r = CGRectMake(x, [[self textLabel] low] + (int)(_innerPadding/2),
+  r = CGRectMake(x, [[self textLabel] clcg_low] + (int)(_innerPadding/2),
                  sz.width, sz.height);
   [[self detailTextLabel] setFrame:CGRectIntegral(r)];
 
   // info text label
   sz = [self calculateInfoLabelSizeForCellWidth:w];
   sz.height = ceil(sz.height);
-  r = CGRectMake(x, [[self detailTextLabel] low] + (int)(_innerPadding/2),
+  r = CGRectMake(x, [[self detailTextLabel] clcg_low] + (int)(_innerPadding/2),
                  w, sz.height);
   [_infoTextLabel setFrame:CGRectIntegral(r)];
 }

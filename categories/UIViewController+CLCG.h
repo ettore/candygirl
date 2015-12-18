@@ -28,18 +28,18 @@
 @interface UIViewController (Candygirl)
 
 /*!
- Returns the top offset for the view in case you don't want content to appear 
+ Returns the top offset for the view in case you don't want content to appear
  behind a translucent or transparent UIKit bar. This method accounts for both
  status and navigation bar.
  */
-- (CGFloat)viewTopOffset;
+- (CGFloat)clcg_viewTopOffset;
 
 /*!
  Returns the bottom offset for the view in case you don't want content to appear
- behind a translucent or transparent UIKit bar. This method accounts for 
+ behind a translucent or transparent UIKit bar. This method accounts for
  tab-bars and toolbars.
  */
-- (CGFloat)viewBottomOffset;
+- (CGFloat)clcg_viewBottomOffset;
 
 
 /**
@@ -47,7 +47,7 @@
  * controller hosting this view controller. If no navigation controller is
  * present, it will return 0.
  */
--(CGFloat)navBarH;
+-(CGFloat)clcg_navBarH;
 
 
 /**
@@ -55,26 +55,26 @@
  * of this view controller as a subview. If no tab bar is present,
  * it will return 0.
  */
--(CGFloat)tabBarH;
+-(CGFloat)clcg_tabBarH;
 
 
 /*!
- Let the receiver view controller present another view controller modally 
+ Let the receiver view controller present another view controller modally
  with animation and no completion handler.
  Handles presentModalViewController:animated: deprecation.
  */
--(void)presentVC:(UIViewController*)vc;
+-(void)clcg_presentVC:(UIViewController*)vc;
 
 /*!
- Dismisses the view controller that was presented modally by this view 
+ Dismisses the view controller that was presented modally by this view
  controller, with default animation and no completion handler.
  Handles dismissModalViewController:animated: deprecation.
  */
--(void)dismissVC;
+-(void)clcg_dismissVC;
 
 /*!
  @return true if the view controller view is visible.
  */
--(BOOL)isVisible;
+-(BOOL)clcg_isVisible;
 
 @end

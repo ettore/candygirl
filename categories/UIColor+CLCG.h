@@ -29,9 +29,9 @@
 @interface UIColor (Candygirl)
 
 /** @return A color that's 25% brighter than self. */
-- (UIColor *)lighterColor;
+-(UIColor*)clcg_lighterColor;
 
 /** @return A color that's 25% darker than self. */
-- (UIColor *)darkerColor;
+-(UIColor*)clcg_darkerColor;
 
 @end

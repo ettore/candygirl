@@ -34,21 +34,21 @@
 @implementation UILabel (Candygirl)
 
 
--(void)sizeToFitWidth:(CGFloat)w
+-(void)clcg_resizeToFitW:(CGFloat)w
 {
   CGSize sz;
 
   sz = CGSizeMake(w, INT_MAX);
   sz = [[self text] sizeWithFont:[self font] constrainedToSize:sz];
 
-  [self setW:ceil(sz.width)];
-  [self setH:ceil(sz.height)];
+  [self setClcg_w:ceil(sz.width)];
+  [self setClcg_h:ceil(sz.height)];
 }
 
 
--(void)resizeHeightForText
+-(void)clcg_resizeHForText
 {
-  [self resizeHeightForText:[self text] font:[self font]];
+  [self clcg_resizeHForText:[self text] font:[self font]];
 }
 
 

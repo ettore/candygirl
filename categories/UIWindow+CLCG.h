@@ -27,9 +27,9 @@
 
 @interface UIWindow (Candygirl)
 
-/**
+/*!
  * Adds v as a subview of the receiver and shows it.
  */
--(void)show:(UIView*)v;
+-(void)clcg_show:(UIView*)v;
 
 @end

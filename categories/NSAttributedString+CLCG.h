@@ -27,7 +27,7 @@
 
 @interface NSAttributedString (CLCG)
 
--(CGSize)sizeWithMaxW:(CGFloat)max_w;
--(CGSize)sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h;
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w;
+-(CGSize)clcg_sizeWithMaxW:(CGFloat)max_w maxH:(CGFloat)max_h;
 
 @end
