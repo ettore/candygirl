@@ -97,18 +97,18 @@
 
 +(BOOL)hasPushNotificationsBadgeEnabled
 {
+  UIApplication *app = [UIApplication sharedApplication];
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if (clcg_os_geq(@"8")) {
-    if ([self hasPushNotificationsEnabled] == NO) {
-      return NO;
+    if ([app isRegisteredForRemoteNotifications]) {
+      return (app.currentUserNotificationSettings.types
+              & UIUserNotificationTypeBadge);
     } else {
-      UIApplication *app = [UIApplication sharedApplication];
-      return (app.currentUserNotificationSettings.types & UIUserNotificationTypeBadge);
+      return NO;
     }
   } else
 #endif
   {
-    UIApplication *app = [UIApplication sharedApplication];
     return ([app enabledRemoteNotificationTypes] & UIRemoteNotificationTypeBadge);
   }
 }
@@ -172,26 +172,6 @@
 
   [self setDeviceToken:nil];
   _isPushRegistered = NO;
-}
-
-
-//------------------------------------------------------------------------------
-#pragma mark - utils
-
-
-+(BOOL)isAppBadgeEnabled
-{
-  UIApplication *app = [UIApplication sharedApplication];
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-  if (clcg_os_geq(@"8")) {
-    UIUserNotificationSettings *notif_settings = [app currentUserNotificationSettings];
-    return ([app isRegisteredForRemoteNotifications]
-            && (notif_settings.types & UIUserNotificationTypeBadge));
-  } else
-#endif
-  {
-    return [app enabledRemoteNotificationTypes] & UIRemoteNotificationTypeBadge;
-  }
 }
 
 

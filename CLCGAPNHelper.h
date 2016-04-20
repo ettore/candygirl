@@ -88,9 +88,4 @@
 /*! adjust state in case registration with APNS failed. */
 -(void)registrationFailed:(NSError*)err;
 
-/*!
- @return YES if the app is currently enabled for app badges notifications.
- */
-+(BOOL)isAppBadgeEnabled;
-
 @end
