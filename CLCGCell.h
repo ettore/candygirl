@@ -67,16 +67,9 @@
  */
 @interface CLCGCell : UITableViewCell <CLCGCell, CLCGCellCommonLayouter>
 
-@property(nonatomic,copy)     NSString  *imgUrl;
-@property(nonatomic,retain)   id        context;//should this be assign?
-@property(nonatomic,retain)   UILabel   *infoTextLabel;
-
-// properties declared in CLCGCell protocol
-@property(nonatomic,assign)   BOOL      emphasized;
-@property(nonatomic) CGFloat   innerPadding;
-@property(nonatomic,retain)   UIColor   *normalColor;
-@property(nonatomic,retain)   UIColor   *emphasisColor;
-
+@property(nonatomic,copy)   NSString  *imgUrl;
+@property(nonatomic,retain) id        context;//should this be assign?
+@property(nonatomic,retain) UILabel   *infoTextLabel;
 @property(nonatomic,retain) CLCGCellCommonLayouter *commonLayouter;
 
 /*! 
@@ -140,7 +133,15 @@
 
 /*!
  @deprecated
+ @abstract
  Calculates the height of the cell in accordance with all given parameters.
+ @discussion
+ This method takes padding values from +innerPadding and +topBottomPadding class
+ methods. Subclasses likely shouldn't override this method: rather, define a
+ more custom interface (perhaps with less params!) and if needed eventually call:
+ [self
+ cellHeightForText:detailText:infoText:font:detailFont:infoFont:maxWidth:imageW:imageH:]
+ (and not [CLCGCell cellHeightForText:...]) to exploit its polymorphic behavior.
  */
 +(CGFloat)cellHeightForText:(NSString*)text
                  detailText:(NSString*)detailtext
@@ -150,8 +151,7 @@
                    infoFont:(UIFont*)info_font
                    maxWidth:(CGFloat)cell_maxw
                      imageW:(CGFloat)imgw
-                     imageH:(CGFloat)imgh
-                    padding:(CGFloat)padding;
+                     imageH:(CGFloat)imgh;
 
 /*!
  @abstract The max width accounted during layout calculations for the
@@ -195,7 +195,6 @@
 +(UIFont*)textFont;
 +(UIFont*)detailFont;
 +(UIFont*)infoFont;
-
 
 
 @end

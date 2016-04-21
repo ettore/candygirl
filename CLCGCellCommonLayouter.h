@@ -58,13 +58,25 @@
 
 @protocol CLCGCell
 
+/*! Does this cell need to stand out (e.g. a new update in feed) or not. */
+@property(nonatomic,assign)   BOOL      emphasized;
+
+/*! Padding between subviews. */
+@property(nonatomic,readonly) CGFloat   innerPadding;
+
+/*! Color (usually background) for non-emphasized cells. */
+@property(nonatomic,retain)   UIColor   *normalColor;
+
+/*! 
+ Color (usually background) for cells that need to stand out against
+ normal cells. 
+ */
+@property(nonatomic,retain)   UIColor   *emphasisColor;
+
+// "overrides" from UITableViewCell
 @property(nonatomic,retain) UIView      *backgroundView;
 @property(nonatomic,readonly,retain) UIImageView *imageView NS_AVAILABLE_IOS(3_0);
-@property(nonatomic,assign)   BOOL      emphasized;
-@property(nonatomic,readonly) CGFloat   innerPadding;
-@property(nonatomic,retain)   UIColor   *normalColor;
-@property(nonatomic,retain)   UIColor   *emphasisColor;
-- (void)setNeedsDisplay;
+-(void)setNeedsDisplay;
 
 @end
 

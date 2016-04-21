@@ -76,6 +76,12 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   CGFloat   _imgH;
 }
 
+// properties declared in CLCGCell protocol
+@synthesize emphasized    = _emphasized;
+@synthesize innerPadding  = _innerPadding;
+@synthesize normalColor   = _normalColor;
+@synthesize emphasisColor = _emphasisColor;
+
 
 // overriding super-class designated initializer
 -(id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)cid
@@ -182,8 +188,10 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
   [super layoutSubviews];
 
   // layout image view
-  const CGRect img_frame = CGRectMake([class viewportPadding], [class topBottomPadding],
-                                      _imgW, _imgH);
+  const CGRect img_frame = CGRectMake([class viewportPadding],
+                                      [class topBottomPadding],
+                                      _imgW,
+                                      _imgH);
   [_mainImageView setFrame:img_frame];
 
   const CGFloat x = CGRectGetMaxX(img_frame) + [class imageRightPadding];
@@ -191,21 +199,18 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 
   // layout text label
   sz = [self calculateTextLabelSizeForCellWidth:w];
-  sz.height = ceil(sz.height);
   r = CGRectMake(x, [_mainImageView clcg_y], w, sz.height);
   [[self textLabel] setFrame:CGRectIntegral(r)];
   
   // layout detail label
   sz = [self calculateDetailLabelSizeForCellWidth:w];
-  sz.height = ceil(sz.height);
-  r = CGRectMake(x, [[self textLabel] clcg_low] + (int)(_innerPadding/2),
+  r = CGRectMake(x, [[self textLabel] clcg_low] + _innerPadding,
                  sz.width, sz.height);
   [[self detailTextLabel] setFrame:CGRectIntegral(r)];
 
   // info text label
   sz = [self calculateInfoLabelSizeForCellWidth:w];
-  sz.height = ceil(sz.height);
-  r = CGRectMake(x, [[self detailTextLabel] clcg_low] + (int)(_innerPadding/2),
+  r = CGRectMake(x, [[self detailTextLabel] clcg_low] + _innerPadding,
                  w, sz.height);
   [_infoTextLabel setFrame:CGRectIntegral(r)];
 }
@@ -279,8 +284,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                         infoFont:[self infoFont]
                         maxWidth:cell_maxw
                           imageW:[self imageSize].width
-                          imageH:[self imageSize].height
-                         padding:[self viewportPadding]];
+                          imageH:[self imageSize].height];
 }
 
 
@@ -293,7 +297,6 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
                    maxWidth:(CGFloat)cell_maxw
                      imageW:(CGFloat)imgw
                      imageH:(CGFloat)imgh
-                    padding:(CGFloat)padding
 {
   CGSize sz;
   CGFloat label_w, h;
