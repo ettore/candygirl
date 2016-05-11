@@ -28,6 +28,24 @@
 #ifndef CLCG_MACROS_H_
 #define CLCG_MACROS_H_
 
+////////////////////////////////////////////////////////////////////////////////
+// Block-related macros
+
+/*!
+ @defined CLCG_EXEC_BLOCK
+ @abstract Executes given block by nil-checking it first.
+ @discussion E.g. Instead of:
+ 
+ if (the_block) {
+   the_block(arg1, arg2, arg3);
+ }
+ 
+ use:
+
+ CLCG_EXEC_BLOCK(the_block, arg1, arg2, arg3);
+ */
+#define CLCG_EXEC_BLOCK(block, ...) if (block) { block(__VA_ARGS__); };
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Stringification macros
