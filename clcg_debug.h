@@ -49,35 +49,13 @@ extern "C" {
 #define CLCGP CLCG_P
 
 
-/* e.g. CLCG_PSIZE(@"screen bounds", [[UIScreen mainScreen] bounds]); */
-#ifdef CLCG_DEBUG_LOGGING
-#define CLCG_PRECT(s,r) NSLog(@"%s(%d): %@ (%.0f,%.0f) (%.0f,%.0f)", __PRETTY_FUNCTION__, \
-        __LINE__, s, r.origin.x, r.origin.y, r.size.width, r.size.height)
-#else
-#define CLCG_PRECT(s,r)  ((void)0)
-#endif
-#define CLCGPR CLCG_PRECT
-
-
-/* e.g. CLCG_PSIZE(@"screen size", [[UIScreen mainScreen] bounds].size); */
-#ifdef CLCG_DEBUG_LOGGING
-#define CLCG_PSIZE(s,r) NSLog(@"%s(%d): %@ (%.0f,%.0f)", __PRETTY_FUNCTION__, \
-        __LINE__, s, r.width, r.height);
-#else
-#define CLCG_PSIZE(s,r)  ((void)0)
-#endif
-#define CLCGPSZ CLCG_PSIZE
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // assert macro
 
 #ifdef DEBUG
 
 #import <TargetConditionals.h>
-
 #if TARGET_IPHONE_SIMULATOR
-
 int am_i_being_debugged(void);
 // We leave the __asm__ in this macro so that when a break occurs, we don't 
 // have to step out of a "breakInDebugger" function.
@@ -89,6 +67,7 @@ if (am_i_being_debugged()) { __asm__("int $3\n" : : ); }; } \
 #endif // #if TARGET_IPHONE_SIMULATOR
 
 #else
+
 #define CLCG_ASSERT(xx) ((void)0)
 #endif // #ifdef DEBUG
 #define CLCGASSERT CLCG_ASSERT
@@ -98,7 +77,8 @@ if (am_i_being_debugged()) { __asm__("int $3\n" : : ); }; } \
 // exception macro
 
 #ifdef DEBUG
-#define CLCG_INCONSISTENCY(msg,obj) {[NSException raise:NSInternalInconsistencyException format:@"%@ Class: %@",msg,NSStringFromClass([obj class])];}
+#define CLCG_INCONSISTENCY(msg,obj) { [NSException raise:NSInternalInconsistencyException \
+format:@"%@ Class: %@",msg,NSStringFromClass([obj class])]; }
 #else
 #define CLCG_INCONSISTENCY(msg,obj) ((void)0)
 #endif
