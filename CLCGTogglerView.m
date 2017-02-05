@@ -103,13 +103,9 @@
 {
   if (state != _togglerState) {
     if (CLCGTogglerFirstView == state) {
-      [_firstView setHidden:NO];
-      [_secondView setHidden:YES];
       [_firstView setAlpha:1.0];
       [_secondView setAlpha:0.0];
     } else if (CLCGTogglerSecondView == state) {
-      [_firstView setHidden:YES];
-      [_secondView setHidden:NO];
       [_firstView setAlpha:0.0];
       [_secondView setAlpha:1.0];
     } else {
@@ -118,10 +114,9 @@
     
     _togglerState = state;
     
-    [self setNeedsDisplay];
+    [self setNeedsLayout];
   }
 }
-
 
 @end
 

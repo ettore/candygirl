@@ -135,11 +135,12 @@
   if (state != _buttonState) {
     switch (state) {
       case CLCGBarButtonItemStateReady:
+        [[self spinner] stopAnimating];
+        [_toggler setTogglerState:CLCGTogglerFirstView];
         if (_isSystemItem) {
           // remove customView so that UIBarButtonItem system graphics are rendered
           [self setCustomView:nil];
         } else {
-          [_toggler setTogglerState:CLCGTogglerFirstView];
           if ([[self title] length] == 0) {
             [self setCustomView:_toggler];
           } else {
@@ -150,11 +151,12 @@
       case CLCGBarButtonItemStateBusy:
         // show the spinner
         [_toggler setTogglerState:CLCGTogglerSecondView];
+        [[self spinner] startAnimating];
         [self setCustomView:_toggler];
         break;
       case CLCGBarButtonItemStateHidden:
         [_toggler setTogglerState:CLCGTogglerFirstView];
-        [[_toggler firstView] setHidden:YES];
+        [[self spinner] stopAnimating];
         if ([[self title] length] > 0) {
           // for a textual button, this will "show" the empty button we created.
           [self setCustomView:_toggler];
@@ -209,18 +211,20 @@
              action:(SEL)action
              height:(CGFloat)h
 {
-  if (title == nil)
+  if (title == nil) {
     title = @"";
+  }
 
+  BOOL is_system_item;
   if (img == nil && [title length] == 0) {
     self = [super initWithBarButtonSystemItem:item target:target action:action];
-    _isSystemItem = YES;
+    is_system_item = YES;
   } else {
     if (img) {
       title = nil;
     }
     self = [super initWithTitle:title style:style target:target action:action];
-    _isSystemItem = NO;
+    is_system_item = NO;
   }
 
   if (self) {
@@ -229,10 +233,11 @@
     UIActivityIndicatorView *second;
     CGFloat w;
 
+    _isSystemItem = is_system_item;
+
     // set up second view
     second = [[UIActivityIndicatorView alloc]
               initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    [second startAnimating];
 
     // set up first view
     b = [UIButton buttonWithType:UIButtonTypeCustom];
