@@ -98,7 +98,7 @@
   CGSize sz;
 
   sz = CGSizeMake([self clcg_w], INT_MAX);
-  sz = [txt sizeWithFont:font constrainedToSize:sz];
+  sz = [txt clcg_sizeWithMaxW:sz.width maxH:sz.height font:font];
 
   [self setClcg_h:ceil(sz.height)];  // Can't round down, may make last line disappear
 }

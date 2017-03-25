@@ -29,6 +29,7 @@
 
 #import "UILabel+CLCG.h"
 #import "UIView+CLCG.h"
+#import "NSString+CLCG.h"
 
 
 @implementation UILabel (Candygirl)
@@ -39,7 +40,7 @@
   CGSize sz;
 
   sz = CGSizeMake(w, INT_MAX);
-  sz = [[self text] sizeWithFont:[self font] constrainedToSize:sz];
+  sz = [[self text] clcg_sizeWithMaxW:sz.width maxH:sz.height font:[self font]];
 
   [self setClcg_w:ceil(sz.width)];
   [self setClcg_h:ceil(sz.height)];

@@ -264,7 +264,8 @@
       // if we've a textual button, we're going to render ourselves as a
       // normal UIBarButton. This is just to display the hidden state.
       UIFont *font = [UIFont boldSystemFontOfSize:12.0f];
-      w = MAX([title sizeWithFont:font].width, [second clcg_w]);
+      w = ceil(MAX([title sizeWithAttributes:@{NSFontAttributeName : font}].width,
+                   [second clcg_w]));
       first = b;
     }
     [b addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];

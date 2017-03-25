@@ -36,6 +36,8 @@
 #import "UIView+CLCG.h"
 #import "CLCGCell.h"
 #import "CLCGImageView.h"
+#import "NSString+CLCG.h"
+
 
 /* 
  ------------------------------------------------------------------------------
@@ -219,9 +221,9 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 -(CGSize)calculateTextLabelSizeForCellWidth:(CGFloat)w_available_for_text
 {
   CGSize sz = CGSizeMake(w_available_for_text, CLCG_MAX_CELL_H);
-  sz = [[[self textLabel] text] sizeWithFont:[[self textLabel] font]
-                           constrainedToSize:sz
-                               lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [[[self textLabel] text] clcg_sizeWithMaxW:sz.width
+                                             maxH:sz.height
+                                             font:[[self textLabel] font]];
   return sz;
 }
 
@@ -229,9 +231,9 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 -(CGSize)calculateDetailLabelSizeForCellWidth:(CGFloat)w_available_for_text
 {
   CGSize sz = CGSizeMake(w_available_for_text, CLCG_MAX_CELL_H);
-  sz = [[[self detailTextLabel] text] sizeWithFont:[[self detailTextLabel] font]
-                                 constrainedToSize:sz
-                                     lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [[[self detailTextLabel] text] clcg_sizeWithMaxW:sz.width
+                                                   maxH:sz.height
+                                                   font:[[self detailTextLabel] font]];
   return sz;
 }
 
@@ -239,9 +241,9 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 -(CGSize)calculateInfoLabelSizeForCellWidth:(CGFloat)w_available_for_text
 {
   CGSize sz = CGSizeMake(w_available_for_text, CLCG_MAX_CELL_H);
-  sz = [[[self infoTextLabel] text] sizeWithFont:[[self infoTextLabel] font]
-                                 constrainedToSize:sz
-                                     lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [[[self infoTextLabel] text] clcg_sizeWithMaxW:sz.width
+                                                 maxH:sz.height
+                                                 font:[[self infoTextLabel] font]];
   return sz;
 }
 
@@ -308,23 +310,21 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 
   // measure main text size
   sz = CGSizeMake(label_w, cell_maxh);
-  sz = [text sizeWithFont:text_font
-              constrainedToSize:sz
-                  lineBreakMode:NSLineBreakByWordWrapping];
+  sz = [text clcg_sizeWithMaxW:sz.width maxH:sz.height font:text_font];
   h = sz.height;
   
   // add detail text size
   if ([detailtext length] > 0) {
-    h += inner_padding + [detailtext sizeWithFont:detail_font
-                                constrainedToSize:CGSizeMake(label_w, cell_maxh)
-                                    lineBreakMode:NSLineBreakByWordWrapping].height;
+    h += inner_padding + [detailtext clcg_sizeWithMaxW:label_w
+                                                  maxH:cell_maxh
+                                                  font:detail_font].height;
   }
 
   // now we have to add space for info text + 1 padding unit
   if ([infotext length] > 0) {
-    h += inner_padding + [infotext sizeWithFont:info_font
-                              constrainedToSize:CGSizeMake(label_w, cell_maxh)
-                                  lineBreakMode:NSLineBreakByWordWrapping].height;
+    h += inner_padding + [infotext clcg_sizeWithMaxW:label_w
+                                                maxH:cell_maxh
+                                                font:info_font].height;
   }
 
   // add padding above and below cell content
