@@ -29,7 +29,7 @@
 
 
 #ifndef CLCG_APP_EXTENSIONS
-CGFloat clcg_statusbar_h()
+CGFloat clcg_statusbar_h(void)
 {
   const CGSize sz = [[UIApplication sharedApplication] statusBarFrame].size;
 
@@ -46,13 +46,13 @@ CGFloat clcg_statusbar_h()
 }
 
 
-UIInterfaceOrientation clcg_orientation()
+UIInterfaceOrientation clcg_orientation(void)
 {
   return [[UIApplication sharedApplication] statusBarOrientation];
 }
 
 
-CGSize clcg_screensize()
+CGSize clcg_screensize(void)
 {
   CGRect bounds = [[UIScreen mainScreen] bounds];
 

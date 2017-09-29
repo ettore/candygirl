@@ -89,7 +89,7 @@
 /*!
  Executes block if a tap on the imageView happens.
  */
--(void)addTapActionOnImage:(void(^)())block;
+-(void)addTapActionOnImage:(void(^)(void))block;
 
 /*!
  Load an image for the cell that displaying info of particular object(context).

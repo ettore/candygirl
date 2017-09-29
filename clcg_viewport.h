@@ -40,18 +40,18 @@ extern "C" {
   /**
    * Returns the current device orientation. 
    */
-  UIInterfaceOrientation clcg_orientation();
+  UIInterfaceOrientation clcg_orientation(void);
   
   /** 
    * Returns the screen size in the current device orientation. 
    */
-  CGSize clcg_screensize();
+  CGSize clcg_screensize(void);
 
   /** 
    * Returns the height of the statusbar considering the current device 
    * orientation. 
    */
-  CGFloat clcg_statusbar_h();
+  CGFloat clcg_statusbar_h(void);
 #endif
 
 #ifdef __cplusplus

@@ -110,7 +110,7 @@ NSString *clcg_ago_format_minimal(NSDate *d)
 }
 
 
-NSTimeInterval clcg_secondsSinceEpoch()
+NSTimeInterval clcg_secondsSinceEpoch(void)
 {
   // timeIntervalSinceReferenceDate returns seconds since 1/1/2001
   // NSTimeIntervalSince1970 = seconds from Epoch and 1/1/2001

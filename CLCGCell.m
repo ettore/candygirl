@@ -67,7 +67,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 
 
 @interface CLCGCell ()
-@property(nonatomic,copy) void(^tapActionBlock)();
+@property(nonatomic,copy) void(^tapActionBlock)(void);
 @property(nonatomic,retain)   CLCGImageView *mainImageView;
 @end
 
@@ -162,7 +162,7 @@ CGFloat CLCGCELL_IMG_DEFAULT_H = 60.0f;
 }
 
 
--(void)addTapActionOnImage:(void(^)())block;
+-(void)addTapActionOnImage:(void(^)(void))block;
 {
   self.tapActionBlock = block;
   [_mainImageView clcg_addTarget:self forTapAction:@selector(tapAction:)];

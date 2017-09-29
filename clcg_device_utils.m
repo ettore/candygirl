@@ -178,7 +178,7 @@ BOOL clcg_has_retina(void)
 }
 
 
-NSString* clcg_device_name()
+NSString* clcg_device_name(void)
 {
   struct utsname systemInfo;
 

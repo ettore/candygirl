@@ -74,7 +74,7 @@ extern "C" {
    */
   NSString *clcg_ago_format_minimal(NSDate *d);
 
-  NSTimeInterval clcg_secondsSinceEpoch();
+  NSTimeInterval clcg_secondsSinceEpoch(void);
 
 #ifdef __cplusplus
 }

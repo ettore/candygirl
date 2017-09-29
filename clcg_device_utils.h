@@ -98,7 +98,7 @@ extern "C" {
    * or "iPhone7,1" (iPhone 6 Plus)
    *
    */
-  NSString *clcg_device_name();
+  NSString *clcg_device_name(void);
 
 #ifdef __cplusplus
 }
